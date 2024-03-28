@@ -14,12 +14,18 @@
               <div>Virar automaticamente após todos jogadores votarem</div>
             </div>
             <div v-if="!virarAutomatico" class="text-red-500">
-              <button @click="mostrarCartas = !mostrarCartas" class="text-white font-bold py-2 px-4 rounded" :class="mostrarCartas
+              <button @click="mostrarCartas = !mostrarCartas" class="text-white font-bold py-2 px-4 rounded w-40"
+                :class="mostrarCartas
           ? 'bg-red-500 hover:bg-red-700'
           : 'bg-green-500 hover:bg-green-700'
           ">
                 <span v-if="mostrarCartas">Esconder cartas</span>
                 <span v-else>Mostrar cartas</span>
+              </button>
+            </div>
+            <div>
+              <button @click="novaRodada" class="w-40 text-white font-bold py-2 px-4 rounded bg-blue-500">
+                <span>Nova rodada</span>
               </button>
             </div>
           </div>
@@ -62,7 +68,8 @@
           ? 'border-green-500 bg-green-100'
           : 'border-yellow-300 bg-yellow-100'
           ">
-            <span v-if="mostrarCartas && player.votou" class="text-5xl flex justify-center">{{ player.score }}</span>
+            <span v-if="mostrarCartas && player.votou" class="text-5xl flex justify-center"><span
+                v-if="player.score != 'coffee'">{{ player.score }}</span><span class="text-7xl" v-else>☕</span></span>
           </div>
           <div>
             <span class="text-2xl flex justify-center text-white">{{ player.name }}</span>
@@ -74,7 +81,8 @@
           class="mt-10 flex-col flex gap-2 text-5xl hover:text-6xl hover:scale-[1.15]">
           <div @click="votar(card.number)" :class="selectedCard == card.number ? card.class + ' -translate-y-10' : card.class
           " class="w-24 h-32 flex-col flex rounded-lg justify-center cursor-pointer border-gray-400 border-4">
-            <span class="flex justify-center">{{ card.number }}</span>
+            <span class="flex justify-center" v-if="card.number != 'coffee'">{{ card.number }}</span><span
+              class="text-7xl" v-else>☕</span>
           </div>
         </div>
       </div>
@@ -104,13 +112,6 @@ const players = ref([
   // { name: "Maria", score: 0, votou: 1, id: 3 },
   // { name: "Amanda", score: 0, votou: 1, id: 4},
 ]);
-
-const sairDaSala = () => {
-  gameId.value = null;
-  jogoComecou.value = false;
-  players.value = [];
-  virarAutomatico.value = true;
-};
 
 const todosVotaram = computed(() => players.value.every((player) => player.votou));
 
@@ -151,6 +152,25 @@ const loadGame = () => {
     players.value.push({ name: nome.value, score: 0, votou: false, id: playerId });
     jogoComecou.value = true;
   }
+};
+
+const novaRodada = () => {
+  players.value = players.value.map((player) => {
+    player.votou = false;
+    player.score = null;
+    return player;
+  });
+  mostrarCartas.value = false;
+  selectedCard.value = null;
+}
+
+const sairDaSala = () => {
+  gameId.value = null;
+  jogoComecou.value = false;
+  players.value = [];
+  virarAutomatico.value = true;
+  selectedCard.value = null;
+  mostrarCartas.value = false;
 };
 
 const votar = (score) => {
@@ -211,5 +231,9 @@ const fibonacciCards = [
     number: 34,
     class: "bg-red-300 border-red-400",
   },
+  {
+    number: 'coffee',
+    class: "bg-gray-100 border-gray-400",
+  }
 ];
 </script>
