@@ -80,6 +80,7 @@ html {
 </style>
 
 <script setup>
+const apiUrl = 'https://planning-poker-go.fly.dev/';
 import { debounce } from 'lodash';
 import { fibonacciCards } from './fibonacciCards.js';
 const nome = ref("");
@@ -100,7 +101,7 @@ const todosVotaram = computed(() => players.value.every((player) => player.voted
 const debouncedUpdate = debounce(() => {
   // Your update logic here
   console.log('Update:', nome.value);
-  fetch(`http://localhost:8080/changeName`, {
+  fetch(`${apiUrl}changeName`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ const jogadorLogado = computed(() =>
 );
 
 const startGame = async () => {
-  const response = await fetch('http://localhost:8080/createRoom', {
+  const response = await fetch(`${apiUrl}createRoom`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -153,7 +154,7 @@ const startGame = async () => {
   userID.value = data.userID;
   localStorage.setItem('userID', userID.value);
   // // start WebSocket connection
-  socket.value = new WebSocket(`ws://localhost:8080/ws/${roomID.value}/${userID.value}`);
+  socket.value = new WebSocket(`wss://planning-poker-go.fly.dev/ws/${roomID.value}/${userID.value}`);
 
   socket.value.addEventListener('open', (event) => {
     // Connection was opened
@@ -190,7 +191,7 @@ const startGame = async () => {
 
 const endGame = () => {
   if (roomID.value) {
-    fetch(`http://localhost:8080/leaveRoom`, {
+    fetch(`${apiUrl}leaveRoom`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -205,7 +206,7 @@ const endGame = () => {
 };
 
 const toggleMostrarCartas = () => {
-  fetch(`http://localhost:8080/showCards`, {
+  fetch(`${apiUrl}showCards`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -217,7 +218,7 @@ const toggleMostrarCartas = () => {
 };
 
 const toggleVirarAutomatico = () => {
-  fetch(`http://localhost:8080/autoShowCards`, {
+  fetch(`${apiUrl}autoShowCards`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -251,7 +252,7 @@ watch(roomState, (newRoomState, oldRoomState) => {
 const loadGame = async () => {
   if (roomID.value) {
     // make http request to join a game
-    const response = await fetch(`http://localhost:8080/joinRoom`, {
+    const response = await fetch(`${apiUrl}joinRoom`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -273,7 +274,7 @@ const loadGame = async () => {
     roomID.value = data.roomID;
 
     // // start WebSocket connection
-    socket.value = new WebSocket(`ws://localhost:8080/ws/${roomID.value}/${userID.value}`);
+    socket.value = new WebSocket(`wss://planning-poker-go.fly.dev/ws/${roomID.value}/${userID.value}`);
 
     socket.value.addEventListener('open', (event) => {
       // Connection was opened
@@ -309,7 +310,7 @@ const loadGame = async () => {
 };
 
 const novaRodada = () => {
-  fetch(`http://localhost:8080/resetVotes`, {
+  fetch(`${apiUrl}resetVotes`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
