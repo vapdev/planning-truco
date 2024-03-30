@@ -44,9 +44,4 @@ export const fibonacciCards = [
         class: "hover:bg-red-300 border-red-400",
         bg: "red-300",
     },
-    {
-        number: 'coffee',
-        class: "hover:bg-gray-400 border-gray-200",
-        bg: "gray-400",
-    }
 ];

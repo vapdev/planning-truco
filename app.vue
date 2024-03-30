@@ -5,7 +5,7 @@
         <template v-if="jogoComecou && jogadorLogado && jogadorLogado.admin">
           <div class="flex flex-col text-white gap-4">
             <div class="flex gap-2">
-              <div @click="virarAutomatico = !virarAutomatico"
+              <div @click="toggleVirarAutomatico"
                 class="hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white justify-center flex items-center">
                 <div v-if="virarAutomatico" class="font-bold text-green-400 text-xl">
                   ✓
@@ -14,8 +14,7 @@
               <div>Virar automaticamente após todos jogadores votarem</div>
             </div>
             <div v-if="!virarAutomatico" class="text-red-500">
-              <button @click="mostrarCartas = !mostrarCartas" class="text-white font-bold py-2 px-4 rounded w-40"
-                :class="mostrarCartas
+              <button @click="toggleMostrarCartas" class="text-white font-bold py-2 px-4 rounded w-40" :class="mostrarCartas
           ? 'bg-red-500 hover:bg-red-700'
           : 'bg-green-500 hover:bg-green-700'
           ">
@@ -63,11 +62,11 @@
     </div>
     <template v-if="jogoComecou">
       <div class="w-full flex justify-center gap-10">
-        <PlayerVote v-for="(player, index) in players" :key="index" :player="player" :mostrarCartas="mostrarCartas" />
+        <PlayerVote v-for="(player, index) in players" :key="player.id" :player="player"
+          :mostrarCartas="mostrarCartas" />
       </div>
       <div class="w-full flex justify-center gap-4">
-        <Carta v-for="(card, index) in fibonacciCards" :key="card.number" :card="card" :selectedCard="selectedCard"
-          :votar="votar" />
+        <Carta :selectedCard="selectedCard" :votar="votar" />
       </div>
     </template>
   </div>
@@ -81,6 +80,7 @@ html {
 </style>
 
 <script setup>
+import { debounce } from 'lodash';
 import { fibonacciCards } from './fibonacciCards.js';
 const nome = ref("");
 const roomID = ref(null);
@@ -88,13 +88,31 @@ const jogoComecou = ref(false);
 const selectedCard = ref(null);
 const mostrarCartas = ref(false);
 const userID = ref(null);
-const virarAutomatico = ref(true);
+const virarAutomatico = ref(false);
+const roomState = ref(null);
 
 const socket = ref(null);
 
 const players = ref([]);
 
-const todosVotaram = computed(() => players.value.every((player) => player.votou));
+const todosVotaram = computed(() => players.value.every((player) => player.voted));
+
+const debouncedUpdate = debounce(() => {
+  // Your update logic here
+  console.log('Update:', nome.value);
+  fetch(`http://localhost:8080/changeName`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userID: userID.value,
+      roomID: Number(roomID.value),
+      name: nome.value,
+    }),
+  });
+}, 1000); // 1000 milliseconds = 1 second
+
 
 onMounted(() => {
   const savedUserID = localStorage.getItem('userID'); // Retrieve from local storage
@@ -103,19 +121,9 @@ onMounted(() => {
   }
 });
 
-watchEffect(() => {
-  if (todosVotaram.value && virarAutomatico.value) {
-    mostrarCartas.value = true;
-  } else {
-    mostrarCartas.value = false;
-  }
-  if (nome.value) {
-    players.value = players.value.map((player) => {
-      if (player.id === userID.value) {
-        player.name = nome.value;
-      }
-      return player;
-    });
+watch(nome, (newVal, oldVal) => {
+  if (newVal) {
+    debouncedUpdate();
   }
 });
 
@@ -163,6 +171,7 @@ const startGame = async () => {
 
     // Log the message
     console.log('Received message:', data);
+    roomState.value = data;
     players.value = data.players;
 
     // Update the game state based on the message
@@ -195,13 +204,47 @@ const endGame = () => {
   sairDaSala();
 };
 
+const toggleMostrarCartas = () => {
+  fetch(`http://localhost:8080/showCards`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      roomID: Number(roomID.value),
+    }),
+  });
+};
+
+const toggleVirarAutomatico = () => {
+  fetch(`http://localhost:8080/autoShowCards`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      roomID: Number(roomID.value),
+    }),
+  });
+};
+
 watch(players, (newPlayers, oldPlayers) => {
   if (newPlayers.length > 0) {
     newPlayers.forEach(player => {
       if (player.voted && player.vote !== selectedCard.value && player.id === userID.value) {
         selectedCard.value = player.vote;
       }
+      if (selectedCard.value && !player.voted && player.id === userID.value) {
+        selectedCard.value = null;
+      }
     });
+  }
+}, { deep: true });
+
+watch(roomState, (newRoomState, oldRoomState) => {
+  if (newRoomState) {
+    virarAutomatico.value = newRoomState.autoShowCards;
+    mostrarCartas.value = newRoomState.showCards;
   }
 }, { deep: true });
 
@@ -248,6 +291,7 @@ const loadGame = async () => {
 
       // Log the message
       console.log('Received message:', data);
+      roomState.value = data;
       players.value = data.players;
 
       // Update the game state based on the message
@@ -265,13 +309,15 @@ const loadGame = async () => {
 };
 
 const novaRodada = () => {
-  players.value = players.value.map((player) => {
-    player.votou = false;
-    player.score = null;
-    return player;
+  fetch(`http://localhost:8080/resetVotes`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      roomID: Number(roomID.value),
+    }),
   });
-  mostrarCartas.value = false;
-  selectedCard.value = null;
 }
 
 const sairDaSala = () => {
