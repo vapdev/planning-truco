@@ -3,7 +3,7 @@
     <div @click="votar(0)"
         :class="selectedCard == 0 ? 'hover:bg-green-100 border-green-200 -translate-y-10 bg-green-100 text-black' : 'hover:bg-green-100 border-green-200 text-white'"
         class="text-5xl hover:text-black hover:text-6xl hover:scale-[1.15] w-24 h-32 flex-col flex rounded-lg justify-center cursor-pointer border-gray-400 border-4">
-        <span class="flex justify-center">0</span>
+        <span class="flex justify-center">☕</span>
     </div>
     <!-- Card 1 -->
     <div @click="votar(1)"
