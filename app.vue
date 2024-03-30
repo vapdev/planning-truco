@@ -1,17 +1,17 @@
 <template>
-  <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-16">
+  <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-4 md:p-16">
     <div class="w-full grid grid-cols-3">
       <div>
         <template v-if="jogoComecou && jogadorLogado && jogadorLogado.admin">
           <div class="flex flex-col text-white gap-4">
-            <div class="flex gap-2">
+            <div class="flex flex-col md:flex-row gap-2">
               <div @click="toggleVirarAutomatico"
                 class="hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white justify-center flex items-center">
                 <div v-if="virarAutomatico" class="font-bold text-green-400 text-xl">
                   ✓
                 </div>
               </div>
-              <div>Virar automaticamente após todos jogadores votarem</div>
+              <div>Virar automaticamente após todos os jogadores votarem</div>
             </div>
             <div v-if="!virarAutomatico" class="text-red-500">
               <button @click="toggleMostrarCartas" class="text-white font-bold py-2 px-4 rounded w-40" :class="mostrarCartas
@@ -30,7 +30,7 @@
           </div>
         </template>
       </div>
-      <div class="text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
+      <div class="invisible md:visible text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
       <div class="flex-grow flex-col flex gap-2">
         <template v-if="!jogoComecou">
           <div class="flex justify-end">
@@ -61,11 +61,11 @@
       </div>
     </div>
     <template v-if="jogoComecou">
-      <div class="w-full flex justify-center gap-10">
+      <div class="justify-center" :class="{ 'w-full': true, 'grid': !$md, 'flex': $md, 'flex-wrap': $md, 'gap-10': $md, 'grid-cols-4': !$md}">
         <PlayerVote v-for="(player, index) in players" :key="player.id" :player="player"
           :mostrarCartas="mostrarCartas" />
       </div>
-      <div class="w-full flex justify-center gap-4">
+      <div class="justify-center gap-4" :class="{ 'w-full': true, 'grid': !$md, 'flex': $md, 'flex-wrap': $md, 'gap-10': $md, 'grid-cols-5': !$md}">
         <Carta :selectedCard="selectedCard" :votar="votar" />
       </div>
     </template>
@@ -93,6 +93,8 @@ const userID = ref(null);
 const virarAutomatico = ref(false);
 const roomState = ref(null);
 
+const $md = ref(null)
+
 const socket = ref(null);
 
 const players = ref([]);
@@ -113,8 +115,8 @@ const debouncedUpdate = debounce(() => {
   });
 }, 1000); // 1000 milliseconds = 1 second
 
-
 onMounted(() => {
+  $md.value = window.matchMedia('(min-width: 768px)').matches 
   const savedUserID = localStorage.getItem('userID');
   if (savedUserID) {
     userID.value = Number(savedUserID);
@@ -174,7 +176,7 @@ const startGame = async () => {
   socket.value.addEventListener('error', (event) => {
     // An error occurred
   });
-
+  
   jogoComecou.value = true;
 }
 
@@ -325,5 +327,4 @@ const votar = (score) => {
     }));
   }
 };
-
 </script>
