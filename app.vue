@@ -57,7 +57,7 @@
           </button>
         </div>
         <div class="flex justify-end h-10">
-          <input v-model="nome" class="border-2 border-green-500 w-40 rounded pl-2" placeholder="Seu nome aqui" />
+          <input v-model="nome" class="border-2 w-40 rounded pl-2" placeholder="Seu nome aqui" />
         </div>
       </div>
     </div>
@@ -66,9 +66,8 @@
         <PlayerVote v-for="(player, index) in players" :key="index" :player="player" :mostrarCartas="mostrarCartas" />
       </div>
       <div class="w-full flex justify-center gap-4">
-        <Carta v-for="(card, index) in fibonacciCards" :key="index" :card="card" :selectedCard="selectedCard"
+        <Carta v-for="(card, index) in fibonacciCards" :key="card.number" :card="card" :selectedCard="selectedCard"
           :votar="votar" />
-
       </div>
     </template>
   </div>
@@ -196,6 +195,21 @@ const endGame = () => {
   sairDaSala();
 };
 
+watch(players, (newPlayers, oldPlayers) => {
+  if (newPlayers.length > 0) {
+    console.log('Players:', newPlayers);
+
+    // Loop through the newPlayers array
+    newPlayers.forEach(player => {
+      // If the player has voted and the vote is not already the selectedCard
+      if (player.voted && player.vote !== selectedCard.value) {
+        // Update selectedCard
+        selectedCard.value = player.vote;
+      }
+    });
+  }
+}, { deep: true }); // Add deep: true to watch nested properties
+
 const loadGame = async () => {
   if (roomID.value) {
     // make http request to join a game
@@ -275,24 +289,22 @@ const sairDaSala = () => {
 };
 
 const votar = (score) => {
-  if (score == selectedCard.value) {
+  console.log('Votando', score);
+  // if selectedCard is already the same as the score, unselect it
+  if (selectedCard.value === score) {
     selectedCard.value = null;
-    players.value = players.value.map((player) => {
-      if (player.id === userID.value) {
-        player.votou = false;
-      }
-      return player;
-    });
-    return;
+  } else {
+    selectedCard.value = score;
   }
-  selectedCard.value = score;
-  players.value = players.value.map((player) => {
-    if (player.id === userID.value) {
-      player.score = score;
-      player.votou = true;
-    }
-    return player;
-  });
+
+  if (jogadorLogado.value) {
+    socket.value.send(JSON.stringify({
+      type: 'vote',
+      userID: userID.value,
+      roomID: roomID.value,
+      vote: score
+    }));
+  }
 };
 
 </script>
