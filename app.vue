@@ -197,18 +197,13 @@ const endGame = () => {
 
 watch(players, (newPlayers, oldPlayers) => {
   if (newPlayers.length > 0) {
-    console.log('Players:', newPlayers);
-
-    // Loop through the newPlayers array
     newPlayers.forEach(player => {
-      // If the player has voted and the vote is not already the selectedCard
-      if (player.voted && player.vote !== selectedCard.value) {
-        // Update selectedCard
+      if (player.voted && player.vote !== selectedCard.value && player.id === userID.value) {
         selectedCard.value = player.vote;
       }
     });
   }
-}, { deep: true }); // Add deep: true to watch nested properties
+}, { deep: true });
 
 const loadGame = async () => {
   if (roomID.value) {
