@@ -100,8 +100,6 @@ const players = ref([]);
 const todosVotaram = computed(() => players.value.every((player) => player.voted));
 
 const debouncedUpdate = debounce(() => {
-  // Your update logic here
-  console.log('Update:', nome.value);
   fetch(`${apiUrl}changeName`, {
     method: 'POST',
     headers: {
@@ -117,7 +115,7 @@ const debouncedUpdate = debounce(() => {
 
 
 onMounted(() => {
-  const savedUserID = localStorage.getItem('userID'); // Retrieve from local storage
+  const savedUserID = localStorage.getItem('userID');
   if (savedUserID) {
     userID.value = Number(savedUserID);
   }
@@ -149,17 +147,13 @@ const startGame = async () => {
   }
 
   const data = await response.json();
-  console.log(data);
 
   roomID.value = data.roomID;
   userID.value = data.userID;
   localStorage.setItem('userID', userID.value);
-  // // start WebSocket connection
   socket.value = new WebSocket(`wss://planning-poker-go.fly.dev/ws/${roomID.value}/${userID.value}`);
 
   socket.value.addEventListener('open', (event) => {
-    // Connection was opened
-    // Send a "newPlayer" message to the server
     socket.value.send(JSON.stringify({
       type: 'newAdmin',
       userID: userID.value,
@@ -168,15 +162,9 @@ const startGame = async () => {
   });
 
   socket.value.addEventListener('message', (event) => {
-    // Received a message from the server
     const data = JSON.parse(event.data);
-
-    // Log the message
-    console.log('Received message:', data);
     roomState.value = data;
     players.value = data.players;
-
-    // Update the game state based on the message
   });
 
   socket.value.addEventListener('close', (event) => {
@@ -252,7 +240,6 @@ watch(roomState, (newRoomState, oldRoomState) => {
 
 const loadGame = async () => {
   if (roomID.value) {
-    // make http request to join a game
     const response = await fetch(`${apiUrl}joinRoom`, {
       method: 'POST',
       headers: {
@@ -274,12 +261,9 @@ const loadGame = async () => {
     localStorage.setItem('userID', userID.value);
     roomID.value = data.roomID;
 
-    // // start WebSocket connection
     socket.value = new WebSocket(`wss://planning-poker-go.fly.dev/ws/${roomID.value}/${userID.value}`);
 
     socket.value.addEventListener('open', (event) => {
-      // Connection was opened
-      // Send a "newPlayer" message to the server
       socket.value.send(JSON.stringify({
         type: 'newPlayer',
         userID: userID.value,
@@ -288,15 +272,9 @@ const loadGame = async () => {
     });
 
     socket.value.addEventListener('message', (event) => {
-      // Received a message from the server
       const data = JSON.parse(event.data);
-
-      // Log the message
-      console.log('Received message:', data);
       roomState.value = data;
       players.value = data.players;
-
-      // Update the game state based on the message
     });
 
     socket.value.addEventListener('close', (event) => {
@@ -332,8 +310,6 @@ const sairDaSala = () => {
 };
 
 const votar = (score) => {
-  console.log('Votando', score);
-  // if selectedCard is already the same as the score, unselect it
   if (selectedCard.value === score) {
     selectedCard.value = null;
   } else {
