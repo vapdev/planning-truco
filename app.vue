@@ -81,7 +81,8 @@ html {
 
 <script setup>
 const apiUrl = 'https://planning-poker-go.fly.dev/';
-import { debounce } from 'lodash';
+import lodash from 'lodash';
+const { debounce } = lodash;
 import { fibonacciCards } from './fibonacciCards.js';
 const nome = ref("");
 const roomID = ref(null);
