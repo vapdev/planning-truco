@@ -40,7 +40,7 @@
             </button>
           </div>
           <div class="flex justify-end gap-2">
-            <input v-model="roomID" class="border-2 border-green-500 rounded pl-2" placeholder="Digite o ID da sala" />
+            <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2" placeholder="Digite o ID da sala" />
             <button @click="loadGame"
               class="bg-green-500 w-40 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Entrar em sala
@@ -49,7 +49,7 @@
         </template>
         <div v-if="jogoComecou" class="flex justify-end">
           <div class="text-white text-xl mr-6">
-            ID da sala: <span class="font-bold">{{ roomID }}</span>
+            ID da sala: <span class="font-bold">{{ roomUUID }}</span>
           </div>
           <button @click="endGame" class="bg-red-500 w-40 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Sair da sala
@@ -80,34 +80,31 @@ html {
 </style>
 
 <script setup>
-const apiUrl = 'https://planning-poker-go.fly.dev/';
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiBase;
+const wsUrl = config.public.wsBase;
 import lodash from 'lodash';
 const { debounce } = lodash;
-import { fibonacciCards } from './fibonacciCards.js';
 const nome = ref("");
-const roomID = ref(null);
+const roomUUID = ref(null);
 const jogoComecou = ref(false);
 const selectedCard = ref(null);
 const mostrarCartas = ref(false);
-const userID = ref(null);
+const userUUID = ref(null);
 const virarAutomatico = ref(false);
 const roomState = ref(null);
-
 const socket = ref(null);
-
 const players = ref([]);
 
-const todosVotaram = computed(() => players.value.every((player) => player.voted));
-
 const debouncedUpdate = debounce(() => {
-  fetch(`${apiUrl}changeName`, {
+  fetch(`${apiUrl}/changeName`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userID: userID.value,
-      roomID: Number(roomID.value),
+      userUUID: userUUID.value,
+      roomUUID: Number(roomUUID.value),
       name: nome.value,
     }),
   });
@@ -115,9 +112,9 @@ const debouncedUpdate = debounce(() => {
 
 
 onMounted(() => {
-  const savedUserID = localStorage.getItem('userID');
-  if (savedUserID) {
-    userID.value = Number(savedUserID);
+  const savedUserUUID = localStorage.getItem('userUUID');
+  if (savedUserUUID) {
+    userUUID.value = Number(savedUserUUID);
   }
 });
 
@@ -128,17 +125,17 @@ watch(nome, (newVal, oldVal) => {
 });
 
 const jogadorLogado = computed(() =>
-  players.value.find((player) => player.id === userID.value)
+  players.value.find((player) => player.id === userUUID.value)
 );
 
 const startGame = async () => {
-  const response = await fetch(`${apiUrl}createRoom`, {
+  const response = await fetch(`${apiUrl}/createRoom`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      userID: userID.value,
+      userUUID: userUUID.value,
     }),
   });
 
@@ -148,15 +145,15 @@ const startGame = async () => {
 
   const data = await response.json();
 
-  roomID.value = data.roomID;
-  userID.value = data.userID;
-  localStorage.setItem('userID', userID.value);
-  socket.value = new WebSocket(`wss://planning-poker-go.fly.dev/ws/${roomID.value}/${userID.value}`);
+  roomUUID.value = data.roomUUID;
+  userUUID.value = data.userUUID;
+  localStorage.setItem('userUUID', userUUID.value);
+  socket.value = new WebSocket(`${wsUrl}/ws/${roomUUID.value}/${userUUID.value}`);
 
   socket.value.addEventListener('open', (event) => {
     socket.value.send(JSON.stringify({
       type: 'newAdmin',
-      userID: userID.value,
+      userUUID: userUUID.value,
       name: nome.value,
     }));
   });
@@ -179,15 +176,15 @@ const startGame = async () => {
 }
 
 const endGame = () => {
-  if (roomID.value) {
-    fetch(`${apiUrl}leaveRoom`, {
+  if (roomUUID.value) {
+    fetch(`${apiUrl}/leaveRoom`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userID: userID.value,
-        roomID: Number(roomID.value),
+        userUUID: userUUID.value,
+        roomUUID: Number(roomUUID.value),
       }),
     });
   }
@@ -195,25 +192,25 @@ const endGame = () => {
 };
 
 const toggleMostrarCartas = () => {
-  fetch(`${apiUrl}showCards`, {
+  fetch(`${apiUrl}/showCards`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      roomID: Number(roomID.value),
+      roomUUID: Number(roomUUID.value),
     }),
   });
 };
 
 const toggleVirarAutomatico = () => {
-  fetch(`${apiUrl}autoShowCards`, {
+  fetch(`${apiUrl}/autoShowCards`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      roomID: Number(roomID.value),
+      roomUUID: Number(roomUUID.value),
     }),
   });
 };
@@ -221,10 +218,10 @@ const toggleVirarAutomatico = () => {
 watch(players, (newPlayers, oldPlayers) => {
   if (newPlayers.length > 0) {
     newPlayers.forEach(player => {
-      if (player.voted && player.vote !== selectedCard.value && player.id === userID.value) {
+      if (player.voted && player.vote !== selectedCard.value && player.id === userUUID.value) {
         selectedCard.value = player.vote;
       }
-      if (selectedCard.value && !player.voted && player.id === userID.value) {
+      if (selectedCard.value && !player.voted && player.id === userUUID.value) {
         selectedCard.value = null;
       }
     });
@@ -239,15 +236,15 @@ watch(roomState, (newRoomState, oldRoomState) => {
 }, { deep: true });
 
 const loadGame = async () => {
-  if (roomID.value) {
-    const response = await fetch(`${apiUrl}joinRoom`, {
+  if (roomUUID.value) {
+    const response = await fetch(`${apiUrl}/joinRoom`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userID: userID.value,
-        roomID: Number(roomID.value),
+        userUUID: userUUID.value,
+        roomUUID: Number(roomUUID.value),
       }),
     });
 
@@ -257,16 +254,16 @@ const loadGame = async () => {
 
     const data = await response.json();
 
-    userID.value = data.userID;
-    localStorage.setItem('userID', userID.value);
-    roomID.value = data.roomID;
+    userUUID.value = data.userUUID;
+    localStorage.setItem('userUUID', userUUID.value);
+    roomUUID.value = data.roomUUID;
 
-    socket.value = new WebSocket(`wss://planning-poker-go.fly.dev/ws/${roomID.value}/${userID.value}`);
+    socket.value = new WebSocket(`${wsUrl}/ws/${roomUUID.value}/${userUUID.value}`);
 
     socket.value.addEventListener('open', (event) => {
       socket.value.send(JSON.stringify({
         type: 'newPlayer',
-        userID: userID.value,
+        userUUID: userUUID.value,
         name: nome.value,
       }));
     });
@@ -289,19 +286,19 @@ const loadGame = async () => {
 };
 
 const novaRodada = () => {
-  fetch(`${apiUrl}resetVotes`, {
+  fetch(`${apiUrl}/resetVotes`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      roomID: Number(roomID.value),
+      roomUUID: Number(roomUUID.value),
     }),
   });
 }
 
 const sairDaSala = () => {
-  roomID.value = null;
+  roomUUID.value = null;
   jogoComecou.value = false;
   players.value = [];
   virarAutomatico.value = true;
@@ -319,8 +316,8 @@ const votar = (score) => {
   if (jogadorLogado.value) {
     socket.value.send(JSON.stringify({
       type: 'vote',
-      userID: userID.value,
-      roomID: roomID.value,
+      userUUID: userUUID.value,
+      roomUUID: roomUUID.value,
       vote: score
     }));
   }
