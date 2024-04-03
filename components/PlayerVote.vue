@@ -7,7 +7,7 @@
             <span v-if="mostrarCartas && player.voted" class="text-5xl flex justify-center"><span v-if="player.vote != 0">{{ player.vote }}</span><span v-else>☕</span></span>
         </div>
         <div>
-            <span class="text-2xl flex justify-center text-white">{{ player.name }}</span>
+            <span class="text-2xl flex justify-center text-white">{{ player.name || ' ' }}</span>
         </div>
     </div>
 </template>
