@@ -1,31 +1,30 @@
 <template>
   <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-4 md:p-16 md:pb-4">
-    <div class="w-full grid grid-cols-3">
-      <div>
-        <template v-if="jogoComecou && jogadorLogado && jogadorLogado.admin">
-          <div class="flex flex-col text-white gap-4">
-            <div class="flex flex-col md:flex-row gap-2">
-              <div @click="toggleVirarAutomatico"
-                class="md:hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white justify-center flex items-center">
-                <div v-if="virarAutomatico" class="font-bold text-green-400 text-xl">
-                  ✓
-                </div>
-              </div>
-              <div>Revelar cartas automaticamente após todos os jogadores votarem</div>
-            </div>
+    <div
+      class="text-4xl md:mb-0 text-center w-full md:w-fit text-white absolute md:top-13 left-1/2 transform -translate-x-1/2">
+      🃏
+      Planning Truco 🃏</div>
+    <div class="w-full md:grid md:grid-cols-2 flex flex-col mt-16 md:mt-0">
+      <div class="w-full">
+        <div v-if="jogoComecou" class="flex-col flex gap-4">
+          <div class="text-white text-xl w-full md:w-fit mr-6">
+            Nome da sala: <span class="font-bold">{{ roomUUID }}</span>
           </div>
-        </template>
+          <button @click="endGame"
+            class="bg-red-500 w-40 mb-4 md:mb-0 md:hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Sair da sala
+          </button>
+        </div>
       </div>
-      <div class="invisible md:visible text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
       <div class="flex-grow flex-col flex gap-2">
         <template v-if="!jogoComecou">
-          <div class="flex justify-end">
+          <div class="flex md:justify-end">
             <button @click="startGame"
               class="bg-green-500 w-40 md:hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Iniciar nova sala
             </button>
           </div>
-          <div class="flex justify-end gap-2">
+          <div class="flex md:justify-end gap-2">
             <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2"
               placeholder="Digite o nome da sala" />
             <button @click="loadGame"
@@ -34,15 +33,8 @@
             </button>
           </div>
         </template>
-        <div v-if="jogoComecou" class="flex justify-end">
-          <div class="text-white text-xl mr-6">
-            Nome da sala: <span class="font-bold">{{ roomUUID }}</span>
-          </div>
-          <button @click="endGame" class="bg-red-500 w-40 md:hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Sair da sala
-          </button>
-        </div>
-        <div class="flex justify-end h-10">
+
+        <div class="flex md:justify-end h-10">
           <input v-model="nome" class="border-2 w-40 rounded pl-2" placeholder="Seu nome aqui" />
         </div>
       </div>
@@ -50,17 +42,32 @@
     <template v-if="jogoComecou">
       <div class="relative pb-10">
         <div v-if="jogoComecou && jogadorLogado && jogadorLogado.admin"
-          class="absolute top-0 left-1/2 transform -translate-x-1/2">
-          <div v-if="!virarAutomatico && !roomState.showCards" class="text-red-500">
-            <button @click="toggleMostrarCartas"
-              class="text-white font-bold py-2 px-4 rounded w-40 bg-green-500 hover:bg-green-700">
-              <span>Revelar votos</span>
-            </button>
-          </div>
-          <div v-if="roomState.showCards">
-            <button @click="novaRodada" class="w-50 text-white font-bold py-2 px-4 rounded bg-blue-500">
-              <span>Iniciar nova votação</span>
-            </button>
+          class="absolute -top-10 left-1/2 w-full transform -translate-x-1/2">
+          <div class="flex flex-col w-full justify-center items-center gap-6">
+            <div class="flex flex-col w-full text-white gap-4">
+              <div class="flex gap-3 w-full">
+                <div @click="toggleVirarAutomatico"
+                  class="md:hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white flex">
+                  <div v-if="virarAutomatico" class="font-bold text-green-400 text-xl">
+                    ✓
+                  </div>
+                </div>
+                <div class="flex w-full">
+                  <div>Revelar cartas automaticamente após todos os jogadores votarem</div>
+                </div>
+              </div>
+            </div>
+            <div v-if="!virarAutomatico && !roomState.showCards" class="text-red-500">
+              <button @click="toggleMostrarCartas"
+                class="text-white font-bold py-2 px-4 rounded w-40 bg-green-500 hover:bg-green-700">
+                <span>Revelar votos</span>
+              </button>
+            </div>
+            <div v-if="roomState.showCards">
+              <button @click="novaRodada" class="w-50 text-white font-bold py-2 px-4 rounded bg-blue-500">
+                <span>Iniciar nova votação</span>
+              </button>
+            </div>
           </div>
         </div>
         <div class="justify-center pt-32 md:pt-10 flex flex-wrap w-full gap-10">
@@ -68,12 +75,18 @@
             :mostrarCartas="mostrarCartas" />
         </div>
       </div>
-      <div class="justify-center overflow-x-auto gap-4 md:h-60 2 items-center w-full flex">
+      <div class="md:justify-center overflow-x-auto pb-10 gap-4 md:h-60 2 items-center w-full flex">
         <Carta v-if="!roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
         <template v-else>
-          <div class="flex flex-col gap-5">
-            <div class="text-white text-4xl">Votação encerrada</div>
-            <div class="text-white text-4xl">Carta mais votada: {{ winnerComputed }}</div>
+          <div class="flex flex-col gap-2 pb-4 md:pb-0">
+            <div class="text-white text-xl md:text-2xl">Votação encerrada</div>
+            <div class="flex items-center gap-4 text-white text-xl md:text-2xl">
+              <div class="text-green-300">Carta mais votada: </div>
+              <div
+                class="mt-4 w-10 h-14 text-black font-bold flex-col relative flex rounded-lg justify-center border-4 border-green-500 bg-green-100">
+                <span class="text-xl flex justify-center"><span>{{ winnerComputed }}</span></span>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -136,7 +149,7 @@ const debouncedUpdate = debounce(() => {
 const $md = ref(null)
 
 onMounted(() => {
-  $md.value = window.matchMedia('(min-width: 768px)').matches 
+  $md.value = window.matchMedia('(min-width: 768px)').matches
   const savedUserUUID = localStorage.getItem('userUUID');
   if (savedUserUUID) {
     userUUID.value = savedUserUUID;
