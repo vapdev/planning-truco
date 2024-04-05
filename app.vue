@@ -13,24 +13,12 @@
               </div>
               <div>Virar automaticamente após todos jogadores votarem</div>
             </div>
-            <div v-if="!virarAutomatico" class="text-red-500">
-              <button @click="toggleMostrarCartas" class="text-white font-bold py-2 px-4 rounded w-40" :class="mostrarCartas
-          ? 'bg-red-500 hover:bg-red-700'
-          : 'bg-green-500 hover:bg-green-700'
-          ">
-                <span v-if="mostrarCartas">Esconder cartas</span>
-                <span v-else>Mostrar cartas</span>
-              </button>
-            </div>
-            <div>
-              <button @click="novaRodada" class="w-40 text-white font-bold py-2 px-4 rounded bg-blue-500">
-                <span>Nova rodada</span>
-              </button>
-            </div>
           </div>
         </template>
       </div>
-      <div class="text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
+      <div class="flex flex-col">
+        <div class="text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
+      </div>
       <div class="flex-grow flex-col flex gap-2">
         <template v-if="!jogoComecou">
           <div class="flex justify-end">
@@ -40,7 +28,8 @@
             </button>
           </div>
           <div class="flex justify-end gap-2">
-            <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2" placeholder="Digite o nome da sala" />
+            <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2"
+              placeholder="Digite o nome da sala" />
             <button @click="loadGame"
               class="bg-green-500 w-40 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Entrar em sala
@@ -61,12 +50,34 @@
       </div>
     </div>
     <template v-if="jogoComecou">
-      <div class="w-full flex justify-center gap-10">
-        <PlayerVote v-for="(player, index) in players" :key="player.id" :player="player"
-          :mostrarCartas="mostrarCartas" />
+      <div class="relative pb-20">
+        <div v-if="jogoComecou && jogadorLogado && jogadorLogado.admin"
+          class="absolute top-0 left-1/2 transform -translate-x-1/2">
+          <div v-if="!virarAutomatico && !roomState.showCards" class="text-red-500">
+            <button @click="toggleMostrarCartas"
+              class="text-white font-bold py-2 px-4 rounded w-40 bg-green-500 hover:bg-green-700">
+              <span>Revelar votos</span>
+            </button>
+          </div>
+          <div v-if="roomState.showCards">
+            <button @click="novaRodada" class="w-50 text-white font-bold py-2 px-4 rounded bg-blue-500">
+              <span>Iniciar nova votação</span>
+            </button>
+          </div>
+        </div>
+        <div class="w-full flex justify-center pt-10 gap-10">
+          <PlayerVote v-for="(player, index) in players" :key="player.id" :player="player"
+            :mostrarCartas="mostrarCartas" />
+        </div>
       </div>
       <div class="w-full flex justify-center gap-4">
-        <Carta :selectedCard="selectedCard" :votar="votar" />
+        <Carta v-if="!roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
+        <template v-else>
+          <div class="flex flex-col gap-5">
+            <div class="text-white text-4xl">Votação encerrada</div>
+            <div class="text-white text-4xl">Carta mais votada: {{ winnerComputed }}</div>
+          </div>
+        </template>
       </div>
     </template>
   </div>
@@ -95,6 +106,20 @@ const virarAutomatico = ref(false);
 const roomState = ref(null);
 const socket = ref(null);
 const players = ref([]);
+
+const winnerComputed = computed(() => {
+  if (players.value.length > 0) {
+    const votes = players.value.map(player => player.vote);
+    const mostVoted = votes.reduce((acc, curr) => {
+      acc[curr] = (acc[curr] || 0) + 1;
+      return acc;
+    }, {});
+    const mostVotedArray = Object.entries(mostVoted);
+    const mostVotedSorted = mostVotedArray.sort((a, b) => b[1] - a[1]);
+    return mostVotedSorted[0][0];
+  }
+  return null;
+});
 
 const debouncedUpdate = debounce(() => {
   fetch(`${apiUrl}/changeName`, {
@@ -219,10 +244,10 @@ const toggleVirarAutomatico = () => {
 watch(players, (newPlayers, oldPlayers) => {
   if (newPlayers.length > 0) {
     newPlayers.forEach(player => {
-      if (player.voted && player.vote !== selectedCard.value && player.id === userUUID.value) {
+      if (player.voted && player.vote !== selectedCard.value && player.uuid === userUUID.value) {
         selectedCard.value = player.vote;
       }
-      if (selectedCard.value && !player.voted && player.id === userUUID.value) {
+      if (selectedCard.value && !player.voted && player.uuid === userUUID.value) {
         selectedCard.value = null;
       }
     });
@@ -313,7 +338,7 @@ const votar = (score) => {
   } else {
     selectedCard.value = score;
   }
-  
+
   if (jogadorLogado.value) {
     socket.value.send(JSON.stringify({
       type: 'vote',
