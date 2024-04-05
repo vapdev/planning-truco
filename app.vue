@@ -40,7 +40,7 @@
             </button>
           </div>
           <div class="flex justify-end gap-2">
-            <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2" placeholder="Digite o ID da sala" />
+            <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2" placeholder="Digite o nome da sala" />
             <button @click="loadGame"
               class="bg-green-500 w-40 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Entrar em sala
@@ -49,7 +49,7 @@
         </template>
         <div v-if="jogoComecou" class="flex justify-end">
           <div class="text-white text-xl mr-6">
-            ID da sala: <span class="font-bold">{{ roomUUID }}</span>
+            Nome da sala: <span class="font-bold">{{ roomUUID }}</span>
           </div>
           <button @click="endGame" class="bg-red-500 w-40 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Sair da sala
