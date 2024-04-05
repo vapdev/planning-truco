@@ -104,7 +104,7 @@ const debouncedUpdate = debounce(() => {
     },
     body: JSON.stringify({
       userUUID: userUUID.value,
-      roomUUID: Number(roomUUID.value),
+      roomUUID: roomUUID.value,
       name: nome.value,
     }),
   });
@@ -114,7 +114,7 @@ const debouncedUpdate = debounce(() => {
 onMounted(() => {
   const savedUserUUID = localStorage.getItem('userUUID');
   if (savedUserUUID) {
-    userUUID.value = Number(savedUserUUID);
+    userUUID.value = savedUserUUID;
   }
 });
 
@@ -125,7 +125,7 @@ watch(nome, (newVal, oldVal) => {
 });
 
 const jogadorLogado = computed(() =>
-  players.value.find((player) => player.id === userUUID.value)
+  players.value.find((player) => player.uuid === userUUID.value)
 );
 
 const startGame = async () => {
@@ -160,6 +160,7 @@ const startGame = async () => {
 
   socket.value.addEventListener('message', (event) => {
     const data = JSON.parse(event.data);
+    console.log(data);
     roomState.value = data;
     players.value = data.players;
   });
@@ -184,7 +185,7 @@ const endGame = () => {
       },
       body: JSON.stringify({
         userUUID: userUUID.value,
-        roomUUID: Number(roomUUID.value),
+        roomUUID: roomUUID.value,
       }),
     });
   }
@@ -198,7 +199,7 @@ const toggleMostrarCartas = () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      roomUUID: Number(roomUUID.value),
+      roomUUID: roomUUID.value,
     }),
   });
 };
@@ -210,7 +211,7 @@ const toggleVirarAutomatico = () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      roomUUID: Number(roomUUID.value),
+      roomUUID: roomUUID.value,
     }),
   });
 };
@@ -244,7 +245,7 @@ const loadGame = async () => {
       },
       body: JSON.stringify({
         userUUID: userUUID.value,
-        roomUUID: Number(roomUUID.value),
+        roomUUID: roomUUID.value,
       }),
     });
 
@@ -292,7 +293,7 @@ const novaRodada = () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      roomUUID: Number(roomUUID.value),
+      roomUUID: roomUUID.value,
     }),
   });
 }
@@ -312,7 +313,7 @@ const votar = (score) => {
   } else {
     selectedCard.value = score;
   }
-
+  
   if (jogadorLogado.value) {
     socket.value.send(JSON.stringify({
       type: 'vote',
