@@ -42,7 +42,7 @@
     <template v-if="jogoComecou">
       <div class="relative pb-10">
         <div v-if="jogoComecou && jogadorLogado && jogadorLogado.admin"
-          class="absolute -top-10 left-1/2 w-full transform -translate-x-1/2">
+          class="absolute md:-top-10 left-1/2 w-full transform -translate-x-1/2">
           <div class="flex flex-col w-full justify-center items-center gap-6">
             <div class="flex flex-col w-full text-white gap-4">
               <div class="flex gap-3 w-full">
