@@ -1,29 +1,27 @@
 <template>
-  <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-16">
+  <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-4 md:p-16">
     <div class="w-full grid grid-cols-3">
       <div>
         <template v-if="jogoComecou && jogadorLogado && jogadorLogado.admin">
           <div class="flex flex-col text-white gap-4">
-            <div class="flex gap-2">
+            <div class="flex flex-col md:flex-row gap-2">
               <div @click="toggleVirarAutomatico"
-                class="hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white justify-center flex items-center">
+                class="md:hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white justify-center flex items-center">
                 <div v-if="virarAutomatico" class="font-bold text-green-400 text-xl">
                   ✓
                 </div>
               </div>
-              <div>Virar automaticamente após todos jogadores votarem</div>
+              <div>Revelar cartas automaticamente após todos os jogadores votarem</div>
             </div>
           </div>
         </template>
       </div>
-      <div class="flex flex-col">
-        <div class="text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
-      </div>
+      <div class="invisible md:visible text-4xl text-center text-white">🃏 Planning Truco 🃏</div>
       <div class="flex-grow flex-col flex gap-2">
         <template v-if="!jogoComecou">
           <div class="flex justify-end">
             <button @click="startGame"
-              class="bg-green-500 w-40 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              class="bg-green-500 w-40 md:hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Iniciar nova sala
             </button>
           </div>
@@ -31,7 +29,7 @@
             <input v-model="roomUUID" class="border-2 border-green-500 rounded pl-2"
               placeholder="Digite o nome da sala" />
             <button @click="loadGame"
-              class="bg-green-500 w-40 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              class="bg-green-500 w-40 md:hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Entrar em sala
             </button>
           </div>
@@ -40,7 +38,7 @@
           <div class="text-white text-xl mr-6">
             Nome da sala: <span class="font-bold">{{ roomUUID }}</span>
           </div>
-          <button @click="endGame" class="bg-red-500 w-40 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          <button @click="endGame" class="bg-red-500 w-40 md:hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
             Sair da sala
           </button>
         </div>
@@ -65,12 +63,12 @@
             </button>
           </div>
         </div>
-        <div class="w-full flex justify-center pt-10 gap-10">
+        <div class="justify-center pt-10" :class="{ 'w-full': true, 'grid': !$md, 'flex': $md, 'flex-wrap': $md, 'gap-10': $md, 'grid-cols-4': !$md}">
           <PlayerVote v-for="(player, index) in players" :key="player.id" :player="player"
             :mostrarCartas="mostrarCartas" />
         </div>
       </div>
-      <div class="w-full flex justify-center gap-4">
+      <div class="justify-center gap-4" :class="{ 'w-full': true, 'grid': !$md, 'flex': $md, 'flex-wrap': $md, 'gap-10': $md, 'grid-cols-5': !$md}">
         <Carta v-if="!roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
         <template v-else>
           <div class="flex flex-col gap-5">
@@ -135,8 +133,10 @@ const debouncedUpdate = debounce(() => {
   });
 }, 1000); // 1000 milliseconds = 1 second
 
+const $md = ref(null)
 
 onMounted(() => {
+  $md.value = window.matchMedia('(min-width: 768px)').matches 
   const savedUserUUID = localStorage.getItem('userUUID');
   if (savedUserUUID) {
     userUUID.value = savedUserUUID;
