@@ -7,8 +7,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      apiBase: process.env.API_BASE || 'http://localhost:8080',
-      wsBase: process.env.WS_BASE || 'ws://localhost:8080'
+      apiBase: process.env.NUXT_API_BASE || 'http://localhost:8080',
+      wsBase: process.env.NUXT_WS_BASE || 'ws://localhost:8080'
     }
   }
 })
