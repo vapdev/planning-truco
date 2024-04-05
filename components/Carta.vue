@@ -1,8 +1,8 @@
 <template>
     <div v-for="(card, index) in cards" :key="index" @click="votar(card.value)"
         :class="selectedCard == card.value ? card.selectedClass : card.defaultClass"
-        class="text-5xl md:hover:text-black md:hover:text-6xl md:md:hover:scale-[1.15] w-16 h-24 md:w-24 md:h-32 flex-col flex rounded-lg justify-center cursor-pointer border-gray-400 border-4">
-        <span class="flex justify-center">{{ card.label }}</span>
+        class="text-3xl md:hover:text-black md:hover:text-6xl md:hover:scale-[1.15] w-24 h-32 flex items-center rounded-lg justify-center cursor-pointer border-gray-400 border-4">
+        <div class="flex justify-center w-24">{{ card.label }}</div>
     </div>
 </template>
 

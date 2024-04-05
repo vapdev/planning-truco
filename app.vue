@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-4 md:p-16">
+  <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-4 md:p-16 md:pb-4">
     <div class="w-full grid grid-cols-3">
       <div>
         <template v-if="jogoComecou && jogadorLogado && jogadorLogado.admin">
@@ -48,7 +48,7 @@
       </div>
     </div>
     <template v-if="jogoComecou">
-      <div class="relative pb-20">
+      <div class="relative pb-10">
         <div v-if="jogoComecou && jogadorLogado && jogadorLogado.admin"
           class="absolute top-0 left-1/2 transform -translate-x-1/2">
           <div v-if="!virarAutomatico && !roomState.showCards" class="text-red-500">
@@ -63,12 +63,12 @@
             </button>
           </div>
         </div>
-        <div class="justify-center pt-10" :class="{ 'w-full': true, 'grid': !$md, 'flex': $md, 'flex-wrap': $md, 'gap-10': $md, 'grid-cols-4': !$md}">
+        <div class="justify-center pt-32 md:pt-10 flex flex-wrap w-full gap-10">
           <PlayerVote v-for="(player, index) in players" :key="player.id" :player="player"
             :mostrarCartas="mostrarCartas" />
         </div>
       </div>
-      <div class="justify-center gap-4" :class="{ 'w-full': true, 'grid': !$md, 'flex': $md, 'flex-wrap': $md, 'gap-10': $md, 'grid-cols-5': !$md}">
+      <div class="justify-center overflow-x-auto gap-4 md:h-60 2 items-center w-full flex">
         <Carta v-if="!roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
         <template v-else>
           <div class="flex flex-col gap-5">
