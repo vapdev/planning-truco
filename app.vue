@@ -1,9 +1,8 @@
 <template>
   <div class="h-[100vh] w-[100vw] flex flex-col justify-between p-4 md:p-16 md:pb-4">
     <div
-      class="text-4xl md:mb-0 text-center w-full md:w-fit text-white absolute md:top-13 left-1/2 transform -translate-x-1/2">
-      🃏
-      Planning Truco 🃏</div>
+      class="oswald-font text-4xl md:mb-0 text-center w-full md:w-fit text-white absolute md:top-13 left-1/2 transform -translate-x-1/2">
+      Free Planning Poker</div>
     <div class="w-full md:grid md:grid-cols-2 flex flex-col mt-16 md:mt-0">
       <div class="w-full">
         <div v-if="jogoComecou" class="flex-col flex gap-4">
@@ -44,16 +43,16 @@
         <div v-if="jogoComecou && jogadorLogado && jogadorLogado.admin"
           class="absolute md:-top-10 left-1/2 w-full transform -translate-x-1/2">
           <div class="flex flex-col w-full justify-center items-center gap-6">
-            <div class="flex flex-col w-full text-white gap-4">
-              <div class="flex gap-3 w-full">
+            <div class="flex flex-col w-full justify-center text-white gap-4">
+              <div class="flex justify-center gap-3 w-full yupi">
                 <div @click="toggleVirarAutomatico"
-                  class="md:hover:bg-gray-500 w-7 rounded-lg cursor-pointer h-7 border-2 border-white flex">
-                  <div v-if="virarAutomatico" class="font-bold text-green-400 text-xl">
+                  class="md:hover:bg-gray-500 w-7 rounded-lg justify-center items-center cursor-pointer h-7 border-2 border-white flex">
+                  <div v-show="virarAutomatico" class="font-bold text-green-400 text-xl">
                     ✓
                   </div>
                 </div>
-                <div class="flex w-full">
-                  <div>Revelar cartas automaticamente após todos os jogadores votarem</div>
+                <div class="flex">
+                  <div>Revelar votos automaticamente</div>
                 </div>
               </div>
             </div>
@@ -64,7 +63,7 @@
               </button>
             </div>
             <div v-if="roomState.showCards">
-              <button @click="novaRodada" class="w-50 text-white font-bold py-2 px-4 rounded bg-blue-500">
+              <button @click="novaRodada" class="w-50 md:hover:bg-blue-600 text-white font-bold py-2 px-4 rounded bg-blue-500">
                 <span>Iniciar nova votação</span>
               </button>
             </div>
@@ -75,7 +74,7 @@
             :mostrarCartas="mostrarCartas" />
         </div>
       </div>
-      <div class="md:justify-center overflow-x-auto pb-10 gap-4 md:h-60 2 items-center w-full flex">
+      <div class="md:justify-center overflow-x-auto pb-6 gap-4 md:h-72 2 items-center w-full flex">
         <Carta v-if="!roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
         <template v-else>
           <div class="flex flex-col gap-2 pb-4 md:pb-0">
@@ -98,6 +97,12 @@
 html {
   height: 100vh;
   background-color: #3f4146;
+}
+.oswald-font {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
 }
 </style>
 
