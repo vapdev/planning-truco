@@ -52,7 +52,7 @@
                     <div class="flex flex-col gap-6 text-white">
                         <div>Ou entre em uma sala existente</div>
                         <div class="flex">
-                            <input v-model="roomUUID" class="border-2 h-12 border-green-500 rounded pl-2"
+                            <input v-model="roomUUID" class="border-2 text-gray-800 h-12 border-green-500 rounded pl-2"
                                 placeholder="Insira o link da sala" />
                             <button @click="userStore.loadGame(roomUUID)"
                                 class="bg-green-500 md:hover:bg-green-400 text-white font-bold py-2 px-4 rounded">

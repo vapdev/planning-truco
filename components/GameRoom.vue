@@ -13,25 +13,42 @@
                 <Icon @click="endGame" size="36" name="material-symbols-light:exit-to-app" color="white" />
             </div>
         </div>
-        <div class="relative pb-10">
-            <div class="relative justify-center pt-32 md:pt-10 flex flex-wrap w-full gap-10">
-                <div class="w-72 h-44 rounded-xl flex justify-center items-center border-green-600 border-4 mx-auto">
-                    <div v-if="!userStore.roomState.autoShowCards && !userStore.roomState.showCards" class="text-red-500">
-                        <button @click="toggleMostrarCartas"
-                            class="text-white font-bold py-2 px-4 rounded w-40 bg-green-600 hover:bg-green-500">
-                            <span>Revelar votos</span>
-                        </button>
-                    </div>
-                    <div v-if="userStore.roomState.showCards">
-                        <button @click="novaRodada"
-                            class="w-50 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded bg-blue-500">
-                            <span>Iniciar nova votação</span>
-                        </button>
+        <div class="flex flex-col items-center scale">
+            <div class="flex w-80 justify-between">
+                <div v-for="(player, index) in players" :key="player.id">
+                    <PlayerVote :player="player" :mostrarCartas="userStore.roomState.showCards" />
+                </div>
+            </div>
+            <div class="flex gap-4 items-center">
+                <div class="flex flex-col gap-4">
+                    <div v-for="(player, index) in onePlayerlist" :key="player.id">
+                        <PlayerVote :player="player" :mostrarCartas="userStore.roomState.showCards" />
                     </div>
                 </div>
-
-                <div v-for="(player, index) in userStore.players" :key="player.id" class="absolute"
-                    :style="{ transform: `rotate(${index * (360 / userStore.players.length)}deg) translate(250px) rotate(-${index * (360 / userStore.players.length)}deg)` }">
+                <div class="justify-center flex flex-wrap w-full gap-10 mx-8 mt-4">
+                    <div class="w-80 h-32 rounded-xl flex justify-center items-center bg-green-300 m-10 mx-auto">
+                        <div v-if="!userStore.roomState.autoShowCards && !userStore.roomState.showCards" class="text-red-500">
+                            <button @click="toggleMostrarCartas"
+                                class="text-white font-bold py-2 px-4 rounded w-40 bg-green-600 hover:bg-green-500">
+                                <span>Revelar votos</span>
+                            </button>
+                        </div>
+                        <div v-if="userStore.roomState.showCards">
+                            <button @click="novaRodada"
+                                class="w-50 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded bg-blue-500">
+                                <span>Iniciar nova votação</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div v-for="(player, index) in onePlayerlist" :key="player.id">
+                        <PlayerVote :player="player" :mostrarCartas="userStore.roomState.showCards" />
+                    </div>
+                </div>
+            </div>
+            <div class="flex w-80 justify-between">
+                <div v-for="(player, index) in players" :key="player.id">
                     <PlayerVote :player="player" :mostrarCartas="userStore.roomState.showCards" />
                 </div>
             </div>
@@ -124,6 +141,32 @@ const novaRodada = () => {
         }),
     });
 }
+
+const onePlayerlist = [
+    {
+        // mock player
+        id: 1,
+        name: "Player 1",
+    },
+]
+
+const players = [
+    {
+        // mock player
+        id: 1,
+        name: "Player 1",
+    },
+    {
+        // mock player
+        id: 2,
+        name: "Player 2",
+    },
+    {
+        // mock player
+        id: 3,
+        name: "Player 3",
+    },
+]
 
 const sairDaSala = () => {
     userStore.roomUUID = null;

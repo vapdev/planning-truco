@@ -35,8 +35,8 @@ export const useUserStore = defineStore('user', () => {
         setWebSocket('newAdmin');
         jogoComecou.value = true;
     }
-    const loadGame = async (roomUUID) => {
-        if (roomUUID) {
+    const loadGame = async (inputRoomUUID) => {
+        if (inputRoomUUID) {
             const response = await fetch(`${apiUrl}/joinRoom`, {
                 method: 'POST',
                 headers: {
@@ -44,7 +44,7 @@ export const useUserStore = defineStore('user', () => {
                 },
                 body: JSON.stringify({
                     userUUID: localStorage.getItem('userUUID'),
-                    roomUUID: roomUUID,
+                    roomUUID: inputRoomUUID,
                 }),
             });
     
@@ -54,6 +54,7 @@ export const useUserStore = defineStore('user', () => {
     
             const data = await response.json();
             userUUID.value = data.userUUID;
+            roomUUID.value = data.roomUUID;
             localStorage.setItem('userUUID', userUUID.value);
             setWebSocket('newPlayer');
             jogoComecou.value = true;
