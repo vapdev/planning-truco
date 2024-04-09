@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
     'nuxt-icon',
+    '@pinia/nuxt',
   ],
   runtimeConfig: {
     public: {

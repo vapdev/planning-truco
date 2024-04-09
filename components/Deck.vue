@@ -2,7 +2,7 @@
     <div v-for="(card, index) in cards" :key="index" @click="votar(card.value)"
         :class="selectedCard == card.value ? card.selectedClass : card.defaultClass"
         style="box-shadow: 0 10px 30px -10px #222222;"
-        class="text-3xl oswald-font  md:hover:text-black md:hover:text-6xl md:hover:scale-[1.15] w-24 h-32 flex items-center rounded-lg justify-center cursor-pointer border-gray-400 border-4" >
+        class="text-3xl oswald-font  md:hover:text-black md:hover:text-6xl md:hover:scale-[1.15] w-16 h-24 flex items-center rounded-lg justify-center cursor-pointer border-gray-400 border-4" >
         <div class="flex justify-center w-24">{{ card.label }}</div>
     </div>
 </template>
