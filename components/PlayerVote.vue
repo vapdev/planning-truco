@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex rounded-lg w-10 h-16 justify-center border-4" :class="player.voted
+    <div class="relative flex rounded-lg w-12 h-20 justify-center border-4" :class="player.voted
         ? 'border-green-500 bg-green-100'
         : 'border-red-300 bg-red-100'
         "

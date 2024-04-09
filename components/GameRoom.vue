@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="md:justify-center overflow-x-auto gap-4 md:h-48 2 items-center w-full flex">
+        <div class="md:justify-center overflow-x-auto gap-4 md:h-48 items-center w-full flex">
             <Deck v-if="!userStore.roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
             <template v-else>
                 <div class="flex flex-col gap-2 pb-4 md:pb-0">
