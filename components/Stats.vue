@@ -1,11 +1,14 @@
 <template>
-    <div class="flex flex-col gap-2 pb-4 md:pb-0">
+    <div class="flex flex-col gap-2 pb-16">
         <div class="text-white text-xl md:text-2xl">Votação encerrada</div>
         <div class="flex items-center gap-4 text-white text-xl md:text-2xl">
-            <div class="text-green-300">Carta mais votada: </div>
-            <div
-                class="mt-4 w-10 h-14 text-black font-bold flex-col relative flex rounded-lg justify-center border-4 border-green-500 bg-green-100">
-                <span class="text-xl flex justify-center"><span>{{ winnerComputed }}</span></span>
+            <div class="flex justify-center w-full gap-4">
+                <div v-for="player in userStore.players" :key="player.id">
+                    <div
+                        class="mt-4 w-8 h-14 text-black font-bold flex-col relative flex rounded-lg justify-center  bg-green-100">
+                        <span class="text-xl flex justify-center"><span>{{ player.vote }}</span></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

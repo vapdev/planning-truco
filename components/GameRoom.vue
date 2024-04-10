@@ -3,20 +3,26 @@
         <!-- HEADER -->
         <HeaderSala @endGame="endGame" />
 
-        <!-- MAIN CONTENT -->
-        <div class="flex flex-col items-center scale">
-            <!-- PLAYERS DE CIMA -->
-            <TopContainer :players="playersTop" />
-            <div class="flex gap-4 justify-center items-center">
-                <!-- PLAYERS DA ESQUERDA -->
-                <LeftContainer :players="playersLeft" />
-                <!-- MESA -->
-                <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
-                <!-- PLAYERS DA DIREITA -->
-                <RightContainer :players="playersRight" />
+        <div class="flex justify-around">
+            <div class="text-white w-1/3"></div>
+
+            <!-- MAIN CONTENT -->
+            <div class="flex w-1/3 flex-col items-center scale">
+                <!-- PLAYERS DE CIMA -->
+                <TopContainer :players="playersTop" />
+                <div class="flex gap-4 justify-center items-center">
+                    <!-- PLAYERS DA ESQUERDA -->
+                    <LeftContainer :players="playersLeft" />
+                    <!-- MESA -->
+                    <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
+                    <!-- PLAYERS DA DIREITA -->
+                    <RightContainer :players="playersRight" />
+                </div>
+                <!-- PLAYERS DE BAIXO -->
+                <BottomContainer :players="playersBottom" />
             </div>
-            <!-- PLAYERS DE BAIXO -->
-            <BottomContainer :players="playersBottom" />
+
+            <div class="text-white w-1/3"></div>
         </div>
 
         <!-- FOOTER -->

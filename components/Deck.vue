@@ -5,7 +5,7 @@
             <div v-for="(card, index) in cards" :key="index" @click="votar(card.value)"
                 :class="card.defaultClass, selectedCard === card.value ? card.selectedClass : ''"
                 style="box-shadow: 0 10px 30px -10px #222222;"
-                class="text-3xl oswald-font  md:hover:text-black md:hover:text-4xl md:hover:scale-[1.1] w-14 h-24 flex items-center rounded-lg justify-center cursor-pointer">
+                class="text-3xl oswald-font  md:hover:text-black md:hover:scale-[1.1] w-12 h-20 flex items-center rounded-lg justify-center cursor-pointer">
                 <div class="flex justify-center w-24">{{ card.label }}</div>
             </div>
         </div>
