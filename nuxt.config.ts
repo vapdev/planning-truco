@@ -20,4 +20,7 @@ export default defineNuxtConfig({
       Oswald: true,
     }
   },
+  colorMode: {
+    preference: 'dark'
+  }
 })

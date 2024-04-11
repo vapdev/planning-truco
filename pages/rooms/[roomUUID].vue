@@ -1,4 +1,4 @@
-<template v-if="userStore.jogoComecou">
+<template>
     <div class="h-full w-full flex flex-col justify-between">
         <!-- HEADER -->
         <HeaderSala @endGame="endGame" />
@@ -42,6 +42,9 @@ const wsUrl = config.public.wsBase;
 const { debounce } = lodash;
 const nome = ref("");
 const selectedCard = ref(null);
+const route = useRoute();
+
+userStore.loadGame(route.params.roomUUID);
 
 watch(nome, (newVal, oldVal) => {
     if (newVal) {
@@ -142,6 +145,57 @@ const players = [
         id: 3,
         name: "Player 3",
     },
+    {
+        // mock player
+        id: 4,
+        name: "Player 4",
+    },
+    {
+        // mock player
+        id: 5,
+        name: "Player 5",
+    },
+    {
+        // mock player
+        id: 6,
+        name: "Player 6",
+    },
+    {
+        // mock player
+        id: 7,
+        name: "Player 7",
+    },
+    {
+        // mock player
+        id: 8,
+        name: "Player 8",
+    },
+    {
+        // mock player
+        id: 9,
+        name: "Player 9",
+    },
+    {
+        // mock player
+        id: 10,
+        name: "Player 10",
+    },
+    {
+        id: 11,
+        name: 'sdadas',
+    },
+    {
+        id: 11,
+        name: 'sdadas',
+    },
+    {
+        id: 11,
+        name: 'sdadas',
+    },
+    {
+        id: 11,
+        name: 'sdadas',
+    },
 ]
 
 const sairDaSala = () => {
@@ -151,6 +205,7 @@ const sairDaSala = () => {
     userStore.roomState.autoShowCards = true;
     userStore.roomState.showCards = false;
     selectedCard.value = null;
+    navigateTo('/');
 };
 
 const votar = (score) => {

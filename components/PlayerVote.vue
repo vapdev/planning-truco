@@ -6,12 +6,12 @@
          ]" 
          style="box-shadow: 0 30px 30px -10px #222222;">
         <div v-if="player.voted && flipped" class="front absolute w-full h-full flex items-center justify-center">
-            <span class="oswald-font text-4xl">
+            <span class="oswald-font text-black text-4xl">
                 <span v-if="player.vote != 0">{{ player.vote }}</span>
                 <span v-else>☕</span>
             </span>
         </div>
-        <div v-else class="cardPattern absolute w-full h-full flex items-center justify-center" v-if="!player.voted || !flipped">
+        <div v-else class="cardPattern absolute w-full h-full text-black  flex items-center justify-center" v-if="!player.voted || !flipped">
         </div>
         <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
             <span class="text-sm flex justify-center text-nowrap text-white">{{ player.name || ' ' }}</span>

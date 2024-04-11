@@ -5,7 +5,7 @@
             <div class="flex justify-center w-full gap-4">
                 <div v-for="player in userStore.players" :key="player.id">
                     <div
-                        class="mt-4 w-8 h-14 text-black font-bold flex-col relative flex rounded-lg justify-center  bg-green-100">
+                        class="mt-4 w-8 h-14 text-black font-bold flex-col relative flex rounded-md justify-center  bg-green-100">
                         <span class="text-xl flex justify-center"><span>{{ player.vote }}</span></span>
                     </div>
                 </div>

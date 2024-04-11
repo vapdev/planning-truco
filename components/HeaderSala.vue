@@ -3,7 +3,7 @@
         <div class="w-1/3 justify-start items-center">
             <div class="flex gap-2 items-center">
                 <div>Copiar link da sala:</div>
-                <div class="hover:bg-gray-500 rounded-xl">
+                <div @click="copyToClipboard" class="hover:bg-gray-500 rounded-xl">
                     <Icon class="hover:cursor-pointer" size="34" name="material-symbols-light:content-copy"
                         color="white" />
                 </div>
@@ -25,6 +25,18 @@
 </template>
 
 <script setup>
+import { showToast } from '../composables/toast';
 const userStore = useUserStore();
+const modal = ref (true);
 const emit = defineEmits(['endGame']);
+const copyToClipboard = () => {
+    showToast({ message: 'O link da sala foi copiado para a área de transferência' , position: 'top-center'})
+    navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+            console.log('URL copied to clipboard');
+        })
+        .catch(err => {
+            console.error('Failed to copy URL: ', err);
+        });
+};
 </script>

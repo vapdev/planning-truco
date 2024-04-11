@@ -6,7 +6,6 @@ export const useUserStore = defineStore('user', () => {
     const userUUID = ref(null);
     const apiUrl = config.public.apiBase;
     const wsUrl = config.public.wsBase;
-    console.log(wsUrl)
     const name = ref("Anônimo");
     const jogoComecou = ref(false);
     const roomState = ref({
@@ -33,7 +32,7 @@ export const useUserStore = defineStore('user', () => {
         userUUID.value = data.userUUID;
         localStorage.setItem('userUUID', userUUID.value);
         setWebSocket('newAdmin');
-        jogoComecou.value = true;
+        navigateTo(`/rooms/${roomUUID.value}`);
     }
     const loadGame = async (inputRoomUUID) => {
         if (inputRoomUUID) {
@@ -57,7 +56,6 @@ export const useUserStore = defineStore('user', () => {
             roomUUID.value = data.roomUUID;
             localStorage.setItem('userUUID', userUUID.value);
             setWebSocket('newPlayer');
-            jogoComecou.value = true;
         }
     };
     function setWebSocket(tipo) {

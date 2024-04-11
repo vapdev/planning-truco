@@ -1,7 +1,7 @@
 <template>
-  <div class="h-[100vh] w-[100vw] flex flex-col">
-    <LandingPage v-if="!userStore.jogoComecou" />
-    <GameRoom v-else />
+  <div class="w-full h-[100vh]">
+    <NuxtPage />
+    <ToastGlobal />
   </div>
 </template>
 
@@ -20,6 +20,8 @@ html {
 </style>
 
 <script setup>
+import ToastGlobal from './composables/toast';
+
 const $md = ref(null)
 onMounted(() => {
   $md.value = window.matchMedia('(min-width: 768px)').matches
