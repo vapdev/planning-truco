@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="flex w-1/3 justify-center items-center">
-            <span class="font-bold">{{ userStore.roomUUID }}</span>
+            <span class="font-bold">{{ userStore.roomState.name }}</span>
         </div>
         <div class="flex w-1/3 justify-end gap-5 items-center">
             <div class="hover:bg-gray-500 rounded-xl">
@@ -30,7 +30,7 @@ const userStore = useUserStore();
 const modal = ref (true);
 const emit = defineEmits(['endGame']);
 const copyToClipboard = () => {
-    showToast({ message: 'O link da sala foi copiado para a área de transferência' , position: 'top-center'})
+    showToast({ message: 'O link da sala foi copiado para a área de transferência' , position: 'top-center', offsetY: 4})
     navigator.clipboard.writeText(window.location.href)
         .then(() => {
             console.log('URL copied to clipboard');

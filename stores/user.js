@@ -13,7 +13,8 @@ export const useUserStore = defineStore('user', () => {
         autoShowCards: false,
     })
     const ws = ref(null)
-    const startGame = async () => {
+    const startGame = async (roomName, userName) => {
+        console.log('startGame', roomName, userName)
         const response = await fetch(`${apiUrl}/createRoom`, {
             method: 'POST',
             headers: {
@@ -21,6 +22,8 @@ export const useUserStore = defineStore('user', () => {
             },
             body: JSON.stringify({
                 userUUID: userUUID.value,
+                roomName: roomName,
+                userName: userName,
             }),
         });
 
@@ -28,8 +31,21 @@ export const useUserStore = defineStore('user', () => {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        roomUUID.value = data.roomUUID;
+        roomUUID.value = data.roomUUID;        
         userUUID.value = data.userUUID;
+
+        fetch(`${apiUrl}/changeName`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userUUID: userUUID.value,
+                roomUUID: roomUUID.value,
+                name: userName,
+            }),
+        });
+
         localStorage.setItem('userUUID', userUUID.value);
         setWebSocket('newAdmin');
         navigateTo(`/rooms/${roomUUID.value}`);

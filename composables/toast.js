@@ -32,6 +32,8 @@ const showToast = ({
     icon = 'clarity:success-standard-line',
     iconColor = "#FFFFFF",
     position = "top-center",
+    offsetX = 0,
+    offsetY = 0,
     delay = 3000,
 }) => {
     if (toasts.value.length > 14) return;
@@ -62,6 +64,8 @@ const showToast = ({
         icon,
         iconColor,
         position,
+        offsetX,
+        offsetY,
     };
 
     toasts.value.push(toast);
@@ -76,37 +80,39 @@ const toastPosition = (toast) => {
     switch (toast.position) {
         case "top-left":
             return {
-                top: `calc(${toast.top * 4}rem - 4rem)`,
+                top: `calc(${toast.top * 4}rem - 4rem + ${toast.offsetY}rem)`,
+                left: toast.offsetX + "rem",
                 backgroundColor: toast.color,
             }
         case "top-center":
             return {
-                top: `calc(${toast.top * 4}rem - 4rem)`,
-                left: "50%",
+                top: `calc(${toast.top * 4}rem - 4rem + ${toast.offsetY}rem)`,
+                left: `calc(50% + ${toast.offsetX}rem)`,
                 transform: "translateX(-50%)",
                 backgroundColor: toast.color,
             }
         case "top-right":
             return {
-                top: `calc(${toast.top * 4}rem - 4rem)`,
-                right: "0",
+                top: `calc(${toast.top * 4}rem - 4rem + ${toast.offsetY}rem)`,
+                right: toast.offsetX + "rem",
                 backgroundColor: toast.color,
             }
         case "bottom-left":
             return {
-                bottom: `calc(${toast.top * 4}rem - 4rem)`,
+                bottom: `calc(${toast.top * 4}rem - 4rem + ${toast.offsetY}rem)`,
+                left: toast.offsetX + "rem",
                 backgroundColor: toast.color,
             }
         case "bottom-right":
             return {
-                bottom: `calc(${toast.top * 4}rem - 4rem)`,
-                right: "0",
+                bottom: `calc(${toast.top * 4}rem - 4rem + ${toast.offsetY}rem)`,
+                right: toast.offsetX + "rem",
                 backgroundColor: toast.color,
             }
         default:
             return {
                 top: `calc(${toast.top * 4}rem - 4rem)`,
-                right: "0",
+                right: toast.offsetX + "rem",
                 backgroundColor: toast.color,
             }
     }

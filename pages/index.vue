@@ -78,30 +78,31 @@
                 </div>
                 <div class="mb-4 text-white text-4xl">Criando sala</div>
                 <div class="text-md flex flex-col gap-4 text-white">
-                    <div>Nome da sala:</div>
+                    <div>Nome da sala: (Opcional)</div>
                     <div class="flex w-full gap-4">
-                        <input v-model="roomUUID"
-                            class="border-2 outline-offset-2 outline outline-blue-500 h-10 w-full  rounded pl-2"
+                        <input v-model="roomName"
+                            class="border-2 text-gray-800 outline-offset-2 outline outline-blue-500 h-10 w-full  rounded pl-2"
                             placeholder="Nome da sala" />
                     </div>
                 </div>
                 <div class="text-md flex flex-col gap-4 text-white">
-                    <div>Seu nome:</div>
+                    <div>Seu nome: (Como os outros irão te ver)</div>
                     <div class="flex w-full gap-4">
-                        <input v-model="roomUUID" class="border-2 outline outline-blue-500 h-10 w-full rounded pl-2"
+                        <input v-model="userName" class="border-2 text-gray-800 outline outline-blue-500 h-10 w-full rounded pl-2"
                             placeholder="Seu nome" />
                     </div>
                 </div>
-                <button @click="userStore.startGame"
-                    class=" bg-blue-500 mt-24 w-full md:hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
+                <button @click="userStore.startGame(roomName, userName)"
+                    class=" bg-blue-500 mt-6 w-full md:hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
                     Iniciar
                 </button>
             </div>
         </UModal>
         <UModal :ui="{ overlay : { background: 'bg-blue-200/40' } }" v-model="modalEntrar">
             <div class="relative rounded-lg font-bold bg-[#3f4146] p-12 flex flex-col gap-6">
-                <button @click="modalEntrar = false"
-                    class="absolute top-2 right-2 pr-2 text-white text-2xl">&times;</button>
+                <div class="absolute cursor-pointer text-white flex top-2 right-2">
+                    <Icon @click="modalCriar=false" class=" md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out" size="38" name="material-symbols:close-small-rounded"></Icon>
+                </div>
                 <div class="mb-4 text-white text-4xl">Entrar em sala</div>
                 <div class="text-md flex flex-col gap-4 text-white">
                     <div>Seu nome:</div>
@@ -125,6 +126,9 @@ const userStore = useUserStore();
 const roomUUID = ref('');
 const modalCriar = ref(false);
 const modalEntrar = ref(false);
+
+const roomName = ref('');
+const userName = ref('');
 
 const startGame = () => {
     modalCriar.value = true;
