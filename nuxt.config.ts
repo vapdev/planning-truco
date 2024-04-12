@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Oswald: true,
+      Rubik: true
     }
   },
   colorMode: {

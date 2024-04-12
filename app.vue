@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[100vh]">
+  <div class="w-full rubik-font h-[100vh]">
     <NuxtPage />
     <ToastGlobal />
   </div>
@@ -13,6 +13,12 @@ html {
 
 .oswald-font {
   font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+.rubik-font {
+  font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
