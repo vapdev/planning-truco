@@ -4,10 +4,8 @@
             <div class=" text-blue-500 font-bold">Free Planning Poker</div>
             <div class="text-lg font-bold">
                 <div class="flex gap-4">
-                    <div class="md:hover:bg-gray-600 rounded cursor-pointer p-2">Sign Up</div>
-                    <div class="md:hover:bg-gray-600 rounded cursor-pointer p-2">Login</div>
                     <button @click="startGame"
-                        class="bg-blue-500 md:hover:bg-blue-400 font-bold px-4 rounded">
+                        class="bg-blue-500 md:hover:bg-blue-400 font-bold p-2 px-4 rounded">
                         Iniciar nova sala
                     </button>
                 </div>
@@ -85,11 +83,11 @@
                 </div>
                 <div class="mb-4 text-white text-4xl">Criando sala</div>
                 <div class="text-md flex flex-col gap-4 text-white">
-                    <div>Nome da sala: (Opcional)</div>
+                    <div>Nome da sala:</div>
                     <div class="flex w-full gap-4">
                         <input v-model="roomName"
                             class="border-2 text-gray-800 outline-offset-2 outline outline-blue-500 h-10 w-full  rounded pl-2"
-                            placeholder="Nome da sala" />
+                            placeholder="Nome da sala (Opcional)" />
                     </div>
                 </div>
                 <button @click="userStore.startGame(roomName)"
