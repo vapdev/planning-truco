@@ -1,11 +1,12 @@
 import { showToast } from '../composables/toast';
+import { useStorage } from "@vueuse/core";
 
 export const useUserStore = defineStore('user', () => {
     const player = ref(null)
     const players = ref([])
     const config = useRuntimeConfig();
     const roomUUID = ref(null);
-    const userUUID = ref(null);
+    const userUUID = ref(useStorage('userUUID', ''));
     const apiUrl = config.public.apiBase;
     const wsUrl = config.public.wsBase;
     const name = ref("Guest");
@@ -17,7 +18,7 @@ export const useUserStore = defineStore('user', () => {
     const ws = ref(null)
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
-
+    
     async function fetchJson(url, body) {
         const response = await fetch(url, {
             method: POST,
@@ -25,7 +26,6 @@ export const useUserStore = defineStore('user', () => {
                 'Content-Type': APPLICATION_JSON,
             },
             body: JSON.stringify(body),
-            
         });
 
         if (!response.ok) {
@@ -36,40 +36,42 @@ export const useUserStore = defineStore('user', () => {
     }
 
     function setWebSocket(tipo) {
-        console.log(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
-        ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
+        if (process.client) {
+            console.log(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
+            ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
 
-        ws.value.onopen = () => {
-            console.log('WebSocket connected!!!!!!')
+            ws.value.onopen = () => {
+                console.log('WebSocket connected!!!!!!')
+            }
+
+            ws.value.onerror = (error) => {
+                console.log('WebSocket error: ', error)
+            }
+
+            ws.value.onmessage = (event) => {
+                console.log('WebSocket message connected!!!!!!', event.data)
+            }
+
+            ws.value.onclose = () => {
+                console.log('WebSocket closed')
+            }
+
+            console.log(name.value)
+            ws.value.addEventListener('open', (event) => {
+                ws.value.send(JSON.stringify({
+                    type: tipo,
+                    userUUID: userUUID.value,
+                    name: name.value,
+                }));
+            });
+
+            ws.value.addEventListener('message', (event) => {
+                console.log("Received message", event.data)
+                const data = JSON.parse(event.data);
+                roomState.value = data;
+                players.value = data.players;
+            });
         }
-
-        ws.value.onerror = (error) => {
-            console.log('WebSocket error: ', error)
-        }
-
-        ws.value.onmessage = (event) => {
-            console.log('WebSocket message connected!!!!!!', event.data)
-        }
-
-        ws.value.onclose = () => {
-            console.log('WebSocket closed')
-        }
-
-        console.log(name.value)
-        ws.value.addEventListener('open', (event) => {
-            ws.value.send(JSON.stringify({
-                type: tipo,
-                userUUID: userUUID.value,
-                name: name.value,
-            }));
-        });
-
-        ws.value.addEventListener('message', (event) => {
-            console.log("Received message", event.data)
-            const data = JSON.parse(event.data);
-            roomState.value = data;
-            players.value = data.players;
-        });
     }
 
     const startGame = async (roomName) => {
@@ -81,21 +83,19 @@ export const useUserStore = defineStore('user', () => {
 
         roomUUID.value = data.roomUUID;
         userUUID.value = data.userUUID;
-        localStorage.setItem('userUUID', userUUID.value);
-        setWebSocket('newAdmin');
+        // setWebSocket('newAdmin');
         navigateTo(`/rooms/${roomUUID.value}`);
     }
 
     const loadGame = async (inputRoomUUID) => {
         if (inputRoomUUID) {
             const data = await fetchJson(`${apiUrl}/joinRoom`, {
-                userUUID: localStorage.getItem('userUUID'),
+                userUUID: userUUID.value,
                 roomUUID: inputRoomUUID,
             });
 
             userUUID.value = data.userUUID;
             roomUUID.value = data.roomUUID;
-            localStorage.setItem('userUUID', userUUID.value);
             setWebSocket('newPlayer');
         }
     };
@@ -112,7 +112,6 @@ export const useUserStore = defineStore('user', () => {
                 userUUID: userUUID.value,
                 name: newName,
             }),
-            
         });
     
         if (!response.ok) {
