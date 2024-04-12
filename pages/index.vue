@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col w-full h-full">
-        <div class="w-full px-4 flex justify-between text-white items-center text-2xl bg-preto h-16">
+        <div class="w-full px-4 flex justify-between text-white items-center text-2xl bg-preto md:h-16">
             <div class=" text-blue-500 font-bold">Free Planning Poker</div>
             <div class="text-lg font-bold">
                 <div class="flex gap-4">
@@ -13,8 +13,8 @@
                 </div>
             </div>
         </div>
-        <div class="flex h-full w-full justify-between">
-            <div class="text-white flex flex-col justify-center items-center w-1/2 text-xl">
+        <div class="flex flex-col md:flex-row h-full w-full">
+            <div class="p-6 pt-14 text-white flex flex-col justify-center items-center w-full md:w-1/2 text-xl">
                 <div>
                     <p class="text-4xl mb-8">Bem-vindo ao <span
                             class="underline-offset-4 underline text-blue-500 font-bold">Free
@@ -23,8 +23,7 @@
                         A solução perfeita para os planejamentos de sprint da sua equipe
                     </div>
                 </div>
-                <div class="w-[600px]">
-                    <!-- galeria de imagens -->
+                <!-- <div class="w-[600px]">
                     <div class="flex w-full gap-4">
                         <div class="">
                             <img src="https://planning-poker-agile.web.app/static/media/Session.6e63c44d14589001840a.jpg"
@@ -45,18 +44,11 @@
                                 alt="Imagem 2" class="rounded-lg" />
                         </div>
                     </div>
-                </div>
-                <div class="flex align-center gap-2 mt-8">
-                    <p class="text-xs">Criado por:</p>
-                    <div @click="goToGithub" class="cursor-pointer flex align-center gap-2">
-                        <p class="text-xs">vapdev </p>
-                        <Icon name="uil:github" color="black" />
-                    </div>
-                </div>
+                </div> -->
             </div>
-            <div class="text-white flex flex-col justify-center items-center w-1/2 text-2xl pr-32">
-                <p class="text-3xl mb-4 font-bold">Jogue agora gratuitamente!</p>
-                <div class="flex flex-col font-bold text-xl py-8 gap-16">
+            <div class="text-white flex flex-col justify-center items-center w-full md:w-1/2 text-2xl">
+                <p class="text-3xl font-bold">Jogue agora gratuitamente!</p>
+                <div class="flex flex-col font-bold text-xl py-8 gap-6 md:gap-16">
                     <template v-if="!userStore.jogoComecou">
                         <div class="flex flex-col gap-6 text-white">
                             <p>Crie uma nova sala</p>
