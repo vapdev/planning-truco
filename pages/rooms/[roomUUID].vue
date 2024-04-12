@@ -85,7 +85,7 @@ const debouncedUpdate = debounce(() => {
             roomUUID: userStore.roomUUID,
             name: userStore.nome,
         }),
-        credentials: 'include',
+        
     });
 }, 1000); // 1000 milliseconds = 1 second
 
@@ -111,7 +111,7 @@ const novaRodada = () => {
         body: JSON.stringify({
             roomUUID: userStore.roomUUID,
         }),
-        credentials: 'include',
+        
     });
 }
 
@@ -243,7 +243,7 @@ const endGame = () => {
                 userUUID: userStore.userUUID,
                 roomUUID: userStore.roomUUID,
             }),
-            credentials: 'include',
+            
         });
     }
     sairDaSala();
@@ -262,7 +262,7 @@ const toggleMostrarCartas = () => {
         body: JSON.stringify({
             roomUUID: userStore.roomUUID,
         }),
-        credentials: 'include',
+        
     });
 };
 
@@ -275,7 +275,7 @@ const toggleVirarAutomatico = () => {
         body: JSON.stringify({
             roomUUID: userStore.roomUUID,
         }),
-        credentials: 'include',
+        
     });
 };
 </script>

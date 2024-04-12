@@ -25,7 +25,7 @@ export const useUserStore = defineStore('user', () => {
                 'Content-Type': APPLICATION_JSON,
             },
             body: JSON.stringify(body),
-            credentials: 'include',
+            
         });
 
         if (!response.ok) {
@@ -112,7 +112,7 @@ export const useUserStore = defineStore('user', () => {
                 userUUID: userUUID.value,
                 name: newName,
             }),
-            credentials: 'include',
+            
         });
     
         if (!response.ok) {
