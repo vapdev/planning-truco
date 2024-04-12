@@ -2,9 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
+    '@nuxt/ui',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxtjs/google-fonts',
+    'nuxt-icon',
+    '@pinia/nuxt',
   ],
   runtimeConfig: {
     public: {
@@ -15,6 +18,10 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Oswald: true,
+      Rubik: true
     }
   },
+  colorMode: {
+    preference: 'dark'
+  }
 })
