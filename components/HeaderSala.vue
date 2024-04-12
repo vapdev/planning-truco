@@ -34,7 +34,7 @@
                         Compartilhe o link da sala
                     </p>
                     <div class="flex gap-4">
-                        <input class="border-2 outline outline-blue-500 text-gray-800 h-10 rounded pl-2 w-full"
+                        <input class="border-2 outline outline-blue-500 text-white h-10 rounded pl-2 w-full"
                             :value="urlToCopy" />
                         <button @click="copyToClipboard"
                             class="outline outline-blue-500 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
@@ -58,7 +58,7 @@
                     <div>Seu nome:</div>
                     <div class="flex w-full gap-4">
                         <input v-model="userName"
-                            class="border-2 outline outline-blue-500 text-gray-800 h-10 w-full rounded pl-2"
+                            class="border-2 outline outline-blue-500 text-white h-10 w-full rounded pl-2"
                             placeholder="Seu nome" />
                     </div>
                 </div>
