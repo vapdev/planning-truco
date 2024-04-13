@@ -59,7 +59,7 @@
                             <div>Ou entre em uma sala existente</div>
                             <div class="flex gap-4">
                                 <input v-model="roomUUID"
-                                    class="border-2 outline outline-blue-500 text-white h-12 rounded pl-2"
+                                    class="border-2 outline outline-blue-500 text-gray-800 h-12 rounded pl-2"
                                     placeholder="Insira o link da sala" />
                                 <button @click="loadGame(roomUUID)"
                                     class="outline outline-blue-500 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
@@ -86,7 +86,7 @@
                     <div>Nome da sala:</div>
                     <div class="flex w-full gap-4">
                         <input v-model="roomName"
-                            class="border-2 text-white outline-offset-2 outline outline-blue-500 h-10 w-full  rounded pl-2"
+                            class="border-2 text-gray-800 outline-offset-2 outline outline-blue-500 h-10 w-full  rounded pl-2"
                             placeholder="Nome da sala (Opcional)" />
                     </div>
                 </div>

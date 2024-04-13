@@ -58,12 +58,12 @@
                     <div>Seu nome:</div>
                     <div class="flex w-full gap-4">
                         <input v-model="userName"
-                            class="border-2 outline outline-blue-500 text-white h-10 w-full rounded pl-2"
+                            class="border-2 outline outline-blue-500 text-gray-800 h-10 w-full rounded pl-2"
                             placeholder="Seu nome" />
                     </div>
                 </div>
                 <button @click="userStore.changeName(userName); modalConfig = false"
-                    class=" bg-blue-500 mt-24 w-full md:hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
+                    class=" bg-blue-500 w-full md:hover:bg-blue-400 text-white font-bold py-2 px-4 rounded">
                     Salvar
                 </button>
             </div>
