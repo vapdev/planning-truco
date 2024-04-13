@@ -19,15 +19,15 @@ const props = defineProps({
 })
 
 const cards = ref([
-    { value: -1, label: '☕', selectedClass: 'md:-translate-y-6', defaultClass: 'border text-black' },
-    { value: 0, label: '0', selectedClass: 'md:-translate-y-6', defaultClass: 'bg-green-50 text-black' },
-    { value: 1, label: '1', selectedClass: 'md:-translate-y-6', defaultClass: 'bg-green-100 text-black' },
-    { value: 2, label: '2', selectedClass: 'md:-translate-y-6', defaultClass: 'bg-green-200 text-black' },
-    { value: 3, label: '3', selectedClass: 'md:-translate-y-6', defaultClass: ' bg-green-300 text-black' },
-    { value: 5, label: '5', selectedClass: 'md:-translate-y-6', defaultClass: ' bg-yellow-100 text-black' },
-    { value: 8, label: '8', selectedClass: 'md:-translate-y-6', defaultClass: ' bg-yellow-200 text-black' },
-    { value: 13, label: '13', selectedClass: 'md:-translate-y-6', defaultClass: 'bg-yellow-300 text-black' },
-    { value: 21, label: '21', selectedClass: 'md:-translate-y-6', defaultClass: 'bg-red-200 text-black' },
-    { value: 34, label: '34', selectedClass: 'md:-translate-y-6', defaultClass: 'bg-red-300 text-black' }
+    { value: -1, label: '☕', selectedClass: '-translate-y-6', defaultClass: 'border text-black' },
+    { value: 0, label: '0', selectedClass: '-translate-y-6', defaultClass: 'bg-green-50 text-black' },
+    { value: 1, label: '1', selectedClass: '-translate-y-6', defaultClass: 'bg-green-100 text-black' },
+    { value: 2, label: '2', selectedClass: '-translate-y-6', defaultClass: 'bg-green-200 text-black' },
+    { value: 3, label: '3', selectedClass: '-translate-y-6', defaultClass: ' bg-green-300 text-black' },
+    { value: 5, label: '5', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-100 text-black' },
+    { value: 8, label: '8', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-200 text-black' },
+    { value: 13, label: '13', selectedClass: '-translate-y-6', defaultClass: 'bg-yellow-300 text-black' },
+    { value: 21, label: '21', selectedClass: '-translate-y-6', defaultClass: 'bg-red-200 text-black' },
+    { value: 34, label: '34', selectedClass: '-translate-y-6', defaultClass: 'bg-red-300 text-black' }
 ])
 </script>
