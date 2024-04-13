@@ -1,6 +1,6 @@
 <template>
-    <div class="justify-center flex flex-wrap w-full gap-10 md:mx-8 mt-4">
-        <div class="w-64 h-24 rounded-xl flex justify-center items-center bg-gray-400 m-10 mx-auto">
+    <div class="justify-center flex flex-wrap w-full gap-10 md:mx-8">
+        <div class="md:w-64 w-40 h-24 rounded-xl flex justify-center items-center bg-gray-400 mx-4 md:m-10">
             <div v-if="!userStore.roomState.autoShowCards && !userStore.roomState.showCards" class="text-red-500">
                 <button @click="emit('toggleMostrarCartas')"
                     class="text-white font-bold py-2 px-4 rounded w-50 bg-blue-500 hover:bg-blue-400">
