@@ -7,7 +7,7 @@
             <div class="text-white w-1/3"></div>
 
             <!-- MAIN CONTENT -->
-            <div class="flex w-1/3 flex-col items-center">
+            <div class="flex w-1/3 flex-col items-center ">
                 <!-- PLAYERS DE CIMA -->
                 <TopContainer :players="playersTop" />
                 <div class="flex gap-4 justify-center items-center">
