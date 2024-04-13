@@ -1,5 +1,5 @@
 <template>
-    <div class="h-20 flex w-80 justify-around">
+    <div class="h-22 flex w-80 justify-around">
         <div v-for="(player, index) in players" :key="player.id">
             <PlayerVote :player="player" :mostrarCartas="userStore.roomState.showCards" />
         </div>
