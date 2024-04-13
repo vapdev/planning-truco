@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full rubik-font h-[100vh]">
+  <div class="w-full rubik-font h-[100dvh]">
     <NuxtPage />
     <ToastGlobal />
   </div>
