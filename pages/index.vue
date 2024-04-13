@@ -44,8 +44,8 @@
                     </div>
                 </div> -->
             </div>
-            <div class="text-white flex flex-col justify-center items-center w-full md:w-1/2 text-2xl">
-                <p class="text-3xl font-bold">Jogue agora gratuitamente!</p>
+            <div class="text-white pl-6 flex flex-col justify-center items-center w-full md:w-1/2 text-2xl">
+                <div class="text-3xl font-bold">Jogue agora gratuitamente!</div>
                 <div class="flex flex-col font-bold text-xl py-8 gap-6 md:gap-16">
                     <template v-if="!userStore.jogoComecou">
                         <div class="flex flex-col gap-6 text-white">
@@ -68,9 +68,6 @@
                             </div>
                         </div>
                     </template>
-                    <!-- <div class="flex h-10">
-              <input v-model="nome" class="border-2 w-40 rounded pl-2" placeholder="Seu nome aqui" />
-            </div> -->
                 </div>
             </div>
         </div>
