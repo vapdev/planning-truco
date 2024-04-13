@@ -1,5 +1,5 @@
 <template>
-    <div class="justify-center flex flex-wrap w-full mx-4">
+    <div style="height: 136px" class="justify-center items-center flex flex-wrap w-full mx-4">
         <div class="md:w-64 w-44 h-24 rounded-xl flex justify-center items-center bg-gray-400">
             <div v-if="!userStore.roomState.autoShowCards && !userStore.roomState.showCards" class="text-red-500">
                 <button @click="emit('toggleMostrarCartas')"
