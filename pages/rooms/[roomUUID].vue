@@ -3,7 +3,7 @@
         <!-- HEADER -->
         <HeaderSala @endGame="endGame" />
 
-        <div class="flex justify-around">
+        <div class="flex justify-around w-full">
             <div class="text-white w-1/3"></div>
 
             <!-- MAIN CONTENT -->
@@ -26,7 +26,7 @@
         </div>
 
         <!-- FOOTER -->
-        <div class="md:justify-center overflow-x-auto gap-4 md:h-44 items-center w-full flex">
+        <div class="w-full">
             <Deck v-if="!userStore.roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
             <Stats v-else />
         </div>
