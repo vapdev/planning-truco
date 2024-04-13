@@ -1,11 +1,15 @@
 <template>
-    <div class="flex flex-col gap-2 pb-16">
-        <div class="text-white text-xl md:text-2xl">Votação encerrada</div>
-        <div class="flex items-center gap-4 text-white text-xl md:text-2xl">
-            <div class="flex justify-center w-full gap-4">
+    <div class="w-full flex flex-col items-center text-white text-xl justify-center pb-10">
+        <div>Rodada encerrada</div>
+        <div class="text-xl font-bold mt-1">média: {{ winnerComputed }}</div>
+        <div class="text-xl font-bold mt-1">carta mais votada: {{ winnerComputed }}</div>
+        <div class="text-xl font-bold mt-1">assertividade: {{ winnerComputed }}%</div>
+
+        <div class="flex flex-col gap-4 mt-4">
+            <div class="flex gap-4">
                 <div v-for="player in userStore.players" :key="player.id">
                     <div
-                        class="mt-4 w-8 h-14 text-black oswald-font font-bold flex-col relative flex rounded-md justify-center  bg-green-100">
+                        class="w-8 h-14 text-black oswald-font font-bold flex-col relative flex rounded-md justify-center  bg-green-100">
                         <span class="text-xl flex justify-center"><span>{{ player.vote }}</span></span>
                     </div>
                 </div>

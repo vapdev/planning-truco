@@ -27,7 +27,7 @@
 
         <!-- FOOTER -->
         <div class="w-full">
-            <Deck v-if="!userStore.roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
+            <Deck style="height: 236px" v-if="!userStore.roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
             <Stats v-else />
         </div>
     </div>

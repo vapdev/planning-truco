@@ -7,7 +7,7 @@
          style="box-shadow: 0 30px 30px -10px #222222;">
         <div v-if="player.voted && flipped" class="front absolute w-full h-full flex items-center justify-center">
             <span class="oswald-font text-black text-4xl">
-                <span v-if="player.vote != 0">{{ player.vote }}</span>
+                <span v-if="player.vote != -1">{{ player.vote }}</span>
                 <span v-else>☕</span>
             </span>
         </div>
