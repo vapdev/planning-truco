@@ -57,9 +57,7 @@
                 <div class="text-md flex flex-col gap-4 text-white">
                     <div>Seu nome:</div>
                     <div class="flex w-full gap-4">
-                        <input v-model="userName"
-                            class="border-2 outline outline-blue-500 text-gray-800 h-10 w-full rounded pl-2"
-                            placeholder="Seu nome" />
+                        <UInput v-model="userName" size="lg" color="blue"  class="w-full" placeholder="Seu nome" />
                     </div>
                 </div>
                 <button @click="userStore.changeName(userName); modalConfig = false"
