@@ -78,8 +78,10 @@ const modalShare = ref(false);
 const modalConfig = ref(false);
 const emit = defineEmits(['endGame']);
 const urlToCopy = ref();
+const userName = ref('');
 onMounted(() => {
     urlToCopy.value = window.location.href;
+    userName.value = userStore.name;
 })
 function abrirModalCompartilhar() {
     modalShare.value = true;

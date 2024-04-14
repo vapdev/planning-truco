@@ -6,10 +6,10 @@ export const useUserStore = defineStore('user', () => {
     const players = ref([])
     const config = useRuntimeConfig();
     const roomUUID = ref(null);
-    const userUUID = ref(useStorage('userUUID', ''));
+    const userUUID = useStorage('userUUID', '');
     const apiUrl = config.public.apiBase;
     const wsUrl = config.public.wsBase;
-    const name = ref("Guest");
+    const name =  useStorage('userName', '');
     const jogoComecou = ref(false);
     const roomState = ref({
         showCards: false,

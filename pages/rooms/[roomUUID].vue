@@ -46,12 +46,6 @@ const route = useRoute();
 
 userStore.loadGame(route.params.roomUUID);
 
-watch(nome, (newVal, oldVal) => {
-    if (newVal) {
-        debouncedUpdate();
-    }
-});
-
 const playersBottom = computed(() => {
     return userStore.players.filter((_, index) => {
         if (index < 4) return index % 4 === 0;
@@ -73,21 +67,6 @@ const playersLeft = computed(() => {
 const playersRight = computed(() => {
     return userStore.players.filter((_, index) => index === 3);
 });
-
-const debouncedUpdate = debounce(() => {
-    fetch(`${apiUrl}/changeName`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            userUUID: userStore.userUUID,
-            roomUUID: userStore.roomUUID,
-            name: userStore.nome,
-        }),
-        
-    });
-}, 1000); // 1000 milliseconds = 1 second
 
 watch(userStore.players, (newPlayers, oldPlayers) => {
     if (newPlayers.length > 0) {

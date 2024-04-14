@@ -102,6 +102,11 @@ const roomUUID = ref('');
 const modalCriar = ref(false);
 const modalEntrar = ref(false);
 
+onMounted(() => {
+    userStore.userUUID = localStorage.getItem('userUUID');
+    userStore.name = localStorage.getItem('userName');
+});
+
 const roomName = ref('');
 const userName = ref('');
 const goToGithub = () => {
