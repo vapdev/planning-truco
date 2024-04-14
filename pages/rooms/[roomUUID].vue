@@ -1,13 +1,12 @@
 <template>
     <div class="h-full w-full flex flex-col justify-between">
         <!-- HEADER -->
-        <HeaderSala ref="headerRef" @endGame="endGame" />
+        <HeaderSala class="h-1/6" ref="headerRef" @endGame="endGame" />
 
-        <div class="flex justify-around w-full">
-            <div class="text-white w-1/3"></div>
+        <div class="flex h-4/6 justify-around w-full">
 
             <!-- MAIN CONTENT -->
-            <div class="flex w-1/3 flex-col items-center ">
+            <div class="flex w-1/3 flex-col justify-center items-center ">
                 <!-- PLAYERS DE CIMA -->
                 <TopContainer style="height: 108px" :players="playersTop" />
                 <div class="flex gap-4 justify-center items-center">
@@ -19,15 +18,14 @@
                     <RightContainer :players="playersRight" />
                 </div>
                 <!-- PLAYERS DE BAIXO -->
-                <BottomContainer :players="playersBottom" />
+                <BottomContainer style="height: 108px" :players="playersBottom" />
             </div>
 
-            <div class="text-white w-1/3"></div>
         </div>
 
         <!-- FOOTER -->
-        <div class="w-full">
-            <Deck style="height: 236px" v-if="!userStore.roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
+        <div class="w-full h-2/6 flex flex-col justify-end">
+            <Deck v-if="!userStore.roomState.showCards" :selectedCard="selectedCard" :votar="votar" />
             <Stats v-else />
         </div>
     </div>
@@ -44,6 +42,7 @@ const selectedCard = ref(null);
 const route = useRoute();
 const headerRef = ref(null);
 const userStore = useUserStore();
+const $md = ref(null)
 
 onMounted(async () => {
     userStore.userUUID = localStorage.getItem('userUUID');
@@ -52,8 +51,8 @@ onMounted(async () => {
     if (!userStore.name || userStore.name == 'Guest') {
         headerRef.value.modalConfig = true;
     }
+    $md.value = window.matchMedia('(min-width: 768px)').matches
 });
-
 const playersBottom = computed(() => {
     return userStore.players.filter((_, index) => {
         if (index < 4) return index % 4 === 0;
@@ -139,7 +138,7 @@ const endGame = () => {
                 userUUID: userStore.userUUID,
                 roomUUID: userStore.roomUUID,
             }),
-            
+
         });
     }
     sairDaSala();
@@ -166,7 +165,7 @@ const toggleMostrarCartas = () => {
         body: JSON.stringify({
             roomUUID: userStore.roomUUID,
         }),
-        
+
     });
 };
 
@@ -179,7 +178,7 @@ const toggleVirarAutomatico = () => {
         body: JSON.stringify({
             roomUUID: userStore.roomUUID,
         }),
-        
+
     });
 };
 </script>

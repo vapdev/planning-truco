@@ -7,7 +7,7 @@
 
 <style>
 html {
-  height: 100vh;
+  height: 100dvh;
   background-color: #3f4146;
 }
 

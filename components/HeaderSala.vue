@@ -1,8 +1,8 @@
 <template>
-    <div class="text-white text-lg flex p-4 justify-between">
+    <div class="text-white text-lg flex p-4 items-start justify-between">
         <div class="w-1/3 justify-start items-center">
             <div class="flex gap-2 items-center">
-                <div class="text-sm">Copiar link da sala:</div>
+                <div v-if="$md" class="text-sm">Copiar link da sala:</div>
                 <div @click="copyToClipboard" class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
                     <Icon size="30" name="material-symbols:content-copy" color="white" />
                 </div>
@@ -76,13 +76,17 @@ const modalConfig = ref(false);
 const emit = defineEmits(['endGame']);
 const urlToCopy = ref();
 const userName = ref('');
+const $md = ref(null)
+
 onMounted(() => {
     if (localStorage.getItem('userName')) {
         userStore.name = localStorage.getItem('userName');
     }
     userName.value = userStore.name;
     urlToCopy.value = window.location.href;
+    $md.value = window.matchMedia('(min-width: 768px)').matches
 })
+
 function abrirModalCompartilhar() {
     modalShare.value = true;
     copyToClipboard();
