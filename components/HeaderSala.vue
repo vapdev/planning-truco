@@ -57,11 +57,11 @@
                         class=" md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out" size="38"
                         name="material-symbols:close-small-rounded"></Icon>
                 </div>
-                <div :tabindex="!$md ? 1 : ''" class="mb-4 text-white text-4xl">Configurações</div>
+                <div class="mb-4 text-white text-4xl">Configurações</div>
                 <div class="text-md flex flex-col gap-4 text-white">
                     <div>Seu nome:</div>
                     <div class="flex w-full gap-4">
-                        <UInput tabindex="1" v-model="userName" size="lg" color="blue" class="w-full" placeholder="Seu nome" />
+                        <UInput v-model="userName" size="lg" color="blue" class="w-full" placeholder="Seu nome" />
                     </div>
                 </div>
                 <button @click="userStore.changeName(userName); modalConfig = false"
