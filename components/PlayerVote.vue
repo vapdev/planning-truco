@@ -3,7 +3,8 @@
         <div class="relative flex items-center rounded-lg w-12 h-20 justify-center" :class="[
             player.voted ? 'border-green-500 bg-green-100' : 'border-red-300 bg-red-100',
             flipped ? 'flip' : ''
-        ]" style="box-shadow: 0 30px 30px -10px #222222;">
+        ]">
+        <div class="shadow" style="box-shadow: 0 30px 30px -10px #222222;"></div>
             <div v-if="player.voted && flipped" class="front  w-full h-full flex items-center justify-center">
                 <span class="oswald-font text-black text-4xl">
                     <span v-if="player.vote != -1">{{ player.vote }}</span>
@@ -59,7 +60,14 @@ watch(
     animation-timing-function: ease-out;
     animation-name: flip-animation;
 }
-
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
 .cardPattern {
     background-image:
         repeating-linear-gradient(45deg,
