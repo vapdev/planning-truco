@@ -34,8 +34,7 @@
                         Compartilhe o link da sala
                     </p>
                     <div class="flex gap-4">
-                        <input class="border-2 outline outline-blue-500 text-white h-10 rounded pl-2 w-full"
-                            :value="urlToCopy" />
+                        <UInput v-model="urlToCopy" size="lg" color="blue" class="w-full" />
                         <button @click="copyToClipboard"
                             class="outline outline-blue-500 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
                             Copiar
@@ -78,8 +77,11 @@ const emit = defineEmits(['endGame']);
 const urlToCopy = ref();
 const userName = ref('');
 onMounted(() => {
-    urlToCopy.value = window.location.href;
+    if (localStorage.getItem('userName')) {
+        userStore.name = localStorage.getItem('userName');
+    }
     userName.value = userStore.name;
+    urlToCopy.value = window.location.href;
 })
 function abrirModalCompartilhar() {
     modalShare.value = true;
@@ -88,11 +90,9 @@ function abrirModalCompartilhar() {
 const copyToClipboard = () => {
     showToast({ message: 'O link da sala foi copiado para a área de transferência', position: 'top-center', offsetY: 4 })
     navigator.clipboard.writeText(window.location.href)
-        .then(() => {
-            console.log('URL copied to clipboard');
-        })
-        .catch(err => {
-            console.error('Failed to copy URL: ', err);
-        });
 };
+defineExpose({
+    modalConfig,
+    modalShare
+})
 </script>

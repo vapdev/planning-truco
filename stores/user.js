@@ -6,10 +6,10 @@ export const useUserStore = defineStore('user', () => {
     const players = ref([])
     const config = useRuntimeConfig();
     const roomUUID = ref(null);
-    const userUUID = useStorage('userUUID', '');
+    const userUUID = ref("");
     const apiUrl = config.public.apiBase;
     const wsUrl = config.public.wsBase;
-    const name =  useStorage('userName', '');
+    const name =  ref("Guest")
     const jogoComecou = ref(false);
     const roomState = ref({
         showCards: false,
@@ -19,6 +19,18 @@ export const useUserStore = defineStore('user', () => {
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
     
+    watch(userUUID, (newVal) => {
+        if (newVal !== null && newVal !== '') {
+            localStorage.setItem('userUUID', newVal);
+        }
+    });
+
+    watch(name, (newVal) => {
+        if (newVal !== null) {
+            localStorage.setItem('userName', newVal);
+        }
+    });
+
     async function fetchJson(url, body) {
         const response = await fetch(url, {
             method: POST,
@@ -37,7 +49,6 @@ export const useUserStore = defineStore('user', () => {
 
     function setWebSocket(tipo) {
         if (process.client) {
-            console.log(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
             ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
 
             ws.value.onopen = () => {
@@ -56,7 +67,6 @@ export const useUserStore = defineStore('user', () => {
                 console.log('WebSocket closed')
             }
 
-            console.log(name.value)
             ws.value.addEventListener('open', (event) => {
                 ws.value.send(JSON.stringify({
                     type: tipo,
@@ -75,7 +85,6 @@ export const useUserStore = defineStore('user', () => {
     }
 
     const startGame = async (roomName) => {
-        console.log('startGame', roomName)
         const data = await fetchJson(`${apiUrl}/createRoom`, {
             userUUID: userUUID.value,
             roomName: roomName,
@@ -83,11 +92,14 @@ export const useUserStore = defineStore('user', () => {
 
         roomUUID.value = data.roomUUID;
         userUUID.value = data.userUUID;
-        // setWebSocket('newAdmin');
         navigateTo(`/rooms/${roomUUID.value}`);
     }
 
     const loadGame = async (inputRoomUUID) => {
+        console.log("input fckin rom:")
+        console.log(inputRoomUUID)
+        console.log("user uid : ")
+        console.log(userUUID.value)
         if (inputRoomUUID) {
             const data = await fetchJson(`${apiUrl}/joinRoom`, {
                 userUUID: userUUID.value,
@@ -100,7 +112,7 @@ export const useUserStore = defineStore('user', () => {
         }
     };
 
-    const changeName = async (newName) => {
+    const changeName = async (newName) => { 
         name.value = newName;
         const response = await fetch(`${apiUrl}/changeName`, {
             method: 'POST',

@@ -76,7 +76,6 @@ const showToast = ({
 };
 
 const toastPosition = (toast) => {
-    console.log(toast)
     switch (toast.position) {
         case "top-left":
             return {

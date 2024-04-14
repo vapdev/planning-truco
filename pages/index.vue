@@ -4,8 +4,7 @@
             <div class=" text-blue-500 font-bold">Free Planning Poker</div>
             <div class="text-lg font-bold">
                 <div class="flex gap-4">
-                    <button @click="startGame"
-                        class="bg-blue-500 md:hover:bg-blue-400 font-bold p-2 px-4 rounded">
+                    <button @click="startGame" class="bg-blue-500 md:hover:bg-blue-400 font-bold p-2 px-4 rounded">
                         Iniciar nova sala
                     </button>
                 </div>
@@ -58,7 +57,8 @@
                         <div class="flex flex-col gap-6 text-white">
                             <div>Ou entre em uma sala existente</div>
                             <div class="flex gap-4">
-                                <UInput v-model="roomUUID" size="xl" color="blue"  class="w-full text-white" placeholder="Insira o link da sala" />
+                                <UInput v-model="roomUUID" size="xl" color="blue" class="w-full text-white"
+                                    placeholder="Insira o link da sala" />
                                 <button @click="loadGame(roomUUID)"
                                     class="outline outline-blue-500 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
                                     Entrar
@@ -80,7 +80,8 @@
                 <div class="text-md flex flex-col gap-4 text-white">
                     <div>Nome da sala:</div>
                     <div class="flex text-white w-full gap-4">
-                        <UInput color="blue" v-model="roomName" size="lg" class="w-full " placeholder="Nome da sala (Opcional)" />
+                        <UInput color="blue" v-model="roomName" size="lg" class="w-full "
+                            placeholder="Nome da sala (Opcional)" />
                     </div>
                 </div>
                 <button @click="userStore.startGame(roomName)"
@@ -112,9 +113,9 @@ const startGame = () => {
     modalCriar.value = true;
     // userStore.startGame();
 }
-
-const loadGame = (roomUUID) => {
-    modalEntrar.value = true;
-    // userStore.loadGame(roomUUID);
+const loadGame = (roomUUIDurl) => {
+    const urlParts = new URL(roomUUIDurl).pathname.split('/');
+    const roomUUID = urlParts[urlParts.length - 1];
+    navigateTo(`/rooms/${roomUUID}`);
 }
 </script>

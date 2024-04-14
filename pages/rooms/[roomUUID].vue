@@ -1,7 +1,7 @@
 <template>
     <div class="h-full w-full flex flex-col justify-between">
         <!-- HEADER -->
-        <HeaderSala @endGame="endGame" />
+        <HeaderSala ref="headerRef" @endGame="endGame" />
 
         <div class="flex justify-around w-full">
             <div class="text-white w-1/3"></div>
@@ -36,15 +36,23 @@
 <script setup>
 import lodash from 'lodash';
 const config = useRuntimeConfig();
-const userStore = useUserStore();
 const apiUrl = config.public.apiBase;
 const wsUrl = config.public.wsBase;
 const { debounce } = lodash;
 const nome = ref("");
 const selectedCard = ref(null);
 const route = useRoute();
+const headerRef = ref(null);
+const userStore = useUserStore();
 
-userStore.loadGame(route.params.roomUUID);
+onMounted(async () => {
+    userStore.userUUID = localStorage.getItem('userUUID');
+    userStore.name = localStorage.getItem('userName');
+    await userStore.loadGame(route.params.roomUUID);
+    if (!userStore.name || userStore.name == 'Guest') {
+        headerRef.value.modalConfig = true;
+    }
+});
 
 const playersBottom = computed(() => {
     return userStore.players.filter((_, index) => {
@@ -195,11 +203,8 @@ const votar = (score) => {
     } else {
         selectedCard.value = score;
     }
-    console.log('votando')
-    console.log(jogadorLogado.value)
 
     if (jogadorLogado.value) {
-        console.log('votando')
         userStore.ws.send(JSON.stringify({
             type: 'vote',
             userUUID: userStore.userUUID,
