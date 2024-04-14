@@ -1,26 +1,25 @@
 <template>
-    <div class="flex flex-col w-12 gap-2">
+    <div class="flex flex-col w-12 gap-2 rounded-lg">
         <div class="relative flex items-center rounded-lg w-12 h-20 justify-center" :class="[
             player.voted ? 'border-green-500 bg-green-100' : 'border-red-300 bg-red-100',
             flipped ? 'flip' : ''
         ]">
-        <div class="shadow" style="box-shadow: 0 30px 30px -10px #222222;"></div>
-            <div v-if="player.voted && flipped" class="front  w-full h-full flex items-center justify-center">
+            <div class="shadow"></div>
+            <div v-if="player.voted && flipped" class="front w-full h-full flex items-center justify-center">
                 <span class="oswald-font text-black text-4xl">
                     <span v-if="player.vote != -1">{{ player.vote }}</span>
                     <span v-else>☕</span>
                 </span>
             </div>
-            <div v-else class="cardPattern  w-full h-full text-black  flex items-center justify-center"
+            <div v-else class="cardPattern rounded-lg w-full h-full text-black flex items-center justify-center"
                 v-if="!player.voted || !flipped">
             </div>
         </div>
-        <div class="w-full text-center">
+        <div class="w-full text-center z-10">
             <div class="text-sm flex justify-center text-nowrap text-white">{{ player.name || ' ' }}</div>
         </div>
     </div>
 </template>
-
 <script setup>
 const props = defineProps({
     player: {
@@ -67,6 +66,7 @@ watch(
     width: 100%;
     height: 100%;
     z-index: -1;
+    box-shadow: 0 30px 30px -10px #222222;
 }
 .cardPattern {
     background-image:
