@@ -22,8 +22,8 @@
 
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
-                <div v-for="card in nonRepeatedCardsWithVotes" class="flex items-center gap-2" :key="card.value">
+            <div class="grid grid-cols-2 gap-x-4 gap-y-2">
+                <div v-for="card in nonRepeatedCardsWithVotes" class="flex items-center gap-1" :key="card.value">
                     <div class="w-5 h-8 text-black oswald-font font-bold flex rounded-md justify-center bg-green-100">
                         <span class="text-lg flex justify-center"><span>{{ card.value }}</span></span>
                     </div>
