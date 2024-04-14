@@ -76,11 +76,11 @@
                         class=" md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out" size="38"
                         name="material-symbols:close-small-rounded"></Icon>
                 </div>
-                <div class="mb-4 text-white text-4xl">Criando sala</div>
+                <div :tabindex="!$md ? 1 : ''" class="mb-4 text-white text-4xl">Criando sala</div>
                 <div class="text-md flex flex-col gap-4 text-white">
                     <div>Nome da sala:</div>
                     <div class="flex text-white w-full gap-4">
-                        <UInput color="blue" v-model="roomName" size="lg" class="w-full "
+                        <UInput tabindex="1" color="blue" v-model="roomName" size="lg" class="w-full "
                             placeholder="Nome da sala (Opcional)" />
                     </div>
                 </div>
@@ -98,10 +98,11 @@ const userStore = useUserStore();
 const roomUUID = ref('');
 const modalCriar = ref(false);
 const modalEntrar = ref(false);
-
+const $md = ref(false);
 onMounted(() => {
     userStore.userUUID = localStorage.getItem('userUUID');
     userStore.name = localStorage.getItem('userName');
+    $md.value = window.innerWidth > 768;
 });
 
 const roomName = ref('');
