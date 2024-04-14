@@ -8,11 +8,9 @@
             <div class="text-md items-start">
                 <div class="flex gap-2 items-end font-semibold">
                     <div>
-                        Carta mais votada:
+                        Carta mais votada: {{ stats.mostVoted.map(card => card).join(', ') }}
                     </div>
-                    <div class="w-5 h-8 text-black oswald-font font-bold flex rounded-md justify-center bg-green-100">
-                        <span class="text-lg flex justify-center">{{ stats.mostVoted[0] }}</span>
-                    </div>
+                    
                 </div>
                 <div class="font-semibold mt-1">Média: {{ stats.average }}</div>
                 <div class="font-semibold mt-1">Assertividade: {{ stats.assertiveness }}%</div>
@@ -23,8 +21,8 @@
             </div>
 
             <div class="grid grid-cols-2 gap-x-4 gap-y-2">
-                <div v-for="card in nonRepeatedCardsWithVotes" class="flex items-center gap-1" :key="card.value">
-                    <div class="w-5 h-8 text-black oswald-font font-bold flex rounded-md justify-center bg-green-100">
+                <div v-for="card in nonRepeatedCardsWithVotes" class="flex items-center gap-2" :key="card.value">
+                    <div class="w-5 h-7 text-black oswald-font font-bold flex rounded-md justify-center bg-green-100">
                         <span class="text-lg flex justify-center"><span>{{ card.value }}</span></span>
                     </div>
                     <div class="text-md">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}</div>
