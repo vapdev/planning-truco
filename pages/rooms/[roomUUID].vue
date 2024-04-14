@@ -88,7 +88,6 @@ watch(userStore.players, (newPlayers, oldPlayers) => {
         });
     }
 }, { deep: true });
-
 const novaRodada = () => {
     fetch(`${apiUrl}/resetVotes`, {
         method: 'POST',
@@ -98,94 +97,8 @@ const novaRodada = () => {
         body: JSON.stringify({
             roomUUID: userStore.roomUUID,
         }),
-        
     });
 }
-
-const onePlayerlist = [
-    {
-        // mock player
-        id: 1,
-        name: "Player 1",
-    },
-]
-
-const player = {
-    // mock player
-    id: 1,
-    name: "Player 1",
-    voted: true,
-    vote: 5,
-}
-
-const players = [
-    {
-        // mock player
-        id: 1,
-        name: "Player 1",
-    },
-    {
-        // mock player
-        id: 2,
-        name: "Player 2",
-    },
-    {
-        // mock player
-        id: 3,
-        name: "Player 3",
-    },
-    {
-        // mock player
-        id: 4,
-        name: "Player 4",
-    },
-    {
-        // mock player
-        id: 5,
-        name: "Player 5",
-    },
-    {
-        // mock player
-        id: 6,
-        name: "Player 6",
-    },
-    {
-        // mock player
-        id: 7,
-        name: "Player 7",
-    },
-    {
-        // mock player
-        id: 8,
-        name: "Player 8",
-    },
-    {
-        // mock player
-        id: 9,
-        name: "Player 9",
-    },
-    {
-        // mock player
-        id: 10,
-        name: "Player 10",
-    },
-    {
-        id: 11,
-        name: 'sdadas',
-    },
-    {
-        id: 11,
-        name: 'sdadas',
-    },
-    {
-        id: 11,
-        name: 'sdadas',
-    },
-    {
-        id: 11,
-        name: 'sdadas',
-    },
-]
 
 const sairDaSala = () => {
     userStore.roomUUID = null;
@@ -215,7 +128,6 @@ const votar = (score) => {
 };
 
 
-
 const endGame = () => {
     if (userStore.roomUUID) {
         fetch(`${apiUrl}/leaveRoom`, {
@@ -236,6 +148,14 @@ const endGame = () => {
 const jogadorLogado = computed(() =>
     userStore.players.find((player) => player.uuid === userStore.userUUID)
 );
+
+watch(() => jogadorLogado.value, (newPlayer, oldPlayer) => {
+    if (JSON.stringify(newPlayer) !== JSON.stringify(oldPlayer)) {
+        if (newPlayer && !newPlayer.voted) {
+            selectedCard.value = null;
+        }
+    }
+}, { deep: true });
 
 const toggleMostrarCartas = () => {
     fetch(`${apiUrl}/showCards`, {

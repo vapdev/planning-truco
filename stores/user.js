@@ -52,19 +52,15 @@ export const useUserStore = defineStore('user', () => {
             ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
 
             ws.value.onopen = () => {
-                console.log('WebSocket connected!!!!!!')
             }
 
             ws.value.onerror = (error) => {
-                console.log('WebSocket error: ', error)
             }
 
             ws.value.onmessage = (event) => {
-                console.log('WebSocket message connected!!!!!!', event.data)
             }
 
             ws.value.onclose = () => {
-                console.log('WebSocket closed')
             }
 
             ws.value.addEventListener('open', (event) => {
@@ -76,7 +72,6 @@ export const useUserStore = defineStore('user', () => {
             });
 
             ws.value.addEventListener('message', (event) => {
-                console.log("Received message", event.data)
                 const data = JSON.parse(event.data);
                 roomState.value = data;
                 players.value = data.players;
@@ -96,10 +91,6 @@ export const useUserStore = defineStore('user', () => {
     }
 
     const loadGame = async (inputRoomUUID) => {
-        console.log("input fckin rom:")
-        console.log(inputRoomUUID)
-        console.log("user uid : ")
-        console.log(userUUID.value)
         if (inputRoomUUID) {
             const data = await fetchJson(`${apiUrl}/joinRoom`, {
                 userUUID: userUUID.value,
