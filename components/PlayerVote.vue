@@ -1,12 +1,12 @@
 <template>
-    <div class="flex flex-col w-12 gap-2 rounded-lg">
-        <div class="relative flex items-center rounded-lg w-12 h-20 justify-center" :class="[
+    <div class="flex flex-col w-10 gap-2 rounded-lg">
+        <div class="relative flex items-center rounded-lg w-10 h-16 justify-center" :class="[
             player.voted ? 'border-green-500 bg-green-100' : 'border-red-300 bg-red-100',
             flipped ? 'flip' : ''
         ]">
             <div class="shadow"></div>
             <div v-if="player.voted && flipped" class="front w-full h-full flex items-center justify-center">
-                <span class="oswald-font text-black text-4xl">
+                <span class="oswald-font text-black text-3xl">
                     <span v-if="player.vote != -1">{{ player.vote }}</span>
                     <span v-else>☕</span>
                 </span>

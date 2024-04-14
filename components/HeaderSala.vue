@@ -39,7 +39,7 @@
                         Compartilhe o link da sala
                     </p>
                     <div class="flex gap-4">
-                        <UInput v-model="urlToCopy" size="lg" color="blue" class="w-full" />
+                        <UInput disabled v-model="urlToCopy" size="lg" color="blue" class="w-full" />
                         <button @click="copyToClipboard"
                             class="outline outline-blue-500 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
                             Copiar
