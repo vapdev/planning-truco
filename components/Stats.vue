@@ -1,29 +1,40 @@
 <template>
-    <div class="w-full flex flex-col pb-10">
-        <div class="w-full flex justify-center mb-4 text-white text-md font-semibold">Rodada encerrada</div>
-
-        <div class="w-full items-start flex gap-10 text-white text-md justify-center">
-
-
-            <div class="text-md items-start">
-                <div class="flex gap-2 items-end font-semibold">
-                    <div>
-                        Carta mais votada: {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
+    <div class="w-full bg-gray-400 md:bg-inherit pt-4 flex flex-col pb-4">
+        <div class="w-full flex flex-col gap-6 text-md justify-center">
+            <div class="text-md text-gray-900 md:text-white w-full flex gap-8 justify-center">
+                <div class="flex flex-col gap-1 items-center justify-center font-semibold">
+                    <div class="text-lg">
+                        Vencedor: 
+                    </div>
+                    <div class="text-3xl">
+                        {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
                     </div>
                 </div>
-                <div class="font-semibold mt-1">Média: {{ stats.average }}</div>
-                <div class="font-semibold mt-1">Assertividade: {{ stats.assertiveness }}%</div>
-            </div>
-            <div>
-                <div class="flex flex-col gap-2">
-                    <div v-for="card in nonRepeatedCardsWithVotes" class="flex gap-2 items-center" :key="card.value">
-                        <div
-                            class="w-5 h-7 text-black oswald-font font-bold rounded-md justify-center bg-green-100">
-                            <span class="text-lg flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
-                                    }}</span></span>
-                        </div>
-                        <div class="text-md">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}</div>
+                <div class="flex flex-col gap-1 items-center justify-center font-semibold">
+                    <div class="text-lg">
+                        Média: 
                     </div>
+                    <div class="text-3xl">
+                        {{ stats.average }}
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1 items-center justify-center font-semibold">
+                    <div class="text-lg">
+                        Assertividade: 
+                    </div>
+                    <div class="text-3xl">
+                        {{ stats.assertiveness }}%
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center gap-2">
+                <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center" :key="card.value">
+                    <div
+                        class="w-10 h-16 flex items-center text-gray-900 oswald-font font-bold rounded-md justify-center bg-green-100">
+                        <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
+                                }}</span></span>
+                    </div>
+                    <div class="text-font-semibold md:text-white">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}</div>
                 </div>
             </div>
         </div>
