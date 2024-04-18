@@ -1,7 +1,7 @@
 <template>
     <div class="w-full pt-4 flex flex-col pb-4">
         <div class="w-full flex flex-col gap-6 text-md justify-center">
-            <div class="text-md text-gray-900 md:text-white w-full flex gap-8 justify-center">
+            <div class="text-md text-white w-full flex gap-8 justify-center">
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
                         Vencedor: 
@@ -34,7 +34,7 @@
                         <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
-                    <div class="text-font-semibold md:text-white">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}</div>
+                    <div class="text-font-semibold text-white">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}</div>
                 </div>
             </div>
         </div>
