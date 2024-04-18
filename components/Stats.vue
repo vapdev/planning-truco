@@ -1,6 +1,6 @@
 <template>
-    <div class="w-full flex flex-col pb-2">
-        <div class="w-full flex flex-col gap-6 text-md justify-center">
+    <div class="w-full flex flex-col pb-1">
+        <div class="w-full flex flex-col gap-4 text-md justify-center">
             <div class="text-md text-white w-full flex gap-8 justify-center">
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
