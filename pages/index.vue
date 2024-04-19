@@ -19,7 +19,7 @@
                 </a>
 
                 <nav id="nav" :class="{ hidden: !isNavOpen }"
-                    class="absolute top-0 left-0 z-50 flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
+                    class="absolute top-0 left-0 z-[52] flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative">
                     <a href="#"
                         class="ml-0 mr-0 font-bold duration-100 md:ml-12 md:mr-3 lg:mr-8 transition-color hover:text-indigo-600">Início</a>
                     <a href="#features"
@@ -43,7 +43,7 @@
                     <!-- <a href="#_"
                         class="relative z-40 px-3 py-2 mr-0 text-sm font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0">Login</a> -->
                     <a @click="startGame"
-                        class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white cursor-pointer transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Iniciar agora</a>
+nav                        class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white cursor-pointer transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl">Iniciar agora</a>
                     <svg class="absolute top-0 left-0 hidden w-screen max-w-3xl -mt-64 -ml-12 lg:block"
                         viewBox="0 0 818 815" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
