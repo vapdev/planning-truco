@@ -238,7 +238,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h4 class="relative mt-6 text-lg font-bold">Multiplataforma</h4>
+                            <h4 class="relative mt-6 text-lg font-bold text-[#111827]">Multiplataforma</h4>
                             <p class="relative mt-2 text-base text-center text-gray-600">
                                 Use o site em qualquer dispositivo, seja ele um smartphone, tablet ou computador.
                             </p>
@@ -301,7 +301,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h4 class="relative mt-6 text-lg font-bold">Fácil</h4>
+                            <h4 class="relative mt-6 text-lg font-bold bg-[#111827]">Fácil</h4>
                             <p class="relative mt-2 text-base text-center text-gray-600">
                                 Possui uma interface simples e intuitiva, para que você possa jogar sem complicações.
                             </p>
@@ -364,7 +364,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h4 class="relative mt-6 text-lg font-bold">Gratuito</h4>
+                            <h4 class="relative mt-6 text-lg font-bold text-[#111827]">Gratuito</h4>
                             <p class="relative mt-2 text-base text-center text-gray-600">
                                 Para utilizar o Free Planning Poker, você não precisa pagar nada. É totalmente gratuito.
                             </p>
