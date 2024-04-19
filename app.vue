@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full rubik-font h-[100dvh]">
+  <div class="w-full h-[100dvh]">
     <NuxtPage />
     <ToastGlobal />
   </div>
@@ -8,7 +8,8 @@
 <style>
 html {
   height: 100dvh;
-  background-color: #3f4146;
+  /* background-color: #3f4146; */
+  background-color: #FFFFFF;
 }
 
 .oswald-font {

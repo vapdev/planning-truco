@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full w-full flex flex-col justify-between">
+    <div class="wrapper rubik-font h-full w-full flex flex-col justify-between">
         <!-- HEADER -->
         <HeaderSala class="h-1/6" ref="headerRef" @endGame="endGame" />
 
@@ -30,6 +30,13 @@
         </div>
     </div>
 </template>
+
+<style>
+.wrapper  {
+  height: 100dvh;
+  background-color: #3f4146;
+}
+</style>
 
 <script setup>
 import lodash from 'lodash';
