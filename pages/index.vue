@@ -302,7 +302,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <h4 class="relative mt-6 text-lg font-bold bg-[#111827]">Fácil</h4>
+                            <h4 class="relative mt-6 text-lg font-bold text-[#111827]">Fácil</h4>
                             <p class="relative mt-2 text-base text-center text-gray-600">
                                 Possui uma interface simples e intuitiva, para que você possa jogar sem complicações.
                             </p>
