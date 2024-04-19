@@ -32,7 +32,7 @@
                         <!-- <a href="#_" class="w-full py-2 font-bold text-center text-pink-500">Login</a> -->
                         <a
                             @click="startGame"
-                            class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-700 fold-bold">
+                            class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-700 cursor-pointer fold-bold">
                             Iniciar agora
                         </a>
                     </div>
