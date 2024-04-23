@@ -88,14 +88,21 @@ const stats = computed(() => {
             .map(([card]) => card)
             .filter(card => card !== "null");
 
-        if (mostVoted.length === 0) mostVoted.push("N/A")
+        if (mostVoted.length === 0) {
+            if (mostVotedArray.length > 1) {
+                mostVoted.push(mostVotedArray[1][0]);
+            } else {
+                mostVoted.push("N/A");
+            }
+        }
+
 
         const votesWithoutNullAndNegativeOne = votes.filter(vote => vote !== null && vote !== -1);
         const totalVotes = votesWithoutNullAndNegativeOne.length;
         const sumOfVotes = votesWithoutNullAndNegativeOne.reduce((a, b) => a + b, 0);
         const average = totalVotes ? sumOfVotes / totalVotes : 0;
 
-        const assertiveness = (mostVotedSorted[0][1] / votes.length) * 100;
+        const assertiveness = ((mostVotedSorted[0][1] / votes.length) * 100).toFixed(2);
 
         return {
             mostVoted,
