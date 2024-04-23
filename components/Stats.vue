@@ -4,7 +4,7 @@
             <div class="text-md text-white w-full flex gap-8 justify-center">
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
-                        Vencedor: 
+                        Vencedor:
                     </div>
                     <div class="text-3xl">
                         {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
@@ -12,7 +12,7 @@
                 </div>
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
-                        Média: 
+                        Média:
                     </div>
                     <div class="text-3xl">
                         {{ stats.average }}
@@ -20,7 +20,7 @@
                 </div>
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
-                        Assertividade: 
+                        Assertividade:
                     </div>
                     <div class="text-3xl">
                         {{ stats.assertiveness }}%
@@ -28,13 +28,15 @@
                 </div>
             </div>
             <div class="flex justify-center gap-2 pt-2">
-                <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center" :key="card.value">
+                <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
+                    :key="card.value">
                     <div
                         class="w-10 h-16 flex items-center text-gray-900 oswald-font font-bold rounded-md justify-center bg-green-100">
                         <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
-                    <div class="text-font-semibold text-white">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}</div>
+                    <div class="text-font-semibold text-white">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,12 +83,12 @@ const stats = computed(() => {
         const mostVotedArray = Object.entries(voteCounts);
         const mostVotedSorted = mostVotedArray.sort((a, b) => b[1] - a[1]);
 
-        const mostVoted = mostVotedSorted.filter(([card, count]) => count === mostVotedSorted[0][1]).map(([card]) => card);
-        if (mostVoted[0] == "null") {
-            if (mostVoted.length === 1) {
-                mostVoted[0] = 'N/A';
-            }
-        }
+        const mostVoted = mostVotedSorted
+            .filter(([card, count]) => count === mostVotedSorted[0][1])
+            .map(([card]) => card)
+            .filter(card => card !== "null");
+
+        if (mostVoted.length === 0) mostVoted.push("N/A")
 
         const votesWithoutNullAndNegativeOne = votes.filter(vote => vote !== null && vote !== -1);
         const totalVotes = votesWithoutNullAndNegativeOne.length;
