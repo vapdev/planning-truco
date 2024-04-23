@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex flex-col pb-1">
+    <div class="w-full flex flex-col pb-6">
         <div class="w-full flex flex-col gap-4 text-md justify-center">
             <div class="text-md text-white w-full flex gap-8 justify-center">
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center gap-2">
+            <div class="flex justify-center gap-2 pt-2">
                 <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center" :key="card.value">
                     <div
                         class="w-10 h-16 flex items-center text-gray-900 oswald-font font-bold rounded-md justify-center bg-green-100">
@@ -56,8 +56,6 @@ const cards = ref([
 ])
 const userStore = useUserStore();
 
-const notNullVotes = computed(() => userStore.players.filter(player => player.vote !== -1 || player.vote !== 0));
-
 const nonRepeatedCardsWithVotes = computed(() => {
     const notNullVotes = userStore.players.filter(player => player.vote !== null);
     const votes = notNullVotes.map(player => player.vote);
@@ -84,10 +82,13 @@ const stats = computed(() => {
         const mostVotedSorted = mostVotedArray.sort((a, b) => b[1] - a[1]);
 
         const mostVoted = mostVotedSorted.filter(([card, count]) => count === mostVotedSorted[0][1]).map(([card]) => card);
+        if (mostVoted.length === 1 && mostVoted[0] == "null") {
+            mostVoted[0] = 'N/A';
+        }
 
-        const votesWithoutNull = votes.filter(vote => vote !== null);
-        const totalVotes = votesWithoutNull.length;
-        const sumOfVotes = votesWithoutNull.reduce((a, b) => a + b, 0);
+        const votesWithoutNullAndNegativeOne = votes.filter(vote => vote !== null && vote !== -1);
+        const totalVotes = votesWithoutNullAndNegativeOne.length;
+        const sumOfVotes = votesWithoutNullAndNegativeOne.reduce((a, b) => a + b, 0);
         const average = totalVotes ? sumOfVotes / totalVotes : 0;
 
         const assertiveness = (mostVotedSorted[0][1] / votes.length) * 100;
