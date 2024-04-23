@@ -82,8 +82,12 @@ const stats = computed(() => {
         const mostVotedSorted = mostVotedArray.sort((a, b) => b[1] - a[1]);
 
         const mostVoted = mostVotedSorted.filter(([card, count]) => count === mostVotedSorted[0][1]).map(([card]) => card);
-        if (mostVoted.length === 1 && mostVoted[0] == "null") {
-            mostVoted[0] = 'N/A';
+        if (mostVoted[0] == "null") {
+            if (mostVoted.length === 1) {
+                mostVoted[0] = 'N/A';
+            } else {
+                mostVoted.shift();
+            }
         }
 
         const votesWithoutNullAndNegativeOne = votes.filter(vote => vote !== null && vote !== -1);
