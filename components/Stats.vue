@@ -100,7 +100,8 @@ const stats = computed(() => {
         const votesWithoutNullAndNegativeOne = votes.filter(vote => vote !== null && vote !== -1);
         const totalVotes = votesWithoutNullAndNegativeOne.length;
         const sumOfVotes = votesWithoutNullAndNegativeOne.reduce((a, b) => a + b, 0);
-        const average = totalVotes ? sumOfVotes / totalVotes : 0;
+        const rawAverage = totalVotes ? sumOfVotes / totalVotes : 0;
+        const average = Number.isInteger(rawAverage) ? Math.floor(rawAverage) : rawAverage.toFixed(1);
 
         const assertiveness = ((mostVotedSorted[0][1] / votes.length) * 100).toFixed(2);
 

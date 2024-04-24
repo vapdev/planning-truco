@@ -9,7 +9,7 @@ export const useUserStore = defineStore('user', () => {
     const userUUID = ref("");
     const apiUrl = config.public.apiBase;
     const wsUrl = config.public.wsBase;
-    const name =  ref("Guest")
+    const name = ref("Guest")
     const jogoComecou = ref(false);
     const roomState = ref({
         showCards: false,
@@ -18,7 +18,7 @@ export const useUserStore = defineStore('user', () => {
     const ws = ref(null)
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
-    
+
     watch(userUUID, (newVal) => {
         if (newVal !== null && newVal !== '') {
             localStorage.setItem('userUUID', newVal);
@@ -47,6 +47,11 @@ export const useUserStore = defineStore('user', () => {
         return response.json();
     }
 
+    const noVotes = computed(() => {
+        return players.value.every(player => player.voted === false);
+    }
+    )
+
     function setWebSocket(tipo) {
         if (process.client) {
             ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
@@ -61,6 +66,9 @@ export const useUserStore = defineStore('user', () => {
             }
 
             ws.value.onclose = () => {
+                setTimeout(() => {
+                    setWebSocket(); // Re-establish the WebSocket connection
+                }, 1000); // 1-second delay before reconnecting
             }
 
             ws.value.addEventListener('open', (event) => {
@@ -103,7 +111,7 @@ export const useUserStore = defineStore('user', () => {
         }
     };
 
-    const changeName = async (newName) => { 
+    const changeName = async (newName) => {
         name.value = newName;
         const response = await fetch(`${apiUrl}/changeName`, {
             method: 'POST',
@@ -116,14 +124,14 @@ export const useUserStore = defineStore('user', () => {
                 name: newName,
             }),
         });
-    
+
         if (!response.ok) {
-            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error'})
+            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' })
             throw new Error('Error changing name');
         } else {
             showToast({ message: 'Nome alterado com sucesso!', position: 'top-center', offsetY: 4, type: 'success' })
         }
     }
-    
-    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName }
+
+    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName, noVotes }
 })

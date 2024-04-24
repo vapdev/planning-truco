@@ -39,7 +39,7 @@
                         Compartilhe o link da sala
                     </p>
                     <div class="flex gap-4">
-                        <UInput disabled v-model="urlToCopy" size="lg" color="blue" class="w-full" />
+                        <UInput inputClass="text-white" disabled v-model="urlToCopy" size="lg" color="blue" class="w-full" />
                         <button @click="copyToClipboard"
                             class="outline outline-blue-500 md:hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
                             Copiar
@@ -51,17 +51,17 @@
         </UModal>
         <!-- modal pra trocar nome -->
         <UModal :ui="{ overlay: { background: 'bg-blue-200/40' } }" v-model="modalConfig">
-            <div class="relative rounded-lg font-bold bg-[#3f4146] p-12 flex flex-col gap-6">
+            <div class="text-white relative rounded-lg font-bold bg-[#3f4146] p-12 flex flex-col gap-6">
                 <div class="absolute cursor-pointer text-white flex top-2 right-2">
                     <Icon @click="modalConfig = false"
                         class=" md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out" size="38"
                         name="material-symbols:close-small-rounded"></Icon>
                 </div>
                 <div class="mb-4 text-white text-4xl">Configurações</div>
-                <div class="text-md flex flex-col gap-4 text-white">
+                <div class="text-md flex flex-col gap-4">
                     <div>Seu nome:</div>
                     <div class="flex w-full gap-4">
-                        <UInput v-model="userName" size="lg" color="blue" class="w-full" placeholder="Seu nome" />
+                        <UInput v-model="userName" size="lg" variant="outline" color="blue" class="w-full" inputClass="text-white" placeholder="Seu nome" />
                     </div>
                 </div>
                 <button @click="userStore.changeName(userName); modalConfig = false"
