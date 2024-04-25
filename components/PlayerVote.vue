@@ -1,17 +1,16 @@
 <template>
     <div class="flex flex-col w-10 gap-2 rounded-md">
-        <div class="relative flex items-center rounded-md w-10 h-16 border-2 dark:border-none border-[#a1a7b4] justify-center" :class="[
-            player.voted ? 'border-green-500 bg-green-100' : 'border-red-300 bg-red-100',
-            flipped ? 'flip' : ''
+        <div class="relative text-blue-500 dark:bg-blue-50 flex items-center rounded-md w-10 h-16 justify-center" :class="[
+            flipped ? 'flip  border-blue-500 border-2 bg-none' : 'bg-gray-200 dark:bg-gray-600'
         ]">
             <div class="shadow"></div>
-            <div v-if="player.voted && flipped" class="front w-full h-full flex items-center justify-center">
-                <span class="oswald-font text-gray-800 text-3xl">
+            <div v-if="player.voted && flipped" class="front rounded-md w-full h-full flex items-center justify-center">
+                <span class="oswald-font text-3xl">
                     <span v-if="player.vote != -1">{{ player.vote }}</span>
                     <span v-else>☕</span>
                 </span>
             </div>
-            <div v-else class="cardPattern rounded-md w-full h-full text-gray-800 flex items-center justify-center"
+            <div v-else :class="player.voted ? 'cardPattern bg-blue-500' : '' " class="rounded-md w-full h-full text-gray-800 flex items-center justify-center"
                 v-if="!player.voted || !flipped">
             </div>
         </div>

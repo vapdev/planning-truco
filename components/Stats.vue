@@ -31,11 +31,11 @@
                 <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
                     :key="card.value">
                     <div
-                        class="w-10 h-16 flex items-center border-2 dark:border-none border-gray-400 text-gray-900 oswald-font font-bold rounded-md justify-center bg-green-100">
+                        class="w-10 h-16 flex items-center border-2 border-blue-500 text-blue-500   dark:bg-blue-50  oswald-font font-bold rounded-md justify-center">
                         <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
-                    <div class="text-font-semibold text-white">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}
+                    <div class="text-font-semibold">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}
                     </div>
                 </div>
             </div>
