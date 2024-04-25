@@ -3,7 +3,7 @@
         <div class="text-lg flex p-4 items-start justify-between">
             <div class="w-1/3 justify-start items-center">
                 <div class="flex gap-2 items-end">
-                    <div v-if="$md" class="text-md">Copiar link:</div>
+                    <div v-if="$md" class="text-md">Copiar link da sala:</div>
                     <div @click="copyToClipboard" class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
                         <Icon size="30" name="material-symbols:content-copy-outline" :color="isDarkMode ? 'white' : '#3f4146'" />
                     </div>
@@ -14,11 +14,11 @@
             </div>
             <div class="flex w-1/3 justify-end gap-5 items-center">
                 <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
-                    <Icon @click="toggleDarkMode" size="30" name="material-symbols:dark-mode-outline" :color="isDarkMode ? 'white' : '#3f4146'" />
+                    <Icon @click="toggleDarkMode" size="30" :name="userStore.isDarkMode ? 'material-symbols:dark-mode-outline' : 'material-symbols:light-mode-outline'" :color="isDarkMode ? 'white' : '#3f4146'" />
                 </div>
-                <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
+                <!-- <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
                     <Icon @click="abrirModalCompartilhar" size="30" name="material-symbols:share-outline" :color="isDarkMode ? 'white' : '#3f4146'" />
-                </div>
+                </div> -->
                 <div @click="modalConfig = true" class="p-1 hover:bg-gray-500 rounded-xl">
                     <Icon class="hover:cursor-pointer" size="30" name="material-symbols:settings-outline" :color="isDarkMode ? 'white' : '#3f4146'" />
                 </div>
@@ -54,7 +54,7 @@
         </UModal>
         <!-- modal pra trocar nome -->
         <UModal :ui="{ overlay: { background: 'bg-blue-200/40' } }" v-model="modalConfig">
-            <div class="dark:text-white relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6">
+            <div class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6">
                 <div class="absolute cursor-pointer flex top-2 right-2">
                     <Icon @click="modalConfig = false"
                         class=" md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out" size="38"
