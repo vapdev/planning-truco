@@ -780,16 +780,16 @@ nav                        class="relative z-40 inline-block w-auto h-full px-5 
 
         <!-- a little JS for the mobile nav button -->
         <UModal class="z-[52]" :ui="{ overlay: { background: 'bg-blue-200/40' } }" v-model="modalCriar">
-            <div class="relative rounded-lg rubik-font font-bold bg-[#3f4146] p-12 flex flex-col gap-6">
+            <div class="relative rounded-lg dark:text-white rubik-font font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6">
                 <div class="absolute cursor-pointer text-white flex top-2 right-2">
                     <Icon @click="modalCriar = false"
                         class=" md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out" size="38"
                         name="material-symbols:close-small-rounded"></Icon>
                 </div>
-                <div class="mb-4 text-white text-4xl">Criando sala</div>
-                <div class="text-md flex flex-col gap-4 text-white">
+                <div class="mb-4 text-4xl">Iniciar Planning Poker</div>
+                <div class="text-md flex flex-col gap-4">
                     <div>Nome da sala:</div>
-                    <div class="flex text-white w-full gap-4">
+                    <div class="flex w-full gap-4">
                         <UInput color="blue" v-model="roomName" size="lg" class="w-full "
                             placeholder="Nome da sala (Opcional)" />
                     </div>
