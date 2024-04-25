@@ -4,7 +4,7 @@
         <div  class="md:justify-center text-blue-500 overflow-x-auto gap-4 items-center pb-4  pt-8 w-full flex">
             <div class="flex gap-4">
                 <div v-for="(card, index) in cards" :key="index" @click="votar(card.value)"
-                    :class="card.defaultClass, selectedCard === card.value ? card.selectedClass : ' md:hover:-translate-y-1 md:hover:bg-blue-50  dark:bg-blue-50' "
+                    :class="card.defaultClass, selectedCard === card.value ? card.selectedClass : ' md:hover:-translate-y-1 md:hover:bg-blue-50  dark:bg-blue-100' "
                     :style="userStore.isDarkMode ? 'box-shadow: 0 10px 30px -10px #222222;' : 'box-shadow: 0 10px 30px -10px #;'"
                     class="text-3xl border-2 border-blue-500 oswald-font w-12 h-20 flex items-center rounded-lg justify-center cursor-pointer">
                     <div class="flex justify-center w-24">{{ card.label }}</div>
