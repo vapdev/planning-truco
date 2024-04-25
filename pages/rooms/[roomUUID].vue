@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper rubik-font h-full w-full flex flex-col justify-between">
+    <div class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between">
         <!-- HEADER -->
         <HeaderSala class="h-1/6" ref="headerRef" @endGame="endGame" />
 
@@ -34,7 +34,6 @@
 <style>
 .wrapper  {
   height: 100dvh;
-  background-color: #3f4146;
 }
 </style>
 

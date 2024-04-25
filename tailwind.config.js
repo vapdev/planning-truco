@@ -7,5 +7,6 @@ export default {
         'cinza': "#212121"
       }
     },
-  }
+  },
+  darkMode: 'selector',
 };

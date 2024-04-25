@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full flex flex-col pb-6">
+    <div class="w-full flex flex-col pb-2">
         <div class="w-full flex flex-col gap-4 text-md justify-center">
-            <div class="text-md text-white w-full flex gap-8 justify-center">
+            <div class="text-md w-full flex gap-8 justify-center">
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
                         Vencedor:
@@ -27,11 +27,11 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center gap-2 pt-2">
+            <div class="flex justify-center gap-3 pt-2">
                 <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
                     :key="card.value">
                     <div
-                        class="w-10 h-16 flex items-center text-gray-900 oswald-font font-bold rounded-md justify-center bg-green-100">
+                        class="w-10 h-16 flex items-center border-2 dark:border-none border-gray-400 text-gray-900 oswald-font font-bold rounded-md justify-center bg-green-100">
                         <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>

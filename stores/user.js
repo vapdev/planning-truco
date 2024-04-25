@@ -18,6 +18,7 @@ export const useUserStore = defineStore('user', () => {
     const ws = ref(null)
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
+    const isDarkMode = ref(false);
 
     watch(userUUID, (newVal) => {
         if (newVal !== null && newVal !== '') {
@@ -133,5 +134,5 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName, noVotes }
+    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName, noVotes, isDarkMode }
 })
