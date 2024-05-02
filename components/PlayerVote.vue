@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col w-10 gap-2 rounded-md">
-        <div class="relative text-blue-500 dark:bg-blue-100 flex items-center rounded-md w-10 h-16 justify-center" :class="[
-            flipped ? 'flip  border-blue-500 border-2 bg-none' : 'bg-gray-200 dark:bg-gray-600'
+        <div class="relative text-blue-500 dark:text-white dark:bg-blue-100 flex items-center rounded-md w-10 h-16 justify-center" :class="[
+            flipped ? 'flip  border-blue-500 dark:border-0 dark:bg-blue-500 border-2 bg-none' : 'bg-gray-200 dark:bg-gray-600'
         ]">
             <div class="shadow"></div>
             <div v-if="player.voted && flipped" class="front rounded-md w-full h-full flex items-center justify-center">

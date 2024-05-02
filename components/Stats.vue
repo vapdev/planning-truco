@@ -31,7 +31,7 @@
                 <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
                     :key="card.value">
                     <div
-                        class="w-10 h-16 flex items-center border-2 border-blue-500 text-blue-500   dark:bg-blue-100  oswald-font font-bold rounded-md justify-center">
+                        class="w-10 h-16 flex items-center border-2 border-blue-500 text-blue-500 dark:text-white dark:border-0 dark:bg-blue-500  oswald-font font-bold rounded-md justify-center">
                         <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
