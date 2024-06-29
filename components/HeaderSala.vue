@@ -4,7 +4,7 @@
             <div class="w-1/3 justify-start items-center">
                 <div class="flex gap-2 items-end">
                     <UButton @click="abrirModalCompartilhar" class="p-2" color="blue">
-                        <span class="text-md mr-2 text-white font-semibold">Convidar participantes</span>
+                        <span class="text-md text-white font-semibold">Convidar</span>
                         <Icon size="20" name="material-symbols:person-add-outline" color="#f1f1f1" />
                     </UButton>
                     <!-- <div @click="copyToClipboard" class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
