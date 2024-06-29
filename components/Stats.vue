@@ -4,7 +4,7 @@
             <div class="text-md w-full flex gap-8 justify-center">
                 <div class="flex flex-col gap-1 items-center justify-center font-semibold">
                     <div class="text-lg">
-                        Vencedor:
+                        Mais votos:
                     </div>
                     <div class="text-3xl">
                         {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
@@ -103,7 +103,7 @@ const stats = computed(() => {
         const rawAverage = totalVotes ? sumOfVotes / totalVotes : 0;
         const average = Number.isInteger(rawAverage) ? Math.floor(rawAverage) : rawAverage.toFixed(1);
 
-        const assertiveness = ((mostVotedSorted[0][1] / votes.length) * 100).toFixed(2);
+        const assertiveness = Math.floor((mostVotedSorted[0][1] / votes.length) * 100);
 
         return {
             mostVoted,

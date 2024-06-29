@@ -7,9 +7,6 @@
                         <span class="text-md text-white font-semibold">Convidar</span>
                         <Icon size="20" name="material-symbols:person-add-outline" color="#f1f1f1" />
                     </UButton>
-                    <!-- <div @click="copyToClipboard" class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
-                        <Icon size="30" name="material-symbols:content-copy-outline" :color="isDarkMode ? 'white' : '#3f4146'" />
-                    </div> -->
                 </div>
             </div>
             <div class="flex w-1/3 justify-center items-center">
@@ -21,9 +18,6 @@
                         :name="userStore.isDarkMode ? 'material-symbols:dark-mode-outline' : 'material-symbols:light-mode-outline'"
                         :color="isDarkMode ? 'white' : '#3f4146'" />
                 </div>
-                <!-- <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
-                    <Icon @click="abrirModalCompartilhar" size="30" name="material-symbols:share-outline" :color="isDarkMode ? 'white' : '#3f4146'" />
-                </div> -->
                 <div @click="modalConfig = true" class="p-1 hover:bg-gray-500 rounded-xl">
                     <Icon class="hover:cursor-pointer" size="30" name="material-symbols:settings-outline"
                         :color="isDarkMode ? 'white' : '#3f4146'" />
@@ -49,7 +43,7 @@
                     <p class="text-2xl dark:text-white">
                         Compartilhe o link da sala
                     </p>
-                    <div class="flex flex-col gap-12">
+                    <div class="flex flex-col gap-6">
                         <UInput inputClass="dark:text-white text-gray-800" disabled v-model="urlToCopy" color="blue"
                             size="lg" class="w-full" />
                         <UButton @click="copyToClipboard"
@@ -141,7 +135,7 @@ function toggleDarkMode() {
 }
 
 function abrirModalCompartilhar() {
-    modalShare.value = true;
+    // modalShare.value = true;
     copyToClipboard();
 }
 const copyToClipboard = () => {
