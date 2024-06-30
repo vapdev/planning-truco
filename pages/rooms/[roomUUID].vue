@@ -174,17 +174,4 @@ const toggleMostrarCartas = () => {
 
     });
 };
-
-const toggleVirarAutomatico = () => {
-    fetch(`${apiUrl}/autoShowCards`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            roomUUID: userStore.roomUUID,
-        }),
-
-    });
-};
 </script>

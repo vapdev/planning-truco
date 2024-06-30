@@ -93,7 +93,6 @@ export const useUserStore = defineStore('user', () => {
             userUUID: userUUID.value,
             roomName: roomName,
         });
-
         roomUUID.value = data.roomUUID;
         userUUID.value = data.userUUID;
         navigateTo(`/rooms/${roomUUID.value}`);
@@ -134,5 +133,47 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName, noVotes, isDarkMode }
+    const changeRoomName = async (newName) => {
+        const response = await fetch(`${apiUrl}/changeRoomName`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                roomUUID: roomUUID.value,
+                userUUID: userUUID.value,
+                roomName: newName,
+            }),
+        });
+
+        if (!response.ok) {
+            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' })
+            throw new Error('Error changing room name');
+        } else {
+            showToast({ message: 'Nome da sala alterado com sucesso!', position: 'top-center', offsetY: 4, type: 'success' })
+        }
+    }
+
+    const kickPlayer = async (playerUUID) => {
+        const response = await fetch(`${apiUrl}/kickPlayer`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                roomUUID: roomUUID.value,
+                userUUID: userUUID.value,
+                playerUUID: playerUUID,
+            }),
+        });
+
+        if (!response.ok) {
+            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' })
+            throw new Error('Error kicking player');
+        } else {
+            showToast({ message: 'Jogador removido com sucesso!', position: 'top-center', offsetY: 4, type: 'success' })
+        }
+    }
+
+    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName, changeRoomName, noVotes, isDarkMode, kickPlayer }
 })
