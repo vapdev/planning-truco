@@ -173,6 +173,41 @@
         </button>
       </div>
     </UModal>
+    <UModal :ui="{ overlay: { background: 'bg-blue-200/40' } }" v-model="modalName">
+      <div
+        class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
+      >
+        <div class="absolute cursor-pointer flex top-2 right-2">
+          <Icon
+            @click="modalName = false"
+            class="md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out"
+            size="38"
+            name="material-symbols:close-small-rounded"
+          ></Icon>
+        </div>
+        <div class="mb-4 text-4xl dark:text-white">Planning {{ userStore.roomState.name }}</div>
+        <div class="text-md flex flex-col">
+          <div>Seu nome:</div>
+          <div class="flex w-full mt-1">
+            <UInput
+              v-model="userName"
+              size="lg"
+              variant="outline"
+              color="blue"
+              class="w-full"
+              :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
+              placeholder="Seu nome"
+            />
+          </div>
+          <button
+            @click="handleSaveName"
+            class="bg-blue-500 w-full md:hover:bg-blue-400 font-bold py-2 px-4 rounded mt-6"
+          >
+            Salvar
+          </button>
+        </div>
+      </div>
+    </UModal>
   </div>
 </template>
 
@@ -181,6 +216,7 @@ import { showToast } from "../composables/toast";
 const userStore = useUserStore();
 const modalShare = ref(false);
 const modalConfig = ref(false);
+const modalName = ref(false);
 const emit = defineEmits(["endGame"]);
 const urlToCopy = ref();
 const userName = ref("");
@@ -223,6 +259,13 @@ function handleSaveConfig() {
   modalConfig.value = false;
 }
 
+function handleSaveName() {
+  if (userName.value !== userStore.name) {
+    userStore.changeName(userName.value);
+  }
+  modalName.value = false;
+}
+
 watch(modalConfig, (newVal) => {
   if (newVal) {
     userName.value = userStore.name;
@@ -250,5 +293,6 @@ const copyToClipboard = () => {
 defineExpose({
   modalConfig,
   modalShare,
+  modalName,
 });
 </script>
