@@ -41,7 +41,6 @@
 import lodash from 'lodash';
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
-const wsUrl = config.public.wsBase;
 const { debounce } = lodash;
 const nome = ref("");
 const selectedCard = ref(null);
@@ -132,7 +131,6 @@ const votar = (score) => {
     }
 };
 
-
 const endGame = () => {
     if (userStore.roomUUID) {
         fetch(`${apiUrl}/leaveRoom`, {
@@ -154,6 +152,8 @@ const jogadorLogado = computed(() =>
     userStore.players.find((player) => player.uuid === userStore.userUUID)
 );
 
+
+// Reset selected card when round finishes
 watch(() => jogadorLogado.value, (newPlayer, oldPlayer) => {
     if (JSON.stringify(newPlayer) !== JSON.stringify(oldPlayer)) {
         if (newPlayer && !newPlayer.voted) {
