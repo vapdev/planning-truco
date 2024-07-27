@@ -8,7 +8,7 @@
             <!-- MAIN CONTENT -->
             <div class="flex w-1/3 flex-col justify-center items-center ">
                 <!-- PLAYERS DE CIMA -->
-                <TopContainer style="height: 92px" :players="playersTop" />
+                <TopContainer style="height: 92px;" :players="playersTop" />
                 <div class="flex gap-4 justify-center items-center">
                     <!-- PLAYERS DA ESQUERDA -->
                     <LeftContainer :players="playersLeft" />
