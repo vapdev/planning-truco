@@ -37,21 +37,20 @@ const updateLocations = async () => {
 };
 
 watch(playerRefs, updateLocations);
+watch(() => userStore.players, () => {
+  updateLocations();
+}, { deep: true });
 
 onMounted(() => {
   updateLocations();
 
-  // Adicionar event listeners para resize e zoom
   window.addEventListener("resize", updateLocations);
 
-  // Adicionar event listener para zoom (se aplicável)
   const handleZoom = () => {
     updateLocations();
   };
-  // Pode-se usar uma biblioteca ou outro método para detectar zoom, se necessário
   window.addEventListener("zoom", handleZoom);
 
-  // Cleanup event listeners na desmontagem
   onBeforeUnmount(() => {
     window.removeEventListener("resize", updateLocations);
     window.removeEventListener("zoom", handleZoom);
