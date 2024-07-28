@@ -1,28 +1,28 @@
 <template>
-    <div class="w-full flex flex-col pb-2">
-        <div class="w-full flex flex-col gap-4 text-md justify-center">
-            <div class="text-md w-full flex gap-8 justify-center">
-                <div class="flex flex-col gap-1 items-center justify-center font-semibold">
+    <div class="w-full items-center flex flex-col pb-2 md:pb-12">
+        <div class="w-fit flex flex-col gap-2 text-md justify-center bg-gray-200 rounded-xl p-2 px-4">
+            <div class="text-md w-full flex gap-6">
+                <div class="flex flex-col gap-1 items-center justify-center font-normal">
                     <div class="text-lg">
                         Mais votos:
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-3xl font-bold">
                         {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
                     </div>
                 </div>
-                <div class="flex flex-col gap-1 items-center justify-center font-semibold">
+                <div class="flex flex-col gap-1 items-center justify-center font-normal">
                     <div class="text-lg">
                         Média:
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-3xl font-bold">
                         {{ stats.average }}
                     </div>
                 </div>
-                <div class="flex flex-col gap-1 items-center justify-center font-semibold">
+                <div class="flex flex-col gap-1 items-center justify-center font-normal">
                     <div class="text-lg">
                         Assertividade:
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-3xl font-bold">
                         {{ stats.assertiveness }}%
                     </div>
                 </div>

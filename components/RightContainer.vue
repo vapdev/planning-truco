@@ -1,7 +1,7 @@
 <template>
   <PlayerContainer
     :players="players"
-    containerClass="flex flex-col gap-4 pt-7 md:ml-16"
+    containerClass="flex flex-col gap-4 pt-7 md:ml-10"
     style="min-width: 40px"
   />
 </template>

@@ -3,10 +3,13 @@
     class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between"
   >
     <!-- HEADER -->
-    <HeaderSala class="h-1/6" ref="headerRef" @endGame="endGame" />
+    <HeaderSala class="h-1/8" ref="headerRef" @endGame="endGame" />
 
-    <div class="flex h-4/6 justify-around w-full">
+    <div class="flex justify-around w-full h-3/4">
       <!-- MAIN CONTENT -->
+      <div class="w-1/3 flex flex-col items-center">
+        <!-- <span>Histórico de votações:</span> -->
+      </div>
       <div class="flex w-1/3 flex-col justify-center items-center">
         <!-- PLAYERS DE CIMA -->
         <TopContainer :players="playersTop" />
@@ -21,10 +24,13 @@
         <!-- PLAYERS DE BAIXO -->
         <BottomContainer :players="playersBottom" />
       </div>
+      <div class="w-1/3 flex justify-center">
+        <!-- teste2 -->
+      </div>
     </div>
 
     <!-- FOOTER -->
-    <div class="w-full h-2/6 flex flex-col justify-end">
+    <div class="w-full h-2/8 flex flex-col justify-end">
       <Deck
         v-if="!userStore.roomState.showCards"
         :selectedCard="selectedCard"
