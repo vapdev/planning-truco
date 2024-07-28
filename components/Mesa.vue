@@ -1,6 +1,6 @@
 <template>
     <div style="height: 136px" class="justify-center items-center flex flex-wrap w-full mx-4">
-        <div class="md:w-64 w-52 h-24 rounded-xl flex justify-center items-center bg-gray-400">
+        <div class="md:w-64 w-52 h-24 rounded-xl flex justify-center items-center bg-gray-300 dark:bg-gray-500">
             <div v-if="!userStore.roomState.autoShowCards && !userStore.roomState.showCards">
                 <UButton :disabled="userStore.noVotes" @click="emit('toggleMostrarCartas')" color="blue"
                     class="font-bold py-2 px-4 rounded w-50 ">

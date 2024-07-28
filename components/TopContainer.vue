@@ -1,5 +1,5 @@
 <template>
-  <PlayerContainer :players="players" containerClass="h-22 flex w-80 justify-around" />
+  <PlayerContainer :players="players" containerClass="h-22 md:mb-10 flex w-80 justify-around" />
 </template>
 
 <script setup>
