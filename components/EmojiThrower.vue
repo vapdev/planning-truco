@@ -9,7 +9,7 @@
     ]"
     id="participants"
   >
-    <div @click="throwEmoji" class="hover:scale-150 text-2xl cursor-pointer" v-for="emojiItem in emojis" :key="emojiItem.id">
+    <div @click="addEmoji(emojiItem)" class="hover:scale-150 text-2xl cursor-pointer" v-for="emojiItem in emojis" :key="emojiItem.id">
       {{ emojiItem.i }}
     </div>
     <div
@@ -34,8 +34,10 @@
 
 <script setup>
 import { onClickOutside } from "@vueuse/core";
+import { useEmojiStore } from '~/stores/emoji'
 import EmojiPicker from "vue3-emoji-picker";
 const userStore = useUserStore();
+const emojiStore = useEmojiStore();
 import "vue3-emoji-picker/css";
 
 const target = ref(null);
@@ -57,7 +59,7 @@ const toggleEmojiPicker = () => {
 };
 
 const onSelectEmoji = (emoji) => {
-  throwEmoji(emoji, props.targetUUID);
+  addEmoji(emoji, props.targetUserId);
   toggleEmojiPicker();
 };
 
@@ -71,20 +73,23 @@ const connectWebSocket = () => {
 };
 
 const props = defineProps({
-  targetUUID: {
-    type: String,
+  targetUserId: {
+    type: Number,
     required: true,
   },
 });
 
-const throwEmoji = (emoji, targetUUID) => {
-  userStore.ws.send(JSON.stringify({
-      type: 'emoji',
-      userUUID: userStore.userUUID,
-      roomUUID: userStore.roomUUID,
-      targetUUID: props.targetUUID,
-      emoji
-  }));
+const addEmoji = (emoji) => {
+  console.log(emoji)
+  // userStore.ws.send(JSON.stringify({
+  //     type: 'emoji',
+  //     userUUID: userStore.userUUID,
+  //     roomUUID: userStore.roomUUID,
+  //     targetUserId: props.targetUserId,
+  // }));
+  const originUserId = userStore.jogadorLogado.id;
+  const targetUserId = props.targetUserId;
+  emojiStore.addEmoji(emoji, originUserId, targetUserId);
 };
 
 onMounted(() => {

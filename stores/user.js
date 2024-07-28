@@ -2,20 +2,21 @@ import { showToast } from '../composables/toast';
 import { useStorage } from "@vueuse/core";
 
 export const useUserStore = defineStore('user', () => {
-    const player = ref(null)
-    const players = ref([])
+    const player = ref(null);
+    const players = ref([]);
+    const playerLocations = ref({});
     const config = useRuntimeConfig();
     const roomUUID = ref(null);
     const userUUID = ref("");
     const apiUrl = config.public.apiBase;
     const wsUrl = config.public.wsBase;
-    const name = ref("Guest")
+    const name = ref("Guest");
     const jogoComecou = ref(false);
     const roomState = ref({
         showCards: false,
         autoShowCards: false,
-    })
-    const ws = ref(null)
+    });
+    const ws = ref(null);
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
     const isDarkMode = ref(false);
@@ -50,27 +51,23 @@ export const useUserStore = defineStore('user', () => {
 
     const noVotes = computed(() => {
         return players.value.every(player => player.voted === false);
-    }
-    )
+    });
 
     function setWebSocket(tipo) {
         if (process.client) {
-            ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value)
+            ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value);
 
-            ws.value.onopen = () => {
-            }
+            ws.value.onopen = () => { };
 
-            ws.value.onerror = (error) => {
-            }
+            ws.value.onerror = (error) => { };
 
-            ws.value.onmessage = (event) => {
-            }
+            ws.value.onmessage = (event) => { };
 
             ws.value.onclose = () => {
                 setTimeout(() => {
                     setWebSocket(); // Re-establish the WebSocket connection
                 }, 1000); // 1-second delay before reconnecting
-            }
+            };
 
             ws.value.addEventListener('open', (event) => {
                 ws.value.send(JSON.stringify({
@@ -96,7 +93,7 @@ export const useUserStore = defineStore('user', () => {
         roomUUID.value = data.roomUUID;
         userUUID.value = data.userUUID;
         navigateTo(`/rooms/${roomUUID.value}`);
-    }
+    };
 
     const loadGame = async (inputRoomUUID) => {
         if (inputRoomUUID) {
@@ -126,12 +123,12 @@ export const useUserStore = defineStore('user', () => {
         });
 
         if (!response.ok) {
-            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' })
+            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' });
             throw new Error('Error changing name');
         } else {
-            showToast({ message: 'Nome alterado com sucesso!', position: 'top-center', offsetY: 4, type: 'success' })
+            showToast({ message: 'Nome alterado com sucesso!', position: 'top-center', offsetY: 4, type: 'success' });
         }
-    }
+    };
 
     const changeRoomName = async (newName) => {
         const response = await fetch(`${apiUrl}/changeRoomName`, {
@@ -147,12 +144,12 @@ export const useUserStore = defineStore('user', () => {
         });
 
         if (!response.ok) {
-            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' })
+            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' });
             throw new Error('Error changing room name');
         } else {
-            showToast({ message: 'Nome da sala alterado com sucesso!', position: 'top-center', offsetY: 4, type: 'success' })
+            showToast({ message: 'Nome da sala alterado com sucesso!', position: 'top-center', offsetY: 4, type: 'success' });
         }
-    }
+    };
 
     const kickPlayer = async (playerUUID) => {
         const response = await fetch(`${apiUrl}/kickPlayer`, {
@@ -168,12 +165,41 @@ export const useUserStore = defineStore('user', () => {
         });
 
         if (!response.ok) {
-            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' })
+            showToast({ message: 'Erro', position: 'top-center', offsetY: 4, type: 'error' });
             throw new Error('Error kicking player');
         } else {
-            showToast({ message: 'Jogador removido com sucesso!', position: 'top-center', offsetY: 4, type: 'success' })
+            showToast({ message: 'Jogador removido com sucesso!', position: 'top-center', offsetY: 4, type: 'success' });
         }
-    }
+    };
 
-    return { player, ws, roomState, setWebSocket, startGame, players, userUUID, roomUUID, name, jogoComecou, loadGame, changeName, changeRoomName, noVotes, isDarkMode, kickPlayer }
-})
+    // Função para atualizar as localizações dos jogadores
+    const updatePlayerLocation = (playerId, position) => {
+        playerLocations.value[playerId] = position;
+    };
+
+    const jogadorLogado = computed(() =>
+        players.value.find((player) => player.uuid === userUUID.value)
+    );
+
+    return {
+        player,
+        ws,
+        roomState,
+        setWebSocket,
+        startGame,
+        players,
+        playerLocations,
+        userUUID,
+        roomUUID,
+        name,
+        jogoComecou,
+        loadGame,
+        changeName,
+        changeRoomName,
+        noVotes,
+        isDarkMode,
+        kickPlayer,
+        updatePlayerLocation,
+        jogadorLogado
+    };
+});

@@ -26,7 +26,7 @@
       <div
         class="absolute inset-0 flex items-center justify-center translate-y-[-95%]"
       >
-        <EmojiThrower :targetUUID="player.uuid" />
+        <EmojiThrower :targetUserId="player.id" />
       </div>
     </div>
     <div class="w-full text-center z-10">
