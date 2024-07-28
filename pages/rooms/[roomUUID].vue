@@ -47,7 +47,6 @@
 </template>
 
 <script setup>
-import { useEmojiStore } from "~/stores/emoji";
 import lodash from "lodash";
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
@@ -57,28 +56,23 @@ const selectedCard = ref(null);
 const route = useRoute();
 const headerRef = ref(null);
 const userStore = useUserStore();
-const emojiStore = useEmojiStore();
-const { emojiStack } = storeToRefs(emojiStore);
+const { emojiStack } = storeToRefs(userStore);
 const $md = ref(null);
 
 const animationKey = ref(0);
 
 const computedEmojiStack = computed(() => {
-  return [...emojiStore.emojiStack];
+  return [...userStore.emojiStack];
 });
 
 watch(computedEmojiStack, (newStack, oldStack) => {
   if (newStack.length > oldStack.length) {
-    console.log("newStack");
-    console.log(newStack);
-    console.log("oldStack");
-    console.log(oldStack);
     const lastEmoji = newStack[newStack.length - 1];
     if (lastEmoji) {
-      animateEmoji(lastEmoji.originUserId, lastEmoji.targetUserId, lastEmoji.emoji.i);
+      animateEmoji(lastEmoji.originUserId, lastEmoji.targetUserId, lastEmoji.emoji);
     }
     setTimeout(() => {
-      emojiStore.emojiStack = emojiStore.emojiStack.filter(
+      userStore.emojiStack = userStore.emojiStack.filter(
         (e) => e.key !== lastEmoji.key
       );
     }, 2000);

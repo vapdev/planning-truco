@@ -7,9 +7,8 @@
       @click="addEmoji(emojiItem)"
       class="hover:scale-150 text-2xl cursor-pointer"
       v-for="emojiItem in emojis"
-      :key="emojiItem.id"
     >
-      {{ emojiItem.i }}
+      {{ emojiItem }}
     </div>
     <div
       class="hover:scale-150 text-2xl cursor-pointer"
@@ -35,10 +34,8 @@
 
 <script setup>
 import { onClickOutside } from "@vueuse/core";
-import { useEmojiStore } from "~/stores/emoji";
 import EmojiPicker from "vue3-emoji-picker";
 const userStore = useUserStore();
-const emojiStore = useEmojiStore();
 import "vue3-emoji-picker/css";
 
 const target = ref(null);
@@ -56,42 +53,21 @@ onClickOutside(target, (event) => toggleEmojiPicker());
 
 const emojiPickerVisible = ref(false);
 const emoji = ref("");
-const emojis = ref([
-  { id: 1, i: "👍" },
-  { id: 2, i: "👎" },
-  { id: 3, i: "🤝" },
-  { id: 4, i: "💥" },
-  { id: 5, i: "💣" },
-  { id: 6, i: "😳" },
-  { id: 7, i: "🤔" },
-]);
+const emojis = ref(["👍" , "👎", "🤝", "💥", "💣", "😳", "🤔"])
 const toggleEmojiPicker = () => {
   emojiPickerVisible.value = !emojiPickerVisible.value;
   emit("emoji-picker-visible", emojiPickerVisible.value);
 };
 
 const onSelectEmoji = (emoji) => {
-  addEmoji(emoji, props.targetUserId);
-};
-
-const connectWebSocket = () => {
-  let ws = new WebSocket("ws://localhost:8080");
-
-  ws.onmessage = (event) => {
-    const receivedEmoji = event.data;
-    emojis.value.push({ id: Date.now(), i: receivedEmoji });
-  };
+  addEmoji(emoji.i);
 };
 
 const addEmoji = (emoji) => {
   const originUserId = userStore.jogadorLogado.id;
   const targetUserId = props.targetUserId;
-  emojiStore.addEmoji(emoji, originUserId, targetUserId);
+  userStore.addEmoji(emoji, originUserId, targetUserId);
 };
-
-onMounted(() => {
-  connectWebSocket();
-});
 </script>
 
 <style>

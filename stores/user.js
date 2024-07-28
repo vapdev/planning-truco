@@ -1,5 +1,5 @@
 import { showToast } from '../composables/toast';
-import { useStorage } from "@vueuse/core";
+import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', () => {
     const player = ref(null);
@@ -81,6 +81,16 @@ export const useUserStore = defineStore('user', () => {
                 const data = JSON.parse(event.data);
                 roomState.value = data;
                 players.value = data.players;
+                if (data.emojis) {
+                    data.emojis.forEach(emoji => {
+                        emojiStack.value.push({
+                            emoji: emoji.Emoji,
+                            originUserId: emoji.OriginUserID,
+                            targetUserId: emoji.TargetUserID,
+                            key: Date.now(),
+                        })
+                    })
+                }
             });
         }
     }
@@ -181,6 +191,17 @@ export const useUserStore = defineStore('user', () => {
         players.value.find((player) => player.uuid === userUUID.value)
     );
 
+    const emojiStack = ref([])
+
+    const addEmoji = (emoji, originUserId, targetUserId) => {
+        ws.value.send(JSON.stringify({
+            type: 'emoji',
+            emoji: emoji,
+            originUserId,
+            targetUserId,
+        }));
+    }
+
     return {
         player,
         ws,
@@ -200,6 +221,8 @@ export const useUserStore = defineStore('user', () => {
         isDarkMode,
         kickPlayer,
         updatePlayerLocation,
-        jogadorLogado
+        jogadorLogado,
+        emojiStack,
+        addEmoji,
     };
 });
