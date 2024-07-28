@@ -34,7 +34,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
 import { onClickOutside } from "@vueuse/core";
 import { useEmojiStore } from "~/stores/emoji";
 import EmojiPicker from "vue3-emoji-picker";
@@ -51,23 +50,24 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['emoji-picker-visible']);
+const emit = defineEmits(["emoji-picker-visible"]);
 
 onClickOutside(target, (event) => toggleEmojiPicker());
 
 const emojiPickerVisible = ref(false);
 const emoji = ref("");
 const emojis = ref([
-  { id: 1, i: "🚀" },
-  { id: 2, i: "🎉" },
-  { id: 3, i: "🔥" },
-  { id: 4, i: "👍" },
-  { id: 5, i: "🤔" },
+  { id: 1, i: "👍" },
+  { id: 2, i: "👎" },
+  { id: 3, i: "🤝" },
+  { id: 4, i: "💥" },
+  { id: 5, i: "💣" },
+  { id: 6, i: "😳" },
+  { id: 7, i: "🤔" },
 ]);
-
 const toggleEmojiPicker = () => {
   emojiPickerVisible.value = !emojiPickerVisible.value;
-  emit('emoji-picker-visible', emojiPickerVisible.value);
+  emit("emoji-picker-visible", emojiPickerVisible.value);
 };
 
 const onSelectEmoji = (emoji) => {
