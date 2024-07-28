@@ -47,16 +47,12 @@
 </template>
 
 <script setup>
-import lodash from "lodash";
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
-const { debounce } = lodash;
-const nome = ref("");
 const selectedCard = ref(null);
 const route = useRoute();
 const headerRef = ref(null);
 const userStore = useUserStore();
-const { emojiStack } = storeToRefs(userStore);
 const $md = ref(null);
 
 const animationKey = ref(0);
@@ -65,19 +61,14 @@ const computedEmojiStack = computed(() => {
   return [...userStore.emojiStack];
 });
 
+// Watcher para detectar mudanças no emojiStack
 watch(computedEmojiStack, (newStack, oldStack) => {
-  if (newStack.length > oldStack.length) {
-    const lastEmoji = newStack[newStack.length - 1];
-    if (lastEmoji) {
-      animateEmoji(lastEmoji.originUserId, lastEmoji.targetUserId, lastEmoji.emoji);
+  newStack.forEach(emoji => {
+    if (!oldStack.includes(emoji)) {
+      animateEmoji(emoji.originUserId, emoji.targetUserId, emoji.emoji);
     }
-    setTimeout(() => {
-      userStore.emojiStack = userStore.emojiStack.filter(
-        (e) => e.key !== lastEmoji.key
-      );
-    }, 2000);
-  }
-});
+  });
+}, { deep: true });
 
 const emojiThrowStack = ref([]);
 
@@ -86,7 +77,7 @@ const animateEmoji = (startId, endId, emoji) => {
   const endLocation = userStore.playerLocations[endId];
 
   if (startLocation && endLocation) {
-    const key = `emoji-${Date.now()}`;
+    const key = `emoji-${Date.now()}-${animationKey.value++}`;
     emojiThrowStack.value.push({
       i: emoji,
       key: key,
@@ -95,24 +86,26 @@ const animateEmoji = (startId, endId, emoji) => {
         left: `${startLocation.left - 5}px`,
       },
     });
-    setTimeout(() => {
-      emojiThrowStack.value = emojiThrowStack.value.map((e) => {
-        if (e.key === key) {
-          return {
-            ...e,
-            style: {
-              ...e.style,
-              transform: `translate(${endLocation.left - startLocation.left}px, ${
-                endLocation.top - startLocation.top
-              }px)`,
-            },
-          };
-        }
-        return e;
-      });
-    }, 0);
 
-    animationKey.value++;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        emojiThrowStack.value = emojiThrowStack.value.map((e) => {
+          if (e.key === key) {
+            return {
+              ...e,
+              style: {
+                ...e.style,
+                transform: `translate(${endLocation.left - startLocation.left}px, ${
+                  endLocation.top - startLocation.top
+                }px)`,
+              },
+            };
+          }
+          return e;
+        });
+      });
+    });
+
     setTimeout(() => {
       emojiThrowStack.value = emojiThrowStack.value.filter((e) => e.key !== key);
     }, 1000);

@@ -20,7 +20,8 @@ export const useUserStore = defineStore('user', () => {
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
     const isDarkMode = ref(false);
-
+    let emojiCounter = 0;
+    
     watch(userUUID, (newVal) => {
         if (newVal !== null && newVal !== '') {
             localStorage.setItem('userUUID', newVal);
@@ -83,13 +84,19 @@ export const useUserStore = defineStore('user', () => {
                 players.value = data.players;
                 if (data.emojis) {
                     data.emojis.forEach(emoji => {
-                        emojiStack.value.push({
+                        const newEmoji = {
                             emoji: emoji.Emoji,
                             originUserId: emoji.OriginUserID,
                             targetUserId: emoji.TargetUserID,
-                            key: Date.now(),
-                        })
-                    })
+                            key: `${Date.now()}-${emojiCounter++}`,
+                        };
+                        emojiStack.value.push(newEmoji);
+                        setTimeout(() => {
+                            emojiStack.value = emojiStack.value.filter(
+                                (e) => e.key !== newEmoji.key
+                            );
+                        }, 2000);
+                    });
                 }
             });
         }
