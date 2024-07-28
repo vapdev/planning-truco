@@ -9,7 +9,7 @@
       <!-- MAIN CONTENT -->
       <div class="flex w-1/3 flex-col justify-center items-center">
         <!-- PLAYERS DE CIMA -->
-        <TopContainer style="height: 92px" :players="playersTop" />
+        <TopContainer :players="playersTop" />
         <div class="flex gap-4 justify-center items-center">
           <!-- PLAYERS DA ESQUERDA -->
           <LeftContainer :players="playersLeft" />
@@ -19,7 +19,7 @@
           <RightContainer :players="playersRight" />
         </div>
         <!-- PLAYERS DE BAIXO -->
-        <BottomContainer style="height: 92px" :players="playersBottom" />
+        <BottomContainer :players="playersBottom" />
       </div>
     </div>
 
@@ -37,7 +37,7 @@
       <div
         v-for="emoji in emojiThrowStack"
         :key="emoji.key"
-        class="absolute text-4xl transition-transform duration-1000 ease-in-out"
+        class="absolute text-4xl transition-transform duration-1000 ease-in-out z-50"
         :style="emoji.style"
       >
         {{ emoji.i }}
@@ -97,8 +97,8 @@ const animateEmoji = (startId, endId, emoji) => {
       i: emoji,
       key: key,
       style: {
-        top: `${startLocation.top}px`,
-        left: `${startLocation.left}px`,
+        top: `${startLocation.top + 15}px`,
+        left: `${startLocation.left - 5}px`,
       },
     });
     setTimeout(() => {
@@ -108,7 +108,9 @@ const animateEmoji = (startId, endId, emoji) => {
             ...e,
             style: {
               ...e.style,
-              transform: `translate(${endLocation.left - startLocation.left}px, ${endLocation.top - startLocation.top}px)`,
+              transform: `translate(${endLocation.left - startLocation.left}px, ${
+                endLocation.top - startLocation.top
+              }px)`,
             },
           };
         }

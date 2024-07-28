@@ -19,9 +19,11 @@
     >
       😊
     </div>
-    <div class="relative">
+    <div class="relative z-50">
       <EmojiPicker
         ref="target"
+        display-recent
+        disable-skin-tones 
         theme="auto"
         v-if="emojiPickerVisible"
         class="emoji-picker"
@@ -51,7 +53,7 @@ const emojis = ref([
   { id: 2, i: "🎉" },
   { id: 3, i: "🔥" },
   { id: 4, i: "👍" },
-  { id: 5, i: "👏" },
+  { id: 5, i: "🤔" },
 ]);
 
 const toggleEmojiPicker = () => {
@@ -60,7 +62,6 @@ const toggleEmojiPicker = () => {
 
 const onSelectEmoji = (emoji) => {
   addEmoji(emoji, props.targetUserId);
-  toggleEmojiPicker();
 };
 
 const connectWebSocket = () => {
@@ -97,11 +98,15 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style>
 .emoji-picker {
   position: absolute;
-  top: 100%; /* Positioned below the button */
+  top: 100%; 
   left: 0;
   z-index: 1000;
+}
+
+#participants > div.relative.z-50 > div > div.v3-footer {
+  display: none;
 }
 </style>

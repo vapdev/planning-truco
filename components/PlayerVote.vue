@@ -24,7 +24,7 @@
         v-if="!player.voted || !flipped"
       ></div>
       <div
-        class="absolute inset-0 flex items-center justify-center translate-y-[-95%]"
+        class="absolute inset-0 flex items-center justify-center translate-y-[-95%] z-40"
       >
         <EmojiThrower :targetUserId="player.id" />
       </div>
