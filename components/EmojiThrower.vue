@@ -1,15 +1,14 @@
 <template>
   <div
-    :class="[
-      'relative select-none flex z-10 transition-opacity duration-300',
-      {
-        'opacity-100': emojiPickerVisible,
-        'opacity-0 group-hover:opacity-100': !emojiPickerVisible,
-      },
-    ]"
+    class="relative select-none flex z-10 transition-opacity duration-300"
     id="participants"
   >
-    <div @click="addEmoji(emojiItem)" class="hover:scale-150 text-2xl cursor-pointer" v-for="emojiItem in emojis" :key="emojiItem.id">
+    <div
+      @click="addEmoji(emojiItem)"
+      class="hover:scale-150 text-2xl cursor-pointer"
+      v-for="emojiItem in emojis"
+      :key="emojiItem.id"
+    >
       {{ emojiItem.i }}
     </div>
     <div
@@ -23,7 +22,7 @@
       <EmojiPicker
         ref="target"
         display-recent
-        disable-skin-tones 
+        disable-skin-tones
         theme="auto"
         v-if="emojiPickerVisible"
         class="emoji-picker"
@@ -36,7 +35,7 @@
 
 <script setup>
 import { onClickOutside } from "@vueuse/core";
-import { useEmojiStore } from '~/stores/emoji'
+import { useEmojiStore } from "~/stores/emoji";
 import EmojiPicker from "vue3-emoji-picker";
 const userStore = useUserStore();
 const emojiStore = useEmojiStore();
@@ -81,13 +80,6 @@ const props = defineProps({
 });
 
 const addEmoji = (emoji) => {
-  console.log(emoji)
-  // userStore.ws.send(JSON.stringify({
-  //     type: 'emoji',
-  //     userUUID: userStore.userUUID,
-  //     roomUUID: userStore.roomUUID,
-  //     targetUserId: props.targetUserId,
-  // }));
   const originUserId = userStore.jogadorLogado.id;
   const targetUserId = props.targetUserId;
   emojiStore.addEmoji(emoji, originUserId, targetUserId);
@@ -101,7 +93,7 @@ onMounted(() => {
 <style>
 .emoji-picker {
   position: absolute;
-  top: 100%; 
+  top: 100%;
   left: 0;
   z-index: 1000;
 }

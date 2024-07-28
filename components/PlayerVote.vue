@@ -1,7 +1,7 @@
 <template>
-  <div class="relative flex flex-col w-10 gap-2 rounded-md">
+  <div class="relative flex flex-col w-10 gap-2 rounded-md group">
     <div
-      class="relative group text-blue-500 dark:text-white dark:bg-blue-100 flex items-center rounded-md w-10 h-16 justify-center"
+      class="relative text-blue-500 dark:text-white dark:bg-blue-100 flex items-center rounded-md w-10 h-16 justify-center"
       :class="[
         flipped
           ? 'flip border-blue-500 dark:border-0 dark:bg-blue-500 border-2 bg-none'
@@ -24,7 +24,7 @@
         v-if="!player.voted || !flipped"
       ></div>
       <div
-        class="absolute inset-0 flex items-center justify-center translate-y-[-95%] z-40"
+        class="absolute inset-0 flex items-center justify-center translate-y-[-95%] z-40 group-hover:flex group-hover:opacity-100 transition-opacity duration-300 hidden opacity-0"
       >
         <EmojiThrower :targetUserId="player.id" />
       </div>
@@ -36,6 +36,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 const props = defineProps({
   player: {
