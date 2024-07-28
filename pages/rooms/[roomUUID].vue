@@ -35,16 +35,14 @@
 
     <!-- EMOJI -->
     <div class="emoji-container">
-      <transition-group name="emoji" tag="div" class="relative w-full h-full">
-        <div
-          v-for="emoji in emojiShowStack"
-          :key="emoji.key"
-          class="absolute text-4xl"
-          :style="emoji.style"
-        >
-          {{ emoji.i }}
-        </div>
-      </transition-group>
+      <div
+        v-for="emoji in emojiThrowStack"
+        :key="emoji.key"
+        class="absolute text-4xl"
+        :style="emoji.style"
+      >
+        {{ emoji.i }}
+      </div>
     </div>
   </div>
 </template>
@@ -105,13 +103,20 @@ const animateEmoji = (startId, endId, emoji) => {
       style: {
         top: `${startLocation.top}px`,
         left: `${startLocation.left}px`,
-        transform: `translate(${endLocation.left - startLocation.left}px, ${endLocation.top - startLocation.top}px)`,
+      }
+    });
+    emojiThrowStack.value.push({
+      i: emoji,
+      key: key,
+      style: {
+        top: `${endLocation.top}px`,
+        left: `${endLocation.left}px`,
       }
     });
     animationKey.value++;
     setTimeout(() => {
       emojiThrowStack.value = emojiThrowStack.value.filter((e) => e.key !== key);
-    }, 5000);
+    }, 3000);
   }
 };
 
@@ -254,21 +259,8 @@ const toggleMostrarCartas = () => {
 };
 </script>
 
-
-
 <style>
 .wrapper {
   height: 100dvh;
-}
-
-.emoji-enter-active,
-.emoji-leave-active {
-  transition: transform 1s, opacity 1s;
-}
-
-.emoji-enter-from,
-.emoji-leave-to {
-  transform: translateY(-100%);
-  opacity: 0;
 }
 </style>
