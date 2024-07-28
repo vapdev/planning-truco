@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import { onClickOutside } from "@vueuse/core";
 import { useEmojiStore } from "~/stores/emoji";
 import EmojiPicker from "vue3-emoji-picker";
@@ -42,6 +43,15 @@ const emojiStore = useEmojiStore();
 import "vue3-emoji-picker/css";
 
 const target = ref(null);
+
+const props = defineProps({
+  targetUserId: {
+    type: Number,
+    required: true,
+  },
+});
+
+const emit = defineEmits(['emoji-picker-visible']);
 
 onClickOutside(target, (event) => toggleEmojiPicker());
 
@@ -57,6 +67,7 @@ const emojis = ref([
 
 const toggleEmojiPicker = () => {
   emojiPickerVisible.value = !emojiPickerVisible.value;
+  emit('emoji-picker-visible', emojiPickerVisible.value);
 };
 
 const onSelectEmoji = (emoji) => {
@@ -71,13 +82,6 @@ const connectWebSocket = () => {
     emojis.value.push({ id: Date.now(), i: receivedEmoji });
   };
 };
-
-const props = defineProps({
-  targetUserId: {
-    type: Number,
-    required: true,
-  },
-});
 
 const addEmoji = (emoji) => {
   const originUserId = userStore.jogadorLogado.id;

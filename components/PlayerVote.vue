@@ -24,9 +24,13 @@
         v-if="!player.voted || !flipped"
       ></div>
       <div
-        class="absolute inset-0 flex items-center justify-center translate-y-[-95%] z-40 group-hover:flex group-hover:opacity-100 transition-opacity duration-300 hidden opacity-0"
+        class="absolute inset-0 flex items-center justify-center translate-y-[-95%] z-40 group-hover:flex group-hover:opacity-100 transition-opacity duration-300"
+        :class="{ hidden: !emojiPickerVisible }"
       >
-        <EmojiThrower :targetUserId="player.id" />
+        <EmojiThrower
+          :targetUserId="player.id"
+          @emoji-picker-visible="setEmojiPickerVisible"
+        />
       </div>
     </div>
     <div class="w-full text-center z-10">
@@ -38,6 +42,9 @@
 </template>
 
 <script setup>
+import { ref, watch } from "vue";
+import EmojiThrower from "./EmojiThrower.vue";
+
 const props = defineProps({
   player: {
     type: Object,
@@ -51,6 +58,7 @@ const props = defineProps({
 
 const { player, mostrarCartas } = toRefs(props);
 const flipped = ref(false);
+const emojiPickerVisible = ref(false);
 
 watch(
   () => mostrarCartas.value,
@@ -63,6 +71,10 @@ watch(
     }
   }
 );
+
+const setEmojiPickerVisible = (visible) => {
+  emojiPickerVisible.value = visible;
+};
 </script>
 
 <style scoped>
