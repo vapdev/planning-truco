@@ -37,7 +37,7 @@
       <div
         v-for="emoji in emojiThrowStack"
         :key="emoji.key"
-        class="absolute text-4xl transition-transform duration-1000 ease-in-out z-50"
+        class="absolute select-none text-4xl transition-transform duration-1000 ease-in-out z-50"
         :style="emoji.style"
       >
         {{ emoji.i }}
