@@ -33,12 +33,11 @@
       <Stats v-else />
     </div>
 
-    <!-- EMOJI -->
-    <div class="emoji-container">
+    <div>
       <div
         v-for="emoji in emojiThrowStack"
         :key="emoji.key"
-        class="absolute text-4xl"
+        class="absolute text-4xl transition-transform duration-1000 ease-in-out"
         :style="emoji.style"
       >
         {{ emoji.i }}
@@ -89,11 +88,8 @@ watch(computedEmojiStack, (newStack, oldStack) => {
 const emojiThrowStack = ref([]);
 
 const animateEmoji = (startId, endId, emoji) => {
-  console.log("ANIMATING: ", startId, endId, emoji);
   const startLocation = userStore.playerLocations[startId];
   const endLocation = userStore.playerLocations[endId];
-  console.log("startLocation", startLocation);
-  console.log("endLocation", endLocation);
 
   if (startLocation && endLocation) {
     const key = `emoji-${Date.now()}`;
@@ -103,20 +99,27 @@ const animateEmoji = (startId, endId, emoji) => {
       style: {
         top: `${startLocation.top}px`,
         left: `${startLocation.left}px`,
-      }
+      },
     });
-    emojiThrowStack.value.push({
-      i: emoji,
-      key: key,
-      style: {
-        top: `${endLocation.top}px`,
-        left: `${endLocation.left}px`,
-      }
-    });
+    setTimeout(() => {
+      emojiThrowStack.value = emojiThrowStack.value.map((e) => {
+        if (e.key === key) {
+          return {
+            ...e,
+            style: {
+              ...e.style,
+              transform: `translate(${endLocation.left - startLocation.left}px, ${endLocation.top - startLocation.top}px)`,
+            },
+          };
+        }
+        return e;
+      });
+    }, 0);
+
     animationKey.value++;
     setTimeout(() => {
       emojiThrowStack.value = emojiThrowStack.value.filter((e) => e.key !== key);
-    }, 3000);
+    }, 1000);
   }
 };
 
