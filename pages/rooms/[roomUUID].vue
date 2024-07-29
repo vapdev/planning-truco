@@ -36,7 +36,9 @@
         :selectedCard="selectedCard"
         :votar="votar"
       />
-      <Stats v-else />
+      <transition v-else name="slide-up">
+        <Stats />
+      </transition>
     </div>
 
     <div>

@@ -33,7 +33,7 @@
                     :key="card.value">
                     <div
                         class="w-10 h-16 flex items-center border-2 border-blue-500 text-blue-500 dark:border-0 dark:bg-blue-500 oswald-font font-bold rounded-md justify-center">
-                        <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
+                        <span class="text-3xl flex justify-center dark:text-white"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
                     <div class="text-font-semibold">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}
