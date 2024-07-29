@@ -3,7 +3,7 @@
     class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between"
   >
     <!-- HEADER -->
-    <HeaderSala class="h-1/8" ref="headerRef" @endGame="endGame" />
+    <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
 
     <div class="flex justify-around w-full h-3/4">
       <!-- MAIN CONTENT -->
@@ -30,15 +30,19 @@
     </div>
 
     <!-- FOOTER -->
-    <div class="w-full h-2/8 flex flex-col justify-end">
-      <Deck
-        v-if="!userStore.roomState.showCards"
-        :selectedCard="selectedCard"
-        :votar="votar"
-      />
-      <transition v-else name="slide-up">
-        <Stats />
-      </transition>
+    <div class="w-full h-2/5 flex flex-col justify-end overflow-hidden">
+      <Transition
+        enter-active-class="slide-up-enter-active"
+        enter-from-class="slide-up-enter-from"
+        enter-to-class="slide-up-enter-to"
+      >
+        <div v-if="!userStore.roomState.showCards" key="deck">
+          <Deck :selectedCard="selectedCard" :votar="votar" />
+        </div>
+        <div v-else key="stats">
+          <Stats />
+        </div>
+      </Transition>
     </div>
 
     <div>
@@ -70,13 +74,17 @@ const computedEmojiStack = computed(() => {
 });
 
 // Watcher para detectar mudanças no emojiStack
-watch(computedEmojiStack, (newStack, oldStack) => {
-  newStack.forEach(emoji => {
-    if (!oldStack.includes(emoji)) {
-      animateEmoji(emoji.originUserId, emoji.targetUserId, emoji.emoji);
-    }
-  });
-}, { deep: true });
+watch(
+  computedEmojiStack,
+  (newStack, oldStack) => {
+    newStack.forEach((emoji) => {
+      if (!oldStack.includes(emoji)) {
+        animateEmoji(emoji.originUserId, emoji.targetUserId, emoji.emoji);
+      }
+    });
+  },
+  { deep: true }
+);
 
 const emojiThrowStack = ref([]);
 
@@ -262,5 +270,16 @@ const toggleMostrarCartas = () => {
 <style>
 .wrapper {
   height: 100dvh;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: transform 0.6s ease;
+  overflow: hidden;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(100%);
 }
 </style>
