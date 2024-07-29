@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col  justify-end w-full">
-        <div class="flex justify-center ">Vote abaixo 👇</div>
+        <div class="flex justify-center font-semibold">Vote abaixo 👇</div>
         <div  class="md:justify-center text-blue-500 overflow-x-auto gap-4 items-center pb-4  pt-8 w-full flex">
             <div class="flex gap-4">
                 <div v-for="(card, index) in cards" :key="index" @click="votar(card.value)"
