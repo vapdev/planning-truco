@@ -1,12 +1,13 @@
 <template>
-    <div class="w-full items-center flex flex-col pb-2 md:pb-12">
-        <div class="w-fit flex flex-col gap-2 text-md justify-center bg-gray-200 rounded-xl p-2 px-4">
+    <div class="w-full items-center flex flex-col pb-2 md:pb-12"> 
+        <span class="mb-1 font-semibold">Resultados da rodada</span>
+        <div class="w-fit flex flex-col gap-1 text-md justify-center bg-gray-200 dark:bg-gray-500 rounded-xl p-2 px-4">
             <div class="text-md w-full flex gap-6">
                 <div class="flex flex-col gap-1 items-center justify-center font-normal">
                     <div class="text-lg">
                         Mais votos:
                     </div>
-                    <div class="text-3xl font-bold">
+                    <div class="text-2xl font-bold">
                         {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
                     </div>
                 </div>
@@ -14,7 +15,7 @@
                     <div class="text-lg">
                         Média:
                     </div>
-                    <div class="text-3xl font-bold">
+                    <div class="text-2xl font-bold">
                         {{ stats.average }}
                     </div>
                 </div>
@@ -22,7 +23,7 @@
                     <div class="text-lg">
                         Assertividade:
                     </div>
-                    <div class="text-3xl font-bold">
+                    <div class="text-2xl font-bold">
                         {{ stats.assertiveness }}%
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                 <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
                     :key="card.value">
                     <div
-                        class="w-10 h-16 flex items-center border-2 border-blue-500 text-blue-500 dark:text-white dark:border-0 dark:bg-blue-500  oswald-font font-bold rounded-md justify-center">
+                        class="w-10 h-16 flex items-center border-2 border-blue-500 text-blue-500 dark:border-0 dark:bg-blue-500 oswald-font font-bold rounded-md justify-center">
                         <span class="text-3xl flex justify-center"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
