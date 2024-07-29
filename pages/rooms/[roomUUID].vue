@@ -49,7 +49,7 @@
       <div
         v-for="emoji in emojiThrowStack"
         :key="emoji.key"
-        class="absolute select-none text-4xl transition-transform duration-1000 ease-in-out z-50"
+        class="absolute pointer-events-none select-none touch-manipulation text-4xl transition-transform duration-1000 ease-in-out z-50"
         :style="emoji.style"
       >
         {{ emoji.i }}

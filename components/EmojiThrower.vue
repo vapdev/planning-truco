@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative select-none flex z-10 transition-opacity duration-300"
+    class="relative touch-manipulation select-none flex z-10 gap-2 md:gap-1 transition-opacity duration-300"
     id="participants"
   >
     <div
@@ -53,7 +53,7 @@ onClickOutside(target, (event) => toggleEmojiPicker());
 
 const emojiPickerVisible = ref(false);
 const emoji = ref("");
-const emojis = ref(["👍" , "👎", "🤝", "💥", "💣", "😳", "🤔"])
+const emojis = ref(["👍", "👎", "🤝", "💥", "💣", "😳", "🤔"]);
 const toggleEmojiPicker = () => {
   emojiPickerVisible.value = !emojiPickerVisible.value;
   emit("emoji-picker-visible", emojiPickerVisible.value);
