@@ -47,7 +47,7 @@
           <a
             @click="startGame"
             nav
-            class="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-indigo-600 cursor-pointer transition-all transition duration-100 duration-300 border-indigo-600 border-2 rounded shadow-md fold-bold sm:w-full"
+            class="relative z-40 hover:bg-indigo-200 hover:scale-105 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-indigo-600 cursor-pointer transition-all transition duration-100 duration-300 border-indigo-600 border-2 rounded shadow-md fold-bold sm:w-full"
             >Criar novo jogo</a
           >
         </div>
@@ -91,7 +91,7 @@
           <a
             href="#_"
             @click="startGame"
-            class="relative self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold"
+            class="relative hover:scale-105 hover:bg-indigo-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold"
             >Criar novo jogo!</a
           >
           <div class="flex-col hidden mt-12 sm:flex lg:mt-24"></div>
