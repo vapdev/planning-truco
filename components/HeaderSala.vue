@@ -185,7 +185,7 @@
             name="material-symbols:close-small-rounded"
           ></Icon>
         </div>
-        <div class="mb-4 text-4xl dark:text-white">Planning {{ userStore.roomState.name }}</div>
+        <div class="mb-4 text-4xl dark:text-white">{{ userStore.roomState.name }}</div>
         <div class="text-md flex flex-col">
           <div>Seu nome:</div>
           <div class="flex w-full mt-1">

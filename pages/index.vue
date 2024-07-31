@@ -1,15 +1,15 @@
 <template>
-  <div class="overflow-x-hidden antialiased rubik-font">
+  <div class="overflow-x-hidden antialiased rubik-font bg-gray-800">
     <!-- Header Section -->
-    <header class="relative bg-indigo-100 w-full h-24">
+    <header class="relative bg-indigo-900 w-full text-white h-24">
       <div
-        class="container bg-indigo-100 flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
+        class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
       >
         <a
           href="/"
           class="relative flex items-center inline-block h-5 h-full font-black leading-none"
         >
-          <span id="home" class="ml-3 text-xl text-gray-800"
+          <span id="home" class="ml-3 text-xl text-white"
             >Free Planning Poker<span class="text-indigo-600">.</span></span
           >
         </a>
@@ -17,7 +17,7 @@
         <nav
           id="nav"
           :class="{ hidden: !isNavOpen }"
-          class="absolute top-0 left-0 z-[53] flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-indigo-100 md:mt-0 md:border-none md:py-0 md:flex md:relative"
+          class="absolute top-0 left-0 z-[53] flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm border-t border-gray-600 md:w-auto md:flex-row md:h-24 lg:text-base md:mt-0 md:border-none md:py-0 md:flex md:relative"
         >
           <a
             href="#"
@@ -30,7 +30,7 @@
             >Recursos</a
           >
           <div
-            class="flex flex-col block w-full font-medium border-t border-gray-200 md:hidden"
+            class="flex flex-col block w-full font-medium border-t border-gray-600 md:hidden"
           >
             <a
               @click="startGame"
@@ -42,12 +42,12 @@
         </nav>
 
         <div
-          class="flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between"
+          class="flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-600 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between"
         >
           <a
             @click="startGame"
             nav
-            class="relative z-40 hover:bg-indigo-200 hover:scale-105 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-indigo-600 cursor-pointer transition-all transition duration-100 duration-300 border-indigo-600 border-2 rounded shadow-md fold-bold sm:w-full"
+            class="relative z-40 hover:bg-indigo-700 hover:scale-105 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none cursor-pointer transition-all transition duration-100 duration-300 border-indigo-600 border-2 rounded shadow-md fold-bold sm:w-full"
             >Criar novo jogo</a
           >
         </div>
@@ -71,7 +71,7 @@
 
     <!-- BEGIN HERO SECTION -->
     <div
-      class="items-center justify-center w-full overflow-x-hidden w-full flex"
+      class="items-center justify-center bg-gray-800 w-full overflow-x-hidden w-full flex"
     >
       <div
         class="container flex flex-col items-center justify-between h-full max-w-6xl px-8 mx-auto xl:px-0"
@@ -80,18 +80,18 @@
           class="flex flex-col items-center w-full max-w-xl pt-10 md:pt-32 text-center"
         >
           <h1
-            class="mb-4 text-3xl font-black leading-tight text-gray-900 sm:text-6xl xl:mb-8"
+            class="mb-4 text-3xl font-black leading-tight text-gray-200 sm:text-6xl xl:mb-8"
           >
             Comece a planejar sua sprint
           </h1>
-          <p class="pr-0 mb-8 text-base text-gray-600 sm:text-lg xl:text-xl">
+          <p class="pr-0 mb-8 text-base text-gray-200 sm:text-lg xl:text-xl">
             O Free Planning Poker é uma ferramenta para auxiliar times ágeis a estimar o
             esforço de desenvolvimento de suas tarefas.
           </p>
           <a
             href="#_"
             @click="startGame"
-            class="relative hover:scale-105 hover:bg-indigo-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold"
+            class="relative hover:scale-105 hover:bg-indigo-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-indigo-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
             >Criar novo jogo!</a
           >
           <div class="flex-col hidden mt-12 sm:flex lg:mt-24"></div>
@@ -103,7 +103,7 @@
     <!-- BEGIN FEATURES SECTION -->
     <div
       id="features"
-      class="relative w-full px-8 pt-10 border-gray-200"
+      class="relative w-full px-8 pt-10 border-gray-600 bg-gray-800"
     >
       <div
         class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto"
@@ -112,7 +112,7 @@
           recursos da plataforma
         </h2>
         <h3
-          class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-center text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl"
+          class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-center text-gray-200 sm:mt-0 sm:px-0 sm:text-6xl"
         >
           Porque utilizar o Free Planning Poker
         </h3>
@@ -122,7 +122,7 @@
               class="relative flex flex-col items-center justify-center w-full h-full p-10 md:p-20 mr-5 rounded-lg"
             >
               <svg
-                class="absolute w-full h-full text-gray-100 fill-current"
+                class="absolute w-full h-full text-gray-100 fill-gray-600"
                 viewBox="0 0 377 340"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -216,10 +216,10 @@
                   </g>
                 </g>
               </svg>
-              <h4 class="relative md:mt-6 text-lg font-bold text-[#111827]">
+              <h4 class="relative md:mt-2 text-lg text-gray-200 font-bold text-[#111827]">
                 Multiplataforma
               </h4>
-              <p class="relative mt-2 text-base text-center text-gray-600">
+              <p class="relative mt-2 text-base text-center text-gray-200">
                 Use o site em qualquer dispositivo, seja ele um smartphone, tablet ou
                 computador.
               </p>
@@ -231,7 +231,7 @@
               class="relative flex flex-col items-center justify-center w-full h-full p-10 md:p-20 mr-5 rounded-lg"
             >
               <svg
-                class="absolute w-full h-full text-gray-100 fill-current"
+                class="absolute w-full h-full text-gray-100 fill-gray-600"
                 viewBox="0 0 358 372"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -324,8 +324,8 @@
                   </g>
                 </g>
               </svg>
-              <h4 class="relative mt-6 text-lg font-bold text-[#111827]">Fácil</h4>
-              <p class="relative mt-2 text-base text-center text-gray-600">
+              <h4 class="relative mt-2 text-lg font-bold text-gray-200">Fácil</h4>
+              <p class="relative mt-2 text-base text-center text-gray-200">
                 Possui uma interface simples e intuitiva, para que você possa jogar sem
                 complicações.
               </p>
@@ -337,7 +337,7 @@
               class="relative flex flex-col items-center justify-center w-full h-full p-10 md:p-20 mr-5 rounded-lg"
             >
               <svg
-                class="absolute w-full h-full text-gray-100 fill-current"
+                class="absolute w-full h-full text-gray-100 fill-gray-600"
                 viewBox="0 0 378 410"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -430,8 +430,8 @@
                   </g>
                 </g>
               </svg>
-              <h4 class="relative mt-6 text-lg font-bold text-[#111827]">Gratuito</h4>
-              <p class="relative mt-2 text-base text-center text-gray-600">
+              <h4 class="relative mt-2 text-lg font-bold text-gray-200">Gratuito</h4>
+              <p class="relative mt-2 text-base text-center text-gray-200">
                 Para utilizar o Free Planning Poker, você não precisa pagar nada. É
                 totalmente gratuito.
               </p>
@@ -441,65 +441,8 @@
       </div>
     </div>
 
-    <footer class="px-4 pt-12 md:mt-24 pb-8 text-white bg-white border-t border-gray-200">
-      <div
-        class="container flex flex-col justify-between max-w-6xl px-4 mx-auto overflow-hidden lg:flex-row"
-      >
-        <div
-          class="w-full pl-12 mr-4 text-left lg:w-1/4 sm:text-center sm:pl-0 lg:text-left"
-        >
-          <a
-            href="/"
-            class="flex justify-start block text-left sm:text-center lg:text-left sm:justify-center lg:justify-start"
-          >
-            <span class="flex items-start sm:items-center">
-              <svg
-                class="w-auto h-6 text-gray-800 fill-current"
-                viewBox="0 0 194 116"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g fill-rule="evenodd">
-                  <path
-                    d="M96.869 0L30 116h104l-9.88-17.134H59.64l47.109-81.736zM0 116h19.831L77 17.135 67.088 0z"
-                  ></path>
-                  <path
-                    d="M87 68.732l9.926 17.143 29.893-51.59L174.15 116H194L126.817 0z"
-                  ></path>
-                </g>
-              </svg>
-            </span>
-          </a>
-          <p class="mt-6 mr-4 text-base text-gray-500">
-            Criando soluções para facilitar a vida dos profissionais de TI.
-          </p>
-        </div>
-        <div class="block w-full pl-10 mt-6 text-sm lg:w-3/4 sm:flex lg:mt-0">
-          <ul
-            class="flex flex-col w-full p-0 font-medium text-left text-gray-700 list-none"
-          >
-            <li
-              class="inline-block px-3 py-2 mt-5 font-bold tracking-wide text-gray-800 uppercase md:mt-0"
-            >
-              Produto
-            </li>
-            <li>
-              <a
-                href="#home"
-                class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-gray-600"
-                >Início</a
-              >
-            </li>
-            <li>
-              <a
-                href="#features"
-                class="inline-block px-3 py-2 text-gray-500 no-underline hover:text-gray-600"
-                >Recursos</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="pt-4 pt-6 mt-10 text-center text-gray-500 border-t border-gray-100">
+    <footer class="px-4 md:mt-16 text-white border-gray-600 bg-gray-800">
+      <div class="py-10 text-center text-gray-200 border-t border-gray-600">
         © 2024 Codestation. Todos os direitos reservados.
       </div>
     </footer>
