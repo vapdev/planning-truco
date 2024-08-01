@@ -96,7 +96,7 @@
         class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto"
       >
         <h3
-          class="px-5 mt-2 text-3xl font-black leading-tight text-center text-gray-200 sm:mt-0 sm:px-0 sm:text-6xl"
+          class="px-5 mt-2 text-4xl font-black leading-tight text-center text-gray-200 sm:mt-0 sm:px-0"
         >
           Como utilizar o Free Planning Poker
         </h3>
