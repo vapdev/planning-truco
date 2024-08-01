@@ -1,7 +1,6 @@
 <template>
   <div class="overflow-x-hidden antialiased rubik-font bg-gray-800">
-    <!-- Header Section -->
-    <header class="relative bg-indigo-900 w-full text-white h-24">
+    <header class="relative bg-primary-800 w-full text-white h-24">
       <div
         class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
       >
@@ -10,56 +9,12 @@
           class="relative flex items-center inline-block h-5 h-full font-black leading-none"
         >
           <span id="home" class="ml-3 text-xl text-white"
-            >Free Planning Poker<span class="text-indigo-600">.</span></span
+            >Free Planning Poker<span class="text-primary-600">.</span></span
           >
         </a>
-
-        <nav
-          id="nav"
-          :class="{ hidden: !isNavOpen }"
-          class="absolute top-0 left-0 z-[53] flex flex-col items-center justify-between w-full h-64 pt-5 mt-24 text-sm border-t border-gray-600 md:w-auto md:flex-row md:h-24 lg:text-base md:mt-0 md:border-none md:py-0 md:flex md:relative"
-        >
-          <div
-            class="flex flex-col block w-full font-medium border-t border-gray-600 md:hidden"
-          >
-            <a
-              @click="startGame"
-              class="relative inline-block w-full px-5 py-3 text-sm leading-none text-center text-white bg-indigo-600 cursor-pointer fold-bold"
-            >
-              Criar novo jogo
-            </a>
-          </div>
-        </nav>
-
-        <div
-          class="flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-600 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between"
-        >
-          <a
-            @click="startGame"
-            nav
-            class="relative z-40 hover:bg-indigo-700 hover:scale-105 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none cursor-pointer transition-all transition duration-100 duration-300 border-indigo-600 border-2 rounded shadow-md fold-bold sm:w-full"
-            >Criar novo jogo</a
-          >
-        </div>
-
-        <div
-          @click="toggleNav"
-          :class="{ close: isNavOpen }"
-          id="nav-mobile-btn"
-          class="absolute top-0 right-0 z-50 block w-6 mt-8 mr-10 cursor-pointer select-none md:hidden sm:mt-10"
-        >
-          <span
-            class="block w-full h-1 mt-2 duration-200 transform bg-gray-800 rounded-full sm:mt-1"
-          ></span>
-          <span
-            class="block w-full h-1 mt-1 duration-200 transform bg-gray-800 rounded-full"
-          ></span>
-        </div>
       </div>
     </header>
-    <!-- End Header Section-->
 
-    <!-- BEGIN HERO SECTION -->
     <div
       class="items-center justify-center bg-gray-800 w-full overflow-x-hidden w-full flex"
     >
@@ -81,7 +36,7 @@
           <a
             href="#_"
             @click="startGame"
-            class="relative hover:scale-105 hover:bg-indigo-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-indigo-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
+            class="relative hover:scale-105 hover:bg-primary-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-primary-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
             >Criar novo jogo!</a
           >
           <div class="flex-col hidden mt-12 sm:flex lg:mt-24"></div>
@@ -190,7 +145,7 @@
 
     <footer class="px-4 md:mt-16 text-white border-gray-600 bg-gray-800">
       <div class="py-10 text-center text-gray-200 border-t border-gray-600">
-        © 2024 <span class="text-indigo-600">Codestation</span>. Todos os direitos
+        © 2024 <span class="text-primary-600">Codestation</span>. Todos os direitos
         reservados.
       </div>
     </footer>
@@ -198,7 +153,7 @@
     <!-- a little JS for the mobile nav button -->
     <UModal
       class="z-[52]"
-      :ui="{ overlay: { background: 'bg-blue-200/40' } }"
+      :ui="{ overlay: { background: 'bg-primary-200/40' } }"
       v-model="modalCriar"
     >
       <div
@@ -217,7 +172,7 @@
           <div>Nome da sala:</div>
           <div class="flex w-full gap-4">
             <UInput
-              color="blue"
+              color="primary"
               v-model="roomName"
               size="lg"
               class="w-full"
@@ -227,7 +182,7 @@
         </div>
         <button
           @click="userStore.startGame(roomName)"
-          class="bg-[#4F46E5] mt-6 w-full md:hover:bg-blue-400 text-white font-bold py-2 px-4 rounded"
+          class="bg-[#4F46E5] mt-6 w-full md:hover:bg-primary-400 text-white font-bold py-2 px-4 rounded"
         >
           Iniciar
         </button>

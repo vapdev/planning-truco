@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col min-h-screen rubik-font">
-    <header class="relative bg-indigo-900 w-full text-white h-24">
+  <div class="dark flex flex-col min-h-screen rubik-font">
+    <header class="relative bg-primary-700 w-full text-white h-24">
       <div
         class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
       >
@@ -9,7 +9,7 @@
           class="relative flex items-center inline-block h-5 h-full font-black leading-none"
         >
           <span id="home" class="ml-3 text-xl text-white"
-            >Free Planning Poker<span class="text-indigo-600">.</span></span
+            >Free Planning Poker<span class="text-primary-600">.</span></span
           >
         </a>
       </div>
@@ -24,7 +24,7 @@
                 v-model="roomName"
                 size="lg"
                 variant="outline"
-                color="indigo"
+                color="primary"
                 class="w-full"
                 inputClass="border-1"
                 placeholder="Nome da sala"
@@ -36,7 +36,7 @@
                 v-model="baralho"
                 :options="votingSystems"
                 size="lg"
-                color="indigo"
+                color="primary"
                 class="w-full"
               ></USelectMenu>
             </div>
@@ -58,7 +58,7 @@
                   <UToggle
                     @click="toggleVirarAutomatico"
                     v-model="virarAutomatico"
-                    color="indigo"
+                    color="primary"
                     class="dark:border-2 dark:border-gray-600" 
                   />
                 </div>
@@ -74,7 +74,7 @@
                   <UToggle
                     @click="toggleTodosPodemVotar"
                     v-model="todosPodemVotar"
-                    color="indigo"
+                    color="primary"
                     class="dark:border-2 dark:border-gray-600" 
                   />
                 </div>
@@ -87,14 +87,14 @@
                   </div>
                 </div>
                 <div class="pt-5">
-                  <UToggle class="dark:border-2 dark:border-gray-600" @click="toggleEmojis" v-model="emojis" color="indigo" />
+                  <UToggle class="dark:border-2 dark:border-gray-600" @click="toggleEmojis" v-model="emojis" color="primary" />
                 </div>
               </div>
             </div>
           </div>
           <div class="flex text-center mt-8">
             <UButton
-              color="indigo"
+              color="primary"
               variant="solid"
               size="lg"
               class="w-full text-xl flex justify-center"

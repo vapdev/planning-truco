@@ -30,7 +30,7 @@
     </div>
 
     <!-- FOOTER -->
-    <div class="w-full h-2/5 flex flex-col justify-end overflow-hidden">
+    <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
       <Transition
         enter-active-class="slide-up-enter-active"
         enter-from-class="slide-up-enter-from"
@@ -280,6 +280,7 @@ const toggleMostrarCartas = () => {
 
 .slide-up-enter-from,
 .slide-up-leave-to {
+  overflow: hidden;
   transform: translateY(100%);
 }
 </style>

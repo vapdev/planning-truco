@@ -20,7 +20,7 @@
             </button>
         </div>
         <div>
-            <button @click="novaRodada" class="w-40 text-white font-bold py-2 px-4 rounded bg-blue-500">
+            <button @click="novaRodada" class="w-40 text-white font-bold py-2 px-4 rounded bg-primary-500">
                 <span>Nova rodada</span>
             </button>
         </div>

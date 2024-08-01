@@ -1,5 +1,5 @@
 <template>
-  <div class="dark w-full h-[100dvh]">
+  <div class="w-full h-[100dvh]">
     <NuxtPage />
     <ToastGlobal />
   </div>
