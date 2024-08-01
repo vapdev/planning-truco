@@ -241,18 +241,15 @@ const userStore = useUserStore();
 const modalCriar = ref(false);
 
 const isNavOpen = ref(false);
+const router = useRouter();
 
 const toggleNav = () => {
   isNavOpen.value = !isNavOpen.value;
 };
-onMounted(() => {
-  userStore.userUUID = localStorage.getItem("userUUID");
-  userStore.name = localStorage.getItem("userName");
-});
 
 const roomName = ref("");
 const startGame = () => {
-  modalCriar.value = true;
+  router.push("/new");
 };
 </script>
 

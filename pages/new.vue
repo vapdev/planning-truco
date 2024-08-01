@@ -1,21 +1,21 @@
 <template>
-  <div class="flex flex-col min-h-screen">
-    <header class="bg-indigo-100 w-full h-24 rubik-font">
+  <div class="flex flex-col min-h-screen rubik-font">
+    <header class="relative bg-indigo-900 w-full text-white h-24">
       <div
-        class="bg-indigo-100 flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
+        class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
       >
         <a
           href="/"
           class="relative flex items-center inline-block h-5 h-full font-black leading-none"
         >
-          <span id="home" class="ml-3 text-xl text-gray-800"
+          <span id="home" class="ml-3 text-xl text-white"
             >Free Planning Poker<span class="text-indigo-600">.</span></span
           >
         </a>
       </div>
     </header>
-    <div class="flex-grow flex items-center justify-center bg-gray-100">
-      <div class="bg-white font-semibold p-8 pt-4 rounded shadow-md w-full max-w-md">
+    <div class="flex-grow dark:text-white flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+      <div class="bg-white dark:bg-gray-700 font-semibold p-8 pt-4 rounded shadow-md w-full max-w-md">
         <form>
           <div class="text-md flex flex-col">
             <div class="mt-4 mb-1">Nome da sala:</div>
@@ -42,7 +42,7 @@
             </div>
             <div
               @click="mostrarOpcoesAvancadas = !mostrarOpcoesAvancadas"
-              class="cursor-pointer mt-4 p-2 text-sm bg-gray-200 w-fit rounded-xl text-center"
+              class="cursor-pointer mt-4 p-2 text-sm bg-gray-200 dark:bg-gray-600 w-fit rounded-xl text-center"
             >
               {{ mostrarOpcoesAvancadas ? "Esconder" : "Mostrar" }} opções avançadas
             </div>
@@ -58,7 +58,8 @@
                   <UToggle
                     @click="toggleVirarAutomatico"
                     v-model="virarAutomatico"
-                    color="blue"
+                    color="indigo"
+                    class="dark:border-2 dark:border-gray-600" 
                   />
                 </div>
               </div>
@@ -73,7 +74,8 @@
                   <UToggle
                     @click="toggleTodosPodemVotar"
                     v-model="todosPodemVotar"
-                    color="blue"
+                    color="indigo"
+                    class="dark:border-2 dark:border-gray-600" 
                   />
                 </div>
               </div>
@@ -85,20 +87,20 @@
                   </div>
                 </div>
                 <div class="pt-5">
-                  <UToggle @click="toggleEmojis" v-model="emojis" color="blue" />
+                  <UToggle class="dark:border-2 dark:border-gray-600" @click="toggleEmojis" v-model="emojis" color="indigo" />
                 </div>
               </div>
             </div>
           </div>
           <div class="flex text-center mt-8">
             <UButton
-              type="submit"
               color="indigo"
               variant="solid"
               size="lg"
               class="w-full text-xl flex justify-center"
+              @click="userStore.startGame(roomName)"
             >
-              Criar sala
+              <span class="dark:text-white font-bold text-2xl">Criar sala</span>
             </UButton>
           </div>
         </form>
@@ -114,6 +116,7 @@ const baralho = ref("Fibonacci");
 const mostrarOpcoesAvancadas = ref(false);
 const todosPodemVotar = ref(false);
 const emojis = ref(false);
+const userStore = useUserStore();
 
 const votingSystems = ["Fibonacci", "T-Shirt Sizes", "Standard", "Criar baralho customizado"];
 

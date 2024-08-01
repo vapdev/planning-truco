@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[100dvh]">
+  <div class="dark w-full h-[100dvh]">
     <NuxtPage />
     <ToastGlobal />
   </div>
@@ -28,11 +28,12 @@ html {
 
 <script setup>
 import ToastGlobal from './composables/toast';
-
+const userStore = useUserStore();
 const $md = ref(null)
 onMounted(() => {
   $md.value = window.matchMedia('(min-width: 768px)').matches
+  userStore.userUUID = localStorage.getItem("userUUID");
+  userStore.name = localStorage.getItem("userName");
 });
 
-const userStore = useUserStore();
 </script>
