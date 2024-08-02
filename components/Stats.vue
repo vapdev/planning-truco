@@ -32,8 +32,8 @@
                 <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
                     :key="card.value">
                     <div
-                        class="w-10 h-16 flex items-center border-2 border-primary-500 text-primary-500 dark:border-0 dark:bg-primary-500 oswald-font font-bold rounded-md justify-center">
-                        <span class="text-3xl flex justify-center dark:text-white"><span>{{ card.value == -1 ? '☕' : card.value
+                        class="w-8 h-12 flex items-center text-primary-500 bg-primary-500 oswald-font font-bold rounded-md justify-center">
+                        <span class="text-2xl flex justify-center text-white"><span>{{ card.value == -1 ? '☕' : card.value
                                 }}</span></span>
                     </div>
                     <div class="text-font-semibold">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}
@@ -46,16 +46,16 @@
 
 <script setup>
 const cards = ref([
-    { value: -1, label: '☕', selectedClass: '-translate-y-6', defaultClass: 'border text-black' },
-    { value: 0, label: '0', selectedClass: '-translate-y-6', defaultClass: 'bg-green-50 text-black' },
-    { value: 1, label: '1', selectedClass: '-translate-y-6', defaultClass: 'bg-green-100 text-black' },
-    { value: 2, label: '2', selectedClass: '-translate-y-6', defaultClass: 'bg-green-200 text-black' },
-    { value: 3, label: '3', selectedClass: '-translate-y-6', defaultClass: ' bg-green-300 text-black' },
-    { value: 5, label: '5', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-100 text-black' },
-    { value: 8, label: '8', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-200 text-black' },
-    { value: 13, label: '13', selectedClass: '-translate-y-6', defaultClass: 'bg-yellow-300 text-black' },
-    { value: 21, label: '21', selectedClass: '-translate-y-6', defaultClass: 'bg-red-200 text-black' },
-    { value: 34, label: '34', selectedClass: '-translate-y-6', defaultClass: 'bg-red-300 text-black' }
+    { value: -1, label: '☕', selectedClass: '-translate-y-6', defaultClass: 'border' },
+    { value: 0, label: '0', selectedClass: '-translate-y-6', defaultClass: 'bg-green-50' },
+    { value: 1, label: '1', selectedClass: '-translate-y-6', defaultClass: 'bg-green-100' },
+    { value: 2, label: '2', selectedClass: '-translate-y-6', defaultClass: 'bg-green-200' },
+    { value: 3, label: '3', selectedClass: '-translate-y-6', defaultClass: ' bg-green-300' },
+    { value: 5, label: '5', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-100' },
+    { value: 8, label: '8', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-200' },
+    { value: 13, label: '13', selectedClass: '-translate-y-6', defaultClass: 'bg-yellow-300' },
+    { value: 21, label: '21', selectedClass: '-translate-y-6', defaultClass: 'bg-red-200' },
+    { value: 34, label: '34', selectedClass: '-translate-y-6', defaultClass: 'bg-red-300' }
 ])
 const userStore = useUserStore();
 

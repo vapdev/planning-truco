@@ -21,7 +21,7 @@ export const useUserStore = defineStore('user', () => {
     const APPLICATION_JSON = 'application/json';
     const isDarkMode = ref(false);
     let emojiCounter = 0;
-    
+
     watch(userUUID, (newVal) => {
         if (newVal !== null && newVal !== '') {
             localStorage.setItem('userUUID', newVal);
@@ -77,7 +77,6 @@ export const useUserStore = defineStore('user', () => {
                     name: name.value,
                 }));
             });
-
             ws.value.addEventListener('message', (event) => {
                 const data = JSON.parse(event.data);
                 roomState.value = data;
@@ -91,11 +90,12 @@ export const useUserStore = defineStore('user', () => {
                             key: `${Date.now()}-${emojiCounter++}`,
                         };
                         emojiStack.value.push(newEmoji);
+                        const duration = newEmoji.originUserId == newEmoji.targetUserId ? 5000 : 2000;
                         setTimeout(() => {
                             emojiStack.value = emojiStack.value.filter(
                                 (e) => e.key !== newEmoji.key
                             );
-                        }, 2000);
+                        }, duration);
                     });
                 }
             });

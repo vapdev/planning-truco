@@ -493,6 +493,11 @@ onMounted(() => {
   if (savedColor && tailwindColors[savedColor]) {
     changeColor(savedColor);
   }
+  const darkMode = localStorage.getItem("nuxt-color-mode");
+  if (darkMode === "dark") {
+    document.body.classList.add("dark");
+  }
+
   if (localStorage.getItem("userName")) {
     userStore.name = localStorage.getItem("userName");
   }
@@ -543,7 +548,9 @@ watch(modalConfig, (newVal) => {
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
-  userStore.isDarkMode = !userStore.isDarkMode;
+  const isDark = document.body.classList.contains("dark");
+  localStorage.setItem("nuxt-color-mode", isDark ? "dark" : "light");
+  userStore.isDarkMode = isDark;
 }
 
 function abrirModalCompartilhar() {

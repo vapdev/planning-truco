@@ -4,10 +4,10 @@
         <div  class="md:justify-center text-primary-500 overflow-x-auto gap-4 items-center pb-4  pt-8 w-full flex">
             <div class="flex gap-4">
                 <div v-for="(card, index) in cards" :key="index" @click="votar(card.value)"
-                    :class="card.defaultClass, selectedCard === card.value ? card.selectedClass : ' md:hover:-translate-y-1 md:hover:bg-primary-100 dark:md:hover:bg-primary-600 dark:bg-primary-500' "
+                    :class="card.defaultClass, selectedCard === card.value ? card.selectedClass : ' md:hover:-translate-y-1 md:hover:bg-primary-100 md:hover:bg-primary-600 bg-primary-500' "
                     :style="userStore.isDarkMode ? 'box-shadow: 0 10px 30px -10px #222222;' : 'box-shadow: 0 10px 30px -10px #;'"
-                    class="text-3xl border-2 border-primary-500 dark:border-0 oswald-font w-12 h-20 flex items-center rounded-lg justify-center cursor-pointer">
-                    <div class="flex justify-center w-24 dark:text-white">{{ card.label }}</div>
+                    class="text-3xl oswald-font w-12 h-20 flex items-center rounded-lg justify-center cursor-pointer">
+                    <div class="flex justify-center w-24 text-white">{{ card.label }}</div>
                 </div>
             </div>
         </div>

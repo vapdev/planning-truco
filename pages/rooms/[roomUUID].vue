@@ -122,9 +122,11 @@ const animateEmoji = (startId, endId, emoji) => {
       });
     });
 
+    const duration = startId === endId ? 5000 : 1000;
+
     setTimeout(() => {
       emojiThrowStack.value = emojiThrowStack.value.filter((e) => e.key !== key);
-    }, 1000);
+    }, duration);
   }
 };
 

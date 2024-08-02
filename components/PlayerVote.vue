@@ -1,11 +1,11 @@
 <template>
   <div class="relative flex flex-col w-10 gap-2 rounded-md group">
     <div
-      class="relative text-primary-500 dark:text-white dark:bg-primary-200 flex items-center rounded-md w-10 h-16 justify-center"
+      class="relative text-white flex items-center rounded-md w-10 h-16 justify-center"
       :class="[
         flipped
-          ? 'flip border-primary-500 dark:border-0 dark:bg-primary-500 border-2 bg-none'
-          : 'bg-gray-200 dark:bg-gray-600',
+          ? 'flip bg-primary-500'
+          : 'bg-gray-300 dark:bg-gray-600',
       ]"
     >
       <div
@@ -24,7 +24,7 @@
         v-if="!player.voted || !flipped"
       ></div>
       <div
-        class="absolute inset-0 flex items-center justify-center translate-y-[-95%] z-40 group-hover:flex group-hover:opacity-200 transition-opacity duration-300"
+        class="absolute inset-0 flex items-center justify-center translate-y-[-83%] z-40 group-hover:flex group-hover:opacity-200 transition-opacity duration-300"
         :class="{ hidden: !emojiPickerVisible }"
       >
         <EmojiThrower
