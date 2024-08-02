@@ -476,12 +476,11 @@ const color = ref("blue");
 
 const changeColor = (color) => {
   const colorHex = tailwindColors[color];
-  
   if (colorHex) {
     Object.keys(colorHex).forEach((shade) => {
       document.documentElement.style.setProperty(`--color-primary-${shade}`, colorHex[shade]);
     });
-    console.log('Selected color:', colorHex);
+    localStorage.setItem("themeColor", color); 
   } else {
     console.error('Color not found:', color);
   }
@@ -490,6 +489,10 @@ const changeColor = (color) => {
 const isDarkMode = computed(() => userStore.isDarkMode);
 
 onMounted(() => {
+  const savedColor = localStorage.getItem("themeColor");
+  if (savedColor && tailwindColors[savedColor]) {
+    changeColor(savedColor);
+  }
   if (localStorage.getItem("userName")) {
     userStore.name = localStorage.getItem("userName");
   }
