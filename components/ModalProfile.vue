@@ -1,5 +1,5 @@
 <template>
-  <UModal :ui="{ overlay: { background: 'bg-primary-200/40' } }" :model-value="modelValue">
+  <UModal @close="close" :ui="{ overlay: { background: 'bg-primary-200/40' } }" :model-value="modelValue">
     <div
       class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-6 flex flex-col gap-6"
     >

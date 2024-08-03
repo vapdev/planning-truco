@@ -79,7 +79,7 @@ const userStore = useUserStore();
 const modalShare = ref(false);
 const modalConfig = ref(false);
 const modalProfile = ref(false);
-const emit = defineEmits(["endGame"]);
+const emit = defineEmits(["endGame", "toggleDarkMode"]);
 const urlToCopy = ref();
 const $md = ref(null);
 import { onClickOutside } from "@vueuse/core";
@@ -99,10 +99,6 @@ const showColorPickerModal = ref(false);
 const isDarkMode = computed(() => userStore.isDarkMode);
 
 onMounted(() => {
-  const darkMode = localStorage.getItem("nuxt-color-mode");
-  if (darkMode === "dark") {
-    document.body.classList.add("dark");
-  }
   urlToCopy.value = window.location.href;
   $md.value = window.matchMedia("(min-width: 768px)").matches;
 });
@@ -113,9 +109,8 @@ const toggleColorPickerModal = () => {
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
-  const isDark = document.body.classList.contains("dark");
-  localStorage.setItem("nuxt-color-mode", isDark ? "dark" : "light");
-  userStore.isDarkMode = isDark;
+  userStore.toggleDarkMode();
+  emit("toggleDarkMode");
 }
 
 const copyToClipboard = () => {

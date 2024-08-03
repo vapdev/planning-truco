@@ -1,5 +1,6 @@
 import { showToast } from '../composables/toast';
-import { defineStore } from 'pinia';
+import { defineStore, skipHydrate } from 'pinia';
+import { useStorage } from '@vueuse/core'
 
 export const useUserStore = defineStore('user', () => {
     const player = ref(null);
@@ -19,7 +20,8 @@ export const useUserStore = defineStore('user', () => {
     const ws = ref(null);
     const POST = 'POST';
     const APPLICATION_JSON = 'application/json';
-    const isDarkMode = ref(false);
+    const nuxtColorMode = useStorage('nuxt-color-mode', 'dark');
+    const isDarkMode = computed(() => nuxtColorMode.value === 'dark');
     let emojiCounter = 0;
 
     watch(userUUID, (newVal) => {
@@ -209,6 +211,10 @@ export const useUserStore = defineStore('user', () => {
         }));
     }
 
+    const toggleDarkMode = () => {
+        nuxtColorMode.value = nuxtColorMode.value === 'dark' ? 'light' : 'dark';
+    }
+
     return {
         player,
         ws,
@@ -231,5 +237,7 @@ export const useUserStore = defineStore('user', () => {
         jogadorLogado,
         emojiStack,
         addEmoji,
+        nuxtColorMode,
+        toggleDarkMode,
     };
 });

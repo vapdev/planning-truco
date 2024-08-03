@@ -17,14 +17,6 @@ import { tailwindColorShades, colorsCaroussel } from '~/utils/colors';
 const props = defineProps({
     showColorPickerModal: Boolean,
 });
-
-onMounted(() => {
-const savedColor = localStorage.getItem("themeColor");
-  if (savedColor && tailwindColorShades[savedColor]) {
-    changeColor(savedColor);
-  }
-});
-
 const color = ref("blue");
 
 const changeColor = (color) => {

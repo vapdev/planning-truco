@@ -15,6 +15,7 @@ export default defineNuxtConfig({
       wsBase: process.env.NUXT_WS_BASE || 'ws://localhost:8080'
     }
   },
+  ssr: false,
   googleFonts: {
     families: {
       Oswald: true,
