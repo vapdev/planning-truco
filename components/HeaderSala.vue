@@ -117,7 +117,7 @@
     <ModalConfig v-model="modalConfig" />
     <UModal :ui="{ overlay: { background: 'bg-primary-200/40' } }" v-model="modalName">
       <div
-        class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
+        class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-6 flex flex-col gap-6"
       >
         <div class="absolute cursor-pointer flex top-2 right-2">
           <Icon
@@ -127,7 +127,7 @@
             name="material-symbols:close-small-rounded"
           ></Icon>
         </div>
-        <div class="mb-4 text-4xl dark:text-white">{{ userStore.roomState.name }}</div>
+        <div class="mb-2 text-3xl dark:text-white">Perfil</div>
         <div class="text-md flex flex-col">
           <div>Seu nome:</div>
           <div class="flex w-full mt-1">
@@ -135,7 +135,7 @@
               v-model="userName"
               size="lg"
               variant="outline"
-              color="primary"
+              color="gray"
               class="w-full"
               :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
               placeholder="Seu nome"
