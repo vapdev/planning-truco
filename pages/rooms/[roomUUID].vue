@@ -6,7 +6,7 @@
     <!-- HEADER -->
     <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
 
-    <div class="flex justify-around w-full h-3/4">
+    <div class="flex justify-around w-full h-2/5">
       <!-- MAIN CONTENT -->
       <div class="w-1/3 flex flex-col items-center">
         <!-- <span>Histórico de votações:</span> -->
