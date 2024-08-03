@@ -12,7 +12,7 @@
       <div class="flex w-1/3 justify-center items-center">
         <span class="invisible md:visible font-bold">{{ userStore.roomState.name }}</span>
       </div>
-      <div class="flex w-1/3 justify-end gap-3 sm:gap-5 items-center">
+      <div class="flex w-1/3 justify-end sm:gap-5 items-center">
         <div class="hover:bg-gray-500 rounded-xl p-1 relative">
           <Icon
             @click="toggleColorPickerModal"
