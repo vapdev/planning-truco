@@ -135,7 +135,7 @@ onMounted(async () => {
   userStore.name = localStorage.getItem("userName");
   await userStore.loadGame(route.params.roomUUID);
   if (!userStore.name || userStore.name == "Guest") {
-    headerRef.value.modalName = true;
+    headerRef.value.modalProfile = true;
   }
   $md.value = window.matchMedia("(min-width: 768px)").matches;
 });
