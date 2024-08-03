@@ -136,6 +136,11 @@ const close = () => {
   emit("update:modelValue", false);
 };
 
+onMounted(() => {
+  roomName.value = userStore.roomState.name;
+  userName.value = userStore.name;
+});
+
 const toggleVirarAutomatico = () => {
   fetch(`${apiUrl}/autoShowCards`, {
     method: "POST",
