@@ -66,7 +66,7 @@
                   />
                 </div>
               </div>
-              <div class="flex items-center gap-4 justify-between w-full">
+              <!-- <div class="flex items-center gap-4 justify-between w-full">
                 <div class="flex flex-col mt-4">
                   <div class="font-semibold">Todos podem revelar os votar</div>
                   <div class="font-normal text-sm">
@@ -82,8 +82,8 @@
                     class="dark:border-2 dark:border-gray-600"
                   />
                 </div>
-              </div>
-              <div class="flex items-center gap-4 justify-between w-full">
+              </div> -->
+              <!-- <div class="flex items-center gap-4 justify-between w-full">
                 <div class="flex flex-col mt-4">
                   <div class="font-semibold">Habilitar recursor divertidos</div>
                   <div class="font-normal text-sm">
@@ -97,7 +97,7 @@
                     v-model="emojis"
                   />
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="flex text-center mt-8">

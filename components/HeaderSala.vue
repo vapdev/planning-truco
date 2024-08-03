@@ -114,83 +114,7 @@
         </div>
       </div>
     </UModal>
-    <!-- modal pra trocar nome -->
-    <UModal :ui="{ overlay: { background: 'bg-primary-200/40' } }" v-model="modalConfig">
-      <div
-        class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
-      >
-        <div class="absolute cursor-pointer flex top-2 right-2">
-          <Icon
-            @click="modalConfig = false"
-            class="md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out"
-            size="38"
-            name="material-symbols:close-small-rounded"
-          ></Icon>
-        </div>
-        <div class="mb-4 text-4xl dark:text-white">Configurações</div>
-        <div class="text-md flex flex-col">
-          <div class="mt-4">Nome da sala:</div>
-          <div class="flex w-full mt-1 mb-4">
-            <UInput
-              v-model="roomName"
-              size="lg"
-              variant="outline"
-              color="primary"
-              class="w-full"
-              :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
-              placeholder="Nome da sala"
-            />
-          </div>
-          <div class="mt-4">Revelar cartas automaticamente</div>
-          <div class="flex w-full mt-1 mb-4">
-            <UToggle
-              @click="toggleVirarAutomatico"
-              v-model="userStore.roomState.autoShowCards"
-              color="primary"
-            />
-          </div>
-          <div class="mt-4">Lista de usuários</div>
-          <UTable
-            :columns="[
-              {
-                key: 'name',
-                label: 'Nome de usuário',
-              },
-              {
-                key: 'admin',
-                label: 'Mediador',
-              },
-              //{
-              //  key: 'actions',
-              //  label: 'Ações',
-              //},
-            ]"
-            :rows="userStore.roomState.players"
-          >
-            <template #name-data="{ row }">
-              <div>{{ row.name }}</div>
-            </template>
-            <template #admin-data="{ row }">
-              <div>{{ row.admin ? "Sim" : "Não" }}</div>
-            </template>
-            <!-- <template #actions-data="{ row }">
-              <div
-                @click="userStore.kickPlayer(row.userUUID)"
-                class="hover:bg-red-500 hover:cursor-pointer rounded-xl p-1"
-              >
-                <Icon size="30" name="material-symbols:delete-outline" color="red" />
-              </div>
-            </template> -->
-          </UTable>
-        </div>
-        <button
-          @click="handleSaveConfig"
-          class="bg-primary-500 w-full md:hover:bg-primary-400 font-bold py-2 px-4 rounded"
-        >
-          Salvar
-        </button>
-      </div>
-    </UModal>
+    <ModalConfig v-model="modalConfig" />
     <UModal :ui="{ overlay: { background: 'bg-primary-200/40' } }" v-model="modalName">
       <div
         class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
@@ -238,11 +162,8 @@ const modalName = ref(false);
 const emit = defineEmits(["endGame"]);
 const urlToCopy = ref();
 const userName = ref("");
-const roomName = ref("");
 const $md = ref(null);
 
-const config = useRuntimeConfig();
-const apiUrl = config.public.apiBase;
 
 const tailwindColors = {
   red: {
@@ -449,7 +370,6 @@ const colorsCaroussel = [
   "green",
   "emerald",
   "cyan",
-  "sky",
   "blue",
   "indigo",
   "violet",
@@ -498,41 +418,12 @@ const toggleColorPickerModal = () => {
   showColorPickerModal.value = !showColorPickerModal.value;
 };
 
-const toggleVirarAutomatico = () => {
-  fetch(`${apiUrl}/autoShowCards`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      roomUUID: userStore.roomUUID,
-    }),
-  });
-};
-
-function handleSaveConfig() {
-  if (roomName.value !== userStore.roomState.name) {
-    userStore.changeRoomName(roomName.value);
-  }
-  if (userName.value !== userStore.name) {
-    userStore.changeName(userName.value);
-  }
-  modalConfig.value = false;
-}
-
 function handleSaveName() {
   if (userName.value !== userStore.name) {
     userStore.changeName(userName.value);
   }
   modalName.value = false;
 }
-
-watch(modalConfig, (newVal) => {
-  if (newVal) {
-    userName.value = userStore.name;
-    roomName.value = userStore.roomState.name;
-  }
-});
 
 function toggleDarkMode() {
   document.body.classList.toggle("dark");
@@ -554,9 +445,7 @@ const copyToClipboard = () => {
   navigator.clipboard.writeText(window.location.href);
 };
 defineExpose({
-  modalConfig,
-  modalShare,
-  modalName,
+  modalName
 });
 </script>
 <style scoped>
