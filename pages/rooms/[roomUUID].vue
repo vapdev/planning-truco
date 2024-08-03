@@ -1,65 +1,65 @@
 <template>
-    <div
-      :key="key"
-      class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between"
-    >
-      <!-- HEADER -->
-      <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
-
-      <div class="flex justify-around w-full h-3/4">
-        <!-- MAIN CONTENT -->
-        <div class="w-1/3 flex flex-col items-center">
-          <!-- <span>Histórico de votações:</span> -->
-        </div>
-        <div class="flex w-1/3 flex-col justify-center items-center">
-          <!-- PLAYERS DE CIMA -->
-          <TopContainer :players="playersTop" />
-          <div class="flex gap-4 justify-center items-center">
-            <!-- PLAYERS DA ESQUERDA -->
-            <LeftContainer :players="playersLeft" />
-            <!-- MESA -->
-            <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
-            <!-- PLAYERS DA DIREITA -->
-            <RightContainer :players="playersRight" />
-          </div>
-          <!-- PLAYERS DE BAIXO -->
-          <BottomContainer :players="playersBottom" />
-        </div>
-        <div class="w-1/3 flex justify-center">
-          <!-- teste2 -->
-        </div>
-      </div>
-
-      <!-- FOOTER -->
-      <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
-        <Transition
-    enter-active-class="slide-up-enter-active"
-    enter-from-class="slide-up-enter-from"
-    enter-to-class="slide-up-enter-to"
-    leave-active-class="slide-up-leave-active"
-    leave-from-class="slide-up-leave-from"
-    leave-to-class="slide-up-leave-to"
+  <div
+    :key="key"
+    class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between"
   >
-          <div v-if="!userStore.roomState.showCards" key="deck">
-            <Deck :selectedCard="selectedCard" :votar="votar" />
-          </div>
-          <div v-else key="stats">
-            <Stats />
-          </div>
-        </Transition>
-      </div>
+    <!-- HEADER -->
+    <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
 
-      <div>
-        <div
-          v-for="emoji in emojiThrowStack"
-          :key="emoji.key"
-          class="absolute pointer-events-none select-none touch-manipulation text-4xl transition-transform duration-1000 ease-in-out z-50"
-          :style="emoji.style"
-        >
-          {{ emoji.i }}
+    <div class="flex justify-around w-full h-3/4">
+      <!-- MAIN CONTENT -->
+      <div class="w-1/3 flex flex-col items-center">
+        <!-- <span>Histórico de votações:</span> -->
+      </div>
+      <div class="flex w-1/3 flex-col justify-center items-center">
+        <!-- PLAYERS DE CIMA -->
+        <TopContainer :players="playersTop" />
+        <div class="flex gap-4 justify-center items-center">
+          <!-- PLAYERS DA ESQUERDA -->
+          <LeftContainer :players="playersLeft" />
+          <!-- MESA -->
+          <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
+          <!-- PLAYERS DA DIREITA -->
+          <RightContainer :players="playersRight" />
         </div>
+        <!-- PLAYERS DE BAIXO -->
+        <BottomContainer :players="playersBottom" />
+      </div>
+      <div class="w-1/3 flex justify-center">
+        <!-- teste2 -->
       </div>
     </div>
+
+    <!-- FOOTER -->
+    <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
+      <Transition
+        enter-active-class="slide-up-enter-active"
+        enter-from-class="slide-up-enter-from"
+        enter-to-class="slide-up-enter-to"
+        leave-active-class="slide-up-leave-active"
+        leave-from-class="slide-up-leave-from"
+        leave-to-class="slide-up-leave-to"
+      >
+        <div v-if="!userStore.roomState.showCards" key="deck">
+          <Deck :selectedCard="selectedCard" :votar="votar" />
+        </div>
+        <div v-else key="stats">
+          <Stats />
+        </div>
+      </Transition>
+    </div>
+
+    <div>
+      <div
+        v-for="emoji in emojiThrowStack"
+        :key="emoji.key"
+        class="absolute pointer-events-none select-none touch-manipulation text-4xl transition-transform duration-1000 ease-in-out z-50"
+        :style="emoji.style"
+      >
+        {{ emoji.i }}
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -70,7 +70,6 @@ const route = useRoute();
 const headerRef = ref(null);
 const userStore = useUserStore();
 const $md = ref(null);
-import { tailwindColorShades } from '~/utils/colors';
 
 const animationKey = ref(0);
 
@@ -143,29 +142,7 @@ onMounted(async () => {
     headerRef.value.modalProfile = true;
   }
   $md.value = window.matchMedia("(min-width: 768px)").matches;
-  const savedColor = localStorage.getItem("themeColor");
-  if (savedColor && tailwindColorShades[savedColor]) {
-    changeColor(savedColor);
-  }
-  const darkMode = localStorage.getItem("nuxt-color-mode");
-  if (darkMode === "dark") {
-    document.body.classList.add("dark");
-  }
 });
-
-const changeColor = (color) => {
-  const colorHex = tailwindColorShades[color];
-  if (colorHex) {
-    Object.keys(colorHex).forEach((shade) => {
-      document.documentElement.style.setProperty(
-        `--color-primary-${shade}`,
-        colorHex[shade]
-      );
-    });
-  } else {
-    console.error("Color not found:", color);
-  }
-};
 
 const playersBottom = computed(() => {
   return userStore.players.filter((_, index) => {
