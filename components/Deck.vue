@@ -23,15 +23,15 @@ const props = defineProps({
 const userStore = useUserStore();
 
 const cards = ref([
-    { value: -1, label: '☕', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 0, label: '0', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 1, label: '1', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 2, label: '2', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 3, label: '3', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 5, label: '5', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 8, label: '8', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 13, label: '13', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 21, label: '21', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' },
-    { value: 34, label: '34', selectedClass: '-translate-y-4 bg-primary-500 dark:bg-primary-700 text-white', defaultClass: '' }
+    { value: -1, label: '☕', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 0, label: '0', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 1, label: '1', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 2, label: '2', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 3, label: '3', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 5, label: '5', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 8, label: '8', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 13, label: '13', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 21, label: '21', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' },
+    { value: 34, label: '34', selectedClass: '-translate-y-4 bg-primary-500 bg-primary-700 text-white', defaultClass: '' }
 ])
 </script>

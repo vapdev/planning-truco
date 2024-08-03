@@ -33,11 +33,10 @@
             O Free Planning Poker é uma ferramenta totalmente gratuita para auxiliar times
             ágeis a estimar o esforço de desenvolvimento de suas tarefas.
           </p>
-          <a
-            href="#_"
+          <div
             @click="startGame"
-            class="relative hover:scale-105 hover:bg-primary-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-primary-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
-            >Criar novo jogo!</a
+            class=" cursor-pointer hover:scale-105 hover:bg-primary-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-primary-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
+            >Criar novo jogo!</div
           >
           <div class="flex-col hidden mt-12 sm:flex lg:mt-24"></div>
         </div>

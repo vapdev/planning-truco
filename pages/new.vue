@@ -1,6 +1,6 @@
 <template>
-  <div class="dark flex flex-col min-h-screen rubik-font">
-    <header class="relative bg-primary-700 w-full text-white h-24">
+  <div class="flex flex-col min-h-screen rubik-font">
+    <header class="relative bg-primary-800 w-full text-white h-24">
       <div
         class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
       >
@@ -14,30 +14,32 @@
         </a>
       </div>
     </header>
-    <div class="flex-grow dark:text-white flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-      <div class="bg-white dark:bg-gray-700 font-semibold p-8 pt-4 rounded shadow-md w-full max-w-md">
+    <div
+      class="flex-grow dark:text-white flex items-center justify-center bg-gray-100 dark:bg-gray-800"
+    >
+      <div class="bg-white dark:bg-gray-700 p-8 pt-4 rounded shadow-md w-full max-w-md">
         <form>
           <div class="text-md flex flex-col">
-            <div class="mt-4 mb-1">Nome da sala:</div>
+            <div class="mt-4 mb-1 font-semibold">Nome da sala:</div>
             <div class="flex w-full mb-4">
               <UInput
                 v-model="roomName"
                 size="lg"
                 variant="outline"
-                color="primary"
+                color="gray"
                 class="w-full"
-                inputClass="border-1"
+                inputClass="font-light"
                 placeholder="Nome da sala"
               />
             </div>
-            <div class="mb-1">Baralho:</div>
+            <div class="mb-1 font-semibold">Baralho:</div>
             <div class="flex w-full mb-4">
               <USelectMenu
                 v-model="baralho"
                 :options="votingSystems"
                 size="lg"
-                color="primary"
-                class="w-full"
+                color="gray"
+                class="w-full font-light"
               ></USelectMenu>
             </div>
             <div
@@ -47,11 +49,12 @@
               {{ mostrarOpcoesAvancadas ? "Esconder" : "Mostrar" }} opções avançadas
             </div>
             <div v-show="mostrarOpcoesAvancadas">
-              <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-4 justify-between w-full">
                 <div class="flex flex-col mt-4">
-                  <div>Revelar cartas automaticamente</div>
+                  <div class="font-semibold">Revelar cartas automaticamente</div>
                   <div class="font-normal text-sm">
-                    dawdawdasdgfa adsfuiasdf adugfasugdyfg
+                    As cartas serão reveladas automaticamente após todos os jogadores
+                    votarem
                   </div>
                 </div>
                 <div class="pt-5">
@@ -59,15 +62,16 @@
                     @click="toggleVirarAutomatico"
                     v-model="virarAutomatico"
                     color="primary"
-                    class="dark:border-2 dark:border-gray-600" 
+                    class="dark:border-2 dark:border-gray-600"
                   />
                 </div>
               </div>
-              <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-4 justify-between w-full">
                 <div class="flex flex-col mt-4">
-                  <div>Todos podem revelar os votar</div>
+                  <div class="font-semibold">Todos podem revelar os votar</div>
                   <div class="font-normal text-sm">
-                    dawdawdasdgfa adsfuiasdf adugfasugdyfg
+                    Define se todos jogadores podem revelar os votos ou apenas o
+                    facilitador
                   </div>
                 </div>
                 <div class="pt-5">
@@ -75,19 +79,23 @@
                     @click="toggleTodosPodemVotar"
                     v-model="todosPodemVotar"
                     color="primary"
-                    class="dark:border-2 dark:border-gray-600" 
+                    class="dark:border-2 dark:border-gray-600"
                   />
                 </div>
               </div>
-              <div class="flex items-center justify-between w-full">
+              <div class="flex items-center gap-4 justify-between w-full">
                 <div class="flex flex-col mt-4">
-                  <div>Habilitar emojis</div>
+                  <div class="font-semibold">Habilitar recursor divertidos</div>
                   <div class="font-normal text-sm">
-                    dawdawdasdgfa adsfuiasdf adugfasugdyfg
+                    Habilita emojis e outros recursos divertidos
                   </div>
                 </div>
                 <div class="pt-5">
-                  <UToggle class="dark:border-2 dark:border-gray-600" @click="toggleEmojis" v-model="emojis" color="primary" />
+                  <UToggle
+                    class="dark:border-2 dark:border-gray-600"
+                    @click="toggleEmojis"
+                    v-model="emojis"
+                  />
                 </div>
               </div>
             </div>
@@ -118,7 +126,12 @@ const todosPodemVotar = ref(false);
 const emojis = ref(false);
 const userStore = useUserStore();
 
-const votingSystems = ["Fibonacci", "T-Shirt Sizes", "Standard", "Criar baralho customizado"];
+const votingSystems = [
+  "Fibonacci",
+  "T-Shirt Sizes",
+  "Standard",
+  "Criar baralho customizado",
+];
 
 const toggleVirarAutomatico = () => {
   virarAutomatico.value = !virarAutomatico.value;

@@ -129,18 +129,6 @@
         </div>
         <div class="mb-4 text-4xl dark:text-white">Configurações</div>
         <div class="text-md flex flex-col">
-          <div>Seu nome:</div>
-          <div class="flex w-full mt-1">
-            <UInput
-              v-model="userName"
-              size="lg"
-              variant="outline"
-              color="primary"
-              class="w-full"
-              :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
-              placeholder="Seu nome"
-            />
-          </div>
           <div class="mt-4">Nome da sala:</div>
           <div class="flex w-full mt-1 mb-4">
             <UInput
