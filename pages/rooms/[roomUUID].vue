@@ -33,10 +33,13 @@
       <!-- FOOTER -->
       <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
         <Transition
-          enter-active-class="slide-up-enter-active"
-          enter-from-class="slide-up-enter-from"
-          enter-to-class="slide-up-enter-to"
-        >
+    enter-active-class="slide-up-enter-active"
+    enter-from-class="slide-up-enter-from"
+    enter-to-class="slide-up-enter-to"
+    leave-active-class="slide-up-leave-active"
+    leave-from-class="slide-up-leave-from"
+    leave-to-class="slide-up-leave-to"
+  >
           <div v-if="!userStore.roomState.showCards" key="deck">
             <Deck :selectedCard="selectedCard" :votar="votar" />
           </div>
@@ -299,15 +302,23 @@ const toggleMostrarCartas = () => {
   height: 100dvh;
 }
 
-.slide-up-enter-active,
-.slide-up-leave-active {
+.slide-up-enter-active {
   transition: transform 0.6s ease;
-  overflow: hidden;
 }
 
-.slide-up-enter-from,
-.slide-up-leave-to {
-  overflow: hidden;
+.slide-up-enter-from {
   transform: translateY(100%);
+}
+
+.slide-up-enter-to {
+  transform: translateY(0%);
+}
+
+.slide-up-leave-active,
+.slide-up-leave-from,
+.slide-up-leave-to {
+  transition: none;
+  transform: translateY(0%);
+  display: none;
 }
 </style>
