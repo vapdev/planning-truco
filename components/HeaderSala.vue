@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-lg flex p-4 items-start justify-between">
+    <div class="text-lg flex p-4  items-start justify-between">
       <div class="w-1/3 justify-start items-center">
         <div class="flex gap-2 items-end">
           <UButton @click="abrirModalCompartilhar" class="p-2" color="primary">
@@ -12,15 +12,7 @@
       <div class="flex w-1/3 justify-center items-center">
         <span class="invisible md:visible font-bold">{{ userStore.roomState.name }}</span>
       </div>
-      <div class="flex w-1/3 justify-end gap-5 items-center">
-        <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
-          <Icon
-            @click="modalName = true"
-            size="30"
-            name="material-symbols:person-outline"
-            :color="isDarkMode ? 'white' : '#3f4146'"
-          />
-        </div>
+      <div class="flex w-1/3 justify-end gap-3 sm:gap-5 items-center">
         <div class="hover:bg-gray-500 rounded-xl p-1 relative">
           <Icon
             @click="toggleColorPickerModal"
@@ -52,6 +44,14 @@
                 ? 'material-symbols:light-mode-outline'
                 : 'material-symbols:dark-mode-outline'
             "
+            :color="isDarkMode ? 'white' : '#3f4146'"
+          />
+        </div>
+        <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
+          <Icon
+            @click="modalName = true"
+            size="30"
+            name="material-symbols:person-outline"
             :color="isDarkMode ? 'white' : '#3f4146'"
           />
         </div>
