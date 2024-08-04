@@ -64,7 +64,7 @@
     </div>
 
     <div>
-      <span class="md:invisible font-bold w-full flex justify-center">{{
+      <span class="md:invisible font-bold w-full -mt-6 flex justify-center">{{
         userStore.roomState.name
       }}</span>
     </div>
