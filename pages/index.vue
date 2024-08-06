@@ -22,20 +22,20 @@
         class="container flex flex-col items-center justify-between h-full max-w-6xl px-8 mx-auto xl:px-0"
       >
         <div
-          class="flex flex-col items-center w-full max-w-xl pt-10 md:pt-32 text-center"
+          class="flex flex-col items-center w-full max-w-xl pt-10 md:pt-20 text-center"
         >
           <h1
-            class="mb-4 text-3xl font-black leading-tight text-gray-200 sm:text-6xl xl:mb-8"
+            class="mb-4 text-5xl font-black leading-tight text-gray-200 sm:text-6xl xl:mb-14"
           >
             Comece a planejar sua sprint
           </h1>
-          <p class="pr-0 mb-8 text-base text-gray-200 sm:text-lg xl:text-xl">
+          <p class="pr-0 mb-8 md:mb-20 text-gray-200 text-2xl font-light md:text-3xl">
             O Free Planning Poker é uma ferramenta totalmente gratuita para auxiliar times
             ágeis a estimar o esforço de desenvolvimento de suas tarefas.
           </p>
           <div
             @click="startGame"
-            class=" cursor-pointer hover:scale-105 hover:bg-primary-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-3xl font-bold text-white bg-primary-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
+            class=" cursor-pointer hover:scale-105 hover:bg-primary-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-4xl font-bold text-white bg-primary-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
             >Criar novo jogo!</div
           >
           <div class="flex-col hidden mt-12 sm:flex lg:mt-24"></div>
@@ -74,10 +74,10 @@
               </svg>
               <!-- FEATURE Icon 1 -->
               <span class="relative text-[4rem] text-white">1</span>
-              <h4 class="relative text-lg text-gray-200 font-bold text-[#111827]">
+              <h4 class="relative text-xl text-gray-200 font-bold text-[#111827]">
                 Crie um novo jogo
               </h4>
-              <p class="relative mt-2 text-base text-center text-gray-200">
+              <p class="relative mt-2 text-lg text-base text-center text-gray-200">
                 Inicie um novo jogo de Planning Poker para sua equipe.
               </p>
             </div>
@@ -102,10 +102,10 @@
               </svg>
               <!-- FEATURE Icon 2 -->
               <span class="relative text-[4rem] text-white">2</span>
-              <h4 class="relative mt-2 text-lg font-bold text-gray-200">
+              <h4 class="relative mt-2 text-xl font-bold text-gray-200">
                 Compartilhe o link
               </h4>
-              <p class="relative mt-2 text-base text-center text-gray-200">
+              <p class="relative mt-2 text-base text-lg text-center text-gray-200">
                 Envie o link do jogo para os membros do seu time para que eles possam
                 participar.
               </p>
@@ -131,8 +131,8 @@
               </svg>
               <!-- FEATURE Icon 3 -->
               <span class="relative text-[4rem] text-white">3</span>
-              <h4 class="relative mt-2 text-lg font-bold text-gray-200">Planeje</h4>
-              <p class="relative mt-2 text-base text-center text-gray-200">
+              <h4 class="relative mt-2 text-xl font-bold text-gray-200">Planeje</h4>
+              <p class="relative mt-2 text-base text-lg text-center text-gray-200">
                 Utilize o Planning Poker para organizar e estimar as tarefas da sua
                 sprint.
               </p>
