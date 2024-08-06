@@ -59,28 +59,25 @@ export const useUserStore = defineStore('user', () => {
 
     function setWebSocket(tipo) {
         if (process.client) {
+            if (ws.value) {
+                ws.value.close(); // Fecha qualquer conexão WebSocket existente
+            }
+
             ws.value = new WebSocket(wsUrl + '/ws/' + roomUUID.value + '/' + userUUID.value);
 
-            ws.value.onopen = () => { };
-
-            ws.value.onerror = (error) => { };
-
-            ws.value.onmessage = (event) => { };
-
-            ws.value.onclose = () => {
-                setTimeout(() => {
-                    setWebSocket(); // Re-establish the WebSocket connection
-                }, 1000); // 1-second delay before reconnecting
-            };
-
-            ws.value.addEventListener('open', (event) => {
+            ws.value.onopen = (event) => {
                 ws.value.send(JSON.stringify({
                     type: tipo,
                     userUUID: userUUID.value,
                     name: name.value,
                 }));
-            });
-            ws.value.addEventListener('message', (event) => {
+            };
+
+            ws.value.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            ws.value.onmessage = (event) => {
                 const data = JSON.parse(event.data);
                 roomState.value = data;
                 players.value = data.players;
@@ -93,7 +90,7 @@ export const useUserStore = defineStore('user', () => {
                             key: `${Date.now()}-${emojiCounter++}`,
                         };
                         emojiStack.value.push(newEmoji);
-                        const duration = newEmoji.originUserId == newEmoji.targetUserId ? 5000 : 2000;
+                        const duration = newEmoji.originUserId === newEmoji.targetUserId ? 5000 : 2000;
                         setTimeout(() => {
                             emojiStack.value = emojiStack.value.filter(
                                 (e) => e.key !== newEmoji.key
@@ -101,7 +98,12 @@ export const useUserStore = defineStore('user', () => {
                         }, duration);
                     });
                 }
-            });
+            };
+            ws.value.onclose = () => {
+                setTimeout(() => {
+                    setWebSocket(tipo); 
+                }, 1000); 
+            };
         }
     }
 

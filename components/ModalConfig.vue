@@ -24,9 +24,8 @@
             size="lg"
             variant="outline"
             color="gray"
-            class="w-full"
+            class="w-full font-normal border-2 border-gray-300 rounded-lg"
             :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
-            inputClass="font-normal"
             placeholder="Nome da sala"
           />
         </div>
