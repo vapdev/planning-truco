@@ -23,16 +23,17 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useUserStore } from "@/stores/user";
-import { fibonacciCards } from "@/utils/fibonacciCards";
+import { fibonacci } from "@/utils/decks";
 
 const props = defineProps({
   selectedCard: Number,
   votar: Function,
+  deckType: String,
 });
 
 const userStore = useUserStore();
 
-const cards = ref(fibonacciCards);
+const cards = ref(fibonacci);
 
 const getCardClasses = (card) => {
   const isSelected = props.selectedCard === card.value;

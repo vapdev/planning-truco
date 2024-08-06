@@ -36,11 +36,21 @@
             <div class="flex w-full mb-4">
               <USelectMenu
                 v-model="baralho"
-                :options="votingSystems"
+                :options="deckOptions"
                 size="lg"
                 color="gray"
                 class="w-full font-light"
               ></USelectMenu>
+            </div>
+            <div class="mb-1 font-semibold">Preview:</div>
+            <div class="flex w-full mb-4 gap-2">
+              <div v-for="card in selectedDeck" :key="card.value">
+                <div
+                  class="text-md bg-primary-500 hover:bg-primary-600 oswald-font w-6 h-10 flex items-center rounded-md justify-center cursor-pointer"
+                >
+                  <div class="flex justify-center w-24 text-white">{{ card.label }}</div>
+                </div>
+              </div>
             </div>
             <div
               @click="mostrarOpcoesAvancadas = !mostrarOpcoesAvancadas"
@@ -118,20 +128,25 @@
 </template>
 
 <script setup>
+import * as decks from "@/utils/decks";
 const virarAutomatico = ref(false);
 const roomName = ref("");
-const baralho = ref("Fibonacci");
+const baralho = ref("fibonacci");
 const mostrarOpcoesAvancadas = ref(false);
 const todosPodemVotar = ref(false);
 const emojis = ref(false);
 const userStore = useUserStore();
 
-const votingSystems = [
-  "Fibonacci",
-  "T-Shirt Sizes",
-  "Standard",
-  "Criar baralho customizado",
-];
+const selectedDeck = ref(decks.fibonacci);
+
+const deckOptions = Object.keys(decks).filter(key => key !== 'deckLabels').map(key => ({
+  value: key,
+  label: decks.deckLabels[key] || key,
+}));
+
+watch(baralho, (newValue) => {
+  selectedDeck.value = decks[newValue.value] || decks.fibonacci;
+});
 
 const toggleVirarAutomatico = () => {
   virarAutomatico.value = !virarAutomatico.value;
