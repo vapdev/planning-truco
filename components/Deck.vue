@@ -23,6 +23,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useUserStore } from "@/stores/user";
+import { fibonacciCards } from "@/utils/fibonacciCards";
 
 const props = defineProps({
   selectedCard: Number,
@@ -31,18 +32,7 @@ const props = defineProps({
 
 const userStore = useUserStore();
 
-const cards = ref([
-  { value: -1, label: "☕" },
-  { value: 0, label: "0" },
-  { value: 1, label: "1" },
-  { value: 2, label: "2" },
-  { value: 3, label: "3" },
-  { value: 5, label: "5" },
-  { value: 8, label: "8" },
-  { value: 13, label: "13" },
-  { value: 21, label: "21" },
-  { value: 34, label: "34" },
-]);
+const cards = ref(fibonacciCards);
 
 const getCardClasses = (card) => {
   const isSelected = props.selectedCard === card.value;
