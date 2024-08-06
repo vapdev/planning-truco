@@ -39,8 +39,7 @@
           </div>
           <div class="pt-5">
             <UToggle
-              @click="toggleVirarAutomatico"
-              v-model="userStore.roomState.autoShowCards"
+              v-model="autoShowCards"
               color="primary"
               class="dark:border-2 dark:border-gray-600"
             />
@@ -131,6 +130,7 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue", "close"]);
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
+const autoShowCards = ref(false);
 
 const close = () => {
   emit("update:modelValue", false);
@@ -139,9 +139,10 @@ const close = () => {
 onMounted(() => {
   roomName.value = userStore.roomState.name;
   userName.value = userStore.name;
+  autoShowCards.value = userStore.roomState.autoShowCards;
 });
 
-const toggleVirarAutomatico = () => {
+const changeVirarAutomatico = () => {
   fetch(`${apiUrl}/autoShowCards`, {
     method: "POST",
     headers: {
@@ -149,6 +150,7 @@ const toggleVirarAutomatico = () => {
     },
     body: JSON.stringify({
       roomUUID: userStore.roomUUID,
+      autoShowCards: autoShowCards.value,
     }),
   });
 };
@@ -159,6 +161,9 @@ function handleSaveConfig() {
   }
   if (userName.value !== userStore.name) {
     userStore.changeName(userName.value);
+  }
+  if (autoShowCards.value !== userStore.roomState.autoShowCards) {
+    changeVirarAutomatico();
   }
   close();
 }
