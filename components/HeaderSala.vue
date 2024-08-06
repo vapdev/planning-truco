@@ -68,8 +68,8 @@
         userStore.roomState.name
       }}</span>
     </div>
-    <ModalConfig v-model="modalConfig" />
-    <ModalProfile v-model="modalProfile" />
+    <ModalConfig v-if="modalConfig" v-model="modalConfig" />
+    <ModalProfile v-if="modalProfile" v-model="modalProfile" />
   </div>
 </template>
 

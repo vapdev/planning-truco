@@ -6,7 +6,7 @@
     >
       <div class="flex gap-4">
         <div
-          v-for="(card, index) in cards"
+          v-for="(card, index) in deck"
           :key="index"
           @click="votar(card.value)"
           :class="getCardClasses(card)"
@@ -28,13 +28,10 @@ import { fibonacci } from "@/utils/decks";
 const props = defineProps({
   selectedCard: Number,
   votar: Function,
-  deckType: String,
+  deck: Array,
 });
 
 const userStore = useUserStore();
-
-const cards = ref(fibonacci);
-
 const getCardClasses = (card) => {
   const isSelected = props.selectedCard === card.value;
   return [

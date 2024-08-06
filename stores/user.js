@@ -23,6 +23,7 @@ export const useUserStore = defineStore('user', () => {
     const nuxtColorMode = useStorage('nuxt-color-mode', 'dark');
     const isDarkMode = computed(() => nuxtColorMode.value === 'dark');
     let emojiCounter = 0;
+    const deck = ref([]);
 
     watch(userUUID, (newVal) => {
         if (newVal !== null && newVal !== '') {
@@ -104,10 +105,10 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    const startGame = async (roomName) => {
+    const startGame = async (options) => {
         const data = await fetchJson(`${apiUrl}/createRoom`, {
             userUUID: userUUID.value,
-            roomName: roomName,
+            ...options
         });
         roomUUID.value = data.roomUUID;
         userUUID.value = data.userUUID;
@@ -123,6 +124,7 @@ export const useUserStore = defineStore('user', () => {
 
             userUUID.value = data.userUUID;
             roomUUID.value = data.roomUUID;
+            deck.value = data.deck;
             setWebSocket('newPlayer');
         }
     };
@@ -239,5 +241,6 @@ export const useUserStore = defineStore('user', () => {
         addEmoji,
         nuxtColorMode,
         toggleDarkMode,
+        deck,
     };
 });

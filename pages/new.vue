@@ -42,6 +42,18 @@
                 class="w-full font-light"
               ></USelectMenu>
             </div>
+            <div v-if="baralho.value === 'custom'" class="mb-1 font-semibold">Deck personalizado:</div>
+            <div v-if="baralho.value === 'custom'" class="flex w-full mb-4">
+              <UInput
+                v-model="customDeckInput"
+                size="lg"
+                variant="outline"
+                color="gray"
+                class="w-full"
+                inputClass="font-light"
+                placeholder="Ex: 1, 2, 3, 5, 8"
+              />
+            </div>
             <div class="mb-1 font-semibold">Preview:</div>
             <div class="flex w-full mb-4 gap-2">
               <div v-for="card in selectedDeck" :key="card.value">
@@ -116,7 +128,7 @@
               variant="solid"
               size="lg"
               class="w-full text-xl flex justify-center"
-              @click="userStore.startGame(roomName)"
+              @click="userStore.startGame(gameOptions)"
             >
               <span class="dark:text-white font-bold text-2xl">Criar sala</span>
             </UButton>
@@ -131,7 +143,11 @@
 import * as decks from "@/utils/decks";
 const virarAutomatico = ref(false);
 const roomName = ref("");
-const baralho = ref("fibonacci");
+const baralho = ref({
+  value: 'fibonacci',
+  label: 'Fibonacci',
+});
+const customDeckInput = ref("");
 const mostrarOpcoesAvancadas = ref(false);
 const todosPodemVotar = ref(false);
 const emojis = ref(false);
@@ -139,15 +155,43 @@ const userStore = useUserStore();
 
 const selectedDeck = ref(decks.fibonacci);
 
-const deckOptions = Object.keys(decks).filter(key => key !== 'deckLabels').map(key => ({
-  value: key,
-  label: decks.deckLabels[key] || key,
+const gameOptions = computed(() => ({
+  roomName: roomName.value,
+  deck: selectedDeck.value,
+  autoShowCards: virarAutomatico.value,
+  // todosPodemVotar: todosPodemVotar.value,
+  // emojis: emojis.value,
 }));
 
+const deckOptions = [
+  ...Object.keys(decks).filter(key => key !== 'deckLabels').map(key => ({
+    value: key,
+    label: decks.deckLabels[key] || key,
+  })),
+  { value: 'custom', label: 'Deck personalizado' }
+];
+
+// Watcher para atualizar o baralho selecionado
 watch(baralho, (newValue) => {
-  selectedDeck.value = decks[newValue.value] || decks.fibonacci;
+  if (newValue === 'custom') {
+    selectedDeck.value = customDeckInput.value
+      .split(',')
+      .map((label, index) => ({ value: index, label: label.trim() }));
+  } else {
+    selectedDeck.value = decks[newValue.value] || decks.fibonacci;
+  }
 });
 
+// Watcher para atualizar o deck personalizado
+watch(customDeckInput, (newValue) => {
+  if (baralho.value.value === 'custom') {
+    selectedDeck.value = newValue
+      .split(',')
+      .map((label) => ({ value: label.trim(), label: label.trim() }));
+  }
+});
+
+// Funções de toggle
 const toggleVirarAutomatico = () => {
   virarAutomatico.value = !virarAutomatico.value;
 };

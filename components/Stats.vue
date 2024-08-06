@@ -1,117 +1,120 @@
 <template>
-    <div class="w-full items-center flex flex-col pb-2 md:pb-12"> 
-        <span class="mb-1 font-semibold">Resultados da rodada</span>
-        <div class="w-fit flex flex-col gap-1 text-md justify-center bg-gray-200 dark:bg-gray-500 rounded-xl p-2 px-4">
-            <div class="text-md w-full flex gap-6">
-                <div class="flex flex-col gap-1 items-center justify-center font-normal">
-                    <div class="text-lg">
-                        Mais votos:
-                    </div>
-                    <div class="text-2xl font-bold">
-                        {{ stats.mostVoted.map(card => card == -1 ? '☕' : card).join(', ') }}
-                    </div>
-                </div>
-                <div class="flex flex-col gap-1 items-center justify-center font-normal">
-                    <div class="text-lg">
-                        Média:
-                    </div>
-                    <div class="text-2xl font-bold">
-                        {{ stats.average }}
-                    </div>
-                </div>
-                <div class="flex flex-col gap-1 items-center justify-center font-normal">
-                    <div class="text-lg">
-                        Assertividade:
-                    </div>
-                    <div class="text-2xl font-bold">
-                        {{ stats.assertiveness }}%
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center gap-3 pt-2">
-                <div v-for="card in nonRepeatedCardsWithVotes" class="flex flex-col gap-1 items-center"
-                    :key="card.value">
-                    <div
-                        class="w-8 h-12 flex items-center text-primary-500 bg-primary-500 oswald-font font-bold rounded-md justify-center">
-                        <span class="text-2xl flex justify-center text-white"><span>{{ card.value == -1 ? '☕' : card.value
-                                }}</span></span>
-                    </div>
-                    <div class="text-font-semibold">{{ card.vote }} {{ card.vote === 1 ? 'voto' : 'votos' }}
-                    </div>
-                </div>
-            </div>
+  <div class="w-full items-center flex flex-col pb-2 md:pb-12">
+    <span class="mb-1 font-semibold">Resultados da rodada</span>
+    <div
+      class="w-fit flex flex-col gap-1 text-md justify-center bg-gray-200 dark:bg-gray-500 rounded-xl p-2 px-4"
+    >
+      <div class="text-md w-full flex gap-6">
+        <div class="flex flex-col gap-1 items-center justify-center font-normal">
+          <div class="text-lg">Mais votos:</div>
+          <div class="text-2xl font-bold">
+            {{ stats.mostVoted.join(", ") }}
+          </div>
         </div>
+        <!-- Média removida -->
+        <div class="flex flex-col gap-1 items-center justify-center font-normal">
+          <div class="text-lg">Consenso:</div>
+          <div class="text-2xl font-bold">{{ stats.assertiveness }}%</div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-3 pt-2">
+        <div
+          v-for="card in nonRepeatedCardsWithVotes"
+          class="flex flex-col gap-1 items-center"
+          :key="card.value"
+        >
+          <div
+            :class="[
+              'w-8 h-12 flex items-center font-bold rounded-md justify-center',
+              card.selectedClass || 'bg-primary-500',
+            ]"
+          >
+            <span class="text-2xl flex justify-center text-white">
+              {{ card.value === -1 ? "☕" : card.value }}
+            </span>
+          </div>
+          <div class="text-font-semibold">
+            {{ card.vote }} {{ card.vote === 1 ? "voto" : "votos" }}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
-const cards = ref([
-    { value: -1, label: '☕', selectedClass: '-translate-y-6', defaultClass: 'border' },
-    { value: 0, label: '0', selectedClass: '-translate-y-6', defaultClass: 'bg-green-50' },
-    { value: 1, label: '1', selectedClass: '-translate-y-6', defaultClass: 'bg-green-100' },
-    { value: 2, label: '2', selectedClass: '-translate-y-6', defaultClass: 'bg-green-200' },
-    { value: 3, label: '3', selectedClass: '-translate-y-6', defaultClass: ' bg-green-300' },
-    { value: 5, label: '5', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-100' },
-    { value: 8, label: '8', selectedClass: '-translate-y-6', defaultClass: ' bg-yellow-200' },
-    { value: 13, label: '13', selectedClass: '-translate-y-6', defaultClass: 'bg-yellow-300' },
-    { value: 21, label: '21', selectedClass: '-translate-y-6', defaultClass: 'bg-red-200' },
-    { value: 34, label: '34', selectedClass: '-translate-y-6', defaultClass: 'bg-red-300' }
-])
+const props = defineProps({
+  cards: {
+    type: Array,
+    required: true,
+    default: () => [],
+  },
+});
 const userStore = useUserStore();
 
 const nonRepeatedCardsWithVotes = computed(() => {
-    const notNullVotes = userStore.players.filter(player => player.vote !== null);
-    const votes = notNullVotes.map(player => player.vote);
-    const voteCounts = votes.reduce((acc, curr) => {
-        acc[curr] = (acc[curr] || 0) + 1;
-        return acc;
-    }, {});
+  const notNullVotes = userStore.players.filter((player) => player.vote !== null);
+  const votes = notNullVotes.map((player) => String(player.vote)); // Ensure votes are strings
+  const voteCounts = votes.reduce((acc, curr) => {
+    acc[curr] = (acc[curr] || 0) + 1;
+    return acc;
+  }, {});
 
-    return cards.value.filter(card => voteCounts[card.value]).map(card => ({
-        ...card,
-        vote: voteCounts[card.value]
+  return props.cards
+    .filter((card) => voteCounts[String(card.value)])
+    .map((card) => ({
+      ...card,
+      vote: voteCounts[String(card.value)],
     }));
 });
 
 const stats = computed(() => {
-    if (userStore.players.length > 0) {
-        const votes = userStore.players.map(player => player.vote);
-        const voteCounts = votes.reduce((acc, curr) => {
-            acc[curr] = (acc[curr] || 0) + 1;
-            return acc;
-        }, {});
+  if (userStore.players.length > 0) {
+    const votes = userStore.players.map((player) => String(player.vote));
 
-        const mostVotedArray = Object.entries(voteCounts);
-        const mostVotedSorted = mostVotedArray.sort((a, b) => b[1] - a[1]);
+    const votesWithoutNull = votes.filter((vote) => vote !== "null" && vote !== "NaN");
 
-        const mostVoted = mostVotedSorted
-            .filter(([card, count]) => count === mostVotedSorted[0][1])
-            .map(([card]) => card)
-            .filter(card => card !== "null");
+    const voteCounts = votesWithoutNull.reduce((acc, curr) => {
+      acc[curr] = (acc[curr] || 0) + 1;
+      return acc;
+    }, {});
 
-        if (mostVoted.length === 0) {
-            if (mostVotedArray.length > 1) {
-                mostVoted.push(mostVotedArray[1][0]);
-            } else {
-                mostVoted.push("N/A");
-            }
-        }
+    const mostVotedArray = Object.entries(voteCounts);
+    const mostVotedSorted = mostVotedArray.sort((a, b) => b[1] - a[1]);
 
+    const maxVotes = mostVotedSorted[0][1];
+    const mostVoted = mostVotedSorted
+      .filter(([card, count]) => count === maxVotes)
+      .map(([card]) => {
+        const cardObj = props.cards.find((c) => String(c.value) === card);
+        return cardObj ? cardObj.label : card;
+      });
 
-        const votesWithoutNullAndNegativeOne = votes.filter(vote => vote !== null && vote !== -1);
-        const totalVotes = votesWithoutNullAndNegativeOne.length;
-        const sumOfVotes = votesWithoutNullAndNegativeOne.reduce((a, b) => a + b, 0);
-        const rawAverage = totalVotes ? sumOfVotes / totalVotes : 0;
-        const average = Number.isInteger(rawAverage) ? Math.floor(rawAverage) : rawAverage.toFixed(1);
+    let average = null;
+    if (props.cards.every((card) => Number.isInteger(Number(card.value)))) {
+      const totalVotes = votesWithoutNull.length;
+      const sumOfVotes = votesWithoutNull
+        .map((vote) => Number(vote))
+        .reduce((a, b) => a + b, 0);
+      const rawAverage = totalVotes ? sumOfVotes / totalVotes : 0;
 
-        const assertiveness = Math.floor((mostVotedSorted[0][1] / votes.length) * 100);
-
-        return {
-            mostVoted,
-            average,
-            assertiveness,
-        };
+      average = Number.isInteger(rawAverage)
+        ? Math.floor(rawAverage)
+        : rawAverage.toFixed(1);
     }
-    return null;
+
+    const assertiveness = Math.floor((mostVotedSorted[0][1] / votes.length) * 100);
+
+    return {
+      mostVoted,
+      average,
+      assertiveness,
+    };
+  }
+  return {
+    mostVoted: [],
+    average: null,
+    assertiveness: 0,
+  };
 });
 </script>

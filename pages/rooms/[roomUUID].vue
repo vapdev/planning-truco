@@ -41,10 +41,10 @@
         leave-to-class="slide-up-leave-to"
       >
         <div v-if="!userStore.roomState.showCards" key="deck">
-          <Deck :selectedCard="selectedCard" :votar="votar" />
+          <Deck :deck="deck" :selectedCard="selectedCard" :votar="votar" />
         </div>
         <div v-else key="stats">
-          <Stats />
+          <Stats :cards="deck" />
         </div>
       </Transition>
     </div>
@@ -134,13 +134,22 @@ const animateEmoji = (startId, endId, emoji) => {
   }
 };
 
+const deck = ref([
+  {
+    value: 0,
+    label: "0",
+  },
+]);
+
 onMounted(async () => {
   userStore.userUUID = localStorage.getItem("userUUID");
   userStore.name = localStorage.getItem("userName");
+
   await userStore.loadGame(route.params.roomUUID);
   if (!userStore.name || userStore.name == "Guest") {
     headerRef.value.modalProfile = true;
   }
+  deck.value = userStore.deck;
   $md.value = window.matchMedia("(min-width: 768px)").matches;
 });
 
