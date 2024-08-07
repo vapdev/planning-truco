@@ -1,7 +1,7 @@
 <template>
   <PlayerContainer
     :players="players"
-    containerClass="h-22 mt-2 md:mt-6 flex w-80 justify-around"
+    containerClass="h-16 mt-2 md:mt-6 flex w-80 justify-around"
   />
 </template>
 
