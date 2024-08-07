@@ -6,7 +6,7 @@
     >
       <div class="text-md w-full flex gap-6">
         <div class="flex flex-col gap-1 items-center justify-center font-normal">
-          <div class="text-lg">Mais votos:</div>
+          <div class="text-lg">Mais votado:</div>
           <div class="text-2xl font-bold">
             {{ stats.mostVoted.join(", ") }}
           </div>

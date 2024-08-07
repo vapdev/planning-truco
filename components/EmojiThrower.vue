@@ -15,7 +15,7 @@
       @click="toggleEmojiPicker"
       ref="emojiButton"
     >
-      😊
+      ➕
     </div>
     <div class="relative z-50">
       <EmojiPicker
@@ -53,7 +53,7 @@ onClickOutside(target, (event) => toggleEmojiPicker());
 
 const emojiPickerVisible = ref(false);
 const emoji = ref("");
-const emojis = ref(["👍", "👎", "🤝", "💥", "💣", "😳", "🤔"]);
+const emojis = ref(["👍", "🎯", "💥", "💣", "🃏", "🤔"]);
 const toggleEmojiPicker = () => {
   emojiPickerVisible.value = !emojiPickerVisible.value;
   emit("emoji-picker-visible", emojiPickerVisible.value);

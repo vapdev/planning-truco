@@ -51,14 +51,16 @@ const explodeEmojis = (location, emoji) => {
 
     // Animate explosion
     requestAnimationFrame(() => {
-      emojiThrowStack.value = emojiThrowStack.value.map((e) => {
-        if (e.key === key) {
-          return {
-            ...e,
-            style: finalStyle,
-          };
-        }
-        return e;
+      requestAnimationFrame(() => {
+        emojiThrowStack.value = emojiThrowStack.value.map((e) => {
+          if (e.key === key) {
+            return {
+              ...e,
+              style: finalStyle,
+            };
+          }
+          return e;
+        });
       });
     });
 
@@ -97,14 +99,16 @@ const animateEmoji = (startId, endId, emoji) => {
       });
 
       requestAnimationFrame(() => {
-        emojiThrowStack.value = emojiThrowStack.value.map((e) => {
-          if (e.key === key) {
-            return {
-              ...e,
-              style: finalStyle,
-            };
-          }
-          return e;
+        requestAnimationFrame(() => {
+          emojiThrowStack.value = emojiThrowStack.value.map((e) => {
+            if (e.key === key) {
+              return {
+                ...e,
+                style: finalStyle,
+              };
+            }
+            return e;
+          });
         });
       });
 
