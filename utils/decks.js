@@ -23,7 +23,7 @@ export const tShirtSizes = [
 export const modifiedFibonacci = [
     { value: "☕", label: "☕" },
     { value: "0", label: "0" },
-    { value: "0.5", label: "½" },
+    { value: "½", label: "½" },
     { value: "1", label: "1" },
     { value: "2", label: "2" },
     { value: "3", label: "3" },
