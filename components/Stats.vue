@@ -30,7 +30,7 @@
             ]"
           >
             <span class="text-2xl flex justify-center text-white">
-              {{ card.value === -1 ? "☕" : card.value }}
+              {{ card.value }}
             </span>
           </div>
           <div class="text-font-semibold">

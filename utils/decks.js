@@ -1,5 +1,5 @@
 export const fibonacci = [
-    { value: "-1", label: "☕" },
+    { value: "☕", label: "☕" },
     { value: "0", label: "0" },
     { value: "1", label: "1" },
     { value: "2", label: "2" },
@@ -21,7 +21,7 @@ export const tShirtSizes = [
 ];
 
 export const modifiedFibonacci = [
-    { value: "-1", label: "☕" },
+    { value: "☕", label: "☕" },
     { value: "0", label: "0" },
     { value: "0.5", label: "½" },
     { value: "1", label: "1" },
