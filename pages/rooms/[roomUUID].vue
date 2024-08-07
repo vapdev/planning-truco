@@ -144,13 +144,8 @@ const animateEmoji = (startId, endId, emoji) => {
   const startLocation = userStore.playerLocations[startId];
   const endLocation = userStore.playerLocations[endId];
 
-  console.log(`Animating emoji from ${startId} to ${endId}`);
-  console.log("Start location:", startLocation);
-  console.log("End location:", endLocation);
-
   if (startLocation && endLocation) {
     if (startId === endId) {
-      console.log("Exploding emoji at location:", startLocation);
       explodeEmojis(startLocation, emoji);
     } else {
       const key = `emoji-${Date.now()}-${animationKey.value++}`;
