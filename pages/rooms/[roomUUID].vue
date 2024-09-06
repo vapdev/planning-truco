@@ -4,7 +4,7 @@
     class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between"
   >
     <!-- HEADER -->
-    <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" @toggleDarkMode="key++" />
+    <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
 
     <div class="flex justify-around w-full h-2/5">
       <!-- MAIN CONTENT -->
