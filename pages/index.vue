@@ -1,164 +1,68 @@
 <template>
-  <div class="overflow-x-hidden antialiased rubik-font bg-gray-800">
-    <header class="relative bg-primary-800 w-full text-white h-24">
+  <div class="overflow-x-hidden flex flex-col justify-between antialiased rubik-font h-[100vh] bg-gray-100 text-gray-800">
+    <header class="relative bg-indigo-500 w-full text-gray-100 h-24">
       <div
-        class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
+        class="container flex items-center justify-center h-full sm:pl-32 sm:justify-between"
       >
         <a
           href="/"
           class="relative flex items-center inline-block h-5 h-full font-black leading-none"
         >
-          <span id="home" class="ml-3 text-xl text-white"
+          <span id="home" class="ml-3 text-lg"
             >Free Planning Poker<span class="text-primary-600">.</span></span
           >
         </a>
       </div>
     </header>
-
     <div
-      class="items-center justify-center bg-gray-800 w-full overflow-x-hidden w-full flex"
+      class="justify-center text-gray-800 bg-gray-100 w-full overflow-hidden w-full flex mt-12"
     >
-      <div
-        class="container flex flex-col items-center justify-between h-full max-w-6xl px-8 mx-auto xl:px-0"
-      >
-        <div
-          class="flex flex-col items-center w-full max-w-xl pt-10 md:pt-20 text-center"
-        >
-          <h1
-            class="mb-4 text-5xl font-black leading-tight text-gray-200 sm:text-6xl xl:mb-14"
-          >
-            Comece a planejar sua sprint
-          </h1>
-          <p class="pr-0 mb-8 md:mb-20 text-gray-200 text-2xl font-light md:text-3xl">
-            O Free Planning Poker é uma ferramenta totalmente gratuita para auxiliar times
-            ágeis a estimar o esforço de desenvolvimento de suas tarefas.
-          </p>
+      <div class="container flex flex-col md:flex-row h-full px-8 w-full justify-around">
+        <div class="flex flex-col justify-between w-full max-w-xl">
+          <div>
+            <div class="text-xl font-black leading-tight sm:text-2xl mb-12">
+              Planejamento de sprint online grátis!
+            </div>
+            <p class="text-lg mb-4 font-light md:text-xl">
+              O Planning Poker direto ao ponto.
+            </p>
+            <p class="text-lg font-light md:text-xl">
+              Crie uma sala e compartilhe o link com seus colegas de equipe.
+            </p>
+            <p class="text-lg font-light md:text-xl">
+              Todos podem votar e ver o resultado em tempo real.
+            </p>
+            <p class="text-lg mt-8 font-semibold md:text-xl">
+              Comece agora mesmo!
+            </p>
+          </div>
           <div
             @click="startGame"
-            class=" cursor-pointer hover:scale-105 hover:bg-primary-500 self-start w-full text-center inline-block w-auto px-8 py-4 mx-auto mt-0 text-4xl font-bold text-white bg-primary-600 border-t border-gray-600 rounded-md shadow-xl sm:mt-1 fold-bold"
-            >Criar novo jogo!</div
+            class="cursor-pointer mt-10 sm:mt-0 text-black hover:bg-indigo-300 bg-indigo-400 w-full text-center inline-block w-auto px-8 py-6 mx-auto mt-0 text-2xl rounded-md sm:mt-1 font-bold"
           >
-          <div class="flex-col hidden mt-12 sm:flex lg:mt-24"></div>
+            Iniciar agora
+          </div>
+        </div>
+        <div class="flex flex-col hidden sm:block">
+          <img src="./mesa.png" alt="Planning Poker" class="rounded-lg h-[400px]" />
         </div>
       </div>
     </div>
-    <!-- HERO SECTION END -->
-
-    <!-- BEGIN FEATURES SECTION -->
-    <div id="features" class="relative w-full px-8 pt-10 border-gray-600 bg-gray-800">
-      <div
-        class="container flex flex-col items-center justify-between h-full max-w-6xl mx-auto"
-      >
-        <h3
-          class="px-5 mt-2 text-4xl font-black leading-tight text-center text-gray-200 sm:mt-0 sm:px-0"
-        >
-          Como utilizar o Free Planning Poker
-        </h3>
-        <div class="flex flex-col w-full mt-0 lg:flex-row sm:mt-10">
-          <div class="w-full max-w-md p-4 mx-auto mb-0 sm:mb-16 lg:mb-0 lg:w-1/3">
-            <div
-              class="relative flex flex-col items-center justify-center w-full h-full p-10 md:p-20 mr-5 rounded-lg"
-            >
-              <svg
-                class="absolute w-full h-full text-gray-100 fill-gray-600"
-                viewBox="0 0 377 340"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g>
-                  <g>
-                    <path
-                      d="M342.8 3.7c24.7 14 18.1 75 22.1 124s18.6 85.8 8.7 114.2c-9.9 28.4-44.4 48.3-76.4 62.4-32 14.1-61.6 22.4-95.9 28.9-34.3 6.5-73.3 11.1-95.5-6.2-22.2-17.2-27.6-56.5-47.2-96C38.9 191.4 5 151.5.9 108.2-3.1 64.8 22.7 18 61.8 8.7c39.2-9.2 91.7 19 146 16.6 54.2-2.4 110.3-35.6 135-21.6z"
-                    />
-                  </g>
-                </g>
-              </svg>
-              <!-- FEATURE Icon 1 -->
-              <span class="relative text-[4rem] text-white">1</span>
-              <h4 class="relative text-xl text-gray-200 font-bold text-[#111827]">
-                Crie um novo jogo
-              </h4>
-              <p class="relative mt-2 text-lg text-base text-center text-gray-200">
-                Inicie um novo jogo de Planning Poker para sua equipe.
-              </p>
-            </div>
-          </div>
-
-          <div class="w-full max-w-md p-4 mx-auto mb-0 sm:mb-16 lg:mb-0 lg:w-1/3">
-            <div
-              class="relative flex flex-col items-center justify-center w-full h-full p-10 md:p-20 mr-5 rounded-lg"
-            >
-              <svg
-                class="absolute w-full h-full text-gray-100 fill-gray-600"
-                viewBox="0 0 358 372"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g>
-                  <g>
-                    <path
-                      d="M315.7 6.5c30.2 15.1 42.6 61.8 41.5 102.5-1.1 40.6-15.7 75.2-24.3 114.8-8.7 39.7-11.3 84.3-34.3 107.2-23 22.9-66.3 23.9-114.5 30.7-48.2 6.7-101.3 19.1-123.2-4.1-21.8-23.2-12.5-82.1-21.6-130.2C30.2 179.3 2.6 141.9.7 102c-2-39.9 21.7-82.2 57.4-95.6 35.7-13.5 83.3 2.1 131.2 1.7 47.9-.4 96.1-16.8 126.4-1.6z"
-                    />
-                  </g>
-                </g>
-              </svg>
-              <!-- FEATURE Icon 2 -->
-              <span class="relative text-[4rem] text-white">2</span>
-              <h4 class="relative mt-2 text-xl font-bold text-gray-200">
-                Compartilhe o link
-              </h4>
-              <p class="relative mt-2 text-base text-lg text-center text-gray-200">
-                Envie o link do jogo para os membros do seu time para que eles possam
-                participar.
-              </p>
-            </div>
-          </div>
-
-          <div class="w-full max-w-md p-4 mx-auto mb-16 lg:mb-0 lg:w-1/3">
-            <div
-              class="relative flex flex-col items-center justify-center w-full h-full p-10 md:p-20 mr-5 rounded-lg"
-            >
-              <svg
-                class="absolute w-full h-full text-gray-100 fill-gray-600"
-                viewBox="0 0 378 410"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g>
-                  <g>
-                    <path
-                      d="M305.9 14.4c23.8 24.6 16.3 84.9 26.6 135.1 10.4 50.2 38.6 90.3 43.7 137.8 5.1 47.5-12.8 102.4-50.7 117.4-37.9 15.1-95.7-9.8-151.7-12.2-56.1-2.5-110.3 17.6-130-3.4-19.7-20.9-4.7-82.9-11.5-131.2C25.5 209.5-3 174.7 1.2 147c4.2-27.7 41-48.3 75-69.6C110.1 56.1 141 34.1 184 17.5c43.1-16.6 98.1-27.7 121.9-3.1z"
-                    />
-                  </g>
-                </g>
-              </svg>
-              <!-- FEATURE Icon 3 -->
-              <span class="relative text-[4rem] text-white">3</span>
-              <h4 class="relative mt-2 text-xl font-bold text-gray-200">Planeje</h4>
-              <p class="relative mt-2 text-base text-lg text-center text-gray-200">
-                Utilize o Planning Poker para organizar e estimar as tarefas da sua
-                sprint.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="px-4 md:mt-16 text-white border-gray-600 bg-gray-800">
-      <div class="py-10 text-center text-gray-200 border-t border-gray-600">
-        © 2024 <span class="text-primary-600">Codestation</span>. Todos os direitos
-        reservados.
+    <footer class="px-4 md:mt-16 border-gray-200">
+      <div class="py-10 text-center border-t border-gray-200">
+        © 2024 <span class="text-primary-600">Codestation</span>.
       </div>
     </footer>
 
-    <!-- a little JS for the mobile nav button -->
     <UModal
       class="z-[52]"
       :ui="{ overlay: { background: 'bg-primary-200/40' } }"
       v-model="modalCriar"
     >
       <div
-        class="relative rounded-lg dark:text-white rubik-font font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
+        class="relative rounded-lg dark: rubik-font font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
       >
-        <div class="absolute cursor-pointer text-white flex top-2 right-2">
+        <div class="absolute cursor-pointer flex top-2 right-2">
           <Icon
             @click="modalCriar = false"
             class="md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out"
@@ -167,7 +71,7 @@
           ></Icon>
         </div>
         <div class="mb-4 text-4xl">Iniciar Planning Poker</div>
-        <div class="text-md flex flex-col gap-4">
+        <div class="text-sm flex flex-col gap-4">
           <div>Nome da sala:</div>
           <div class="flex w-full gap-4">
             <UInput
@@ -181,7 +85,7 @@
         </div>
         <button
           @click="userStore.startGame(roomName)"
-          class="bg-[#4F46E5] mt-6 w-full md:hover:bg-primary-400 text-white font-bold py-2 px-4 rounded"
+          class="bg-[#4F46E5] mt-6 w-full md:hover:bg-primary-400 font-bold py-2 px-4 rounded"
         >
           Iniciar
         </button>
@@ -194,12 +98,20 @@
 const userStore = useUserStore();
 const modalCriar = ref(false);
 
-const isNavOpen = ref(false);
 const router = useRouter();
 
-const toggleNav = () => {
-  isNavOpen.value = !isNavOpen.value;
-};
+const deck = ref([
+  { value: "☕", label: "☕" },
+  { value: "0", label: "0" },
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "5", label: "5" },
+  { value: "8", label: "8" },
+  { value: "13", label: "13" },
+  { value: "21", label: "21" },
+  { value: "34", label: "34" },
+]);
 
 const roomName = ref("");
 const startGame = () => {

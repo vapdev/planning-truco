@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-screen rubik-font">
-    <header class="relative bg-primary-800 w-full text-white h-24">
+    <header class="relative bg-indigo-500 w-full text-white h-24">
       <div
         class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
       >
@@ -9,13 +9,13 @@
           class="relative flex items-center inline-block h-5 h-full font-black leading-none"
         >
           <span id="home" class="ml-3 text-xl text-white"
-            >Free Planning Poker<span class="text-primary-600">.</span></span
+            >Free Planning Poker<span class="text-indigo-600">.</span></span
           >
         </a>
       </div>
     </header>
     <div
-      class="flex-grow dark:text-white flex items-center justify-center bg-gray-100 dark:bg-gray-800"
+      class="flex-grow flex items-center justify-center bg-gray-100 text-black dark:text-white dark:bg-gray-800"
     >
       <div class="bg-white dark:bg-gray-700 p-8 pt-4 rounded shadow-md w-full max-w-md">
         <form>
@@ -58,7 +58,7 @@
             <div class="flex w-full mb-4 gap-2">
               <div v-for="card in selectedDeck" :key="card.value">
                 <div
-                  class="text-md bg-primary-500 hover:bg-primary-600 oswald-font w-6 h-10 flex items-center rounded-md justify-center cursor-pointer"
+                  class="text-md bg-indigo-500 hover:bg-indigo-600 oswald-font w-6 h-10 flex items-center rounded-md justify-center cursor-pointer"
                 >
                   <div class="flex justify-center w-24 text-white">{{ card.label }}</div>
                 </div>
@@ -66,7 +66,7 @@
             </div>
             <div
               @click="mostrarOpcoesAvancadas = !mostrarOpcoesAvancadas"
-              class="cursor-pointer mt-4 p-2 text-sm bg-gray-200 dark:bg-gray-600 w-fit rounded-xl text-center"
+              class="cursor-pointer mt-4 p-2 text-sm bg-gray-200 dark:bg-gray-600  w-fit rounded-xl text-center"
             >
               {{ mostrarOpcoesAvancadas ? "Esconder" : "Mostrar" }} opções avançadas
             </div>
@@ -83,7 +83,7 @@
                   <UToggle
                     @click="toggleVirarAutomatico"
                     v-model="virarAutomatico"
-                    color="primary"
+                    color="indigo"
                     class="dark:border-2 dark:border-gray-600"
                   />
                 </div>
@@ -100,7 +100,7 @@
                   <UToggle
                     @click="toggleTodosPodemVotar"
                     v-model="todosPodemVotar"
-                    color="primary"
+                    color="indigo"
                     class="dark:border-2 dark:border-gray-600"
                   />
                 </div>
@@ -124,7 +124,7 @@
           </div>
           <div class="flex text-center mt-8">
             <UButton
-              color="primary"
+              color="indigo"
               variant="solid"
               size="lg"
               class="w-full text-xl flex justify-center"
