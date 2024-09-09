@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-icon',
     '@pinia/nuxt',
-    '@vueuse/nuxt'
+    '@vueuse/nuxt',
+    'nuxt-gtag',
   ],
   runtimeConfig: {
     public: {
@@ -27,4 +28,7 @@ export default defineNuxtConfig({
     preference: 'light'
   },
   css: ['~/assets/css/main.css'],
+  gtag: {
+    id: process.env.NUXT_GTAG_ID,
+  }
 })
