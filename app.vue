@@ -27,6 +27,12 @@ html {
 </style>
 
 <script setup>
+useSeoMeta({
+  title: 'Free Planning Poker',
+  ogTitle: 'Free Planning Poker',
+  description: 'Free Planning Poker for your team',
+  ogDescription: 'Free Planning Poker for your team'
+})
 const DEFAULT_COLOR = "indigo";
 
 import ToastGlobal from './composables/toast';
