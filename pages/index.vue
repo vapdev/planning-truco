@@ -9,8 +9,8 @@
       </div>
     </header>
 
-    <main class="flex-1 flex flex-col items-center justify-center text-center px-6">
-      <h2 class="text-4xl md:text-5xl font-extrabold leading-tight max-w-3xl pt-6">
+    <main class="flex flex-1 flex-col items-center justify-center text-center px-6">
+      <h2 class="text-4xl md:text-5xl font-extrabold leading-tight max-w-4xl pt-6">
         {{ $t('simpleFastEfficient') }}
       </h2>
       <p class="mt-4 text-lg text-gray-700 max-w-2xl">
@@ -22,7 +22,7 @@
       </button>
     </main>
 
-    <section class="py-12 bg-white shadow-inner w-full text-center px-6">
+    <section class="flex-1 flex flex-col py-12 bg-white shadow-inner w-full text-center px-6">
       <div class="max-w-4xl mx-auto">
         <h3 class="text-3xl font-bold">{{ $t('howItWorks') }}</h3>
         <p class="mt-4 text-lg text-gray-700">{{ $t('simpleFastEfficient') }}</p>
