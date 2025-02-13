@@ -1,19 +1,19 @@
 <template>
   <div class="w-full items-center flex flex-col pb-2 md:pb-12">
-    <span class="mb-1 font-semibold">Resultados da rodada</span>
+    <span class="mb-1 font-semibold">{{ $t("roundResults") }}</span>
     <div
       class="w-fit flex flex-col gap-1 text-md justify-center bg-gray-200 dark:bg-gray-500 rounded-xl p-2 px-4"
     >
       <div class="text-md w-full flex gap-6">
         <div class="flex flex-col gap-1 items-center justify-center font-normal">
-          <div class="text-lg">Mais votado:</div>
+          <div class="text-lg">{{ $t("mostVoted") }}</div>
           <div class="text-2xl font-bold">
             {{ stats.mostVoted.join(", ") }}
           </div>
         </div>
         <!-- Média removida -->
         <div class="flex flex-col gap-1 items-center justify-center font-normal">
-          <div class="text-lg">Consenso:</div>
+          <div class="text-lg">{{ $t("consensus") }}</div>
           <div class="text-2xl font-bold">{{ stats.assertiveness }}%</div>
         </div>
       </div>
@@ -34,7 +34,7 @@
             </span>
           </div>
           <div class="text-font-semibold">
-            {{ card.vote }} {{ card.vote === 1 ? "voto" : "votos" }}
+            {{ card.vote }} {{ card.vote === 1 ? $t("vote") : $t("votes") }}
           </div>
         </div>
       </div>

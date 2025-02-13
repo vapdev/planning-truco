@@ -31,6 +31,11 @@ export default defineI18nConfig(() => ({
         preview: 'Preview',
         showAdvancedSettings: 'Show Advanced Settings',
         hideAdvancedSettings: 'Hide Advanced Settings',
+        roundResults: 'Round Results',
+        mostVoted: 'Most Voted',
+        consensus: 'Consensus',
+        vote: 'Vote',
+        votes: 'Votes',
       },
       fr: {
         welcome: 'Bienvenue',
@@ -59,6 +64,11 @@ export default defineI18nConfig(() => ({
         preview: 'Aperçu',
         showAdvancedSettings: 'Afficher les paramètres avancés',
         hideAdvancedSettings: 'Masquer les paramètres avancés',
+        roundResults: 'Résultats du tour',
+        mostVoted: 'Le plus voté',
+        consensus: 'Consensus',
+        vote: 'Vote',
+        votes: 'Votes',
       },
       pt: {
         welcome: 'Bem-vindo',
@@ -87,6 +97,11 @@ export default defineI18nConfig(() => ({
         preview: 'Pré-visualização',
         showAdvancedSettings: 'Mostrar Configurações Avançadas',
         hideAdvancedSettings: 'Ocultar Configurações Avançadas',
+        roundResults: 'Resultados da Rodada',
+        mostVoted: 'Mais Votado',
+        consensus: 'Consenso',
+        vote: 'Voto',
+        votes: 'Votos',
       },
       es: {
         welcome: 'Bienvenido',
@@ -115,6 +130,11 @@ export default defineI18nConfig(() => ({
         preview: 'Vista Previa',
         showAdvancedSettings: 'Mostrar Configuraciones Avanzadas',
         hideAdvancedSettings: 'Ocultar Configuraciones Avanzadas',
+        roundResults: 'Resultados del Round',
+        mostVoted: 'Más Votado',
+        consensus: 'Consenso',
+        vote: 'Voto',
+        votes: 'Votos',
       }
     }
   }))
