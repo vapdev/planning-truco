@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col w-10 gap-2 rounded-md group">
+  <div class="relative atkinson-hyperlegible-mono-regular flex flex-col w-10 gap-2 rounded-md group">
     <div
       class="relative text-white flex items-center rounded-md w-10 h-16 justify-center"
       :class="[
