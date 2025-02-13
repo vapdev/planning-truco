@@ -54,6 +54,7 @@
 </template>
 
 <script setup>
+const { gtag } = useGtag();
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
 const selectedCard = ref(null);
@@ -73,7 +74,7 @@ const key = ref(0);
 onMounted(async () => {
   userStore.userUUID = localStorage.getItem("userUUID");
   userStore.name = localStorage.getItem("userName");
-
+  gtag("event", "join_room", { roomUUID: route.params.roomUUID });
   await userStore.loadGame(route.params.roomUUID);
   if (!userStore.name || userStore.name == "Guest") {
     headerRef.value.modalProfile = true;
@@ -126,6 +127,7 @@ watch(
 );
 
 const novaRodada = () => {
+  gtag("event", "nova_rodada");
   fetch(`${apiUrl}/resetVotes`, {
     method: "POST",
     headers: {
@@ -148,6 +150,7 @@ const sairDaSala = () => {
 };
 
 const votar = (score) => {
+  gtag("event", "vote", { score });
   if (selectedCard.value === score) {
     selectedCard.value = null;
   } else {
@@ -167,6 +170,7 @@ const votar = (score) => {
 };
 
 const endGame = () => {
+  gtag("event", "leave_room");
   if (userStore.roomUUID) {
     fetch(`${apiUrl}/leaveRoom`, {
       method: "POST",
@@ -200,6 +204,7 @@ watch(
 );
 
 const toggleMostrarCartas = () => {
+  gtag("event", "show_cards");
   fetch(`${apiUrl}/showCards`, {
     method: "POST",
     headers: {

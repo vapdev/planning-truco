@@ -130,6 +130,7 @@ const emit = defineEmits(["update:modelValue", "close"]);
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
 const autoShowCards = ref(false);
+const { gtag } = useGtag();
 
 const close = () => {
   emit("update:modelValue", false);
@@ -155,6 +156,7 @@ const changeVirarAutomatico = () => {
 };
 
 function handleSaveConfig() {
+  gtag("event", "save_config");
   if (roomName.value !== userStore.roomState.name) {
     userStore.changeRoomName(roomName.value);
   }
