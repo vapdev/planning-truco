@@ -36,6 +36,7 @@ export default defineI18nConfig(() => ({
         consensus: 'Consensus',
         vote: 'Vote',
         votes: 'Votes',
+        language: 'Language',
       },
       fr: {
         welcome: 'Bienvenue',
@@ -69,6 +70,9 @@ export default defineI18nConfig(() => ({
         consensus: 'Consensus',
         vote: 'Vote',
         votes: 'Votes',
+        language: 'Langue',
+        settings: 'Paramètres',
+        roomName: 'Nom de la salle',
       },
       pt: {
         welcome: 'Bem-vindo',
@@ -102,6 +106,9 @@ export default defineI18nConfig(() => ({
         consensus: 'Consenso',
         vote: 'Voto',
         votes: 'Votos',
+        language: 'Idioma',
+        settings: 'Configurações',
+        roomName: 'Nome da Sala',
       },
       es: {
         welcome: 'Bienvenido',
@@ -135,6 +142,9 @@ export default defineI18nConfig(() => ({
         consensus: 'Consenso',
         vote: 'Voto',
         votes: 'Votos',
+        language: 'Idioma',
+        settings: 'Configuraciones',
+        roomName: 'Nombre de la Sala',
       }
     }
   }))
