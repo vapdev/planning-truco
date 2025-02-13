@@ -20,7 +20,7 @@
       <div class="bg-white dark:bg-gray-700 p-8 pt-4 rounded shadow-md w-full max-w-md">
         <form>
           <div class="text-md flex flex-col">
-            <div class="mt-4 mb-1 font-semibold">Nome da sala:</div>
+            <div class="mt-4 mb-1 font-semibold">{{  $t("roomName")  }}</div>
             <div class="flex w-full mb-4">
               <UInput
                 v-model="roomName"
@@ -29,10 +29,10 @@
                 color="gray"
                 class="w-full"
                 inputClass="font-light"
-                placeholder="Nome da sala"
+                :placeholder="$t('roomName')"
               />
             </div>
-            <div class="mb-1 font-semibold">Baralho:</div>
+            <div class="mb-1 font-semibold">{{ $t("deck") }}</div>
             <div class="flex w-full mb-4">
               <USelectMenu
                 v-model="baralho"
@@ -42,7 +42,7 @@
                 class="w-full font-light"
               ></USelectMenu>
             </div>
-            <div v-if="baralho.value === 'custom'" class="mb-1 font-semibold">Deck personalizado:</div>
+            <div v-if="baralho.value === 'custom'" class="mb-1 font-semibold">{{ $t("customDeck") }}</div>
             <div v-if="baralho.value === 'custom'" class="flex w-full mb-4">
               <UInput
                 v-model="customDeckInput"
@@ -54,7 +54,7 @@
                 placeholder="Ex: 1, 2, 3, 5, 8"
               />
             </div>
-            <div class="mb-1 font-semibold">Preview:</div>
+            <div class="mb-1 font-semibold">{{ $t("preview") }}</div>
             <div class="flex w-full mb-4 gap-2">
               <div v-for="card in selectedDeck" :key="card.value">
                 <div
@@ -68,15 +68,14 @@
               @click="mostrarOpcoesAvancadas = !mostrarOpcoesAvancadas"
               class="cursor-pointer mt-4 p-2 text-sm bg-gray-200 dark:bg-gray-600  w-fit rounded-xl text-center"
             >
-              {{ mostrarOpcoesAvancadas ? "Esconder" : "Mostrar" }} opções avançadas
+              {{ mostrarOpcoesAvancadas ? $t("hideAdvancedSettings") : $t("showAdvancedSettings") }}
             </div>
             <div v-show="mostrarOpcoesAvancadas">
               <div class="flex items-center gap-4 justify-between w-full">
                 <div class="flex flex-col mt-4">
-                  <div class="font-semibold">Revelar cartas automaticamente</div>
+                  <div class="font-semibold">{{ $t("revealCardsTitle") }}</div>
                   <div class="font-normal text-sm">
-                    As cartas serão reveladas automaticamente após todos os jogadores
-                    votarem
+                    {{ $t("revealCardsDescription") }}
                   </div>
                 </div>
                 <div class="pt-5">
@@ -130,7 +129,7 @@
               class="w-full text-xl flex justify-center"
               @click="userStore.startGame(gameOptions)"
             >
-              <span class="dark:text-white font-bold text-2xl">Criar sala</span>
+              <span class="dark:text-white font-bold text-2xl">{{ $t("createRoom") }}</span>
             </UButton>
           </div>
         </form>

@@ -11,9 +11,9 @@
           name="material-symbols:close-small-rounded"
         ></Icon>
       </div>
-      <div class="mb-2 text-3xl dark:text-white">Perfil</div>
+      <div class="mb-2 text-3xl dark:text-white">{{  $t("profile")  }}</div>
       <div class="text-md flex flex-col">
-        <div>Seu nome:</div>
+        <div>{{  $t("yourName")  }}</div>
         <div class="flex w-full mt-1">
           <UInput
             v-model="userName"
@@ -22,14 +22,14 @@
             color="gray"
             class="w-full font-normal border-2 border-gray-300 rounded-lg"
             :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
-            placeholder="Seu nome"
+            :placeholder="$t('yourName')"
           />
         </div>
         <button
           @click="handleSaveName"
           class="bg-primary-500 w-full md:hover:bg-primary-400 font-bold py-2 px-4 rounded mt-6"
         >
-          Salvar
+          {{  $t("save")  }}
         </button>
       </div>
     </div>
