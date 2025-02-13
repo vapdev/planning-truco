@@ -42,7 +42,7 @@ export default defineI18nConfig(() => ({
         welcome: 'Bienvenue',
         createRoom: 'Créer une salle maintenant',
         subtitle: 'Il suffit de cliquer sur le bouton ci-dessous et de générer une salle unique.',
-        howItWorks: 'Comment ça marche?',
+        howItWorks: 'Comment ça marche ?',
         simpleFastEfficient: 'Simple, rapide et efficace.',
         step1: '1. Créez une salle',
         step1Description: 'Cliquez simplement sur le bouton ci-dessus et générez une salle unique.',
