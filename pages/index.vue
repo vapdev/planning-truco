@@ -80,7 +80,7 @@
               size="lg"
               class="w-full"
               placeholder="Nome da sala (Opcional)"
-            />
+              />
           </div>
         </div>
         <button
