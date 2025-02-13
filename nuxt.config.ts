@@ -32,5 +32,15 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   gtag: {
     id: process.env.NUXT_GTAG_ID,
+  },
+  i18n: {
+    locales: [
+      { code: 'en', language: 'en-US' },
+      { code: 'pt', language: 'pt-BR' },
+      { code: 'es', language: 'es-ES' },
+      { code: 'fr', language: 'fr-FR' }
+    ],
+    defaultLocale: 'en',
+    vueI18n: './i18n.config.ts',
   }
 })
