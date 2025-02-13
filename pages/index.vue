@@ -39,7 +39,7 @@
       </div>
     </section>
     <footer class="bg-gray-800 text-white text-center py-4">
-      <p>2025. Feito com ❤️ por <a href="https://github.com/vapdev">vapdev</a>.</p>
+      <p>2025. Feito com ❤️ por <a target="_blank" href="https://github.com/vapdev">vapdev</a>.</p>
     </footer>
   </div>
 </template>
