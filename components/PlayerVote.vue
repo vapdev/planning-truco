@@ -12,7 +12,7 @@
         v-if="player.voted && flipped"
         class="front rounded-md w-full h-full flex items-center justify-center"
       >
-        <span class="oswald-font text-3xl">
+        <span class="text-3xl">
           <span v-if="player.vote != -1">{{ player.vote }}</span>
           <span v-else>☕</span>
         </span>

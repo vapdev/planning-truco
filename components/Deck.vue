@@ -11,7 +11,7 @@
           @click="votar(card.value)"
           :class="getCardClasses(card)"
           :style="cardStyle"
-          class="text-3xl oswald-font w-12 h-20 flex items-center rounded-lg justify-center cursor-pointer"
+          class="text-3xl w-12 h-20 flex items-center rounded-lg justify-center cursor-pointer"
         >
           <div class="flex justify-center w-24 text-white">{{ card.label }}</div>
         </div>

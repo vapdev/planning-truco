@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-hidden flex flex-col justify-between antialiased rubik-font h-[100vh] bg-gray-100 text-gray-800">
+  <div class="overflow-x-hidden flex flex-col justify-between antialiased atkinson-hyperlegible-mono-regular h-[100vh] bg-gray-100 text-gray-800">
     <header class="relative bg-indigo-500 w-full text-gray-100 h-24">
       <div
         class="container flex items-center justify-center h-full sm:pl-32 sm:justify-between"
@@ -60,7 +60,7 @@
       v-model="modalCriar"
     >
       <div
-        class="relative rounded-lg dark: rubik-font font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
+        class="relative rounded-lg dark: font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-12 flex flex-col gap-6"
       >
         <div class="absolute cursor-pointer flex top-2 right-2">
           <Icon

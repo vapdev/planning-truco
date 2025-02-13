@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-[100dvh]">
+  <div class="atkinson-hyperlegible-mono-regular w-full h-[100dvh]">
     <NuxtPage />
     <ToastGlobal />
   </div>
@@ -11,17 +11,10 @@ html {
   /* background-color: #3f4146; */
   background-color: #FFFFFF;
 }
-
-.oswald-font {
-  font-family: "Oswald", sans-serif;
+.atkinson-hyperlegible-mono-regular {
+  font-family: "Atkinson Hyperlegible Mono", serif;
   font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
-}
-.rubik-font {
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
+  font-weight: 400;
   font-style: normal;
 }
 </style>

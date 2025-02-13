@@ -5,7 +5,7 @@
     :model-value="modelValue"
   >
     <div
-      class="dark:text-white text-gray-800 relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-6 flex flex-col gap-6"
+      class="dark:text-white text-gray-800 atkinson-hyperlegible-mono-regular relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-6 flex flex-col gap-6"
     >
       <div class="absolute cursor-pointer flex top-2 right-2">
         <Icon

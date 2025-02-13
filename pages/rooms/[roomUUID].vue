@@ -1,7 +1,7 @@
 <template>
   <div
     :key="key"
-    class="wrapper bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white rubik-font h-full w-full flex flex-col justify-between"
+    class="wrapper atkinson-hyperlegible-mono-regular bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white h-full w-full flex flex-col justify-between"
   >
     <!-- HEADER -->
     <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />

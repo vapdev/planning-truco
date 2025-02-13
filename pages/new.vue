@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen rubik-font">
+  <div class="flex flex-col min-h-screen">
     <header class="relative bg-indigo-500 w-full text-white h-24">
       <div
         class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
@@ -58,7 +58,7 @@
             <div class="flex w-full mb-4 gap-2">
               <div v-for="card in selectedDeck" :key="card.value">
                 <div
-                  class="text-md bg-indigo-500 hover:bg-indigo-600 oswald-font w-6 h-10 flex items-center rounded-md justify-center cursor-pointer"
+                  class="text-md bg-indigo-500 hover:bg-indigo-600 w-6 h-10 flex items-center rounded-md justify-center cursor-pointer"
                 >
                   <div class="flex justify-center w-24 text-white">{{ card.label }}</div>
                 </div>

@@ -19,9 +19,11 @@ export default defineNuxtConfig({
   },
   ssr: false,
   googleFonts: {
+    download: true,
     families: {
       Oswald: true,
-      Rubik: true
+      Rubik: true,
+      "Atkinson Hyperlegible Mono": true,
     }
   },
   colorMode: {
