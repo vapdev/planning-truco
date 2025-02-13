@@ -4,7 +4,7 @@
       <div class="w-1/3 justify-start items-center">
         <div class="flex gap-2 items-end">
           <UButton @click="copyToClipboard" class="p-2" color="primary">
-            <span class="text-md text-white font-semibold">Convidar</span>
+            <span class="text-md text-white font-semibold">{{ $t("invite")}}</span>
             <Icon size="20" name="material-symbols:person-add-outline" color="#f1f1f1" />
           </UButton>
         </div>

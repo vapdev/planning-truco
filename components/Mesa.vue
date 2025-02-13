@@ -4,12 +4,12 @@
             <div v-if="!userStore.roomState.showCards">
                 <UButton :disabled="userStore.noVotes" @click="emit('toggleMostrarCartas')" color="primary" 
                     class="font-bold py-2 px-4 rounded w-50 bg-primary-600 hover:bg-primary-500 dark:bg-primary-600">
-                    <span class="dark:text-white">Revelar votos</span>
+                    <span class="dark:text-white">{{ $t("revealVotes") }}</span>
                 </UButton>
             </div>
             <div v-if="userStore.roomState.showCards">
                 <UButton @click="emit('novaRodada')" color="primary" class="bg-primary-600 hover:bg-primary-500 dark:bg-primary-600 w-50 font-bold py-2 px-4 rounded">
-                    <span class="dark:text-white">Iniciar nova votação</span>
+                    <span class="dark:text-white">{{ $t("startNewRound") }}</span>
                 </UButton>
             </div>
         </div>

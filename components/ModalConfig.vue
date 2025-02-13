@@ -15,9 +15,9 @@
           name="material-symbols:close-small-rounded"
         ></Icon>
       </div>
-      <div class="mb-2 text-3xl dark:text-white">Configurações</div>
+      <div class="mb-2 text-3xl dark:text-white">{{  $t("settings")  }}</div>
       <div class="text-md flex flex-col">
-        <div>Nome da sala:</div>
+        <div>{{  $t("roomName")  }}</div>
         <div class="flex w-full mt-2 mb-4">
           <UInput
             v-model="roomName"
@@ -26,14 +26,14 @@
             color="gray"
             class="w-full font-normal border-2 border-gray-300 rounded-lg"
             :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
-            placeholder="Nome da sala"
+            :placeholder="$t('roomName')"
           />
         </div>
         <div class="flex items-center gap-4 mb-2 justify-between w-full">
           <div class="flex flex-col mt-4">
-            <div class="font-semibold">Revelar cartas automaticamente</div>
+            <div class="font-semibold">{{  $t("revealCardsTitle")  }}</div>
             <div class="font-normal text-sm">
-              As cartas serão reveladas automaticamente após todos os jogadores votarem
+              {{  $t("revealCardsDescription")  }}
             </div>
           </div>
           <div class="pt-5">

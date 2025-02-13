@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-end w-full">
-    <div class="flex justify-center font-semibold">Vote abaixo 👇</div>
+    <div class="flex justify-center font-semibold">{{ $t("voteBelow") }} </div>
     <div
       class="flex justify-center md:justify-center text-primary-500 overflow-x-auto gap-4 items-center pb-4 pt-8 w-full"
     >
