@@ -14,7 +14,7 @@
         {{ $t('simpleFastEfficient') }}
       </h2>
       <p class="mt-4 text-lg text-gray-700 max-w-2xl">
-        {{ $t('step1Description') }}
+        {{ $t('subtitle') }}
       </p>
       <button @click="startGame"
         class="mt-6 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg text-xl">

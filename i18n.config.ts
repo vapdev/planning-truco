@@ -5,6 +5,7 @@ export default defineI18nConfig(() => ({
       en: {
         welcome: 'Welcome',
         createRoom: 'Create Room Now',
+        subtitle: 'Just click the button below and generate a unique room.',
         howItWorks: 'How It Works?',
         simpleFastEfficient: 'Simple, fast, and efficient.',
         step1: '1. Create a room',
@@ -18,6 +19,7 @@ export default defineI18nConfig(() => ({
       fr: {
         welcome: 'Bienvenue',
         createRoom: 'Créer une salle maintenant',
+        subtitle: 'Il suffit de cliquer sur le bouton ci-dessous et de générer une salle unique.',
         howItWorks: 'Comment ça marche?',
         simpleFastEfficient: 'Simple, rapide et efficace.',
         step1: '1. Créez une salle',
@@ -31,6 +33,7 @@ export default defineI18nConfig(() => ({
       pt: {
         welcome: 'Bem-vindo',
         createRoom: 'Criar Sala Agora',
+        subtitle: 'Basta clicar no botão abaixo e gerar uma sala única.',
         howItWorks: 'Como Funciona?',
         simpleFastEfficient: 'Simples, rápido e eficiente.',
         step1: '1. Crie uma sala',
@@ -44,6 +47,7 @@ export default defineI18nConfig(() => ({
       es: {
         welcome: 'Bienvenido',
         createRoom: 'Crear Sala Ahora',
+        subtitle: 'Simplemente haz clic en el botón de abajo y genera una sala única.',
         howItWorks: '¿Cómo Funciona?',
         simpleFastEfficient: 'Simple, rápido y eficiente.',
         step1: '1. Crea una sala',
