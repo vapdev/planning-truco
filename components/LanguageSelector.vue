@@ -54,6 +54,14 @@ const languages = {
   pt: 'Português',
   fr: 'Français',
   es: 'Español',
+  de: 'Deutsch',
+  it: 'Italiano',
+  pl: 'Polski',
+  ru: 'Русский',
+  ar: 'العربية',
+  zh: '中文',
+  ja: '日本語',
+  ko: '한국어',
 };
 
 const flagIcons = {
@@ -61,5 +69,13 @@ const flagIcons = {
   pt: 'cif:br',
   fr: 'cif:fr',
   es: 'cif:es',
+  zh: 'cif:cn',
+  ar: 'cif:sa',
+  de: 'cif:de',
+  ja: 'cif:jp',
+  it: 'cif:it',
+  ru: 'cif:ru',
+  pl: 'cif:pl',
+  ko: 'cif:kr',
 };
 </script>

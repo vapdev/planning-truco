@@ -49,10 +49,18 @@
           v-model="language"
           value-attribute="id"
           :options="[
-            { label: 'Português', id: 'pt' },
             { label: 'English', id: 'en' },
             { label: 'Español', id: 'es' },
+            { label: 'Português', id: 'pt' },
             { label: 'Français', id: 'fr' },
+            { label: 'Deutsch', id: 'de' },
+            { label: 'Italiano', id: 'it' },
+            { label: 'Polski', id: 'pl' },
+            { label: 'Русский', id: 'ru' },
+            { label: 'العربية', id: 'ar' },
+            { label: '中文', id: 'zh' },
+            { label: '日本語', id: 'ja' },
+            { label: '한국어', id: 'ko' },
           ]"
           size="lg"
           color="gray"
