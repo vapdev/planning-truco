@@ -44,6 +44,20 @@
             />
           </div>
         </div>
+        <div class="mt-4 mb-2">{{ $t("language") }}</div>
+        <USelectMenu
+          v-model="language"
+          value-attribute="id"
+          :options="[
+            { label: 'Português', id: 'pt' },
+            { label: 'English', id: 'en' },
+            { label: 'Español', id: 'es' },
+            { label: 'Français', id: 'fr' },
+          ]"
+          size="lg"
+          color="gray"
+          class="w-full font-normal border-2 border-gray-300 rounded-lg"
+        ></USelectMenu>
         <!-- <div class="flex items-center gap-4 justify-between w-full">
           <div class="flex flex-col mt-4">
             <div class="font-semibold">Todos podem revelar os votar</div>
@@ -120,7 +134,9 @@
 </template>
 
 <script setup>
+const { setLocale, locale } = useI18n();
 const userStore = useUserStore();
+
 const roomName = ref("");
 const userName = ref("");
 const props = defineProps({
@@ -131,6 +147,8 @@ const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
 const autoShowCards = ref(false);
 const { gtag } = useGtag();
+
+const language = ref(locale.value);
 
 const close = () => {
   emit("update:modelValue", false);
@@ -157,6 +175,11 @@ const changeVirarAutomatico = () => {
 
 function handleSaveConfig() {
   gtag("event", "save_config");
+  console.log("language", language.value);
+  console.log("locale", locale.value);
+  if (language.value !== locale.value) {
+    setLocale(language.value);
+  }
   if (roomName.value !== userStore.roomState.name) {
     userStore.changeRoomName(roomName.value);
   }
