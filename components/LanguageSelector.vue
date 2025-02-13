@@ -12,7 +12,7 @@
       <div 
         v-for="(label, lang) in languages" 
         :key="lang" 
-        @click="setLocale(lang)" 
+        @click="handleSetLocale(lang)" 
         class="flex items-center justify-between p-2 hover:bg-gray-100 cursor-pointer"
       >
         <Icon size="20" :name="flagIcons[lang]" />
@@ -26,8 +26,15 @@
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { onClickOutside } from '@vueuse/core'
+const { gtag } = useGtag();
 
 const { setLocale, locale } = useI18n();
+
+const handleSetLocale = (lang) => {
+  gtag("event", "set_locale", { lang });
+  setLocale(lang);
+};
+
 const showLanguageDropdown = ref(false);
 const currentLocale = computed(() => locale.value);
 

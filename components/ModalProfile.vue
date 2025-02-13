@@ -37,6 +37,7 @@
 </template>
 
 <script setup>
+const { gtag } = useGtag();
 const userStore = useUserStore();
 const userName = ref("");
 
@@ -48,6 +49,7 @@ onMounted(() => {
 });
 
 function handleSaveName() {
+  gtag("event", "save_name");
   if (userName.value !== userStore.name) {
     userStore.changeName(userName.value);
   }

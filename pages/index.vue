@@ -49,8 +49,10 @@
 </template>
 
 <script setup>
+const { gtag } = useGtag();
 const router = useRouter();
 const startGame = () => {
+  gtag("event", "start_game");
   router.push("/new");
 };
 </script>
