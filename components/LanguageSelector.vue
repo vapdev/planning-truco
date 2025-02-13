@@ -8,7 +8,7 @@
       :color="isDarkMode ? 'white' : '#3f4146'"
     />
 
-    <div v-if="showLanguageDropdown" class="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-2">
+    <div ref="modal" v-if="showLanguageDropdown" class="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-2">
       <div 
         v-for="(label, lang) in languages" 
         :key="lang" 
@@ -25,10 +25,19 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { onClickOutside } from '@vueuse/core'
 
 const { setLocale, locale } = useI18n();
 const showLanguageDropdown = ref(false);
 const currentLocale = computed(() => locale.value);
+
+const modal = ref(null);
+
+onClickOutside(modal, event => {
+  if (showLanguageDropdown.value) {
+    toggleLanguageDropdown();
+  }
+});
 
 const toggleLanguageDropdown = () => {
   showLanguageDropdown.value = !showLanguageDropdown.value;
