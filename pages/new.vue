@@ -6,7 +6,7 @@
       >
         <a
           href="/"
-          class="relative flex items-center inline-block h-5 h-full font-black leading-none"
+          class="relative flex items-center h-full font-black leading-none"
         >
           <span id="home" class="ml-3 text-xl text-white"
             >Free Planning Poker<span class="text-indigo-600">.</span></span

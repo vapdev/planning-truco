@@ -210,6 +210,10 @@ const toggleMostrarCartas = () => {
     }),
   });
 };
+
+onUnmounted(() => {
+  userStore.closeWsConnection();
+});
 </script>
 
 <style>
