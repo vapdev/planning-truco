@@ -1,55 +1,80 @@
 <template>
-  <div
-    :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular bg-[#F9F9F9] dark:bg-[#3f4146] text-gray-800 dark:text-white h-full w-full flex flex-col justify-between"
-  >
-    <!-- HEADER -->
-    <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
+  <div :key="key"
+    class="wrapper atkinson-hyperlegible-mono-regular bg-[#f0f0f0] dark:bg-[#3f4146] text-gray-800 dark:text-white flex">
 
-    <div class="flex justify-around w-full h-2/5">
-      <!-- MAIN CONTENT -->
-      <div class="w-1/3 flex flex-col items-center">
-        <!-- <span>Histórico de votações:</span> -->
-      </div>
-      <div class="flex w-1/3 flex-col justify-center items-center">
-        <!-- PLAYERS DE CIMA -->
-        <TopContainer :players="playersTop" />
-        <div class="flex gap-4 justify-center items-center">
-          <!-- PLAYERS DA ESQUERDA -->
-          <LeftContainer :players="playersLeft" />
-          <!-- MESA -->
-          <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
-          <!-- PLAYERS DA DIREITA -->
-          <RightContainer :players="playersRight" />
+    <div class="wrapper h-full w-full flex flex-col justify-between">
+
+      <!-- HEADER -->
+      <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" />
+
+      <div class="flex justify-around w-full h-2/5">
+        <!-- MAIN CONTENT -->
+        <div class="w-1/3 flex flex-col items-center">
+          <!-- <span>Histórico de votações:</span> -->
         </div>
-        <!-- PLAYERS DE BAIXO -->
-        <BottomContainer :players="playersBottom" />
+        <div class="flex w-1/3 flex-col justify-center items-center">
+          <!-- PLAYERS DE CIMA -->
+          <TopContainer :players="playersTop" />
+          <div class="flex gap-4 justify-center items-center">
+            <!-- PLAYERS DA ESQUERDA -->
+            <LeftContainer :players="playersLeft" />
+            <!-- MESA -->
+            <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
+            <!-- PLAYERS DA DIREITA -->
+            <RightContainer :players="playersRight" />
+          </div>
+          <!-- PLAYERS DE BAIXO -->
+          <BottomContainer :players="playersBottom" />
+        </div>
+        <div class="w-1/3 flex justify-center">
+          <!-- teste2 -->
+        </div>
       </div>
-      <div class="w-1/3 flex justify-center">
-        <!-- teste2 -->
+
+      <!-- FOOTER -->
+      <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
+        <Transition enter-active-class="slide-up-enter-active" enter-from-class="slide-up-enter-from"
+          enter-to-class="slide-up-enter-to" leave-active-class="slide-up-leave-active"
+          leave-from-class="slide-up-leave-from" leave-to-class="slide-up-leave-to">
+          <div v-if="!userStore.roomState.showCards" key="deck">
+            <Deck :deck="deck" :selectedCard="selectedCard" :votar="votar" />
+          </div>
+          <div v-else key="stats">
+            <Stats :cards="deck" />
+          </div>
+        </Transition>
       </div>
+
+      <EmojiHandler />
     </div>
 
-    <!-- FOOTER -->
-    <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
-      <Transition
-        enter-active-class="slide-up-enter-active"
-        enter-from-class="slide-up-enter-from"
-        enter-to-class="slide-up-enter-to"
-        leave-active-class="slide-up-leave-active"
-        leave-from-class="slide-up-leave-from"
-        leave-to-class="slide-up-leave-to"
-      >
-        <div v-if="!userStore.roomState.showCards" key="deck">
-          <Deck :deck="deck" :selectedCard="selectedCard" :votar="votar" />
+    <!-- <div class="bg-[#f9f9f9] w-[600px] px-6 py-5">
+      <div class="flex justify-between">
+        <div>
+          <div class="text-xl font-semibold">Issues</div>
+          <div class="text-sm">4 issues • 32 points</div>
         </div>
-        <div v-else key="stats">
-          <Stats :cards="deck" />
+        <div>
+          <button class="bg-[#f0f0f0] text-gray-800 dark:text-white dark:bg-[#3f4146] px-4 py-2 rounded-lg">Add
+            issue</button>
+          </div>
+      </div>
+      <div class="mt-6">
+        <div class="bg-[#eeeeee] flex justify-between py-2 px-4">
+          <div class="text-sm">Issue</div>
+          <div class="text-sm">Points</div>
         </div>
-      </Transition>
-    </div>
+        <div class="flex justify-between py-2 px-4">
+          <div class="text-sm">Issue</div>
+          <div class="text-sm">Points</div>
+        </div>
+        <div class="flex justify-between py-2 px-4">
+          <div class="text-sm">Issue</div>
+          <div class="text-sm">Points</div>
+        </div>
+      </div>
+    </div> -->
 
-    <EmojiHandler />
   </div>
 </template>
 
