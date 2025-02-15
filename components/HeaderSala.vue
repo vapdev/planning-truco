@@ -60,6 +60,22 @@
             :color="isDarkMode ? 'white' : '#3f4146'"
           />
         </div>
+        <div class="hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
+          <Icon
+            @click="emit('toggleRightPanel')"
+            size="30"
+            name="material-symbols:right-panel-close"
+            :color="isDarkMode ? 'white' : '#3f4146'"
+            v-if="rightPanel"
+          />
+          <Icon
+            @click="emit('toggleRightPanel')"
+            size="30"
+            name="material-symbols:right-panel-open"
+            :color="isDarkMode ? 'white' : '#3f4146'"
+            v-else
+          />
+        </div>
       </div>
     </div>
 
@@ -76,10 +92,11 @@
 <script setup>
 import { showToast } from "../composables/toast";
 const userStore = useUserStore();
+const { rightPanel } = storeToRefs(userStore);
 const modalShare = ref(false);
 const modalConfig = ref(false);
 const modalProfile = ref(false);
-const emit = defineEmits(["endGame", "toggleDarkMode"]);
+const emit = defineEmits(["endGame", "toggleDarkMode", "toggleRightPanel"]);
 const urlToCopy = ref();
 const $md = ref(null);
 import { onClickOutside } from "@vueuse/core";
