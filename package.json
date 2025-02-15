@@ -23,7 +23,7 @@
     "vue": "^3.4.21",
     "vue-draggable-next": "^2.2.1",
     "vue-router": "^4.3.0",
-    "vue3-emoji-picker": "^1.1.8",
+    "vue3-emoji-picker": "^1.1.8"
   },
   "devDependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
