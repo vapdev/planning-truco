@@ -79,6 +79,7 @@
               </div>
             </template>
           </UAccordion>
+          <div class="text-xl text-gray-500">This page in under development right now :)</div>
         </div>
       </div>
     </Transition>
