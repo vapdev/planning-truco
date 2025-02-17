@@ -5,7 +5,7 @@
       :class="[
         flipped
           ? 'flip bg-primary-500'
-          : 'bg-gray-300 dark:bg-gray-600',
+          : 'border-gray-300 dark:border-gray-600',
       ]"
     >
       <div
@@ -19,7 +19,7 @@
       </div>
       <div
         v-else
-        :class="player.voted ? 'cardPattern bg-primary-500' : ''"
+        :class="player.voted ? 'cardPattern bg-primary-500' : 'border-[2px] border-gray-300 dark:border-gray-500'"
         class="rounded-md w-full h-full text-gray-800 flex items-center justify-center"
         v-if="!player.voted || !flipped"
       ></div>
