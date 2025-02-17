@@ -1,5 +1,5 @@
 import { showToast } from "../composables/toast";
-import { defineStore, skipHydrate } from "pinia";
+import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
 
 export const useUserStore = defineStore("user", () => {
@@ -22,6 +22,7 @@ export const useUserStore = defineStore("user", () => {
   const APPLICATION_JSON = "application/json";
   const nuxtColorMode = useStorage("nuxt-color-mode", "dark");
   const isDarkMode = computed(() => nuxtColorMode.value === "dark");
+  const rightPanel = ref(false);
   let emojiCounter = 0;
   const deck = ref([]);
 
@@ -289,5 +290,6 @@ export const useUserStore = defineStore("user", () => {
     toggleDarkMode,
     deck,
     closeWsConnection,
+    rightPanel,
   };
 });
