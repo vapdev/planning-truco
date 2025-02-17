@@ -85,20 +85,7 @@ const setEmojiPickerVisible = (visible) => {
   animation-name: flip-animation;
 }
 .cardPattern {
-  background-image: repeating-linear-gradient(
-      45deg,
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.1) 7px,
-      transparent 5px,
-      transparent 10px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      rgba(0, 0, 0, 0.1),
-      rgba(0, 0, 0, 0.1) 7px,
-      transparent 5px,
-      transparent 10px
-    );
+  background: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 10px, transparent 10px, transparent 20px);
 }
 
 .front {

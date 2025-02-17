@@ -1,6 +1,6 @@
 <template>
   <div :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular bg-[#f0f0f0] dark:bg-[#3f4146] text-gray-800 dark:text-white flex overflow-hidden">
+    class="wrapper atkinson-hyperlegible-mono-regular bg-[#f0f0f0] dark:bg-[#3f4146] text-gray-800 dark:text-[#FFFFF0] flex overflow-hidden">
     <div class="wrapper h-full w-full flex flex-col justify-between">
       <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
       <div class="flex justify-around w-full h-2/5">
@@ -19,14 +19,14 @@
       <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
         <Transition name="slide-up">
           <Deck v-if="!userStore.roomState.showCards" :deck="deck" :selectedCard="selectedCard" :votar="votar" />
-          <Stats v-else :cards="deck" />
+          <Stats class="text-gray-700 dark:text-[#FFFFF0]" v-else :cards="deck" />
         </Transition>
       </div>
       <EmojiHandler />
     </div>
     <Transition name="rpanel">
       <div v-if="userStore.rightPanel"
-        class="rpanel bg-[#f9f9f9] flex flex-col justify-between w-[600px] px-6 py-5 max-h-[100vh] h-[100vh]">
+        class="rpanel bg-[#f9f9f9] dark:bg-[#37393d] flex flex-col justify-between w-[600px] px-6 py-5 max-h-[100vh] h-[100vh]">
         <div class="flex justify-between">
           <div>
             <div class="text-xl font-semibold">Issues</div>
@@ -37,7 +37,7 @@
         <div class="mt-6 flex flex-col gap-4 pr-4 flex-grow overflow-auto">
           <draggable class="dragArea list-group w-full" :list="issues" @change="changeDraggable">
             <div v-for="(issue, i) in issues" :key="issue.id"
-              class="bg-[#eeeeee] hover:scale-y-105 rounded-lg flex flex-col justify-between py-2 px-4 mb-2">
+              class="bg-[#eeeeee] dark:bg-[#43464b] hover:scale-y-105 rounded-lg flex flex-col justify-between py-2 px-4 mb-4">
               <div class="flex justify-between">
                 <div class="text-sm text-primary-500">#{{ i + 1 }}</div>
                 <div class="text-sm">Points</div>
@@ -52,17 +52,29 @@
             </div>
           </draggable>
 
-          <UAccordion open-icon="i-heroicons-plus" close-icon="i-heroicons-minus"
+          <UAccordion class="text-white" open-icon="i-heroicons-plus" close-icon="i-heroicons-minus"
             :items="[{ label: 'Add issue', defaultOpen: true, variant: 'solid', color: 'primary' }]">
+            <template #add-issue>
+              <div class="text-gray-900 dark:text-white text-center">
+
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                  Fully styled and customizable components for Nuxt.
+                </p>
+              </div>
+            </template>
             <template #item="{ item }">
-              <div class="bg-[#eeeeee] rounded-md flex flex-col justify-between py-2 px-2">
-                <UInput v-model="title" class="rounded-lg mb-2" placeholder="Issue title" />
-                <UInput v-model="description" class="rounded-lg"
-                  placeholder="Issue description or link" />
+              <div class="bg-[#eeeeee] dark:bg-[#43464b] rounded-md flex flex-col justify-between py-2 px-2">
+                <UInput color="gray" variant="outline" v-model="title" class="rounded-lg mb-2"
+                  placeholder="Issue title" />
+                <UInput color="gray" variant="outline" v-model="description" class="rounded-lg mb-2"
+                  placeholder="Issue description" />
+                <UInput color="gray" variant="outline" v-model="link" class="rounded-lg"
+                  placeholder="Issue link" />
                 <div class="flex justify-between mt-4">
                   <UButton variant="ghost"
                     class="dark:border-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded-lg">Clean</UButton>
-                  <UButton @click="handleAddTask" color="primary" class="text-gray-800 dark:text-white px-4 py-2 rounded-lg">Confirm</UButton>
+                  <UButton @click="handleAddTask" color="primary"
+                    class="text-gray-800 dark:text-white px-4 py-2 rounded-lg">Confirm</UButton>
                 </div>
               </div>
             </template>
@@ -86,8 +98,7 @@ const deck = ref([]);
 const key = ref(0);
 const title = ref("");
 const description = ref("");
-const issueList = ref([]);
-
+const link = ref("");
 const issues = ref([]);
 
 function toggleRightPanel() {
@@ -160,6 +171,18 @@ const toggleMostrarCartas = () => {
 };
 
 onUnmounted(() => userStore.closeWsConnection());
+
+watch(
+  () => jogadorLogado.value,
+  (newPlayer, oldPlayer) => {
+    if (JSON.stringify(newPlayer) !== JSON.stringify(oldPlayer)) {
+      if (newPlayer && !newPlayer.voted) {
+        selectedCard.value = null;
+      }
+    }
+  },
+  { deep: true }
+);
 </script>
 
 <style>

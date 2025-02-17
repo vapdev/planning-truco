@@ -5,7 +5,6 @@
       size="30"
       class="hover:cursor-pointer"
       :name="flagIcons[currentLocale]"
-      :color="isDarkMode ? 'white' : '#3f4146'"
     />
 
     <div ref="modal" v-if="showLanguageDropdown" class="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-2">
