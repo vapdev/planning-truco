@@ -24,91 +24,29 @@
       </div>
       <EmojiHandler />
     </div>
-    <Transition name="rpanel">
-      <div v-if="userStore.rightPanel"
-        class="rpanel bg-[#f9f9f9] dark:bg-[#37393d] flex flex-col justify-between w-[600px] px-6 py-5 max-h-[100vh] h-[100vh]">
-        <div class="flex justify-between">
-          <div>
-            <div class="text-xl font-semibold">Issues</div>
-            <div class="text-sm">{{ issues.length }} issues • {{ issuesTotalPoints }} points</div>
-          </div>
-        </div>
-
-        <div class="mt-6 flex flex-col gap-4 pr-4 flex-grow overflow-auto">
-          <draggable class="dragArea list-group w-full" :list="issues" @change="changeDraggable">
-            <div v-for="(issue, i) in issues" :key="issue.id"
-              class="bg-[#eeeeee] dark:bg-[#43464b] hover:scale-y-105 rounded-lg flex flex-col justify-between py-2 px-4 mb-4">
-              <div class="flex justify-between">
-                <div class="text-sm text-primary-500">#{{ i + 1 }}</div>
-                <div class="text-sm">Points</div>
-              </div>
-              <div class="flex justify-between">
-                <div class="font-semibold">{{ issue.title }}</div>
-                <div class="font-semibold">{{ issue.points }}</div>
-              </div>
-              <a target="_blank" :href="issue.link" v-if="issue.link" class="text-sm text-blue-500 underline">{{
-                issue.link }}</a>
-              <div v-if="issue.description" class="text-sm">{{ issue.description }}</div>
-            </div>
-          </draggable>
-
-          <UAccordion class="text-white" open-icon="i-heroicons-plus" close-icon="i-heroicons-minus"
-            :items="[{ label: 'Add issue', defaultOpen: true, variant: 'solid', color: 'primary' }]">
-            <template #add-issue>
-              <div class="text-gray-900 dark:text-white text-center">
-
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                  Fully styled and customizable components for Nuxt.
-                </p>
-              </div>
-            </template>
-            <template #item="{ item }">
-              <div class="bg-[#eeeeee] dark:bg-[#43464b] rounded-md flex flex-col justify-between py-2 px-2">
-                <UInput color="gray" variant="outline" v-model="title" class="rounded-lg mb-2"
-                  placeholder="Issue title" />
-                <UInput color="gray" variant="outline" v-model="description" class="rounded-lg mb-2"
-                  placeholder="Issue description" />
-                <UInput color="gray" variant="outline" v-model="link" class="rounded-lg"
-                  placeholder="Issue link" />
-                <div class="flex justify-between mt-4">
-                  <UButton variant="ghost"
-                    class="dark:border-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded-lg">Clean</UButton>
-                  <UButton @click="handleAddTask" color="primary"
-                    class="text-gray-800 dark:text-white px-4 py-2 rounded-lg">Confirm</UButton>
-                </div>
-              </div>
-            </template>
-          </UAccordion>
-          <div class="text-xl text-gray-500">This page in under development right now :)</div>
-        </div>
-      </div>
+    <Transition name="rpanel" mode="out-in">
+      <RightPanel v-if="userStore.rightPanel" @close="userStore.rightPanel = false" />
     </Transition>
   </div>
 </template>
 
 <script setup>
-import { VueDraggableNext as draggable } from 'vue-draggable-next'
 const { gtag } = useGtag();
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiBase;
 const selectedCard = ref(null);
 const route = useRoute();
 const headerRef = ref(null);
-const userStore = useUserStore();
 const deck = ref([]);
 const key = ref(0);
-const title = ref("");
-const description = ref("");
-const link = ref("");
-const issues = ref([]);
+const userStore = useUserStore();
+
 
 function toggleRightPanel() {
   userStore.rightPanel = !userStore.rightPanel;
 }
 
-function changeDraggable() {
-  console.log("changeDraggable");
-}
+
 
 onMounted(async () => {
   userStore.userUUID = localStorage.getItem("userUUID");
@@ -121,7 +59,6 @@ onMounted(async () => {
   deck.value = userStore.deck;
 });
 
-const issuesTotalPoints = computed(() => issues.value.reduce((acc, issue) => acc + issue.points, 0));
 const computedPlayers = (condition) => computed(() => userStore.players.filter(condition));
 const playersBottom = computedPlayers((_, index) => (index < 4 ? index % 4 === 0 : index % 2 === 0));
 const playersTop = computedPlayers((_, index) => (index < 4 ? index % 4 === 1 : index % 2 === 1));
@@ -139,12 +76,6 @@ const votar = (score) => {
 const novaRodada = () => {
   gtag("event", "nova_rodada");
   fetch(`${apiUrl}/resetVotes`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ roomUUID: userStore.roomUUID }) });
-};
-
-const handleAddTask = () => {
-  issues.value.push({ title: title.value, description: description.value, points: 0 });
-  title.value = "";
-  description.value = "";
 };
 
 const sairDaSala = () => {
@@ -188,6 +119,7 @@ watch(
 
 <style>
 .wrapper {
+  position: relative;
   height: 100dvh;
 }
 
@@ -219,25 +151,5 @@ watch(
   transition: none;
   transform: translateY(0%);
   display: none;
-}
-
-/* width */
-.rpanel ::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-.rpanel ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-.rpanel ::-webkit-scrollbar-thumb {
-  background: #d4d4d4;
-}
-
-/* Handle on hover */
-.rpanel ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
 }
 </style>
