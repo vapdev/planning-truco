@@ -183,8 +183,6 @@ const changeVirarAutomatico = () => {
 
 function handleSaveConfig() {
   gtag("event", "save_config");
-  console.log("language", language.value);
-  console.log("locale", locale.value);
   if (language.value !== locale.value) {
     setLocale(language.value);
   }
