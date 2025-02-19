@@ -25,6 +25,7 @@ export const useUserStore = defineStore("user", () => {
   const rightPanel = ref(false);
   let emojiCounter = 0;
   const deck = ref([]);
+  const issues = ref([]);
 
   watch(userUUID, (newVal) => {
     if (newVal !== null && newVal !== "") {
@@ -82,23 +83,9 @@ export const useUserStore = defineStore("user", () => {
         const data = JSON.parse(event.data);
         roomState.value = data;
         players.value = data.players;
+        issues.value = data.issues || [];
         if (data.emojis) {
-          data.emojis.forEach((emoji) => {
-            const newEmoji = {
-              emoji: emoji.Emoji,
-              originUserId: emoji.OriginUserID,
-              targetUserId: emoji.TargetUserID,
-              key: `${Date.now()}-${emojiCounter++}`,
-            };
-            emojiStack.value.push(newEmoji);
-            const duration =
-              newEmoji.originUserId === newEmoji.targetUserId ? 5000 : 2000;
-            setTimeout(() => {
-              emojiStack.value = emojiStack.value.filter(
-                (e) => e.key !== newEmoji.key,
-              );
-            }, duration);
-          });
+          handleEmojis(data);
         }
       };
       ws.value.onclose = (event) => {
@@ -112,6 +99,25 @@ export const useUserStore = defineStore("user", () => {
         navigateTo("/");
       };
     }
+  }
+
+  function handleEmojis(data) {
+    data.emojis.forEach((emoji) => {
+      const newEmoji = {
+        emoji: emoji.Emoji,
+        originUserId: emoji.OriginUserID,
+        targetUserId: emoji.TargetUserID,
+        key: `${Date.now()}-${emojiCounter++}`,
+      };
+      emojiStack.value.push(newEmoji);
+      const duration =
+        newEmoji.originUserId === newEmoji.targetUserId ? 5000 : 2000;
+      setTimeout(() => {
+        emojiStack.value = emojiStack.value.filter(
+          (e) => e.key !== newEmoji.key,
+        );
+      }, duration);
+    });
   }
 
   const startGame = async (options) => {
@@ -291,5 +297,6 @@ export const useUserStore = defineStore("user", () => {
     deck,
     closeWsConnection,
     rightPanel,
+    issues
   };
 });
