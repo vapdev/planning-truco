@@ -1,6 +1,6 @@
 <template>
   <div :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular bg-[#f0f0f0] dark:bg-[#3f4146] text-gray-800 dark:text-[#FFFFF0] flex overflow-hidden">
+    class="wrapper atkinson-hyperlegible-mono-regular bg-[#f0f0f0] dark:bg-[#121212] text-gray-800 dark:text-[#FFFFF0] flex overflow-hidden">
     <div class="wrapper h-full w-full flex flex-col justify-between">
       <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
       <div class="flex justify-around w-full h-2/5">

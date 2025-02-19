@@ -1,6 +1,6 @@
 <template>
     <div
-        class="justify-between h-full overflow-x-hidden bg-[#f9f9f9] dark:bg-[#37393d] transition-all sm:max-w-[480px] w-full sm:relative absolute top-0 right-0 z-50">
+        class="justify-between h-full overflow-x-hidden bg-[#f9f9f9] dark:bg-[#191a1b] transition-all sm:max-w-[480px] w-full sm:relative absolute top-0 right-0 z-50">
         <div class="absolute top-0 right-0 min-w-full px-6 py-5">
             <div class="flex justify-between">
                 <div>
@@ -16,7 +16,7 @@
             <div class="mt-6 flex flex-col gap-4 flex-grow overflow-x-hidden text-nowrap">
                 <draggable class="dragArea list-group w-full" :list="issues" @change="changeDraggable">
                     <div v-for="(issue, i) in issues" :key="issue.id"
-                        class="bg-[#eeeeee] dark:bg-[#43464b] hover:scale-y-105 rounded-lg flex flex-col justify-between py-2 px-4 mb-4">
+                        class="bg-[#eeeeee] dark:bg-[#292b2e] hover:scale-y-105 rounded-lg flex flex-col justify-between py-2 px-4 mb-4">
                         <div class="flex justify-between">
                             <div class="text-sm text-primary-500">#{{ i + 1 }}</div>
                             <div class="text-sm">Points</div>
@@ -25,9 +25,11 @@
                             <div class="font-semibold">{{ issue.title }}</div>
                             <div class="font-semibold">{{ issue.points }}</div>
                         </div>
-                        <a target="_blank" :href="issue.link" v-if="issue.link"
-                            class="text-sm text-blue-500 underline">{{
-                                issue.link }}</a>
+                        <div>
+                            <a target="_blank" :href="issue.link" v-if="issue.link"
+                                class="text-sm text-blue-500 underline">{{
+                                    issue.link }}</a>
+                        </div>
                         <div v-if="issue.description" class="text-sm">{{ issue.description }}</div>
                     </div>
                 </draggable>
@@ -43,7 +45,7 @@
                         </div>
                     </template>
                     <template #item="{ item }">
-                        <div class="bg-[#eeeeee] dark:bg-[#43464b] rounded-md flex flex-col justify-between py-2 px-2">
+                        <div class="bg-[#eeeeee] dark:bg-[#292b2e] rounded-md flex flex-col justify-between py-2 px-2">
                             <UInput color="gray" variant="outline" v-model="title" class="rounded-lg mb-2"
                                 placeholder="Issue title" />
                             <UInput color="gray" variant="outline" v-model="description" class="rounded-lg mb-2"
@@ -51,8 +53,7 @@
                             <UInput color="gray" variant="outline" v-model="link" class="rounded-lg"
                                 placeholder="Issue link" />
                             <div class="flex justify-between mt-4">
-                                <UButton variant="ghost"
-                                    class="dark:border-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded-lg">
+                                <UButton variant="ghost" class="text-gray-800 dark:text-white px-4 py-2 rounded-lg">
                                     Clean
                                 </UButton>
                                 <UButton @click="handleAddIssue" color="primary"
@@ -94,5 +95,4 @@ function changeDraggable() {
 
 </script>
 
-<style>
-</style>
+<style></style>
