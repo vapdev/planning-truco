@@ -10,7 +10,7 @@
         </div>
       </div> -->
       <div class="flex w-1/3 justify-start items-center">
-        <div class="bg-gray-300 dark:bg-gray-600 rounded-full flex sm:gap-5 px-4 py-2">
+        <div class="bg-gray-300 dark:bg-gray-800 rounded-full flex sm:gap-5 px-4 py-2">
           <div class="flex items-center gap-2">
             <div class="hover:bg-gray-400 dark:hover:bg-gray-500 hover:cursor-pointer rounded-xl p-1">
               <Icon @click="modalProfile = true" size="30" name="material-symbols:person-outline"
@@ -26,12 +26,12 @@
         </div>
       </div>
       <div class="flex w-1/3 justify-center items-center">
-        <div v-if="userStore.roomState.name" class="invisible md:visible bg-gray-300 dark:bg-gray-600 rounded-full px-4 py-2">
+        <div v-if="userStore.roomState.name" class="invisible md:visible bg-gray-300 dark:bg-gray-800 rounded-full px-4 py-2">
           <span class="font-bold dark:text-white text-gray-800">{{ userStore.roomState.name }}</span>
         </div>
       </div>
       <div class="flex w-1/3 justify-end items-center">
-        <div class="bg-gray-300 dark:bg-gray-600 rounded-full flex sm:gap-5 px-4 py-2">
+        <div class="bg-gray-300 dark:bg-gray-800 rounded-full flex sm:gap-5 px-4 py-2">
           <div class="hover:bg-gray-400 rounded-xl p-1 relative">
             <Icon @click="toggleColorPickerModal" size="30" ref="refColorPickerIcon" class="hover:cursor-pointer"
               name="material-symbols:palette-outline" :color="isDarkMode ? '#FFFFF0' : '#3f4146'" />
