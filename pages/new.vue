@@ -139,7 +139,7 @@
 </template>
 
 <script setup>
-import * as decks from "@/utils/decks";
+import * as decks from "~/utils/decks";
 const virarAutomatico = ref(false);
 const roomName = ref("");
 const baralho = ref({
