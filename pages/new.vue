@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen ">
     <header class="relative bg-indigo-500 w-full text-white h-24">
       <div
         class="container flex items-center justify-center h-full max-w-6xl px-8 mx-auto sm:justify-between xl:px-0"
@@ -15,7 +15,7 @@
       </div>
     </header>
     <div
-      class="flex-grow flex items-center justify-center bg-gray-100 text-black dark:text-white dark:bg-gray-800"
+      class="flex-grow flex items-center justify-center bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-[#FFFFF0]"
     >
       <div class="bg-white dark:bg-gray-700 p-8 pt-4 rounded shadow-md w-full max-w-md">
         <form>
