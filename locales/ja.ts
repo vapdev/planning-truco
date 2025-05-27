@@ -32,5 +32,10 @@ export default {
   votes: '投票数',
   language: '言語',
   settings: '設定',
-  roomName: 'ルーム名'
+  roomName: 'ルーム名',
+  linkCopied: 'リンクがクリップボードにコピーされました！',
+  error: 'エラー',
+  nameChangedSuccess: '名前が正常に変更されました！',
+  roomNameChangedSuccess: 'ルーム名が正常に変更されました！',
+  playerKickedSuccess: 'プレイヤーが正常に削除されました！',
 }

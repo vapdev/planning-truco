@@ -33,4 +33,9 @@ export default {
   language: 'Idioma',
   settings: 'Configurações',
   roomName: 'Nome da Sala',
+  linkCopied: 'O link foi copiado para a área de transferência!',
+  error: 'Erro',
+  nameChangedSuccess: 'Nome alterado com sucesso!',
+  roomNameChangedSuccess: 'Nome da sala alterado com sucesso!',
+  playerKickedSuccess: 'Jogador removido com sucesso!',
 }

@@ -1,23 +1,43 @@
 <template>
   <div class="select-none relative">
-    <Icon
+    <button
       @click="toggleLanguageDropdown"
-      size="30"
-      class="hover:cursor-pointer"
-      :name="flagIcons[currentLocale]"
-    />
+      class="group p-2 rounded-lg backdrop-blur-sm bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
+    >
+      <Icon
+        size="24"
+        class="text-white group-hover:text-purple-200 transition-colors duration-300"
+        :name="flagIcons[currentLocale]"
+      />
+    </button>
 
-    <div ref="modal" v-if="showLanguageDropdown" class="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-2">
+    <Transition name="dropdown">
       <div 
-        v-for="(label, lang) in languages" 
-        :key="lang" 
-        @click="handleSetLocale(lang)" 
-        class="flex items-center justify-between p-2 hover:bg-gray-100 cursor-pointer"
+        ref="modal" 
+        v-if="showLanguageDropdown" 
+        class="absolute top-14 right-0 backdrop-blur-sm bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-3 min-w-[200px] z-50"
       >
-        <Icon size="20" :name="flagIcons[lang]" />
-        <span class="text-gray-900">{{ label }}</span>
+        <div 
+          v-for="(label, lang) in languages" 
+          :key="lang" 
+          @click="handleSetLocale(lang)" 
+          class="group flex items-center justify-between p-3 rounded-xl hover:bg-white/10 cursor-pointer transition-all duration-300 transform hover:scale-105"
+          :class="{ 'bg-gradient-to-r from-purple-500/20 to-pink-500/20': currentLocale === lang }"
+        >
+          <Icon 
+            size="20" 
+            :name="flagIcons[lang]" 
+            class="group-hover:scale-110 transition-transform duration-300" 
+          />
+          <span 
+            class="text-white font-medium group-hover:text-purple-200 transition-colors duration-300"
+            :class="{ 'text-purple-200': currentLocale === lang }"
+          >
+            {{ label }}
+          </span>
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
@@ -78,3 +98,26 @@ const flagIcons = {
   ko: 'cif:kr',
 };
 </script>
+
+<style scoped>
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dropdown-enter-from,
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+.dropdown-enter-to,
+.dropdown-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+</style>

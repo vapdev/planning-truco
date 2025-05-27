@@ -32,5 +32,10 @@ export default {
   votes: 'Голоса',
   language: 'Язык',
   settings: 'Настройки',
-  roomName: 'Название комнаты'
+  roomName: 'Название комнаты',
+  linkCopied: 'Ссылка скопирована в буфер обмена!',
+  error: 'Ошибка',
+  nameChangedSuccess: 'Имя успешно изменено!',
+  roomNameChangedSuccess: 'Название комнаты успешно изменено!',
+  playerKickedSuccess: 'Игрок успешно удален!',
 }

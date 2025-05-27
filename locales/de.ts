@@ -32,5 +32,10 @@ export default {
   votes: 'Stimmen',
   language: 'Sprache',
   settings: 'Einstellungen',
-  roomName: 'Raumname'
+  roomName: 'Raumname',
+  linkCopied: 'Der Link wurde in die Zwischenablage kopiert!',
+  error: 'Fehler',
+  nameChangedSuccess: 'Name erfolgreich geändert!',
+  roomNameChangedSuccess: 'Raumname erfolgreich geändert!',
+  playerKickedSuccess: 'Spieler erfolgreich entfernt!',
 }

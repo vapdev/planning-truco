@@ -1,7 +1,18 @@
 <template>
   <div :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular  bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-[#FFFFF0] flex overflow-hidden">
-    <div class="wrapper h-full w-full flex flex-col justify-between">
+    class="wrapper atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+    
+    <!-- Animated background elements -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Radial spotlight effect for depth -->
+    <div class="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-900/50"></div>
+    
+    <div class="wrapper h-full w-full flex flex-col justify-between relative z-10">
       <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
       <div class="flex justify-around w-full h-2/5">
         <div class="w-1/3 flex flex-col items-center"></div>
@@ -19,7 +30,7 @@
       <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
         <Transition name="slide-up">
           <Deck v-if="!userStore.roomState.showCards" :deck="deck" :selectedCard="selectedCard" :votar="votar" />
-          <Stats class="text-gray-700 dark:text-[#FFFFF0]" v-else :cards="deck" />
+          <Stats class="text-white" v-else :cards="deck" />
         </Transition>
       </div>
       <EmojiHandler />
@@ -151,5 +162,29 @@ watch(
   transition: none;
   transform: translateY(0%);
   display: none;
+}
+
+/* Modern background effects */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+.animate-pulse {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Radial gradient utility */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
+/* Enhanced glassmorphism effects */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
 }
 </style>

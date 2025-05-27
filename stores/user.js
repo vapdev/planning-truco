@@ -20,8 +20,6 @@ export const useUserStore = defineStore("user", () => {
   const ws = ref(null);
   const POST = "POST";
   const APPLICATION_JSON = "application/json";
-  const nuxtColorMode = useStorage("nuxt-color-mode", "dark");
-  const isDarkMode = computed(() => nuxtColorMode.value === "dark");
   const rightPanel = ref(false);
   let emojiCounter = 0;
   const deck = ref([]);
@@ -144,7 +142,7 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const changeName = async (newName) => {
+  const changeName = async (newName, messages = { error: "Error", success: "Name changed successfully!" }) => {
     name.value = newName;
     const response = await fetch(`${apiUrl}/changeName`, {
       method: "POST",
@@ -160,7 +158,7 @@ export const useUserStore = defineStore("user", () => {
 
     if (!response.ok) {
       showToast({
-        message: "Erro",
+        message: messages.error,
         position: "top-center",
         offsetY: 4,
         type: "error",
@@ -168,7 +166,7 @@ export const useUserStore = defineStore("user", () => {
       throw new Error("Error changing name");
     } else {
       showToast({
-        message: "Nome alterado com sucesso!",
+        message: messages.success,
         position: "top-center",
         offsetY: 4,
         type: "success",
@@ -176,7 +174,7 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const changeRoomName = async (newName) => {
+  const changeRoomName = async (newName, messages = { error: "Error", success: "Room name changed successfully!" }) => {
     const response = await fetch(`${apiUrl}/changeRoomName`, {
       method: "POST",
       headers: {
@@ -191,7 +189,7 @@ export const useUserStore = defineStore("user", () => {
 
     if (!response.ok) {
       showToast({
-        message: "Erro",
+        message: messages.error,
         position: "top-center",
         offsetY: 4,
         type: "error",
@@ -199,7 +197,7 @@ export const useUserStore = defineStore("user", () => {
       throw new Error("Error changing room name");
     } else {
       showToast({
-        message: "Nome da sala alterado com sucesso!",
+        message: messages.success,
         position: "top-center",
         offsetY: 4,
         type: "success",
@@ -207,7 +205,7 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
-  const kickPlayer = async (playerUUID) => {
+  const kickPlayer = async (playerUUID, messages = { error: "Error", success: "Player removed successfully!" }) => {
     const response = await fetch(`${apiUrl}/kickPlayer`, {
       method: "POST",
       headers: {
@@ -222,7 +220,7 @@ export const useUserStore = defineStore("user", () => {
 
     if (!response.ok) {
       showToast({
-        message: "Erro",
+        message: messages.error,
         position: "top-center",
         offsetY: 4,
         type: "error",
@@ -230,7 +228,7 @@ export const useUserStore = defineStore("user", () => {
       throw new Error("Error kicking player");
     } else {
       showToast({
-        message: "Jogador removido com sucesso!",
+        message: messages.success,
         position: "top-center",
         offsetY: 4,
         type: "success",
@@ -260,10 +258,6 @@ export const useUserStore = defineStore("user", () => {
     );
   };
 
-  const toggleDarkMode = () => {
-    nuxtColorMode.value = nuxtColorMode.value === "dark" ? "light" : "dark";
-  };
-
   const closeWsConnection = () => {
     if (ws.value) {
       ws.value.close(1000);
@@ -286,14 +280,11 @@ export const useUserStore = defineStore("user", () => {
     changeName,
     changeRoomName,
     noVotes,
-    isDarkMode,
     kickPlayer,
     updatePlayerLocation,
     jogadorLogado,
     emojiStack,
     addEmoji,
-    nuxtColorMode,
-    toggleDarkMode,
     deck,
     closeWsConnection,
     rightPanel,

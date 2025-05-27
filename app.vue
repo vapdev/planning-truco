@@ -42,10 +42,6 @@ onMounted(() => {
   } else {
     changeColor(DEFAULT_COLOR);
   }
-  const darkMode = localStorage.getItem("nuxt-color-mode");
-  if (darkMode === "dark") {
-    document.body.classList.add("dark");
-  }
 });
 
 const changeColor = (color) => {

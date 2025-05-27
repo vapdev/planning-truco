@@ -32,5 +32,10 @@ export default {
   votes: 'Votos',
   language: 'Idioma',
   settings: 'Configuraciones',
-  roomName: 'Nombre de la Sala'
+  roomName: 'Nombre de la Sala',
+  linkCopied: '¡El enlace ha sido copiado al portapapeles!',
+  error: 'Error',
+  nameChangedSuccess: '¡Nombre cambiado con éxito!',
+  roomNameChangedSuccess: '¡Nombre de la sala cambiado con éxito!',
+  playerKickedSuccess: '¡Jugador eliminado con éxito!',
 }

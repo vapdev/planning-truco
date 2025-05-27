@@ -32,5 +32,10 @@ export default {
   votes: 'Voti',
   language: 'Lingua',
   settings: 'Impostazioni',
-  roomName: 'Nome della stanza'
+  roomName: 'Nome della stanza',
+  linkCopied: 'Il link è stato copiato negli appunti!',
+  error: 'Errore',
+  nameChangedSuccess: 'Nome modificato con successo!',
+  roomNameChangedSuccess: 'Nome della stanza modificato con successo!',
+  playerKickedSuccess: 'Giocatore rimosso con successo!',
 }

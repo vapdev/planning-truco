@@ -1,33 +1,42 @@
 <template>
   <div
-    class="relative touch-manipulation select-none flex z-10 gap-2 md:gap-1 transition-opacity duration-300"
+    class="relative touch-manipulation select-none flex z-10 gap-3 transition-opacity duration-300 p-2 backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl"
     id="participants"
   >
     <div
       @click="addEmoji(emojiItem)"
-      class="hover:scale-150 text-2xl cursor-pointer"
+      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/20 cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/25"
       v-for="emojiItem in emojis"
+      :key="emojiItem"
     >
-      {{ emojiItem }}
+      <span class="text-2xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
+        {{ emojiItem }}
+      </span>
     </div>
+    
     <div
-      class="hover:scale-150 text-2xl cursor-pointer"
+      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 hover:from-purple-500/30 hover:to-pink-500/30 cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/25"
       @click="toggleEmojiPicker"
       ref="emojiButton"
     >
-      ➕
+      <span class="text-xl group-hover:scale-110 transition-transform duration-300 text-purple-200">
+        ➕
+      </span>
     </div>
+    
     <div class="relative z-50">
-      <EmojiPicker
-        ref="target"
-        display-recent
-        disable-skin-tones
-        theme="auto"
-        v-if="emojiPickerVisible"
-        class="emoji-picker"
-        :native="true"
-        @select="onSelectEmoji"
-      />
+      <Transition name="emoji-picker">
+        <EmojiPicker
+          ref="target"
+          display-recent
+          disable-skin-tones
+          theme="dark"
+          v-if="emojiPickerVisible"
+          class="emoji-picker backdrop-blur-sm bg-slate-900/90 border border-white/20 rounded-xl shadow-2xl"
+          :native="true"
+          @select="onSelectEmoji"
+        />
+      </Transition>
     </div>
   </div>
 </template>

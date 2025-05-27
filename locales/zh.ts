@@ -32,5 +32,10 @@ export default {
   consensus: '共识',
   vote: '投票',
   votes: '投票数',
-  language: '语言'
+  language: '语言',
+  linkCopied: '链接已复制到剪贴板！',
+  error: '错误',
+  nameChangedSuccess: '名称更改成功！',
+  roomNameChangedSuccess: '房间名称更改成功！',
+  playerKickedSuccess: '玩家移除成功！',
 }

@@ -1,71 +1,79 @@
 <template>
   <UModal
     @close="close"
-    :ui="{ overlay: { background: 'bg-primary-200/40' } }"
+    :ui="{ overlay: { background: 'bg-slate-900/60 backdrop-blur-sm' } }"
     :model-value="modelValue"
   >
     <div
-      class="dark:text-white text-gray-800 atkinson-hyperlegible-mono-regular relative rounded-lg font-bold dark:bg-[#3f4146] bg-[#F9F9F9] p-6 flex flex-col gap-6"
+      class="text-white atkinson-hyperlegible-mono-regular relative rounded-xl font-bold bg-slate-900/80 backdrop-blur-sm border border-white/10 p-6 flex flex-col gap-6 animate-fade-in max-h-[90vh] overflow-y-auto"
     >
-      <div class="absolute cursor-pointer flex top-2 right-2">
+      <div class="absolute cursor-pointer flex top-2 right-2 z-10">
         <Icon
           @click="close"
-          class="md:hover:bg-gray-500 p-0.5 rounded-full transition-all duration-250 ease-out"
+          class="hover:bg-white/10 hover:scale-110 p-0.5 rounded-full transition-all duration-300 ease-out text-white/70 hover:text-white"
           size="38"
           name="material-symbols:close-small-rounded"
         ></Icon>
       </div>
-      <div class="mb-2 text-3xl dark:text-white">{{  $t("settings")  }}</div>
-      <div class="text-md flex flex-col">
-        <div>{{  $t("roomName")  }}</div>
-        <div class="flex w-full mt-2 mb-4">
-          <UInput
-            v-model="roomName"
-            size="lg"
-            variant="outline"
-            color="gray"
-            class="w-full font-normal border-2 border-gray-300 rounded-lg"
-            :inputClass="userStore.isDarkMode ? 'text-white' : 'text-gray-800'"
-            :placeholder="$t('roomName')"
-          />
-        </div>
-        <div class="flex items-center gap-4 mb-2 justify-between w-full">
-          <div class="flex flex-col mt-4">
-            <div class="font-semibold">{{  $t("revealCardsTitle")  }}</div>
-            <div class="font-normal text-sm">
-              {{  $t("revealCardsDescription")  }}
-            </div>
-          </div>
-          <div class="pt-5">
-            <UToggle
-              v-model="autoShowCards"
-              color="primary"
-              class="dark:border-2 dark:border-gray-600"
+      <div class="mb-2 text-3xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-extrabold">
+        {{  $t("settings")  }}
+      </div>
+      <div class="text-md flex flex-col space-y-6">
+        <div class="space-y-3">
+          <div class="text-white/90 font-medium">{{  $t("roomName")  }}</div>
+          <div class="flex w-full">
+            <UInput
+              v-model="roomName"
+              size="lg"
+              variant="outline"
+              color="gray"
+              class="w-full font-normal rounded-xl modern-input"
+              :input-class="'text-white bg-transparent border-white/20 focus:border-purple-400 focus:ring-purple-400/50'"
+              :placeholder="$t('roomName')"
             />
           </div>
         </div>
-        <div class="mt-4 mb-2">{{ $t("language") }}</div>
-        <USelectMenu
-          v-model="language"
-          value-attribute="id"
-          :options="[
-            { label: 'English', id: 'en' },
-            { label: 'Español', id: 'es' },
-            { label: 'Português', id: 'pt' },
-            { label: 'Français', id: 'fr' },
-            { label: 'Deutsch', id: 'de' },
-            { label: 'Italiano', id: 'it' },
-            { label: 'Polski', id: 'pl' },
-            { label: 'Русский', id: 'ru' },
-            { label: 'العربية', id: 'ar' },
-            { label: '中文', id: 'zh' },
-            { label: '日本語', id: 'ja' },
-            { label: '한국어', id: 'ko' },
-          ]"
-          size="lg"
-          color="gray"
-          class="w-full font-normal border-2 border-gray-300 rounded-lg"
-        ></USelectMenu>
+        
+        <div class="glass-card p-4 rounded-xl">
+          <div class="flex items-center gap-4 justify-between w-full">
+            <div class="flex flex-col">
+              <div class="font-semibold text-white">{{  $t("revealCardsTitle")  }}</div>
+              <div class="font-normal text-sm text-white/70">
+                {{  $t("revealCardsDescription")  }}
+              </div>
+            </div>
+            <div>
+              <UToggle
+                v-model="autoShowCards"
+                color="primary"
+                class="modern-toggle"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="text-white/90 font-medium">{{ $t("language") }}</div>
+          <USelectMenu
+            v-model="language"
+            value-attribute="id"
+            class="modern-select"
+            :options="[
+              { label: 'English', id: 'en' },
+              { label: 'Español', id: 'es' },
+              { label: 'Português', id: 'pt' },
+              { label: 'Français', id: 'fr' },
+              { label: 'Deutsch', id: 'de' },
+              { label: 'Italiano', id: 'it' },
+              { label: 'Polski', id: 'pl' },
+              { label: 'Русский', id: 'ru' },
+              { label: 'العربية', id: 'ar' },
+              { label: '中文', id: 'zh' },
+              { label: '日本語', id: 'ja' },
+              { label: '한국어', id: 'ko' },
+            ]"
+            size="lg"
+          ></USelectMenu>
         <!-- <div class="flex items-center gap-4 justify-between w-full">
           <div class="flex flex-col mt-4">
             <div class="font-semibold">Todos podem revelar os votar</div>
@@ -129,11 +137,11 @@
                   <Icon size="30" name="material-symbols:delete-outline" color="red" />
                 </div>
               </template> -->
-        <!-- </UTable> -->
+        </div>
       </div>
       <button
         @click="handleSaveConfig"
-        class="bg-primary-500 w-full md:hover:bg-primary-400 font-bold py-2 px-4 rounded"
+        class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 w-full font-bold py-3 px-6 rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 text-white"
       >
         Salvar
       </button>
@@ -142,7 +150,7 @@
 </template>
 
 <script setup>
-const { setLocale, locale } = useI18n();
+const { setLocale, locale, t } = useI18n();
 const userStore = useUserStore();
 
 const roomName = ref("");
@@ -187,10 +195,16 @@ function handleSaveConfig() {
     setLocale(language.value);
   }
   if (roomName.value !== userStore.roomState.name) {
-    userStore.changeRoomName(roomName.value);
+    userStore.changeRoomName(roomName.value, {
+      error: t("error"),
+      success: t("roomNameChangedSuccess")
+    });
   }
   if (userName.value !== userStore.name) {
-    userStore.changeName(userName.value);
+    userStore.changeName(userName.value, {
+      error: t("error"),
+      success: t("nameChangedSuccess")
+    });
   }
   if (autoShowCards.value !== userStore.roomState.autoShowCards) {
     changeVirarAutomatico();
@@ -198,3 +212,46 @@ function handleSaveConfig() {
   close();
 }
 </script>
+
+<style scoped>
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.modern-input input {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.modern-input input:focus {
+  border-color: rgb(168, 85, 247) !important;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.modern-input input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.modern-select :deep(button) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.modern-select :deep(button:hover) {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgb(168, 85, 247) !important;
+}
+
+.modern-toggle :deep(.bg-primary-500) {
+  background-color: rgb(168, 85, 247) !important;
+}
+</style>

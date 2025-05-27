@@ -32,5 +32,10 @@ export default {
   votes: 'Głosy',
   language: 'Język',
   settings: 'Ustawienia',
-  roomName: 'Nazwa pokoju'
+  roomName: 'Nazwa pokoju',
+  linkCopied: 'Link został skopiowany do schowka!',
+  error: 'Błąd',
+  nameChangedSuccess: 'Nazwa została pomyślnie zmieniona!',
+  roomNameChangedSuccess: 'Nazwa pokoju została pomyślnie zmieniona!',
+  playerKickedSuccess: 'Gracz został pomyślnie usunięty!',
 }

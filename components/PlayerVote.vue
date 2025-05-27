@@ -1,30 +1,32 @@
 <template>
-  <div class="relative atkinson-hyperlegible-mono-regular flex flex-col w-10 gap-2 rounded-md group">
+  <div class="relative atkinson-hyperlegible-mono-regular flex flex-col w-10 gap-2 rounded-xl group">
     <div
-      class="relative text-white flex items-center rounded-md w-10 h-16 justify-center"
+      class="relative text-white flex items-center rounded-xl w-10 h-16 scale-110 justify-center backdrop-blur-sm border border-white/20 shadow-lg"
       :class="[
         flipped
-          ? 'flip bg-primary-500'
-          : 'border-gray-300 dark:border-gray-600',
+          ? 'flip bg-gradient-to-br from-purple-500 to-pink-500 shadow-purple-500/30'
+          : player.voted 
+            ? 'bg-gradient-to-br from-slate-600/80 to-slate-700/80 shadow-slate-500/20'
+            : 'bg-slate-800/50 border-white/10',
       ]"
     >
       <div
         v-if="player.voted && flipped"
-        class="front rounded-md w-full h-full flex items-center justify-center"
+        class="front rounded-xl w-full h-full flex items-center justify-center animate-vote-reveal"
       >
-        <span class="text-3xl">
+        <span class="text-2xl font-bold text-white drop-shadow-lg">
           <span v-if="player.vote != -1">{{ player.vote }}</span>
           <span v-else>☕</span>
         </span>
       </div>
       <div
         v-else
-        :class="player.voted ? 'cardPattern bg-primary-500' : 'border-[2px] border-gray-300 dark:border-gray-500'"
-        class="rounded-md w-full h-full text-gray-800 flex items-center justify-center"
+        :class="player.voted ? 'cardPattern bg-gradient-to-br from-purple-600/80 to-pink-600/80' : 'border-[2px] border-white/20'"
+        class="rounded-xl w-full h-full text-white flex items-center justify-center transition-all duration-300"
         v-if="!player.voted || !flipped"
       ></div>
       <div
-        class="absolute inset-0 flex items-center justify-center translate-y-[-83%] z-40 group-hover:flex group-hover:opacity-200 transition-opacity duration-300"
+        class="absolute inset-0 flex items-center justify-center translate-y-[-83%] z-40 group-hover:flex group-hover:opacity-100 transition-opacity duration-300"
         :class="{ hidden: !emojiPickerVisible }"
       >
         <EmojiThrower
@@ -34,7 +36,7 @@
       </div>
     </div>
     <div class="w-full text-center z-10">
-      <div class="text-sm flex justify-center text-nowrap font-semibold">
+      <div class="text-sm flex justify-center text-nowrap font-semibold text-white/90">
         {{ player.name || " " }}
       </div>
     </div>
@@ -78,14 +80,61 @@ const setEmojiPickerVisible = (visible) => {
 </script>
 
 <style scoped>
+@keyframes flip-animation {
+  0% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes vote-reveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .flip {
   transform-style: preserve-3d;
   animation-duration: 0.6s;
   animation-timing-function: ease-out;
   animation-name: flip-animation;
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
 }
+
+.animate-vote-reveal {
+  animation: vote-reveal 0.4s ease-out;
+}
+
 .cardPattern {
-  background: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 10px, transparent 10px, transparent 20px);
+  background: repeating-linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.1) 0px, 
+    rgba(255, 255, 255, 0.1) 8px, 
+    transparent 8px, 
+    transparent 16px
+  );
+  position: relative;
+}
+
+.cardPattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+  border-radius: inherit;
 }
 
 .front {
@@ -94,17 +143,11 @@ const setEmojiPickerVisible = (visible) => {
 
 .back {
   transform: rotateY(180deg);
-  transform: rotateY(180deg);
   backface-visibility: hidden;
 }
 
-@keyframes flip-animation {
-  0% {
-    transform: rotateY(180deg);
-  }
-
-  100% {
-    transform: rotateY(0deg);
-  }
+.group:hover div:first-child {
+  transform: scale(1.15) translateY(-2px);
+  transition: all 0.3s ease-out;
 }
 </style>

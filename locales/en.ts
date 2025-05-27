@@ -33,4 +33,9 @@ export default {
   vote: 'Vote',
   votes: 'Votes',
   language: 'Language',
+  linkCopied: 'The link has been copied to your clipboard!',
+  error: 'Error',
+  nameChangedSuccess: 'Name changed successfully!',
+  roomNameChangedSuccess: 'Room name changed successfully!',
+  playerKickedSuccess: 'Player removed successfully!',
 }

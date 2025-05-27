@@ -32,5 +32,10 @@ export default {
   consensus: 'إجماع',
   vote: 'تصويت',
   votes: 'الأصوات',
-  language: 'اللغة'
+  language: 'اللغة',
+  linkCopied: 'تم نسخ الرابط إلى الحافظة!',
+  error: 'خطأ',
+  nameChangedSuccess: 'تم تغيير الاسم بنجاح!',
+  roomNameChangedSuccess: 'تم تغيير اسم الغرفة بنجاح!',
+  playerKickedSuccess: 'تم إزالة اللاعب بنجاح!',
 }

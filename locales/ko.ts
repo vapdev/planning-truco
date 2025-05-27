@@ -32,5 +32,10 @@ export default {
   votes: '투표 수',
   language: '언어',
   settings: '설정',
-  roomName: '방 이름'
+  roomName: '방 이름',
+  linkCopied: '링크가 클립보드에 복사되었습니다!',
+  error: '오류',
+  nameChangedSuccess: '이름이 성공적으로 변경되었습니다!',
+  roomNameChangedSuccess: '방 이름이 성공적으로 변경되었습니다!',
+  playerKickedSuccess: '플레이어가 성공적으로 제거되었습니다!',
 }

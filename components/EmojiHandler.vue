@@ -3,10 +3,10 @@
     <div
       v-for="emoji in emojiThrowStack"
       :key="emoji.key"
-      class="absolute pointer-events-none select-none touch-manipulation text-4xl transition-transform duration-1000 ease-in-out z-50"
+      class="absolute pointer-events-none select-none touch-manipulation text-4xl transition-all duration-1000 ease-in-out z-50 drop-shadow-lg"
       :style="emoji.style"
     >
-      {{ emoji.i }}
+      <span class="animate-bounce-subtle filter drop-shadow-glow">{{ emoji.i }}</span>
     </div>
   </div>
 </template>
@@ -133,3 +133,22 @@ watch(
   { deep: true }
 );
 </script>
+
+<style scoped>
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px rgba(168, 85, 247, 0.5));
+}
+</style>
