@@ -1,5 +1,3 @@
-// i18n.config.ts
-
 import en from './locales/en'
 import fr from './locales/fr'
 import pt from './locales/pt'
@@ -16,6 +14,7 @@ import ko from './locales/ko'
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'en',
+  fallbackLocale: 'en',
   messages: {
     en,
     fr,
