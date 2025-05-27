@@ -41,26 +41,91 @@ export default defineNuxtConfig({
     id: process.env.NUXT_GTAG_ID,
   },
 
-  i18n: {
-    locales: [
-      { code: 'en', language: 'en-US' },
-      { code: 'pt', language: 'pt-BR' },
-      { code: 'es', language: 'es-ES' },
-      { code: 'fr', language: 'fr-FR' },
-      { code: 'zh', language: 'zh-CN' },
-      { code: 'ar', language: 'ar-SA' },
-      { code: 'de', language: 'de-DE' },
-      { code: 'it', language: 'it-IT' },
-      { code: 'ja', language: 'ja-JP' },
-      { code: 'pl', language: 'pl-PL' },
-      { code: 'ru', language: 'ru-RU' },
-      { code: 'ko', language: 'ko-KR' }
-    ],
-    defaultLocale: 'en',
-    vueI18n: './i18n.config.ts',
-    strategy: 'no_prefix',
+ i18n: {
+    // --- Configurações Gerais ---
+    // strategy: 'prefix_except_default', // ou a estratégia que preferir
+    defaultLocale: 'en', // Idioma padrão
+
+    // --- Configuração do Lazy Loading ---
     lazy: true,
-    langDir: 'locales/'
+    langDir: 'locales', // O diretório que você já criou
+
+    // --- O MAPEAMENTO CORRETO ---
+    // Aqui você define cada idioma e aponta para o seu arquivo.
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English',
+        file: 'en.ts' // <-- A propriedade 'file' que estava faltando
+      },
+      {
+        code: 'pt',
+        iso: 'pt-BR',
+        name: 'Português',
+        file: 'pt.ts'
+      },
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        name: 'Français',
+        file: 'fr.ts'
+      },
+      {
+        code: 'es',
+        iso: 'es-ES',
+        name: 'Español',
+        file: 'es.ts'
+      },
+      {
+        code: 'zh',
+        iso: 'zh-CN',
+        name: '中文',
+        file: 'zh.ts'
+      },
+      {
+        code: 'ar',
+        iso: 'ar-SA',
+        name: 'العربية',
+        file: 'ar.ts'
+      },
+      {
+        code: 'de',
+        iso: 'de-DE',
+        name: 'Deutsch',
+        file: 'de.ts'
+      },
+      {
+        code: 'it',
+        iso: 'it-IT',
+        name: 'Italiano',
+        file: 'it.ts'
+      },
+      {
+        code: 'ja',
+        iso: 'ja-JP',
+        name: '日本語',
+        file: 'ja.ts'
+      },
+      {
+        code: 'pl',
+        iso: 'pl-PL',
+        name: 'Polski',
+        file: 'pl.ts'
+      },
+      {
+        code: 'ru',
+        iso: 'ru-RU',
+        name: 'Русский',
+        file: 'ru.ts'
+      },
+      {
+        code: 'ko',
+        iso: 'ko-KR',
+        name: '한국어',
+        file: 'ko.ts'
+      }
+    ],
   },
 
   compatibilityDate: '2025-02-14'
