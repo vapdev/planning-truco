@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen bg-gray-50 text-gray-900">
+  <div class="flex flex-col h-screen bg-gradient-to-b from-gray-50 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-[#FFFFF0]">
     <header class="bg-indigo-600 text-white py-6 shadow-md">
       <div class="flex justify-between items-center px-6">
         <div class="container mx-auto flex justify-between items-center px-6">
@@ -13,7 +13,7 @@
       <h2 class="text-4xl md:text-5xl font-extrabold leading-tight max-w-4xl pt-6">
         {{ $t('simpleFastEfficient') }}
       </h2>
-      <p class="mt-4 text-lg text-gray-700 max-w-2xl">
+      <p class="mt-4 text-lg text-gray-300 max-w-2xl">
         {{ $t('subtitle') }}
       </p>
       <button @click="startGame"
@@ -22,22 +22,22 @@
       </button>
     </main>
 
-    <section class="flex-1 flex flex-col py-12 bg-white shadow-inner w-full text-center px-6">
+    <section class="flex-1 flex flex-col py-12 shadow-inner w-full text-center px-6">
       <div class="max-w-4xl mx-auto">
         <h3 class="text-3xl font-bold">{{ $t('howItWorks') }}</h3>
-        <p class="mt-4 text-lg text-gray-700">{{ $t('simpleFastEfficient') }}</p>
+        <p class="mt-4 text-lg text-gray-300">{{ $t('simpleFastEfficient') }}</p>
         <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="p-6 bg-gray-200 rounded-lg shadow">
+          <div class="p-6 bg-gray-600 rounded-lg shadow">
             <h4 class="text-xl font-semibold">{{ $t('step1') }}</h4>
-            <p class="text-gray-600 mt-2">{{ $t('step1Description') }}</p>
+            <p class="text-white mt-2">{{ $t('step1Description') }}</p>
           </div>
-          <div class="p-6 bg-gray-200 rounded-lg shadow">
+          <div class="p-6 bg-gray-600 rounded-lg shadow">
             <h4 class="text-xl font-semibold">{{ $t('step2') }}</h4>
-            <p class="text-gray-600 mt-2">{{ $t('step2Description') }}</p>
+            <p class="text-white mt-2">{{ $t('step2Description') }}</p>
           </div>
-          <div class="p-6 bg-gray-200 rounded-lg shadow">
+          <div class="p-6 bg-gray-600 rounded-lg shadow">
             <h4 class="text-xl font-semibold">{{ $t('step3') }}</h4>
-            <p class="text-gray-600 mt-2">{{ $t('step3Description') }}</p>
+            <p class="text-white mt-2">{{ $t('step3Description') }}</p>
           </div>
         </div>
       </div>
