@@ -38,11 +38,11 @@
 
                 <UAccordion class="text-white backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl" 
                     open-icon="i-heroicons-plus" close-icon="i-heroicons-minus"
-                    :items="[{ label: 'Add issue', defaultOpen: true, variant: 'solid', color: 'purple' }]">
-                    <template #add-issue>
+                    :items="accordionItems">
+                    <template #default="{ item, index, open }">
                         <div class="text-center p-4">
                             <p class="text-sm text-gray-400">
-                                Adicione uma nova issue para a sprint
+                                {{ $t("addNewIssue") }}
                             </p>
                         </div>
                     </template>
@@ -51,23 +51,23 @@
                             <UInput color="gray" variant="outline" v-model="title" 
                                 class="rounded-lg"
                                 :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400' }"
-                                placeholder="Issue title" />
+                                :placeholder="$t('issueTitle')" />
                             <UInput color="gray" variant="outline" v-model="description" 
                                 class="rounded-lg"
                                 :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400' }"
-                                placeholder="Issue description" />
+                                :placeholder="$t('issueDescription')" />
                             <UInput color="gray" variant="outline" v-model="link" 
                                 class="rounded-lg"
                                 :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400' }"
-                                placeholder="Issue link" />
+                                :placeholder="$t('issueLink')" />
                             <div class="flex justify-between gap-3">
                                 <button type="button" 
                                     class="flex-1 px-4 py-2 bg-white/5 border border-white/20 text-gray-300 rounded-lg hover:bg-white/10 hover:text-white transition-all duration-300">
-                                    Clean
+                                    {{ $t('clean') }}
                                 </button>
                                 <button @click="handleAddIssue" type="button"
                                     class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
-                                    Confirm
+                                    {{ $t('confirm') }}
                                 </button>
                             </div>
                         </div>
@@ -80,6 +80,7 @@
 <script setup>
 import { VueDraggableNext as draggable } from 'vue-draggable-next'
 
+const { t } = useNuxtApp()
 const userStore = useUserStore();
 const { issues } = storeToRefs(userStore);
 const title = ref("");
@@ -134,7 +135,7 @@ function changeDraggable() {
 
 :deep(.ui-input input:focus) {
   border-color: rgb(168 85 247) !important;
-  ring-color: rgb(168 85 247) !important;
+  --tw-ring-color: rgb(168 85 247) !important;
 }
 
 :deep(.ui-input input::placeholder) {

@@ -92,9 +92,9 @@
         </div>
         <div class="flex items-center gap-4 justify-between w-full">
           <div class="flex flex-col mt-4">
-            <div class="font-semibold">Habilitar recursor divertidos</div>
+            <div class="font-semibold">{{ $t('enableFunFeatures') }}</div>
             <div class="font-normal text-sm">
-              Habilita emojis e outros recursos divertidos
+              {{ $t('enableFunFeaturesDescription') }}
             </div>
           </div>
           <div class="pt-5">
@@ -127,7 +127,7 @@
             <div>{{ row.name }}</div>
           </template>
           <template #admin-data="{ row }">
-            <div>{{ row.admin ? "Sim" : "Não" }}</div>
+            <div>{{ row.admin ? $t("yes") : $t("no") }}</div>
           </template>
           <!-- <template #actions-data="{ row }">
                 <div
@@ -143,7 +143,7 @@
         @click="handleSaveConfig"
         class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 w-full font-bold py-3 px-6 rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 text-white"
       >
-        Salvar
+        {{ $t("save") }}
       </button>
     </div>
   </UModal>

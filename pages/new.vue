@@ -1,6 +1,12 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
-    <!-- Animated background elements -->
+    <!-- Animated backgroconst deckOptions = computed(() => [
+  ...Object.keys(decks).filter(key => key !== 'deckLabels').map(key => ({
+    value: key,
+    label: decks.deckLabels[key] || key,
+  })),
+  { value: 'custom', label: t('customDeckOption') }
+]);ments -->
     <div class="absolute inset-0 overflow-hidden">
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
@@ -23,7 +29,7 @@
             <h2 class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {{ $t("createRoom") }}
             </h2>
-            <p class="text-gray-300 mt-2">Configure sua sala de Planning Poker</p>
+            <p class="text-gray-300 mt-2">{{ $t("configureYourPokerRoom") }}</p>
           </div>
           
           <div class="space-y-6">
@@ -64,7 +70,7 @@
                 color="gray"
                 class="w-full"
                 inputClass="font-light bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400"
-                placeholder="Ex: 1, 2, 3, 5, 8"
+                :placeholder="$t('customDeckPlaceholder')"
               />
             </div>
             
@@ -138,6 +144,7 @@
 
 <script setup>
 import * as decks from "~/utils/decks";
+const { t } = useI18n();
 const virarAutomatico = ref(false);
 const roomName = ref("");
 const baralho = ref({
@@ -160,13 +167,13 @@ const gameOptions = computed(() => ({
   // emojis: emojis.value,
 }));
 
-const deckOptions = [
+const deckOptions = computed(() => [
   ...Object.keys(decks).filter(key => key !== 'deckLabels').map(key => ({
     value: key,
     label: decks.deckLabels[key] || key,
   })),
-  { value: 'custom', label: 'Deck personalizado' }
-];
+  { value: 'custom', label: t('customDeckOption') }
+]);
 
 // Watcher para atualizar o baralho selecionado
 watch(baralho, (newValue) => {
@@ -251,7 +258,7 @@ button:focus {
 
 :deep(.ui-input input:focus) {
   border-color: rgb(168 85 247) !important;
-  ring-color: rgb(168 85 247) !important;
+  --tw-ring-color: rgb(168 85 247) !important;
 }
 
 :deep(.ui-input input::placeholder) {

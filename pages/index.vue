@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative">
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden">
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -7,8 +7,8 @@
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
     </div>
 
-    <header class="relative z-10 backdrop-blur-sm bg-white/5 border-b border-white/10 py-6">
-      <div class="container mx-auto flex justify-between items-center px-6">
+    <header class="relative z-20 backdrop-blur-sm bg-white/5 border-b border-white/10 py-6 overflow-visible">
+      <div class="container mx-auto flex justify-between items-center px-6 overflow-visible">
         <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
           Planning Poker Online
         </h1>

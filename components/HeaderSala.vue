@@ -28,6 +28,9 @@
           <div @click="modalConfig = true" class="p-2 hover:bg-white/10 hover:scale-110 rounded-xl transition-all duration-300">
             <Icon class="hover:cursor-pointer text-white/80 hover:text-white" size="28" name="material-symbols:settings-outline" />
           </div>
+          <div @click="exitRoom" class="p-2 hover:bg-red-500/20 hover:scale-110 rounded-xl transition-all duration-300 group">
+            <Icon class="hover:cursor-pointer text-white/80 group-hover:text-red-300" size="28" name="material-symbols:logout" />
+          </div>
           <!-- <div class="hover:bg-white/10 hover:scale-110 hover:cursor-pointer rounded-xl p-2 transition-all duration-300">
             <Icon @click="emit('toggleRightPanel')" size="28" name="material-symbols:right-panel-close"
               class="text-white/80 hover:text-white" v-if="rightPanel" />
@@ -66,6 +69,10 @@ const copyToClipboard = () => {
     offsetY: 4,
   });
   navigator.clipboard.writeText(window.location.href);
+};
+
+const exitRoom = () => {
+  emit("endGame");
 };
 
 defineExpose({

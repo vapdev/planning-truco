@@ -1,5 +1,5 @@
 <template>
-  <div class="select-none relative">
+  <div class="select-none relative z-50">
     <button
       @click="toggleLanguageDropdown"
       class="group p-2 rounded-lg backdrop-blur-sm bg-white/5 border border-white/20 hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
@@ -15,7 +15,8 @@
       <div 
         ref="modal" 
         v-if="showLanguageDropdown" 
-        class="absolute top-14 right-0 backdrop-blur-sm bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-3 min-w-[200px] z-50"
+        class="absolute top-14 right-0 backdrop-blur-sm bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-3 min-w-[200px] z-[9999]"
+        style="pointer-events: auto;"
       >
         <div 
           v-for="(label, lang) in languages" 
@@ -51,6 +52,7 @@ const { setLocale, locale } = useI18n();
 const handleSetLocale = (lang) => {
   gtag("event", "set_locale", { lang });
   setLocale(lang);
+  showLanguageDropdown.value = false; // Fechar dropdown após seleção
 };
 
 const showLanguageDropdown = ref(false);
@@ -119,5 +121,17 @@ const flagIcons = {
 
 .backdrop-blur-sm {
   backdrop-filter: blur(8px);
+}
+
+/* Garantir que o modal seja sempre clicável */
+.select-none {
+  position: relative;
+  isolation: isolate;
+}
+
+.select-none > .absolute {
+  position: absolute !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
 }
 </style>
