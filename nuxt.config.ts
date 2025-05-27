@@ -46,11 +46,21 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US' },
       { code: 'pt', language: 'pt-BR' },
       { code: 'es', language: 'es-ES' },
-      { code: 'fr', language: 'fr-FR' }
+      { code: 'fr', language: 'fr-FR' },
+      { code: 'zh', language: 'zh-CN' },
+      { code: 'ar', language: 'ar-SA' },
+      { code: 'de', language: 'de-DE' },
+      { code: 'it', language: 'it-IT' },
+      { code: 'ja', language: 'ja-JP' },
+      { code: 'pl', language: 'pl-PL' },
+      { code: 'ru', language: 'ru-RU' },
+      { code: 'ko', language: 'ko-KR' }
     ],
     defaultLocale: 'en',
     vueI18n: './i18n.config.ts',
     strategy: 'no_prefix',
+    lazy: true,
+    langDir: 'locales/'
   },
 
   compatibilityDate: '2025-02-14'
