@@ -49,6 +49,7 @@ export default defineNuxtConfig({
     // --- Configuração do Lazy Loading ---
     lazy: true,
     langDir: 'locales', // O diretório que você já criou
+    strategy: 'no_prefix', // Estratégia de prefixo, pode ser ajustada conforme necessário
 
     // --- O MAPEAMENTO CORRETO ---
     // Aqui você define cada idioma e aponta para o seu arquivo.
