@@ -39,7 +39,7 @@
     <!-- Deck cards (only show when not revealing cards) -->
     <div
       v-if="!showCards"
-      class="flex justify-center md:justify-center text-purple-400 overflow-x-auto gap-2 sm:gap-4 items-center pb-2 sm:pb-4 pt-4 sm:pt-8 w-full"
+      class="flex justify-center overflow-y-hidden md:justify-center text-purple-400 overflow-x-auto gap-2 sm:gap-4 items-center pb-2 sm:pb-4 pt-4 sm:pt-8 w-full"
     >
       <div class="flex gap-3 sm:gap-6">
         <div
