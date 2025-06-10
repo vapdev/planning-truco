@@ -1,7 +1,7 @@
 <template>
-  <div class="relative atkinson-hyperlegible-mono-regular flex flex-col w-10 gap-2 rounded-xl group">
+  <div class="relative atkinson-hyperlegible-mono-regular flex flex-col w-8 sm:w-10 gap-1 sm:gap-2 rounded-lg sm:rounded-xl group">
     <div
-      class="relative text-white flex items-center rounded-xl w-10 h-16 scale-110 justify-center backdrop-blur-sm border border-white/20 shadow-lg"
+      class="relative text-white flex items-center rounded-lg sm:rounded-xl w-8 h-12 sm:w-10 sm:h-16 scale-110 justify-center backdrop-blur-sm border border-white/20 shadow-lg"
       :class="[
         flipped
           ? 'flip bg-gradient-to-br from-purple-500 to-pink-500 shadow-purple-500/30'
@@ -12,9 +12,9 @@
     >
       <div
         v-if="player.voted && flipped"
-        class="front rounded-xl w-full h-full flex items-center justify-center animate-vote-reveal"
+        class="front rounded-lg sm:rounded-xl w-full h-full flex items-center justify-center animate-vote-reveal"
       >
-        <span class="text-2xl font-bold text-white drop-shadow-lg">
+        <span class="text-lg sm:text-2xl font-bold text-white drop-shadow-lg">
           <span v-if="player.vote != -1">{{ player.vote }}</span>
           <span v-else>☕</span>
         </span>
@@ -22,7 +22,7 @@
       <div
         v-else
         :class="player.voted ? 'cardPattern bg-gradient-to-br from-purple-600/80 to-pink-600/80' : 'border-[2px] border-white/20'"
-        class="rounded-xl w-full h-full text-white flex items-center justify-center transition-all duration-300"
+        class="rounded-lg sm:rounded-xl w-full h-full text-white flex items-center justify-center transition-all duration-300"
         v-if="!player.voted || !flipped"
       ></div>
       <div
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="w-full text-center z-10">
-      <div class="text-sm flex justify-center text-nowrap font-semibold text-white/90">
+      <div class="text-xs sm:text-sm flex justify-center text-nowrap font-semibold text-white/90">
         {{ player.name || " " }}
       </div>
     </div>

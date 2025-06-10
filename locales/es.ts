@@ -46,10 +46,10 @@ export default {
   linkCopied: '¡El enlace ha sido copiado al portapapeles!',
   error: 'Error',
   nameChangedSuccess: '¡Nombre cambiado con éxito!',
-  roomNameChangedSuccess: '¡Nombre de la sala cambiado con éxito!',
-  playerKickedSuccess: '¡Jugador eliminado con éxito!',
   enableFunFeatures: 'Habilitar Características Divertidas',
   enableFunFeaturesDescription: 'Habilita emojis y otras características divertidas',
   yes: 'Sí',
   no: 'No',
+  stats: 'Estadísticas',
+  close: 'Cerrar',
 }

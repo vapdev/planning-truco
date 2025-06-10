@@ -1,44 +1,98 @@
 <template>
-  <div class="w-full items-center flex flex-col pb-2 md:pb-12">
-    <span class="mb-6 text-xl font-semibold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-      {{ $t("roundResults") }}
-    </span>
-    <div class="w-fit flex flex-col gap-6 text-md justify-center backdrop-blur-sm bg-white/10 border border-white/20 rounded-2xl p-6 px-8 shadow-2xl animate-fade-in">
-      <div class="text-md w-full flex gap-8">
-        <div class="flex flex-col gap-2 items-center justify-center font-normal">
-          <div class="text-lg text-purple-200">{{ $t("mostVoted") }}</div>
-          <div class="text-3xl font-bold text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+  <!-- Elegant Stats Overlay Modal -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 animate-overlay-appear">
+    <!-- Background overlay -->
+    <div 
+      class="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+      @click="$emit('close')"
+    ></div>
+    
+    <!-- Stats Modal -->
+    <div class="relative bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl shadow-purple-500/20 p-6 max-w-lg w-full animate-modal-slide-up">
+      <!-- Close button -->
+      <button 
+        @click="$emit('close')"
+        class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 group"
+      >
+        <svg class="w-5 h-5 text-white/70 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+          {{ $t("roundResults") }}
+        </h3>
+        <div class="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto"></div>
+      </div>
+
+      <!-- Main Stats Grid -->
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <!-- Most Voted -->
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-sm text-purple-200 mb-2">{{ $t("mostVoted") }}</div>
+          <div class="text-2xl font-bold text-white">
             {{ stats.mostVoted.join(", ") }}
           </div>
         </div>
-        <div class="flex flex-col gap-2 items-center justify-center font-normal">
-          <div class="text-lg text-purple-200">{{ $t("consensus") }}</div>
-          <div class="text-3xl font-bold text-white">{{ stats.assertiveness }}%</div>
+
+        <!-- Consensus -->
+        <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
+          <div class="text-sm text-purple-200 mb-2">{{ $t("consensus") }}</div>
+          <div class="text-2xl font-bold text-white">{{ stats.assertiveness }}%</div>
+        </div>
+
+        <!-- Average (if numeric) -->
+        <div v-if="stats.average !== null" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center col-span-2">
+          <div class="text-sm text-purple-200 mb-2">{{ $t("average") }}</div>
+          <div class="text-2xl font-bold text-white">{{ stats.average }}</div>
         </div>
       </div>
-      
-      <div class="flex justify-center gap-4 pt-2">
-        <div
-          v-for="(card, index) in nonRepeatedCardsWithVotes"
-          class="group flex flex-col gap-3 items-center animate-fade-in-card"
-          :key="card.value"
-          :style="{ animationDelay: `${index * 0.1}s` }"
-        >
-          <div class="relative">
-            <div class="w-12 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center font-bold justify-center shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-purple-500/25">
-              <span class="text-xl flex justify-center text-white">
-                {{ card.value }}
-              </span>
+
+      <!-- Vote Distribution -->
+      <div class="mb-6">
+        <h4 class="text-lg font-semibold text-white mb-4 text-center">{{ $t("voteDistribution") }}</h4>
+        <div class="flex justify-center gap-3 flex-wrap">
+          <div
+            v-for="(card, index) in nonRepeatedCardsWithVotes"
+            class="group flex flex-col items-center animate-fade-in-card"
+            :key="card.value"
+            :style="{ animationDelay: `${index * 0.1}s` }"
+          >
+            <div class="relative">
+              <div class="w-12 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center font-bold justify-center shadow-lg transform transition-all duration-300 group-hover:scale-105">
+                <span class="text-lg text-white">
+                  {{ card.label }}
+                </span>
+              </div>
+              <!-- Vote count badge -->
+              <div class="absolute -top-2 -right-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+                {{ card.vote }}
+              </div>
             </div>
-            <!-- Vote count badge -->
-            <div class="absolute -top-2 -right-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow-lg">
-              {{ card.vote }}
+            <div class="text-xs font-medium text-gray-300 text-center mt-2">
+              {{ card.vote }} {{ $t("votes") }}
             </div>
-          </div>
-          <div class="text-sm font-medium text-gray-300 text-center">
-            {{ card.vote }} {{ card.vote === 1 ? $t("vote") : $t("votes") }}
           </div>
         </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="text-center">
+        <button 
+          @click="$emit('newRound')"
+          class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+        >
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-xl shadow-lg group-hover:shadow-blue-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
+          <span class="relative z-10 flex items-center font-bold">
+            {{ $t("startNewVoting") }}
+            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </span>
+        </button>
       </div>
     </div>
   </div>

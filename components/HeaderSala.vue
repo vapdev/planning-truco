@@ -1,42 +1,36 @@
 <template>
   <div>
-    <div class="text-lg flex p-4 md:p-6 md:px-12 items-center justify-between">
+    <div class="text-base sm:text-lg flex p-2 sm:p-4 md:p-6 md:px-12 items-center justify-between">
       <div class="flex w-1/3 justify-start items-center">
-        <div class="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-xl flex sm:gap-5 px-4 py-3 shadow-lg">
-          <div class="flex items-center gap-3">
-            <div class="hover:bg-white/10 hover:scale-110 hover:cursor-pointer rounded-xl p-2 transition-all duration-300">
-              <Icon @click="modalProfile = true" size="28" name="material-symbols:person-outline"
-                class="text-white/80 hover:text-white" />
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl flex gap-2 sm:gap-5 px-2 sm:px-4 py-2 sm:py-3 shadow-lg">
+          <div class="flex items-center gap-1 sm:gap-3">
+            <div class="hover:bg-white/10 hover:scale-110 hover:cursor-pointer rounded-lg sm:rounded-xl p-1 sm:p-2 transition-all duration-300">
+              <Icon @click="modalProfile = true" size="20" name="material-symbols:person-outline"
+                class="text-white/80 hover:text-white sm:w-7 sm:h-7" />
             </div>
-            <div>
-              <span class="text-sm md:text-md text-white font-semibold">{{ userStore.name }}</span>
+            <div class="hidden sm:block">
+              <span class="text-xs sm:text-sm md:text-md text-white font-semibold">{{ userStore.name }}</span>
             </div>
           </div>
-          <UButton variant="ghost" @click="copyToClipboard" class="invisible md:visible px-4 py-2 ml-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 rounded-xl border border-white/10 transition-all duration-300 hover:scale-105" color="primary">
-            <span class="text-sm text-white font-semibold">{{ $t("invite") }}</span>
+          <UButton variant="ghost" @click="copyToClipboard" class="hidden sm:flex px-2 sm:px-4 py-1 sm:py-2 ml-2 sm:ml-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 rounded-lg sm:rounded-xl border border-white/10 transition-all duration-300 hover:scale-105" color="primary">
+            <span class="text-xs sm:text-sm text-white font-semibold">{{ $t("invite") }}</span>
           </UButton>
         </div>
       </div>
       <div class="flex w-1/3 justify-center items-center">
-        <div v-if="userStore.roomState.name" class="invisible md:visible bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-xl px-6 py-3 shadow-lg">
-          <span class="font-bold text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{{ userStore.roomState.name }}</span>
+        <div v-if="userStore.roomState.name" class="hidden md:block bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-xl px-3 sm:px-6 py-2 sm:py-3 shadow-lg">
+          <span class="font-bold text-sm sm:text-base text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{{ userStore.roomState.name }}</span>
         </div>
       </div>
       <div class="flex w-1/3 justify-end items-center">
-        <div class="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-xl flex sm:gap-3 px-4 py-3 shadow-lg">
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl flex gap-1 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 shadow-lg">
             <LanguageSelector />
-          <div @click="modalConfig = true" class="p-2 hover:bg-white/10 hover:scale-110 rounded-xl transition-all duration-300">
-            <Icon class="hover:cursor-pointer text-white/80 hover:text-white" size="28" name="material-symbols:settings-outline" />
+          <div @click="modalConfig = true" class="p-1 sm:p-2 hover:bg-white/10 hover:scale-110 rounded-lg sm:rounded-xl transition-all duration-300">
+            <Icon class="hover:cursor-pointer text-white/80 hover:text-white" size="20" name="material-symbols:settings-outline" />
           </div>
-          <div @click="exitRoom" class="p-2 hover:bg-red-500/20 hover:scale-110 rounded-xl transition-all duration-300 group">
-            <Icon class="hover:cursor-pointer text-white/80 group-hover:text-red-300" size="28" name="material-symbols:logout" />
+          <div @click="exitRoom" class="p-1 sm:p-2 hover:bg-red-500/20 hover:scale-110 rounded-lg sm:rounded-xl transition-all duration-300 group">
+            <Icon class="hover:cursor-pointer text-white/80 group-hover:text-red-300" size="20" name="material-symbols:logout" />
           </div>
-          <!-- <div class="hover:bg-white/10 hover:scale-110 hover:cursor-pointer rounded-xl p-2 transition-all duration-300">
-            <Icon @click="emit('toggleRightPanel')" size="28" name="material-symbols:right-panel-close"
-              class="text-white/80 hover:text-white" v-if="rightPanel" />
-            <Icon @click="emit('toggleRightPanel')" size="28" name="material-symbols:right-panel-open"
-              class="text-white/80 hover:text-white" v-else />
-          </div> -->
         </div>
       </div>
     </div>

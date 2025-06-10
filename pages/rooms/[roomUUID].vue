@@ -1,6 +1,6 @@
 <template>
   <div :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+    class="wrapper atkinson-hyperlegible-mono-regular h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
     
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden">
@@ -13,26 +13,40 @@
     <div class="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-900/50"></div>
     
     <div class="wrapper h-full w-full flex flex-col justify-between relative z-10">
-      <HeaderSala class="h-1/5" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
-      <div class="flex justify-around w-full h-2/5">
-        <div class="w-1/3 flex flex-col items-center"></div>
-        <div class="flex w-1/3 flex-col justify-center items-center">
+      <HeaderSala class="flex-shrink-0" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
+      <div class="flex justify-around w-full flex-1 min-h-0">
+        <div class="w-1/4 sm:w-1/3 flex flex-col items-center"></div>
+        <div class="flex w-1/2 sm:w-1/3 flex-col justify-center items-center min-h-0">
           <TopContainer :players="playersTop" />
-          <div class="flex gap-4 justify-center items-center">
+          <div class="flex gap-2 sm:gap-4 justify-center items-center my-2">
             <LeftContainer :players="playersLeft" />
-            <Mesa @toggleMostrarCartas="toggleMostrarCartas" @novaRodada="novaRodada" />
+            <Mesa @toggleMostrarCartas="toggleMostrarCartas" />
             <RightContainer :players="playersRight" />
           </div>
           <BottomContainer :players="playersBottom" />
         </div>
-        <div class="w-1/3 flex justify-center"></div>
+        <div class="w-1/4 sm:w-1/3 flex justify-center"></div>
       </div>
-      <div class="w-full h-2/5 flex flex-col justify-end overflow-clip">
-        <Transition name="slide-up">
-          <Deck v-if="!userStore.roomState.showCards" :deck="deck" :selectedCard="selectedCard" :votar="votar" />
-          <Stats class="text-white" v-else :cards="deck" />
+      <div class="w-full flex-shrink-0 flex flex-col justify-end overflow-hidden relative" style="height: 30vh; min-height: 200px;">
+        <Transition name="deck-appear">
+          <Deck 
+            :deck="deck" 
+            :selectedCard="selectedCard" 
+            :votar="votar" 
+            :showCards="userStore.roomState.showCards"
+            @showStats="showStatsModal = true"
+            @newRound="handleNewRound"
+          />
         </Transition>
       </div>
+      
+      <!-- Stats Modal -->
+      <StatsModal 
+        :isOpen="showStatsModal" 
+        :cards="deck" 
+        @close="showStatsModal = false"
+        @newRound="handleNewRound"
+      />
       <EmojiHandler />
     </div>
     <Transition name="rpanel" mode="out-in">
@@ -51,6 +65,7 @@ const headerRef = ref(null);
 const deck = ref([]);
 const key = ref(0);
 const userStore = useUserStore();
+const showStatsModal = ref(false);
 
 
 function toggleRightPanel() {
@@ -87,6 +102,16 @@ const votar = (score) => {
 const novaRodada = () => {
   gtag("event", "nova_rodada");
   fetch(`${apiUrl}/resetVotes`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ roomUUID: userStore.roomUUID }) });
+};
+
+const closeStats = () => {
+  // Just trigger a new round when closing stats
+  novaRodada();
+};
+
+const handleNewRound = () => {
+  showStatsModal.value = false;
+  novaRodada();
 };
 
 const sairDaSala = () => {
@@ -132,6 +157,7 @@ watch(
 .wrapper {
   position: relative;
   height: 100dvh;
+  overflow: hidden; /* Prevent any scroll */
 }
 
 .rpanel-enter-active,
@@ -164,6 +190,25 @@ watch(
   display: none;
 }
 
+/* New deck appear animation - no scroll issues */
+.deck-appear-enter-active {
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.deck-appear-leave-active {
+  transition: all 0.3s ease-in;
+}
+
+.deck-appear-enter-from {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+.deck-appear-leave-to {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+}
+
 /* Modern background effects */
 @keyframes float {
   0%, 100% {
@@ -186,5 +231,47 @@ watch(
 /* Enhanced glassmorphism effects */
 .backdrop-blur-sm {
   backdrop-filter: blur(8px);
+}
+
+/* Responsive adjustments for game room */
+@media (max-height: 700px) {
+  .wrapper {
+    height: 100vh;
+  }
+  
+  .game-area {
+    min-height: 0;
+  }
+  
+  .deck-area {
+    height: 25vh !important;
+    min-height: 150px !important;
+  }
+}
+
+@media (max-height: 600px) {
+  .deck-area {
+    height: 20vh !important;
+    min-height: 120px !important;
+  }
+  
+  .game-center {
+    gap: 0.25rem;
+    margin: 0.25rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-center {
+    gap: 0.5rem;
+  }
+  
+  .side-areas {
+    width: 20%;
+  }
+  
+  .center-area {
+    width: 60%;
+  }
 }
 </style>

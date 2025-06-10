@@ -50,4 +50,9 @@ export default {
   enableFunFeaturesDescription: 'Habilita emojis e outros recursos divertidos',
   yes: 'Sim',
   no: 'Não',
+  average: 'Média',
+  voteDistribution: 'Distribuição de Votos',
+  stats: 'Estatísticas',
+  close: 'Fechar',
+  votesRevealed: 'Votos Revelados',
 }
