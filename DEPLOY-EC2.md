@@ -15,19 +15,28 @@ cd planning-truco
 
 Pronto! Sua aplicação estará rodando em `http://SEU_IP:3000`
 
-## 📋 Pré-requisitos no EC2
+## 📋 Pré-requisitos no EC2 (Amazon Linux 2)
 
 ```bash
-# Instalar Node.js 18+
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
+# Atualizar sistema
+sudo yum update -y
+
+# Instalar Node.js 18+ (usando NodeSource)
+curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+sudo yum install -y nodejs
+
+# Ou usando nvm (recomendado)
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.bashrc
+nvm install 18
+nvm use 18
 
 # Instalar PM2 globalmente
 npm install -g pm2
 
 # Configurar PM2 para auto-start
 pm2 startup
-# Copie e execute o comando que aparecerá
+# Copie e execute o comando que aparecerá (será específico para Amazon Linux)
 ```
 
 ## ⚙️ Configuração Manual (se necessário)

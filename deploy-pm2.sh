@@ -67,10 +67,24 @@ fi
 # Iniciar com PM2
 echo "🚀 Iniciando aplicação com PM2..."
 
-# Opção 1: Usar ecosystem.config.json
+# Criar diretório de logs do PM2 se não existir
+PM2_HOME="${HOME}/.pm2"
+PM2_LOGS="${PM2_HOME}/logs"
+
+if [ ! -d "$PM2_LOGS" ]; then
+    echo "📁 Criando diretório de logs do PM2..."
+    mkdir -p "$PM2_LOGS"
+fi
+
+# Atualizar paths no ecosystem.config.json com o diretório atual
 if [ -f "ecosystem.config.json" ]; then
-    # Atualizar path no ecosystem.config.json
+    echo "⚙️  Configurando ecosystem.config.json..."
+    # Substituir paths no arquivo JSON
     sed -i "s|/home/ubuntu/planning-truco|$(pwd)|g" ecosystem.config.json
+    sed -i "s|/home/ubuntu/.pm2|${PM2_HOME}|g" ecosystem.config.json
+    sed -i "s|/home/ec2-user/planning-truco|$(pwd)|g" ecosystem.config.json
+    sed -i "s|/home/ec2-user/.pm2|${PM2_HOME}|g" ecosystem.config.json
+    
     pm2 start ecosystem.config.json --env production
 else
     # Opção 2: Comando direto
