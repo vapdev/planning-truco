@@ -30,7 +30,7 @@ fi
 # Verificar se houve mudanças no package.json
 if git diff HEAD~1 --name-only | grep -q "package.json\|package-lock.json"; then
     echo "📦 Detectadas mudanças nas dependências. Atualizando..."
-    npm ci --only=production
+    npm ci
 fi
 
 # Build

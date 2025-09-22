@@ -52,7 +52,7 @@ EOF
 
 # Instalar/atualizar dependências
 echo "📦 Instalando dependências..."
-npm ci --only=production
+npm ci
 
 # Build para produção
 echo "🔨 Fazendo build para produção..."
