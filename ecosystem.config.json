@@ -1,0 +1,31 @@
+{
+  "apps": [
+    {
+      "name": "planning-truco-frontend",
+      "script": "npm",
+      "args": "run preview",
+      "cwd": "/home/ubuntu/planning-truco",
+      "instances": 1,
+      "exec_mode": "fork",
+      "watch": false,
+      "max_memory_restart": "500M",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": "3000",
+        "HOST": "0.0.0.0"
+      },
+      "env_production": {
+        "NODE_ENV": "production",
+        "PORT": "3000",
+        "HOST": "0.0.0.0"
+      },
+      "log_file": "/home/ubuntu/.pm2/logs/planning-truco-combined.log",
+      "out_file": "/home/ubuntu/.pm2/logs/planning-truco-out.log",
+      "error_file": "/home/ubuntu/.pm2/logs/planning-truco-error.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss Z",
+      "merge_logs": true,
+      "autorestart": true,
+      "restart_delay": 4000
+    }
+  ]
+}
