@@ -40,13 +40,13 @@ fi
 echo "📝 Configurando variáveis de ambiente..."
 
 # Definir variáveis para BUILD TIME
-export NUXT_API_BASE=http://$EC2_IP:$API_PORT
-export NUXT_WS_BASE=ws://$EC2_IP:$API_PORT
+export NUXT_API_BASE=https://$EC2_IP:$API_PORT
+export NUXT_WS_BASE=wss://$EC2_IP:$API_PORT
 
 cat > .env << EOF
 # Configuração para EC2 com PM2
-NUXT_API_BASE=http://$EC2_IP:$API_PORT
-NUXT_WS_BASE=ws://$EC2_IP:$API_PORT
+NUXT_API_BASE=https://$EC2_IP:$API_PORT
+NUXT_WS_BASE=wss://$EC2_IP:$API_PORT
 NODE_ENV=production
 HOST=0.0.0.0
 PORT=3000
@@ -116,7 +116,7 @@ echo "✅ Deploy concluído com sucesso!"
 echo ""
 echo "📋 Informações importantes:"
 echo "   🌐 URL: http://$EC2_IP:3000"
-echo "   📱 API: http://$EC2_IP:$API_PORT"
+echo "   📱 API: https://$EC2_IP:$API_PORT"
 echo ""
 echo "🔧 Comandos úteis do PM2:"
 echo "   pm2 status                    # Ver status de todos os processos"
