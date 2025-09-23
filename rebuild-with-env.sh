@@ -13,6 +13,7 @@ if [ -z "$EC2_IP" ]; then
     echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"
     echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"
     echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 planningpoker.digital"
+    echo "  (O script adicionará automaticamente 'www.' se necessário)"
     exit 1
 fi
 
@@ -22,9 +23,18 @@ echo "🔌 API Port: $API_PORT"
 
 # Se tiver domínio, usa ele com https; senão, usa o IP com http
 if [ -n "$DOMAIN" ]; then
-    API_BASE="https://$DOMAIN/api"
-    WS_BASE="wss://$DOMAIN/api"
-    echo "🌐 Usando domínio para API: $DOMAIN"
+    # Verificar se o domínio já tem www, se não tiver, adicionar
+    if [[ "$DOMAIN" == www.* ]]; then
+        # Já tem www, usar como está
+        API_DOMAIN="$DOMAIN"
+    else
+        # Não tem www, adicionar
+        API_DOMAIN="www.$DOMAIN"
+    fi
+    
+    API_BASE="https://$API_DOMAIN/api"
+    WS_BASE="wss://$API_DOMAIN/api"
+    echo "🌐 Usando domínio para API: $API_DOMAIN"
 else
     API_BASE="http://$EC2_IP:$API_PORT"
     WS_BASE="ws://$EC2_IP:$API_PORT"
@@ -82,7 +92,7 @@ pm2 status planning-truco-frontend
 echo ""
 echo "✅ Rebuild concluído!"
 if [ -n "$DOMAIN" ]; then
-    echo "🌐 Aplicação rodando em: https://$DOMAIN"
+    echo "🌐 Aplicação rodando em: https://$API_DOMAIN"
 else
     echo "🌐 Aplicação rodando em: http://$EC2_IP:3000"
 fi
