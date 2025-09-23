@@ -22,8 +22,8 @@ echo "🔌 API Port: $API_PORT"
 
 # Se tiver domínio, usa ele com https; senão, usa o IP com http
 if [ -n "$DOMAIN" ]; then
-    API_BASE="https://$DOMAIN/api"
-    WS_BASE="wss://$DOMAIN/api"
+    API_BASE="http://$DOMAIN/api"
+    WS_BASE="ws://$DOMAIN/api"
     echo "🌐 Usando domínio para API: $DOMAIN"
 else
     API_BASE="http://$EC2_IP:$API_PORT"
@@ -82,7 +82,7 @@ pm2 status planning-truco-frontend
 echo ""
 echo "✅ Rebuild concluído!"
 if [ -n "$DOMAIN" ]; then
-    echo "🌐 Aplicação rodando em: https://$DOMAIN"
+    echo "🌐 Aplicação rodando em: http://$DOMAIN"
 else
     echo "🌐 Aplicação rodando em: http://$EC2_IP:3000"
 fi
