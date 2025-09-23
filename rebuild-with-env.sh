@@ -33,7 +33,7 @@ if [ -n "$DOMAIN" ]; then
     fi
     
     API_BASE="https://$API_DOMAIN/api"
-    WS_BASE="wss://$API_DOMAIN/api"
+    WS_BASE="wss://$API_DOMAIN"
     echo "🌐 Usando domínio para API: $API_DOMAIN"
 else
     API_BASE="http://$EC2_IP:$API_PORT"
