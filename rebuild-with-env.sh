@@ -1,4 +1,4 @@
-#!/bin/bash#!/bin/bash
+#!/bin/bash
 
 
 
@@ -6,96 +6,193 @@
 
 # Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]
 
-# Script para rebuild com novas variáveis de ambiente# Script para rebuild com novas variáveis de ambiente
+# Script para rebuild com novas variáveis de ambiente
 
 set -e
 
-# Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]# Uso: ./rebuild-with-envecho ""
+# Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]
 
 EC2_IP=${1}
 
-API_PORT=${2:-"8080"}echo "✅ Rebuild concluído!"
+API_PORT=${2:-"8080"}# Script para rebuild com novas variáveis de ambiente# Script para rebuild com novas variáveis de ambiente
 
 DOMAIN=${3}
 
-set -eecho "🌐 Aplicação rodando em: http://$EC2_IP:3000"
+set -e
 
 if [ -z "$EC2_IP" ]; then
 
-    echo "❌ Erro: IP do EC2 é obrigatório"echo "🔗 API configurada para: $API_BASE"
+    echo "❌ Erro: IP do EC2 é obrigatório"# Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]# Uso: ./rebuild-with-envecho ""
 
     echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"
 
-    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"EC2_IP=${1}echo ""IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]
+    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"EC2_IP=${1}
 
     echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 planningpoker.digital"
 
-    exit 1API_PORT=${2:-"8080"}
+    exit 1API_PORT=${2:-"8080"}echo "✅ Rebuild concluído!"
 
 fi
 
-DOMAIN=${3}  # Novo parâmetro opcionalset -e
+DOMAIN=${3}
 
 echo "🔄 Rebuild com novas variáveis de ambiente"
 
-echo "📍 EC2 IP: $EC2_IP"
+echo "📍 EC2 IP: $EC2_IP"set -eecho "🌐 Aplicação rodando em: http://$EC2_IP:3000"
 
 echo "🔌 API Port: $API_PORT"
 
-if [ -n "$DOMAIN" ]; thenif [ -z "$EC2_IP" ]; thenEC2_IP=${1}
+if [ -n "$DOMAIN" ]; thenif [ -z "$EC2_IP" ]; then
 
     echo "🌐 Domain: $DOMAIN"
 
-fi    echo "❌ Erro: IP do EC2 é obrigatório"API_PORT=${2:-"8080"}
+fi    echo "❌ Erro: IP do EC2 é obrigatório"echo "🔗 API configurada para: $API_BASE"
 
 
 
-# Parar PM2    echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"DOMAIN=${3}  # Novo parâmetro opcional
+# Parar PM2    echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"
 
 echo "🛑 Parando PM2 e liberando porta 3000..."
 
-pm2 stop planning-truco-frontend 2>/dev/null || echo "App não estava rodando no PM2"    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"
+pm2 stop planning-truco-frontend 2>/dev/null || echo "App não estava rodando no PM2"    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"EC2_IP=${1}echo ""IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]
 
 pm2 delete planning-truco-frontend 2>/dev/null || echo "App removido do PM2"
 
-    echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 planningpoker.digital"if [ -z "$EC2_IP" ]; then
+    echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 planningpoker.digital"
 
 # Matar qualquer processo na porta 3000
 
-echo "💀 Liberando porta 3000..."    exit 1    echo "❌ Erro: IP do EC2 é obrigatório"
+echo "💀 Liberando porta 3000..."    exit 1API_PORT=${2:-"8080"}
 
 PIDS=$(lsof -ti :3000 2>/dev/null || echo "")
 
-if [ -n "$PIDS" ]; thenfi    echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"
+if [ -n "$PIDS" ]; thenfi
 
     echo "Matando processos na porta 3000: $PIDS"
 
-    kill -9 $PIDS 2>/dev/null || echo "Alguns processos já estavam mortos"    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"
+    kill -9 $PIDS 2>/dev/null || echo "Alguns processos já estavam mortos"DOMAIN=${3}  # Novo parâmetro opcionalset -e
 
 fi
 
-echo "🔄 Rebuild com novas variáveis de ambiente"    echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 meudominio.com"
+echo "🔄 Rebuild com novas variáveis de ambiente"
 
 # Configurar variáveis de ambiente para BUILD TIME
 
-echo "📝 Configurando variáveis de ambiente para build..."echo "📍 EC2 IP: $EC2_IP"    exit 1
+echo "📝 Configurando variáveis de ambiente para build..."echo "📍 EC2 IP: $EC2_IP"
 
 
 
-# Usar domínio se fornecido, senão usar IPecho "🔌 API Port: $API_PORT"fi
+# Usar domínio se fornecido, senão usar IPecho "🔌 API Port: $API_PORT"
 
 if [ -n "$DOMAIN" ]; then
 
-    API_BASE="http://$DOMAIN:$API_PORT"if [ -n "$DOMAIN" ]; then
+    API_BASE="http://$DOMAIN:$API_PORT"if [ -n "$DOMAIN" ]; thenif [ -z "$EC2_IP" ]; thenEC2_IP=${1}
 
     WS_BASE="ws://$DOMAIN:$API_PORT"
 
-    echo "🌐 Usando domínio para API: $DOMAIN"    echo "🌐 Domain: $DOMAIN"echo "🔄 Rebuild com novas variáveis de ambiente"
+    echo "🌐 Usando domínio para API: $DOMAIN"    echo "🌐 Domain: $DOMAIN"
 
 else
 
-    API_BASE="http://$EC2_IP:$API_PORT"fiecho "📍 EC2 IP: $EC2_IP"
+    API_BASE="http://$EC2_IP:$API_PORT"fi    echo "❌ Erro: IP do EC2 é obrigatório"API_PORT=${2:-"8080"}
 
+    WS_BASE="ws://$EC2_IP:$API_PORT"
+
+    echo "📍 Usando IP para API: $EC2_IP"
+
+fi
+
+# Parar PM2    echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"DOMAIN=${3}  # Novo parâmetro opcional
+
+export NUXT_API_BASE=$API_BASE
+
+export NUXT_WS_BASE=$WS_BASEecho "🛑 Parando PM2 e liberando porta 3000..."
+
+
+
+# Criar arquivo .envpm2 stop planning-truco-frontend 2>/dev/null || echo "App não estava rodando no PM2"    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"
+
+cat > .env << EOF
+
+NUXT_API_BASE=$API_BASEpm2 delete planning-truco-frontend 2>/dev/null || echo "App removido do PM2"
+
+NUXT_WS_BASE=$WS_BASE
+
+NODE_ENV=production    echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 planningpoker.digital"if [ -z "$EC2_IP" ]; then
+
+HOST=0.0.0.0
+
+PORT=3000# Matar qualquer processo na porta 3000
+
+EOF
+
+echo "💀 Liberando porta 3000..."    exit 1    echo "❌ Erro: IP do EC2 é obrigatório"
+
+echo "✅ Arquivo .env atualizado:"
+
+cat .envPIDS=$(lsof -ti :3000 2>/dev/null || echo "")
+
+
+
+# Limpar build anteriorif [ -n "$PIDS" ]; thenfi    echo "Uso: ./rebuild-with-env.sh [IP_DO_EC2] [PORTA_API] [DOMAIN_OPCIONAL]"
+
+echo "🧹 Limpando build anterior..."
+
+rm -rf .output .nuxt    echo "Matando processos na porta 3000: $PIDS"
+
+
+
+# Rebuild com as novas variáveis    kill -9 $PIDS 2>/dev/null || echo "Alguns processos já estavam mortos"    echo "Exemplo: ./rebuild-with-env.sh 54.123.456.789 8080"
+
+echo "🔨 Fazendo rebuild com novas variáveis..."
+
+npm run buildfi
+
+
+
+# Verificar se build foi bem-sucedidoecho "🔄 Rebuild com novas variáveis de ambiente"    echo "Exemplo com domínio: ./rebuild-with-env.sh 54.123.456.789 8080 meudominio.com"
+
+if [ ! -d ".output" ]; then
+
+    echo "❌ Build falhou!"# Configurar variáveis de ambiente para BUILD TIME
+
+    exit 1
+
+fiecho "📝 Configurando variáveis de ambiente para build..."echo "📍 EC2 IP: $EC2_IP"    exit 1
+
+
+
+# Reiniciar com PM2
+
+echo "🚀 Reiniciando com PM2..."
+
+pm2 start npm --name "planning-truco-frontend" -- run preview# Usar domínio se fornecido, senão usar IPecho "🔌 API Port: $API_PORT"fi
+
+
+
+# Salvar configuraçãoif [ -n "$DOMAIN" ]; then
+
+pm2 save
+
+    API_BASE="http://$DOMAIN:$API_PORT"if [ -n "$DOMAIN" ]; then
+
+echo "📊 Status:"
+
+pm2 status planning-truco-frontend    WS_BASE="ws://$DOMAIN:$API_PORT"
+
+
+
+echo ""    echo "🌐 Usando domínio para API: $DOMAIN"    echo "🌐 Domain: $DOMAIN"echo "🔄 Rebuild com novas variáveis de ambiente"
+
+echo "✅ Rebuild concluído!"
+
+echo "🌐 Aplicação rodando em: http://$EC2_IP:3000"else
+
+echo "🔗 API configurada para: $API_BASE"
+
+echo ""    API_BASE="http://$EC2_IP:$API_PORT"fiecho "📍 EC2 IP: $EC2_IP"
+
+echo "🧪 Teste no navegador para confirmar que as URLs estão corretas!"
     WS_BASE="ws://$EC2_IP:$API_PORT"
 
     echo "📍 Usando IP para API: $EC2_IP"echo "🔌 API Port: $API_PORT"
