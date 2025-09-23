@@ -25,6 +25,10 @@ export default defineNuxtConfig({
   },
 
   ssr: false,
+  
+  nitro: {
+    preset: 'node-server'
+  },
 
   googleFonts: {
     download: true,
@@ -32,6 +36,16 @@ export default defineNuxtConfig({
       Oswald: true,
       Rubik: true,
       "Atkinson Hyperlegible Mono": true,
+    }
+  },
+
+  app: {
+    baseURL: '/',
+  },
+
+  router: {
+    options: {
+      hashMode: false
     }
   },
 
