@@ -62,6 +62,7 @@ NUXT_WS_BASE=$WS_BASE
 NODE_ENV=production
 HOST=0.0.0.0
 PORT=3000
+NUXT_GTAG_ID=G-VZ3TCRZBPL
 EOF
 
 echo "✅ Arquivo .env atualizado:"

@@ -42,6 +42,7 @@ echo "📝 Configurando variáveis de ambiente..."
 # Definir variáveis para BUILD TIME
 export NUXT_API_BASE=http://$EC2_IP:$API_PORT
 export NUXT_WS_BASE=ws://$EC2_IP:$API_PORT
+export NUXT_GTAG_ID=G-VZ3TCRZBPL
 
 cat > .env << EOF
 # Configuração para EC2 com PM2
@@ -51,8 +52,8 @@ NODE_ENV=production
 HOST=0.0.0.0
 PORT=3000
 
-# Google Analytics (opcional)
-NUXT_GTAG_ID=
+# Google Analytics
+NUXT_GTAG_ID=G-VZ3TCRZBPL
 EOF
 
 echo "✅ Variáveis configuradas:"
