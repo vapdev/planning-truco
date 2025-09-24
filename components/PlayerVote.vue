@@ -1,7 +1,7 @@
 <template>
   <div class="relative atkinson-hyperlegible-mono-regular flex flex-col w-8 sm:w-10 gap-1 sm:gap-2 rounded-lg sm:rounded-xl group">
     <div
-      class="relative text-white flex items-center rounded-lg sm:rounded-xl w-8 h-12 sm:w-10 sm:h-16 scale-110 justify-center backdrop-blur-sm border border-white/20 shadow-lg"
+      class="relative text-white flex items-center rounded-lg sm:rounded-xl w-8 h-12 sm:w-10 sm:h-16 justify-center backdrop-blur-sm border border-white/20 shadow-lg"
       :class="[
         flipped
           ? 'flip bg-gradient-to-br from-purple-500 to-pink-500 shadow-purple-500/30'
@@ -26,8 +26,8 @@
         v-if="!player.voted || !flipped"
       ></div>
       <div
-        class="absolute inset-0 flex items-center justify-center translate-y-[-83%] z-40 group-hover:flex group-hover:opacity-100 transition-opacity duration-300"
-        :class="{ hidden: !emojiPickerVisible }"
+        class="absolute -top-14 left-1/2 transform -translate-x-1/2 z-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        :class="{ '!opacity-100': emojiPickerVisible }"
       >
         <EmojiThrower
           :targetUserId="player.id"
@@ -147,7 +147,6 @@ const setEmojiPickerVisible = (visible) => {
 }
 
 .group:hover div:first-child {
-  transform: scale(1.15) translateY(-2px);
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
 }
 </style>

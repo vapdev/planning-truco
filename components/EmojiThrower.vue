@@ -1,48 +1,65 @@
 <template>
   <div
-    class="relative touch-manipulation select-none flex z-10 gap-3 transition-opacity duration-300 p-2 backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl"
+    class="relative touch-manipulation select-none flex z-10 gap-3 transition-opacity duration-300 p-2 backdrop-blur-sm bg-white/10 border border-white/20 rounded-xl emoji-container"
     id="participants"
   >
     <div
       @click="addEmoji(emojiItem)"
-      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/20 cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/25"
+      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/20 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-purple-500/20"
       v-for="emojiItem in emojis"
       :key="emojiItem"
     >
-      <span class="text-2xl group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
+      <span class="text-2xl transition-transform duration-200 filter drop-shadow-lg">
         {{ emojiItem }}
       </span>
     </div>
     
-    <div
-      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 hover:from-purple-500/30 hover:to-pink-500/30 cursor-pointer transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/25"
-      @click="toggleEmojiPicker"
-      ref="emojiButton"
-    >
-      <span class="text-xl group-hover:scale-110 transition-transform duration-300 text-purple-200">
-        ➕
-      </span>
-    </div>
-    
-    <div class="relative z-50">
+    <div class="relative">
+      <div
+        class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 hover:from-purple-500/30 hover:to-pink-500/30 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-purple-500/20"
+        @click="toggleEmojiPicker"
+        ref="emojiButton"
+      >
+        <span class="text-xl transition-transform duration-200 text-purple-200">
+          ➕
+        </span>
+      </div>
+      
       <Transition name="emoji-picker">
-        <EmojiPicker
-          ref="target"
-          display-recent
-          disable-skin-tones
-          theme="dark"
+        <div
           v-if="emojiPickerVisible"
-          class="emoji-picker backdrop-blur-sm bg-slate-900/90 border border-white/20 rounded-xl shadow-2xl"
-          :native="true"
-          @select="onSelectEmoji"
-        />
+          class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          @click="toggleEmojiPicker"
+        >
+          <div
+            class="relative max-w-sm w-full mx-4"
+            @click.stop
+          >
+            <EmojiPicker
+              ref="target"
+              display-recent
+              disable-skin-tones
+              theme="dark"
+              class="emoji-picker w-full backdrop-blur-sm bg-slate-900/95 border border-white/20 rounded-xl shadow-2xl"
+              :native="true"
+              @select="onSelectEmoji"
+            />
+            
+            <!-- Botão fechar -->
+            <button
+              @click="toggleEmojiPicker"
+              class="absolute -top-2 -right-2 w-8 h-8 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold transition-colors z-10"
+            >
+              ×
+            </button>
+          </div>
+        </div>
       </Transition>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onClickOutside } from "@vueuse/core";
 import EmojiPicker from "vue3-emoji-picker";
 const userStore = useUserStore();
 import "vue3-emoji-picker/css";
@@ -58,8 +75,6 @@ const props = defineProps({
 
 const emit = defineEmits(["emoji-picker-visible"]);
 
-onClickOutside(target, (event) => toggleEmojiPicker());
-
 const emojiPickerVisible = ref(false);
 const emoji = ref("");
 const emojis = ref(["👍", "🎯", "💥", "💣", "🃏", "🤔"]);
@@ -70,6 +85,7 @@ const toggleEmojiPicker = () => {
 
 const onSelectEmoji = (emoji) => {
   addEmoji(emoji.i);
+  toggleEmojiPicker(); // Fechar modal após selecionar emoji
 };
 
 const addEmoji = (emoji) => {
@@ -80,14 +96,43 @@ const addEmoji = (emoji) => {
 </script>
 
 <style>
-.emoji-picker {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
+/* Container fixo para evitar mudanças de tamanho */
+.emoji-container {
+  min-height: 56px; /* altura fixa baseada no padding + altura dos botões */
+  align-items: center;
 }
 
-#participants > div.relative.z-50 > div > div.v3-footer {
-  display: none;
+/* Garantir que os botões não afetem o layout */
+.emoji-container > div {
+  flex-shrink: 0;
+}
+
+/* Transições do emoji picker */
+.emoji-picker-enter-active,
+.emoji-picker-leave-active {
+  transition: all 0.3s ease;
+}
+
+.emoji-picker-enter-from,
+.emoji-picker-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.emoji-picker-enter-to,
+.emoji-picker-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Esconder footer do emoji picker */
+.emoji-picker :deep(.v3-footer) {
+  display: none !important;
+}
+
+/* Ajustar estilo do emoji picker */
+.emoji-picker :deep(.v3-container) {
+  border-radius: 12px !important;
+  overflow: hidden;
 }
 </style>
