@@ -15,7 +15,7 @@
       <div 
         ref="modal" 
         v-if="showLanguageDropdown" 
-        class="absolute top-14 right-0 backdrop-blur-sm bg-white/10 border border-white/20 shadow-2xl rounded-2xl p-3 min-w-[200px] z-[9999]"
+        class="fixed top-20 right-4 backdrop-blur-sm bg-slate-900/95 border border-white/20 shadow-2xl rounded-2xl p-3 min-w-[200px] z-[99999]"
         style="pointer-events: auto;"
       >
         <div 
@@ -123,15 +123,23 @@ const flagIcons = {
   backdrop-filter: blur(8px);
 }
 
-/* Garantir que o modal seja sempre clicável */
+/* Garantir que o componente tenha z-index alto */
 .select-none {
   position: relative;
   isolation: isolate;
+  z-index: 1000;
 }
 
-.select-none > .absolute {
-  position: absolute !important;
-  z-index: 9999 !important;
+/* Modal sempre por cima */
+.select-none :deep(.fixed) {
+  position: fixed !important;
+  z-index: 99999 !important;
   pointer-events: auto !important;
+}
+
+/* Garantir que não seja afetado por outros z-index */
+.select-none button {
+  position: relative;
+  z-index: 1001;
 }
 </style>

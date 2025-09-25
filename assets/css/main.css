@@ -2,8 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom styles here */
+/* Mobile viewport fixes */
 @layer base {
+  html {
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  body {
+    height: 100%;
+    overflow-x: hidden;
+    /* Fix iOS Safari viewport issues */
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Fix mobile viewport height issues */
+  @supports (-webkit-touch-callout: none) {
+    html {
+      height: -webkit-fill-available;
+    }
+  }
+  
+  /* Improve touch scrolling on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
   :root {
     --color-primary-50: #faf5ff;
     --color-primary-100: #f3e8ff;
@@ -15,6 +39,7 @@
     --color-primary-700: #7c3aed;
     --color-primary-800: #6b21a8;
     --color-primary-900: #581c87;
+}
 }
 
   .bg-primary-50 {
@@ -108,4 +133,4 @@
     .compact-mb-6 { margin-bottom: 0.75rem; }
     .compact-mb-8 { margin-bottom: 1rem; }
   }
-}
+  

@@ -22,8 +22,8 @@
           <span class="font-bold text-sm sm:text-base text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{{ userStore.roomState.name }}</span>
         </div>
       </div>
-      <div class="flex w-1/3 justify-end items-center">
-        <div class="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl flex gap-1 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 shadow-lg">
+      <div class="flex w-1/3 justify-end items-center relative z-[1000]">
+        <div class="bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl flex gap-1 sm:gap-3 px-2 sm:px-4 py-2 sm:py-3 shadow-lg relative z-[1001]">
             <LanguageSelector />
           <div @click="modalConfig = true" class="p-1 sm:p-2 hover:bg-white/10 hover:scale-110 rounded-lg sm:rounded-xl transition-all duration-300">
             <Icon class="hover:cursor-pointer text-white/80 hover:text-white" size="20" name="material-symbols:settings-outline" />

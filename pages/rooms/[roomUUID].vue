@@ -1,20 +1,20 @@
 <template>
   <div :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+    class="wrapper atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative">
     
     <!-- Animated background elements -->
-    <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
     </div>
 
     <!-- Radial spotlight effect for depth -->
-    <div class="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-900/50"></div>
+    <div class="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-900/50 pointer-events-none"></div>
     
-    <div class="wrapper h-full w-full flex flex-col justify-between relative z-10">
+    <div class="wrapper h-full w-full flex flex-col relative z-10 min-h-screen">
       <HeaderSala class="flex-shrink-0" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
-      <div class="flex justify-around w-full flex-1 min-h-0">
+      <div class="flex justify-around w-full flex-1 min-h-0 py-2">
         <div class="w-1/4 sm:w-1/3 flex flex-col items-center"></div>
         <div class="flex w-1/2 sm:w-1/3 flex-col justify-center items-center min-h-0">
           <TopContainer :players="playersTop" />
@@ -27,26 +27,28 @@
         </div>
         <div class="w-1/4 sm:w-1/3 flex justify-center"></div>
       </div>
-      <div class="w-full flex-shrink-0 flex flex-col justify-end overflow-hidden relative" style="height: 30vh; min-height: 200px;">
-        <Transition name="deck-appear">
-          <Deck 
-            :deck="deck" 
-            :selectedCard="selectedCard" 
-            :votar="votar" 
-            :showCards="userStore.roomState.showCards"
-            @showStats="showStatsModal = true"
-            @newRound="handleNewRound"
-          />
-        </Transition>
+      <div class="w-full flex-shrink-0 flex flex-col justify-end pb-4 sm:pb-6">
+        <div class="flex flex-col items-center justify-end min-h-[120px] sm:min-h-[200px] max-h-[40vh]">
+          <Transition name="deck-appear">
+            <Deck 
+              :deck="deck" 
+              :selectedCard="selectedCard" 
+              @votar="votar" 
+              :showCards="userStore.roomState.showCards"
+              @showStats="showStatsModal = true"
+              @newRound="handleNewRound"
+            />
+          </Transition>
+        </div>
+        
+        <!-- Stats Modal -->
+        <StatsModal 
+          :isOpen="showStatsModal" 
+          :cards="deck" 
+          @close="showStatsModal = false"
+          @newRound="handleNewRound"
+        />
       </div>
-      
-      <!-- Stats Modal -->
-      <StatsModal 
-        :isOpen="showStatsModal" 
-        :cards="deck" 
-        @close="showStatsModal = false"
-        @newRound="handleNewRound"
-      />
       <EmojiHandler />
     </div>
     <Transition name="rpanel" mode="out-in">
@@ -233,31 +235,48 @@ watch(
   backdrop-filter: blur(8px);
 }
 
-/* Responsive adjustments for game room */
+/* Enhanced mobile support */
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure proper scrolling on mobile */
+@supports (-webkit-touch-callout: none) {
+  .wrapper {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Mobile-specific adjustments */
 @media (max-height: 700px) {
   .wrapper {
-    height: 100vh;
+    min-height: 100vh;
   }
   
-  .game-area {
-    min-height: 0;
+  .min-h-\[200px\] {
+    min-height: 120px !important;
   }
   
-  .deck-area {
-    height: 25vh !important;
-    min-height: 150px !important;
+  .max-h-\[40vh\] {
+    max-height: 35vh !important;
   }
 }
 
 @media (max-height: 600px) {
-  .deck-area {
-    height: 20vh !important;
-    min-height: 120px !important;
+  .min-h-\[120px\] {
+    min-height: 100px !important;
   }
   
-  .game-center {
-    gap: 0.25rem;
-    margin: 0.25rem 0;
+  .max-h-\[40vh\] {
+    max-height: 30vh !important;
+  }
+  
+  .pb-4 {
+    padding-bottom: 0.5rem !important;
   }
 }
 
