@@ -58,6 +58,7 @@ export default {
   // Footer and legal pages
   privacyPolicy: 'Privacy Policy',
   termsOfService: 'Terms of Service',
+  sourceCode: 'Source Code',
   backToHome: 'Back to Home',
   lastUpdated: 'Last updated',
   // Privacy Policy
