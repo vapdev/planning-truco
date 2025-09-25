@@ -1,88 +1,263 @@
 <template>
-  <div class="landing-page min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative">
+  <div class="landing-page min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
       <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
+      <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
     </div>
 
-    <header class="relative z-20 backdrop-blur-sm bg-white/5 border-b border-white/10 py-3">
-      <div class="container mx-auto flex justify-between items-center px-6">
-        <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-          Planning Poker Online
-        </h1>
-        <LanguageSelector />
-      </div>
+    <!-- Navigation Header -->
+    <header class="relative z-20 backdrop-blur-sm bg-white/5 border-b border-white/10 py-4">
+      <nav class="container mx-auto flex justify-between items-center px-6">
+        <div class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Planning Poker Online
+          </h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <LanguageSelector />
+          <button @click="startGame" 
+                  class="hidden sm:inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-sm font-medium rounded-lg transition-all duration-300 hover:scale-105 shadow-lg">
+            {{ $t('getStarted') }}
+          </button>
+        </div>
+      </nav>
     </header>
 
-    <main class="landing-main relative z-10 flex flex-col items-center text-center px-4 py-4 sm:py-8">
+    <main class="landing-main relative z-10">
       <!-- Hero Section -->
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-tight mb-2 sm:mb-4 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent animate-fade-in hero-title">
-          {{ $t('simpleFastEfficient') }}
-        </h2>
-        <p class="text-sm sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-4 sm:mb-6 leading-relaxed animate-fade-in-delay hero-subtitle">
-          {{ $t('subtitle') }}
-        </p>
-        
-        <!-- CTA Button -->
-        <button @click="startGame"
-          class="group relative inline-flex items-center justify-center px-8 sm:px-10 py-2.5 sm:py-3 text-base sm:text-lg font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 animate-fade-in-delay-2 mb-4 sm:mb-8">
-          <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl shadow-lg group-hover:shadow-purple-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
-          <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
-          <span class="relative z-10 flex items-center">
-            {{ $t('createRoom') }}
-            <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-            </svg>
-          </span>
-        </button>
-      </div>
-      
-      <!-- Compact How it works section -->
-      <div class="max-w-5xl mx-auto w-full">
-        <div class="text-center mb-3 sm:mb-6">
-          <h3 class="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+      <section class="container mx-auto px-6 pt-16 pb-24 text-center">
+        <div class="max-w-4xl mx-auto">
+          <!-- Badge -->
+          <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-sm text-purple-300 mb-8 backdrop-blur-sm">
+            <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+            {{ $t('freePowerfulTool') }}
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+            {{ $t('heroTitle') }}
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+            {{ $t('heroSubtitle') }}
+          </p>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <button @click="startGame"
+              class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none">
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl shadow-lg group-hover:shadow-purple-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
+              <span class="relative z-10 flex items-center">
+                {{ $t('startForFree') }}
+                <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </span>
+            </button>
+            <a href="https://github.com/vapdev/planning-truco" target="_blank"
+               class="inline-flex items-center px-8 py-4 text-lg font-medium text-gray-300 hover:text-white border border-gray-600 hover:border-gray-500 rounded-xl transition-all duration-300 hover:bg-gray-800/50 backdrop-blur-sm">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+              {{ $t('viewSource') }}
+            </a>
+          </div>
+
+          <!-- Social Proof -->
+          <div class="flex flex-col items-center">
+            <p class="text-sm text-gray-400 mb-4">{{ $t('trustedByTeams') }}</p>
+            <div class="flex items-center space-x-8 opacity-60">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-xs">A</span>
+                </div>
+                <span class="text-gray-400 font-medium">Agile Teams</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-xs">S</span>
+                </div>
+                <span class="text-gray-400 font-medium">Scrum Masters</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                  <span class="text-white font-bold text-xs">D</span>
+                </div>
+                <span class="text-gray-400 font-medium">Dev Teams</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="container mx-auto px-6 py-24">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            {{ $t('whyChooseUs') }}
+          </h2>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            {{ $t('featuresSubtitle') }}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Feature 1: Real-time -->
+          <div class="group relative p-8 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-white">{{ $t('realTimeVoting') }}</h3>
+              <p class="text-gray-300 leading-relaxed">{{ $t('realTimeDescription') }}</p>
+            </div>
+          </div>
+
+          <!-- Feature 2: No Registration -->
+          <div class="group relative p-8 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-white">{{ $t('noRegistration') }}</h3>
+              <p class="text-gray-300 leading-relaxed">{{ $t('noRegistrationDescription') }}</p>
+            </div>
+          </div>
+
+          <!-- Feature 3: Multiple Decks -->
+          <div class="group relative p-8 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-lg flex items-center justify-center mb-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-white">{{ $t('customDecks') }}</h3>
+              <p class="text-gray-300 leading-relaxed">{{ $t('customDecksDescription') }}</p>
+            </div>
+          </div>
+
+          <!-- Feature 4: Multi-language -->
+          <div class="group relative p-8 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-white">{{ $t('multiLanguage') }}</h3>
+              <p class="text-gray-300 leading-relaxed">{{ $t('multiLanguageDescription') }}</p>
+            </div>
+          </div>
+
+          <!-- Feature 5: Open Source -->
+          <div class="group relative p-8 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-500 rounded-lg flex items-center justify-center mb-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-white">{{ $t('openSource') }}</h3>
+              <p class="text-gray-300 leading-relaxed">{{ $t('openSourceDescription') }}</p>
+            </div>
+          </div>
+
+          <!-- Feature 6: Mobile Friendly -->
+          <div class="group relative p-8 backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+            <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-emerald-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="relative z-10">
+              <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center mb-4 shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-white">{{ $t('mobileFriendly') }}</h3>
+              <p class="text-gray-300 leading-relaxed">{{ $t('mobileFriendlyDescription') }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="container mx-auto px-6 py-24 bg-gradient-to-b from-transparent to-slate-900/50">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             {{ $t('howItWorks') }}
-          </h3>
+          </h2>
+          <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+            {{ $t('howItWorksSubtitle') }}
+          </p>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 step-cards">
-          <div class="group relative p-3 sm:p-4 backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg sm:rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-white/10 step-card">
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10">
-              <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-2 sm:mb-3 mx-auto shadow-lg">
-                <span class="text-base sm:text-lg font-bold text-white">1</span>
-              </div>
-              <h4 class="text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-white">{{ $t('step1') }}</h4>
-              <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">{{ $t('step1Description') }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-6 mx-auto shadow-xl">
+              <span class="text-2xl font-bold text-white">1</span>
             </div>
+            <h3 class="text-xl font-semibold mb-4 text-white">{{ $t('step1') }}</h3>
+            <p class="text-gray-300 leading-relaxed">{{ $t('step1Description') }}</p>
           </div>
           
-          <div class="group relative p-3 sm:p-4 backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg sm:rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-white/10 step-card">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10">
-              <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-2 sm:mb-3 mx-auto shadow-lg">
-                <span class="text-base sm:text-lg font-bold text-white">2</span>
-              </div>
-              <h4 class="text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-white">{{ $t('step2') }}</h4>
-              <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">{{ $t('step2Description') }}</p>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-6 mx-auto shadow-xl">
+              <span class="text-2xl font-bold text-white">2</span>
             </div>
+            <h3 class="text-xl font-semibold mb-4 text-white">{{ $t('step2') }}</h3>
+            <p class="text-gray-300 leading-relaxed">{{ $t('step2Description') }}</p>
           </div>
           
-          <div class="group relative p-3 sm:p-4 backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg sm:rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:bg-white/10 step-card">
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-blue-500/10 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div class="relative z-10">
-              <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center mb-2 sm:mb-3 mx-auto shadow-lg">
-                <span class="text-base sm:text-lg font-bold text-white">3</span>
-              </div>
-              <h4 class="text-base sm:text-lg font-semibold mb-1 sm:mb-2 text-white">{{ $t('step3') }}</h4>
-              <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">{{ $t('step3Description') }}</p>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-blue-500 rounded-full flex items-center justify-center mb-6 mx-auto shadow-xl">
+              <span class="text-2xl font-bold text-white">3</span>
             </div>
+            <h3 class="text-xl font-semibold mb-4 text-white">{{ $t('step3') }}</h3>
+            <p class="text-gray-300 leading-relaxed">{{ $t('step3Description') }}</p>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="container mx-auto px-6 py-24 text-center">
+        <div class="max-w-4xl mx-auto">
+          <div class="backdrop-blur-sm bg-gradient-to-br from-white/5 to-white/10 border border-white/10 rounded-2xl p-12 shadow-2xl">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+              {{ $t('readyToStart') }}
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              {{ $t('ctaDescription') }}
+            </p>
+            <button @click="startGame"
+              class="group relative inline-flex items-center justify-center px-12 py-4 text-lg font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none">
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl shadow-lg group-hover:shadow-purple-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
+              <span class="relative z-10 flex items-center">
+                {{ $t('createRoomNow') }}
+                <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
@@ -98,6 +273,10 @@
                      class="text-gray-300 hover:text-purple-400 transition-colors duration-300 hover:underline">
               {{ $t('termsOfService') }}
             </NuxtLink>
+            <a target="_blank" href="https://github.com/vapdev/planning-truco" 
+               class="text-gray-300 hover:text-purple-400 transition-colors duration-300 hover:underline">
+              {{ $t('sourceCode') }}
+            </a>
           </div>
           <p class="text-gray-400 text-sm text-center">
             2025. {{ $t('madeWithLove') }} 
