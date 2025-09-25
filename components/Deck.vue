@@ -45,7 +45,7 @@
         <div
           v-for="(card, index) in deck"
           :key="index"
-          @click="votar(card.value)"
+          @click="props.votar(card.value)"
           :class="getCardClasses(card)"
           :style="{ animationDelay: `${index * 100}ms` }"
           class="text-lg sm:text-2xl w-12 h-16 sm:w-16 sm:h-24 flex items-center rounded-lg sm:rounded-xl justify-center cursor-pointer transition-all duration-300 ease-out card-hover animate-fade-in-up backdrop-blur-sm border border-white/20 shadow-lg"
@@ -63,7 +63,10 @@ import { useUserStore } from "~/stores/user";
 
 const props = defineProps({
   selectedCard: Number,
-  votar: Function,
+  votar: {
+    type: Function,
+    required: true
+  },
   deck: Array,
   showCards: {
     type: Boolean,

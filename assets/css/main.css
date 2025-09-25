@@ -2,30 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mobile viewport fixes */
+/* Simplified mobile scroll fixes */
 @layer base {
-  html {
-    height: 100%;
+  html, body {
+    height: auto;
+    min-height: 100vh;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100vw;
   }
   
-  body {
-    height: 100%;
-    overflow-x: hidden;
-    /* Fix iOS Safari viewport issues */
-    min-height: -webkit-fill-available;
-  }
-  
-  /* Fix mobile viewport height issues */
-  @supports (-webkit-touch-callout: none) {
-    html {
-      height: -webkit-fill-available;
-    }
-  }
-  
-  /* Improve touch scrolling on mobile */
+  /* Enable smooth scrolling on all elements */
   * {
     -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Mobile viewport fixes for iOS */
+  @supports (-webkit-touch-callout: none) {
+    html, body {
+      height: auto;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
   }
 
   :root {
@@ -39,7 +38,7 @@
     --color-primary-700: #7c3aed;
     --color-primary-800: #6b21a8;
     --color-primary-900: #581c87;
-}
+  }
 }
 
   .bg-primary-50 {
@@ -82,21 +81,6 @@
     background-color: var(--color-primary-900) !important;
   }
 
-  /* Global compact layout rules */
-  html, body {
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  /* Ensure all pages use full height */
-  .page-container {
-    height: 100vh;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-  }
-
   /* Responsive text scaling for compact layouts */
   @media (max-height: 700px) {
     .compact-text-lg { font-size: 1rem; }
@@ -133,4 +117,3 @@
     .compact-mb-6 { margin-bottom: 0.75rem; }
     .compact-mb-8 { margin-bottom: 1rem; }
   }
-  

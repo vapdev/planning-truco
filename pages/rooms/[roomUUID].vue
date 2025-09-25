@@ -1,6 +1,6 @@
 <template>
   <div :key="key"
-    class="wrapper atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative">
+    class="game-wrapper atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-y-auto">
     
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -14,7 +14,7 @@
     
     <div class="wrapper h-full w-full flex flex-col relative z-10 min-h-screen">
       <HeaderSala class="flex-shrink-0" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
-      <div class="flex justify-around w-full flex-1 min-h-0 py-2">
+      <div class="flex justify-around w-full flex-1 py-2 min-h-0">
         <div class="w-1/4 sm:w-1/3 flex flex-col items-center"></div>
         <div class="flex w-1/2 sm:w-1/3 flex-col justify-center items-center min-h-0">
           <TopContainer :players="playersTop" />
@@ -27,13 +27,13 @@
         </div>
         <div class="w-1/4 sm:w-1/3 flex justify-center"></div>
       </div>
-      <div class="w-full flex-shrink-0 flex flex-col justify-end pb-4 sm:pb-6">
-        <div class="flex flex-col items-center justify-end min-h-[120px] sm:min-h-[200px] max-h-[40vh]">
+      <div class="w-full flex-shrink-0 flex flex-col justify-end pb-4 sm:pb-6 mb-4">
+        <div class="flex flex-col items-center justify-end min-h-[80px] sm:min-h-[120px]">
           <Transition name="deck-appear">
             <Deck 
               :deck="deck" 
               :selectedCard="selectedCard" 
-              @votar="votar" 
+              :votar="votar"
               :showCards="userStore.roomState.showCards"
               @showStats="showStatsModal = true"
               @newRound="handleNewRound"
@@ -159,7 +159,9 @@ watch(
 .wrapper {
   position: relative;
   height: 100dvh;
-  overflow: hidden; /* Prevent any scroll */
+  overflow-y: auto; /* Allow vertical scroll */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .rpanel-enter-active,
@@ -236,11 +238,12 @@ watch(
 }
 
 /* Enhanced mobile support */
-.wrapper {
+.game-wrapper {
   position: relative;
   min-height: 100vh;
   min-height: -webkit-fill-available;
   overflow-x: hidden;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
