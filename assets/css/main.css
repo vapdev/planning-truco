@@ -117,3 +117,66 @@
     .compact-mb-6 { margin-bottom: 0.75rem; }
     .compact-mb-8 { margin-bottom: 1rem; }
   }
+
+  /* Game room mobile-only no-scroll layout */
+  @media (max-width: 768px) {
+    .game-room-mobile {
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .game-room-mobile .game-header {
+      flex-shrink: 0;
+      padding: 0.5rem 0;
+    }
+    
+    .game-room-mobile .game-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+    }
+    
+    .game-room-mobile .game-players-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0.25rem;
+      min-height: 0;
+    }
+    
+    .game-room-mobile .game-deck-area {
+      flex-shrink: 0;
+      padding: 0.5rem;
+      max-height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    
+    /* Compact player containers for mobile game */
+    .game-room-mobile .player-container {
+      transform: scale(0.85);
+      margin: 0.125rem;
+    }
+    
+    .game-room-mobile .mesa-container {
+      transform: scale(0.9);
+    }
+    
+    .game-room-mobile .deck-cards {
+      gap: 0.5rem !important;
+    }
+    
+    .game-room-mobile .deck-card {
+      width: 2.5rem !important;
+      height: 3.5rem !important;
+      font-size: 0.75rem !important;
+    }
+  }

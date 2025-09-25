@@ -1,6 +1,6 @@
 <template>
   <div :key="key"
-    class="game-wrapper atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-y-auto">
+    class="game-wrapper game-room-mobile atkinson-hyperlegible-mono-regular min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-y-auto">
     
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -12,22 +12,22 @@
     <!-- Radial spotlight effect for depth -->
     <div class="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-slate-900/50 pointer-events-none"></div>
     
-    <div class="wrapper h-full w-full flex flex-col relative z-10 min-h-screen">
-      <HeaderSala class="flex-shrink-0" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
-      <div class="flex justify-around w-full flex-1 py-2 min-h-0">
+    <div class="wrapper h-full w-full flex flex-col relative z-10 min-h-screen game-content">
+      <HeaderSala class="flex-shrink-0 game-header" ref="headerRef" @endGame="endGame" @toggleRightPanel="toggleRightPanel" />
+      <div class="flex justify-around w-full flex-1 py-2 min-h-0 game-players-area">
         <div class="w-1/4 sm:w-1/3 flex flex-col items-center"></div>
         <div class="flex w-1/2 sm:w-1/3 flex-col justify-center items-center min-h-0">
-          <TopContainer :players="playersTop" />
-          <div class="flex gap-2 sm:gap-4 justify-center items-center my-2">
-            <LeftContainer :players="playersLeft" />
+          <TopContainer :players="playersTop" class="player-container" />
+          <div class="flex gap-2 sm:gap-4 justify-center items-center my-2 mesa-container">
+            <LeftContainer :players="playersLeft" class="player-container" />
             <Mesa @toggleMostrarCartas="toggleMostrarCartas" />
-            <RightContainer :players="playersRight" />
+            <RightContainer :players="playersRight" class="player-container" />
           </div>
-          <BottomContainer :players="playersBottom" />
+          <BottomContainer :players="playersBottom" class="player-container" />
         </div>
         <div class="w-1/4 sm:w-1/3 flex justify-center"></div>
       </div>
-      <div class="w-full flex-shrink-0 flex flex-col justify-end pb-4 sm:pb-6 mb-4">
+      <div class="w-full flex-shrink-0 flex flex-col justify-end pb-4 sm:pb-6 mb-4 game-deck-area">
         <div class="flex flex-col items-center justify-end min-h-[80px] sm:min-h-[120px]">
           <Transition name="deck-appear">
             <Deck 
@@ -37,6 +37,7 @@
               :showCards="userStore.roomState.showCards"
               @showStats="showStatsModal = true"
               @newRound="handleNewRound"
+              class="deck-cards"
             />
           </Transition>
         </div>
