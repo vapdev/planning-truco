@@ -4,7 +4,7 @@
       class="relative text-white flex items-center rounded-lg sm:rounded-xl w-8 h-12 sm:w-10 sm:h-16 justify-center backdrop-blur-sm border border-white/20 shadow-lg"
       :class="[
         flipped
-          ? 'flip bg-gradient-to-br from-purple-500 to-pink-500 shadow-purple-500/30'
+          ? 'flip bg-gradient-to-br from-blue-500 to-indigo-500 shadow-blue-500/30'
           : player.voted 
             ? 'bg-gradient-to-br from-slate-600/80 to-slate-700/80 shadow-slate-500/20'
             : 'bg-slate-800/50 border-white/10',
@@ -21,7 +21,7 @@
       </div>
       <div
         v-else
-        :class="player.voted ? 'cardPattern bg-gradient-to-br from-purple-600/80 to-pink-600/80' : 'border-[2px] border-white/20'"
+        :class="player.voted ? 'cardPattern bg-gradient-to-br from-blue-600/80 to-indigo-600/80' : 'border-[2px] border-white/20'"
         class="rounded-lg sm:rounded-xl w-full h-full text-white flex items-center justify-center transition-all duration-300"
         v-if="!player.voted || !flipped"
       ></div>

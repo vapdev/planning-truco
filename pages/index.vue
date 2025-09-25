@@ -253,22 +253,22 @@
         <div class="flex flex-col items-center space-y-4">
           <div class="flex flex-wrap justify-center gap-6 text-sm">
             <NuxtLink to="/privacy-policy" 
-                     class="text-gray-300 hover:text-purple-400 transition-colors duration-300 hover:underline">
+                     class="text-gray-300 hover:text-blue-400 transition-colors duration-300 hover:underline">
               {{ $t('privacyPolicy') }}
             </NuxtLink>
             <NuxtLink to="/terms-of-service" 
-                     class="text-gray-300 hover:text-purple-400 transition-colors duration-300 hover:underline">
+                     class="text-gray-300 hover:text-blue-400 transition-colors duration-300 hover:underline">
               {{ $t('termsOfService') }}
             </NuxtLink>
             <a target="_blank" href="https://github.com/vapdev/planning-truco" 
-               class="text-gray-300 hover:text-purple-400 transition-colors duration-300 hover:underline">
+               class="text-gray-300 hover:text-blue-400 transition-colors duration-300 hover:underline">
               {{ $t('sourceCode') }}
             </a>
           </div>
           <p class="text-gray-400 text-sm text-center">
             2025. {{ $t('madeWithLove') }} 
             <a target="_blank" href="https://github.com/vapdev" 
-               class="text-purple-400 hover:text-purple-300 transition-colors duration-300 underline decoration-purple-400/50 hover:decoration-purple-300">
+               class="text-blue-400 hover:text-blue-300 transition-colors duration-300 underline decoration-blue-400/50 hover:decoration-blue-300">
               vapdev
             </a>.
           </p>

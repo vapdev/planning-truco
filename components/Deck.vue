@@ -11,8 +11,8 @@
         @click="$emit('showStats')"
         class="group relative inline-flex items-center justify-center px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none"
       >
-        <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl shadow-lg group-hover:shadow-purple-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl shadow-lg group-hover:shadow-blue-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>
         <span class="relative z-10 flex items-center font-bold">
           <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
@@ -39,7 +39,7 @@
     <!-- Deck cards (only show when not revealing cards) -->
     <div
       v-if="!showCards"
-      class="flex justify-center overflow-y-hidden md:justify-center text-purple-400 overflow-x-auto gap-2 sm:gap-4 items-center pb-2 sm:pb-4 pt-4 sm:pt-8 w-full"
+      class="flex justify-center overflow-y-hidden md:justify-center text-blue-400 overflow-x-auto gap-2 sm:gap-4 items-center pb-2 sm:pb-4 pt-4 sm:pt-8 w-full"
     >
       <div class="flex gap-3 sm:gap-6">
         <div
@@ -81,8 +81,8 @@ const getCardClasses = (card) => {
   const isSelected = props.selectedCard === card.value;
   return [
     isSelected
-      ? "bg-gradient-to-br from-purple-600 to-pink-600 -translate-y-6 scale-110 shadow-2xl shadow-purple-500/50"
-      : "bg-gradient-to-br from-slate-700/80 to-slate-800/80 hover:-translate-y-3 hover:bg-gradient-to-br hover:from-purple-500/80 hover:to-pink-500/80 hover:shadow-xl hover:shadow-purple-500/30",
+      ? "bg-gradient-to-br from-blue-600 to-indigo-600 -translate-y-6 scale-110 shadow-2xl shadow-blue-500/50"
+      : "bg-gradient-to-br from-slate-700/80 to-slate-800/80 hover:-translate-y-3 hover:bg-gradient-to-br hover:from-blue-500/80 hover:to-indigo-500/80 hover:shadow-xl hover:shadow-blue-500/30",
     "text-white",
   ];
 };

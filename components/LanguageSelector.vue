@@ -6,7 +6,7 @@
     >
       <Icon
         size="24"
-        class="text-white group-hover:text-purple-200 transition-colors duration-300"
+        class="text-white group-hover:text-blue-200 transition-colors duration-300"
         :name="flagIcons[currentLocale]"
       />
     </button>
@@ -23,7 +23,7 @@
           :key="lang" 
           @click="handleSetLocale(lang)" 
           class="group flex items-center justify-between p-3 rounded-xl hover:bg-white/10 cursor-pointer transition-all duration-300 transform hover:scale-105"
-          :class="{ 'bg-gradient-to-r from-purple-500/20 to-pink-500/20': currentLocale === lang }"
+          :class="{ 'bg-gradient-to-r from-blue-500/20 to-indigo-500/20': currentLocale === lang }"
         >
           <Icon 
             size="20" 
@@ -31,8 +31,8 @@
             class="group-hover:scale-110 transition-transform duration-300" 
           />
           <span 
-            class="text-white font-medium group-hover:text-purple-200 transition-colors duration-300"
-            :class="{ 'text-purple-200': currentLocale === lang }"
+            class="text-white font-medium group-hover:text-blue-200 transition-colors duration-300"
+            :class="{ 'text-blue-200': currentLocale === lang }"
           >
             {{ label }}
           </span>

@@ -12,14 +12,14 @@
               <span class="text-xs sm:text-sm md:text-md text-white font-semibold">{{ userStore.name }}</span>
             </div>
           </div>
-          <UButton variant="ghost" @click="copyToClipboard" class="hidden sm:flex px-2 sm:px-4 py-1 sm:py-2 ml-2 sm:ml-4 bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 rounded-lg sm:rounded-xl border border-white/10 transition-all duration-300 hover:scale-105" color="primary">
+          <UButton variant="ghost" @click="copyToClipboard" class="hidden sm:flex px-2 sm:px-4 py-1 sm:py-2 ml-2 sm:ml-4 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 hover:from-blue-500/30 hover:to-indigo-500/30 rounded-lg sm:rounded-xl border border-white/10 transition-all duration-300 hover:scale-105" color="primary">
             <span class="text-xs sm:text-sm text-white font-semibold">{{ $t("invite") }}</span>
           </UButton>
         </div>
       </div>
       <div class="flex w-1/3 justify-center items-center">
         <div v-if="userStore.roomState.name" class="hidden md:block bg-slate-800/50 backdrop-blur-sm border border-white/10 rounded-xl px-3 sm:px-6 py-2 sm:py-3 shadow-lg">
-          <span class="font-bold text-sm sm:text-base text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{{ userStore.roomState.name }}</span>
+          <span class="font-bold text-sm sm:text-base text-white bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">{{ userStore.roomState.name }}</span>
         </div>
       </div>
       <div class="flex w-1/3 justify-end items-center relative z-[1000]">

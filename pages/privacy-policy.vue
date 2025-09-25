@@ -1,27 +1,27 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
-    <header class="backdrop-blur-sm bg-white/5 border-b border-white/10 py-3">
-      <div class="container mx-auto flex justify-between items-center px-6">
-        <NuxtLink to="/" class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
-          Planning Poker Online
+  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-900 text-white">
+    <header class="backdrop-blur-sm bg-white/5 border-b border-white/10 py-4">
+      <div class="container mx-auto px-6 flex items-center">
+        <NuxtLink to="/" class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
+          Free Planning Poker
         </NuxtLink>
-        <LanguageSelector />
+        <LanguageSelector class="ml-auto" />
       </div>
     </header>
 
-    <main class="container mx-auto px-6 py-12 max-w-4xl">
-      <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl p-8 shadow-2xl">
-        <h1 class="text-3xl sm:text-4xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+    <main class="container mx-auto px-6 py-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-4xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
           {{ $t('privacyPolicy') }}
         </h1>
         
-        <div class="prose prose-invert prose-purple max-w-none">
+        <div class="prose prose-invert prose-blue max-w-none">
           <p class="text-gray-300 mb-6 text-lg">
             {{ $t('lastUpdated') }}: {{ new Date().toLocaleDateString() }}
           </p>
 
           <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-purple-300">1. {{ $t('informationWeCollect') }}</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-300">1. {{ $t('informationWeCollect') }}</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyInfo1') }}
             </p>
@@ -34,7 +34,7 @@
           </section>
 
           <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-purple-300">2. {{ $t('howWeUseInfo') }}</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-300">2. {{ $t('howWeUseInfo') }}</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyInfo2') }}
             </p>
@@ -46,31 +46,31 @@
           </section>
 
           <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-purple-300">3. Google AdSense</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-300">3. Google AdSense</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyAdsense') }}
             </p>
           </section>
 
           <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-purple-300">4. {{ $t('dataStorage') }}</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-300">4. {{ $t('dataStorage') }}</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyInfo4') }}
             </p>
           </section>
 
           <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-purple-300">5. {{ $t('yourRights') }}</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-300">5. {{ $t('yourRights') }}</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyInfo5') }}
             </p>
           </section>
 
           <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-purple-300">6. {{ $t('contactUs') }}</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-blue-300">6. {{ $t('contactUs') }}</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyContact') }}: 
-              <a href="https://github.com/vapdev" target="_blank" class="text-purple-400 hover:text-purple-300 underline">
+              <a href="https://github.com/vapdev" target="_blank" class="text-purple-400 hover:text-blue-300 underline">
                 github.com/vapdev
               </a>
             </p>
