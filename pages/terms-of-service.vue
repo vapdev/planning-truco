@@ -15,7 +15,7 @@
           {{ $t('termsOfService') }}
         </h1>
         
-        <div class="prose prose-invert prose-purple max-w-none">
+        <div class="prose prose-invert prose-blue max-w-none">
           <p class="text-gray-300 mb-6 text-lg">
             {{ $t('lastUpdated') }}: {{ new Date().toLocaleDateString() }}
           </p>

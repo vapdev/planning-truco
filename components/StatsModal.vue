@@ -4,7 +4,7 @@
     <div class="w-full max-w-2xl">
       <!-- Header with close button -->
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+        <h2 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
           {{ $t("roundResults") }}
         </h2>
         <button 
@@ -22,17 +22,17 @@
         <!-- Main Stats -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div class="text-center">
-            <div class="text-sm text-purple-200 mb-2">{{ $t("mostVoted") }}</div>
-            <div class="text-2xl font-bold text-white bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <div class="text-sm text-blue-200 mb-2">{{ $t("mostVoted") }}</div>
+            <div class="text-2xl font-bold text-white bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
               {{ stats.mostVoted.join(", ") }}
             </div>
           </div>
           <div class="text-center">
-            <div class="text-sm text-purple-200 mb-2">{{ $t("consensus") }}</div>
+            <div class="text-sm text-blue-200 mb-2">{{ $t("consensus") }}</div>
             <div class="text-2xl font-bold text-white">{{ stats.assertiveness }}%</div>
           </div>
           <div v-if="stats.average !== null" class="text-center">
-            <div class="text-sm text-purple-200 mb-2">{{ $t("average") }}</div>
+            <div class="text-sm text-blue-200 mb-2">{{ $t("average") }}</div>
             <div class="text-2xl font-bold text-white">{{ stats.average }}</div>
           </div>
         </div>
@@ -46,12 +46,12 @@
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
             <div class="relative">
-              <div class="w-10 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center font-bold justify-center shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-purple-500/25">
+              <div class="w-10 h-14 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center font-bold justify-center shadow-lg transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-blue-500/25">
                 <span class="text-lg text-white">
                   {{ card.value }}
                 </span>
               </div>
-              <div class="absolute -top-1 -right-1 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+              <div class="absolute -top-1 -right-1 bg-gradient-to-r from-indigo-500 to-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
                 {{ card.vote }}
               </div>
             </div>

@@ -11,7 +11,7 @@
           name="material-symbols:close-small-rounded"
         ></Icon>
       </div>
-      <div class="mb-2 text-3xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-extrabold">
+      <div class="mb-2 text-3xl bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent font-extrabold">
         {{  $t("profile")  }}
       </div>
       <div class="text-md flex flex-col">
@@ -23,13 +23,13 @@
             variant="outline"
             color="gray"
             class="w-full font-normal rounded-xl modern-input"
-            :input-class="'text-white bg-transparent border-white/20 focus:border-purple-400 focus:ring-purple-400/50'"
+            :input-class="'text-white bg-transparent border-white/20 focus:border-blue-400 focus:ring-blue-400/50'"
             :placeholder="$t('yourName')"
           />
         </div>
         <button
           @click="handleSaveName"
-          class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 w-full font-bold py-3 px-6 rounded-xl mt-6 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 text-white"
+          class="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-400 hover:to-indigo-400 w-full font-bold py-3 px-6 rounded-xl mt-6 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 text-white"
         >
           {{  $t("save")  }}
         </button>

@@ -8,7 +8,7 @@
     ></div>
     
     <!-- Stats Modal -->
-    <div class="relative bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl shadow-purple-500/20 p-6 max-w-lg w-full animate-modal-slide-up">
+    <div class="relative bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl shadow-blue-500/20 p-6 max-w-lg w-full animate-modal-slide-up">
       <!-- Close button -->
       <button 
         @click="$emit('close')"
@@ -21,17 +21,17 @@
 
       <!-- Header -->
       <div class="text-center mb-6">
-        <h3 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+        <h3 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent mb-2">
           {{ $t("roundResults") }}
         </h3>
-        <div class="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mx-auto"></div>
+        <div class="w-16 h-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full mx-auto"></div>
       </div>
 
       <!-- Main Stats Grid -->
       <div class="grid grid-cols-2 gap-4 mb-6">
         <!-- Most Voted -->
         <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
-          <div class="text-sm text-purple-200 mb-2">{{ $t("mostVoted") }}</div>
+          <div class="text-sm text-blue-200 mb-2">{{ $t("mostVoted") }}</div>
           <div class="text-2xl font-bold text-white">
             {{ stats.mostVoted.join(", ") }}
           </div>
@@ -39,13 +39,13 @@
 
         <!-- Consensus -->
         <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
-          <div class="text-sm text-purple-200 mb-2">{{ $t("consensus") }}</div>
+          <div class="text-sm text-blue-200 mb-2">{{ $t("consensus") }}</div>
           <div class="text-2xl font-bold text-white">{{ stats.assertiveness }}%</div>
         </div>
 
         <!-- Average (if numeric) -->
         <div v-if="stats.average !== null" class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center col-span-2">
-          <div class="text-sm text-purple-200 mb-2">{{ $t("average") }}</div>
+          <div class="text-sm text-blue-200 mb-2">{{ $t("average") }}</div>
           <div class="text-2xl font-bold text-white">{{ stats.average }}</div>
         </div>
       </div>
@@ -61,13 +61,13 @@
             :style="{ animationDelay: `${index * 0.1}s` }"
           >
             <div class="relative">
-              <div class="w-12 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center font-bold justify-center shadow-lg transform transition-all duration-300 group-hover:scale-105">
+              <div class="w-12 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center font-bold justify-center shadow-lg transform transition-all duration-300 group-hover:scale-105">
                 <span class="text-lg text-white">
                   {{ card.label }}
                 </span>
               </div>
               <!-- Vote count badge -->
-              <div class="absolute -top-2 -right-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
+              <div class="absolute -top-2 -right-2 bg-gradient-to-r from-indigo-500 to-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-lg">
                 {{ card.vote }}
               </div>
             </div>
@@ -82,7 +82,7 @@
       <div class="text-center">
         <button 
           @click="$emit('newRound')"
-          class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+          class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white transition-all duration-300 ease-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
         >
           <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-xl shadow-lg group-hover:shadow-blue-500/25 group-hover:shadow-2xl transition-all duration-300"></div>
           <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-xl opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"></div>

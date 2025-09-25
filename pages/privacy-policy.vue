@@ -70,7 +70,7 @@
             <h2 class="text-2xl font-semibold mb-4 text-blue-300">6. {{ $t('contactUs') }}</h2>
             <p class="text-gray-300 mb-4">
               {{ $t('privacyContact') }}: 
-              <a href="https://github.com/vapdev" target="_blank" class="text-purple-400 hover:text-blue-300 underline">
+              <a href="https://github.com/vapdev" target="_blank" class="text-blue-400 hover:text-blue-300 underline">
                 github.com/vapdev
               </a>
             </p>
@@ -79,7 +79,7 @@
 
         <div class="mt-12 pt-8 border-t border-white/10">
           <NuxtLink to="/" 
-                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg">
+                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg">
             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
             </svg>

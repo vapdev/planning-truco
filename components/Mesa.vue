@@ -1,7 +1,7 @@
 <template>
     <div style="height: 100px" class="justify-center items-center flex flex-wrap w-full mx-2 sm:mx-4">
         <div
-            class="md:w-64 w-44 sm:w-52 bg-gradient-to-br from-purple-500/80 via-pink-500/70 to-purple-600/80 backdrop-blur-sm h-20 sm:h-28 poker-table flex justify-center items-center border border-white/20 shadow-2xl shadow-purple-500/30">
+            class="md:w-64 w-44 sm:w-52 bg-gradient-to-br from-blue-500/80 via-indigo-500/70 to-blue-600/80 backdrop-blur-sm h-20 sm:h-28 poker-table flex justify-center items-center border border-white/20 shadow-2xl shadow-blue-500/30">
             <div v-if="!userStore.roomState.showCards" class="animate-pulse-subtle">
                 <UButton :disabled="userStore.noVotes" @click="emit('toggleMostrarCartas')" color="primary"
                     class="font-bold button-poker py-2 sm:py-3 px-3 sm:px-6 rounded-lg sm:rounded-xl bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-400 hover:to-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 border-none">

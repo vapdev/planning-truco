@@ -3,7 +3,7 @@
         <div class="absolute top-0 right-0 min-w-full px-6 py-5">
             <div class="flex justify-between items-center mb-6">
                 <div>
-                    <div class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Issues</div>
+                    <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">Issues</div>
                     <div class="text-sm text-gray-300">{{ issues.length }} issues • {{ issuesTotalPoints }} points</div>
                 </div>
                 <button @click="$emit('close')"
@@ -20,12 +20,12 @@
                         class="group backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl flex flex-col justify-between py-4 px-4 mb-4 transform transition-all duration-300 hover:scale-y-105 hover:shadow-lg animate-fade-in-issue"
                         :style="{ animationDelay: `${i * 0.1}s` }">
                         <div class="flex justify-between items-center mb-2">
-                            <div class="text-sm font-medium text-purple-400">#{{ i + 1 }}</div>
+                            <div class="text-sm font-medium text-blue-400">#{{ i + 1 }}</div>
                             <div class="text-sm text-gray-400">Points</div>
                         </div>
                         <div class="flex justify-between items-center mb-2">
                             <div class="font-semibold text-white">{{ issue.title }}</div>
-                            <div class="font-bold text-xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{{ issue.points }}</div>
+                            <div class="font-bold text-xl bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">{{ issue.points }}</div>
                         </div>
                         <div v-if="issue.link" class="mb-2">
                             <a target="_blank" :href="issue.link"
@@ -50,15 +50,15 @@
                         <div class="backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl flex flex-col justify-between py-4 px-4 space-y-3">
                             <UInput color="gray" variant="outline" v-model="title" 
                                 class="rounded-lg"
-                                :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400' }"
+                                :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400' }"
                                 :placeholder="$t('issueTitle')" />
                             <UInput color="gray" variant="outline" v-model="description" 
                                 class="rounded-lg"
-                                :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400' }"
+                                :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400' }"
                                 :placeholder="$t('issueDescription')" />
                             <UInput color="gray" variant="outline" v-model="link" 
                                 class="rounded-lg"
-                                :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-purple-400' }"
+                                :ui="{ wrapper: 'relative', base: 'bg-white/5 border-white/20 text-white placeholder-gray-400 focus:border-blue-400 focus:ring-blue-400' }"
                                 :placeholder="$t('issueLink')" />
                             <div class="flex justify-between gap-3">
                                 <button type="button" 
@@ -66,7 +66,7 @@
                                     {{ $t('clean') }}
                                 </button>
                                 <button @click="handleAddIssue" type="button"
-                                    class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
+                                    class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
                                     {{ $t('confirm') }}
                                 </button>
                             </div>

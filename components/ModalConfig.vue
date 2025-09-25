@@ -2,8 +2,7 @@
   <UModal
     @close="close"
     :ui="{ overlay: { background: 'bg-slate-900/60 backdrop-blur-sm' } }"
-    :model-value="modelValue"
-  >
+    :model-value="modelValue"        class="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-400 hover:to-indigo-400 w-full font-bold py-3 px-6 rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 text-white"  >
     <div
       class="text-white atkinson-hyperlegible-mono-regular relative rounded-xl font-bold bg-slate-900/80 backdrop-blur-sm border border-white/10 p-6 flex flex-col gap-6 animate-fade-in max-h-[90vh] overflow-y-auto"
     >
@@ -15,7 +14,7 @@
           name="material-symbols:close-small-rounded"
         ></Icon>
       </div>
-      <div class="mb-2 text-3xl bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-extrabold">
+      <div class="mb-2 text-3xl bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent font-extrabold">
         {{  $t("settings")  }}
       </div>
       <div class="text-md flex flex-col space-y-6">
@@ -28,7 +27,7 @@
               variant="outline"
               color="gray"
               class="w-full font-normal rounded-xl modern-input"
-              :input-class="'text-white bg-transparent border-white/20 focus:border-purple-400 focus:ring-purple-400/50'"
+              :input-class="'text-white bg-transparent border-white/20 focus:border-blue-400 focus:ring-blue-400/50'"
               :placeholder="$t('roomName')"
             />
           </div>
@@ -141,7 +140,7 @@
       </div>
       <button
         @click="handleSaveConfig"
-        class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 w-full font-bold py-3 px-6 rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/30 text-white"
+        class="bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 w-full font-bold py-3 px-6 rounded-xl transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 text-white"
       >
         {{ $t("save") }}
       </button>

@@ -5,7 +5,7 @@
   >
     <div
       @click="addEmoji(emojiItem)"
-      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/20 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-purple-500/20"
+      class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-white/5 border border-white/10 hover:bg-white/20 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-blue-500/20"
       v-for="emojiItem in emojis"
       :key="emojiItem"
     >
@@ -16,11 +16,11 @@
     
     <div class="relative">
       <div
-        class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-400/30 hover:from-purple-500/30 hover:to-pink-500/30 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-purple-500/20"
+        class="group relative flex items-center justify-center w-10 h-10 rounded-lg backdrop-blur-sm bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-blue-400/30 hover:from-blue-500/30 hover:to-indigo-500/30 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-blue-500/20"
         @click="toggleEmojiPicker"
         ref="emojiButton"
       >
-        <span class="text-xl transition-transform duration-200 text-purple-200">
+        <span class="text-xl transition-transform duration-200 text-blue-200">
           ➕
         </span>
       </div>
