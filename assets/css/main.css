@@ -180,3 +180,20 @@
       font-size: 0.75rem !important;
     }
   }
+
+  /* Desktop footer positioning fix */
+  @media (min-width: 769px) {
+    .landing-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .landing-main {
+      flex: 1;
+    }
+    
+    .landing-footer {
+      margin-top: auto;
+    }
+  }
