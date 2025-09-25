@@ -51,7 +51,6 @@ export default {
   // Footer and legal pages
   privacyPolicy: 'Política de Privacidade',
   termsOfService: 'Termos de Uso',
-  sourceCode: 'Código Fonte',
   backToHome: 'Voltar ao Início',
   lastUpdated: 'Última atualização',
   // Privacy Policy
@@ -99,7 +98,6 @@ export default {
   heroTitle: 'Planning Poker para Equipes Ágeis',
   heroSubtitle: 'Facilite suas sessões de estimativa com nossa ferramenta moderna, intuitiva e gratuita. Sem cadastro, sem complicações.',
   startForFree: 'Começar Gratuitamente',
-  viewSource: 'Ver Código',
   trustedByTeams: 'Confiado por equipes ágeis ao redor do mundo',
   whyChooseUs: 'Por Que Escolher Nossa Plataforma?',
   featuresSubtitle: 'Desenvolvemos as ferramentas que você precisa para tornar suas sessões de Planning Poker mais eficientes',
