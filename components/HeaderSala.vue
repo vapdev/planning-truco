@@ -34,8 +34,8 @@
         </div>
       </div>
     </div>
-    <ModalConfig v-if="modalConfig" v-model="modalConfig" />
-    <ModalProfile v-if="modalProfile" v-model="modalProfile" />
+  <ModalConfig v-model="modalConfig" />
+  <ModalProfile v-model="modalProfile" />
   </div>
 </template>
 
