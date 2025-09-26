@@ -201,6 +201,18 @@ const toggleTodosPodemVotar = () => {
 const toggleEmojis = () => {
   emojis.value = !emojis.value;
 };
+
+// Loading para criar sala
+const loadingCreateRoom = ref(false);
+async function handleCreateRoom() {
+  if (loadingCreateRoom.value) return;
+  loadingCreateRoom.value = true;
+  try {
+    await userStore.startGame(gameOptions.value);
+  } finally {
+    loadingCreateRoom.value = false;
+  }
+}
 </script>
 
 <style scoped>
